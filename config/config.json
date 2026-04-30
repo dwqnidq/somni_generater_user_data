@@ -1,0 +1,2910 @@
+{
+  "user_profiles": [
+    {
+      "personalInformation": {
+        "type": "M-H-R",
+        "label": "完美主义百灵鸟",
+        "id": "69a6a958c773dde99fc1734e"
+      },
+      "session_id": "69d74b4f64510f62f4b13356",
+      "user_id": "69aea593af5e6cbf08027964",
+      "sleepProfile": "睡眠方面：作息规律，坚持早睡早起，但入睡过程较为困难。高敏感让其对睡眠环境要求苛刻，对光线、声音、温度等细微变化都会产生明显反应；同时大脑高度活跃，睡前思绪纷飞，容易出现反刍思考和过度思虑。需要严格的环境控制和完整的睡前放松仪式才能逐渐入睡。压力较大时睡眠质量明显下降，容易出现碎片化睡眠。浅睡比例偏高，深睡不足，夜间醒来次数较多。整体属于节律管理型睡眠人群，自律度高但心理压力容易影响睡眠稳定性。",
+      "likelyNightSleepEvents": [
+        "入睡困难",
+        "家电持续声",
+        "环境持续声",
+        "邻里持续声",
+        "自然持续声",
+        "突发撞击声",
+        "突发交通声",
+        "人声/门铃声",
+        "自然突发声",
+        "物品突发声",
+        "异常体动",
+        "噩梦应激",
+        "心率上升",
+        "梦话",
+        "睡眠姿势切换",
+        "肢体动作",
+        "打鼾"
+      ],
+      "preference": "日常偏好：偏好有规划、有节奏的生活方式，喜欢制定计划、记录习惯或进行自我管理。倾向于进行有助于稳定状态的活动，如运动、阅读、学习新知识、听播客或做轻度放松练习。睡前会进行整理思绪的行为，例如写待办清单、简单记录或复盘一天的事情。对环境要求较高，偏好安静、有序的空间。整体生活风格偏向理性、自律和目标导向，既重视效率，也希望通过稳定的日常习惯来维持身心状态。",
+      "fitnessProfile": "该用户血压范围100-130/70-90 mmHg，心率55-95 bpm，血氧饱和度93%-98%，疲劳指数偏高（6-9），呼吸频率14-20次/分钟，体温36.3-36.8℃。",
+      "sex": "男",
+      "date": {
+        "start": "2026-03-01",
+        "end": "2026-06-30"
+      },
+      "sleepTime": {
+        "min": [
+          "22:00"
+        ],
+        "max": [
+          "23:00"
+        ]
+      },
+      "awakeTime": {
+        "min": [
+          "06:00"
+        ],
+        "max": [
+          "07:00"
+        ]
+      },
+      "deepSleep": {
+        "min": [
+          13
+        ],
+        "max": [
+          18
+        ]
+      },
+      "awakeSleep": {
+        "min": [
+          9
+        ],
+        "max": [
+          15
+        ]
+      },
+      "sleepLatency": {
+        "min": [
+          20
+        ],
+        "max": [
+          35
+        ]
+      },
+      "sleepEfficiency": {
+        "min": [
+          78
+        ],
+        "max": [
+          86
+        ]
+      },
+      "nightAwakenings": {
+        "min": [
+          1
+        ],
+        "max": [
+          2
+        ]
+      },
+      "nightWakeTotalMinutes": {
+        "min": [
+          22
+        ],
+        "max": [
+          34
+        ]
+      },
+      "lightSleep": {
+        "min": [
+          50
+        ],
+        "max": [
+          57
+        ]
+      },
+      "remSleep": {
+        "min": [
+          17
+        ],
+        "max": [
+          22
+        ]
+      },
+      "fitness": {
+        "systolicPressure": {
+          "min": [
+            108
+          ],
+          "max": [
+            126
+          ]
+        },
+        "diastolicPressure": {
+          "min": [
+            68
+          ],
+          "max": [
+            82
+          ]
+        },
+        "bloodOxygen": {
+          "min": [
+            96
+          ],
+          "max": [
+            98
+          ]
+        },
+        "heartRate": {
+          "min": [
+            58
+          ],
+          "max": [
+            72
+          ]
+        },
+        "breathingRate": {
+          "min": [
+            13
+          ],
+          "max": [
+            18
+          ]
+        },
+        "bodyMovement": {
+          "min": [
+            12
+          ],
+          "max": [
+            22
+          ]
+        },
+        "fatigueIndex": {
+          "min": [
+            6
+          ],
+          "max": [
+            9
+          ]
+        }
+      },
+      "sleepTemperature": {
+        "min": [
+          17
+        ],
+        "max": [
+          21
+        ]
+      },
+      "sleepHumidity": {
+        "min": [
+          45
+        ],
+        "max": [
+          55
+        ]
+      },
+      "sleepIlluminance": {
+        "min": [
+          0
+        ],
+        "max": [
+          5
+        ]
+      },
+      "schedule": {
+        "min_events_per_day": 3,
+        "max_events_per_day": 6,
+        "min_total_minutes_per_day": 120,
+        "max_total_minutes_per_day": 360
+      },
+      "wearableMetrics": {
+        "step_count": {
+          "min": [
+            7700
+          ],
+          "max": [
+            15200
+          ]
+        },
+        "walking_distance_km": {
+          "min": [
+            4.5
+          ],
+          "max": [
+            11.0
+          ]
+        },
+        "running_distance_km": {
+          "min": [
+            1.6
+          ],
+          "max": [
+            6.9
+          ]
+        },
+        "floors_climbed": {
+          "min": [
+            8
+          ],
+          "max": [
+            28
+          ]
+        },
+        "active_calories_kcal": {
+          "min": [
+            380
+          ],
+          "max": [
+            1020
+          ]
+        },
+        "cadence_spm": {
+          "min": [
+            98
+          ],
+          "max": [
+            134
+          ]
+        },
+        "pace_km_per_min": {
+          "min": [
+            0.085
+          ],
+          "max": [
+            0.155
+          ]
+        },
+        "noise_exposure_db": {
+          "min": [
+            38
+          ],
+          "max": [
+            70
+          ]
+        },
+        "hand_wash_count": {
+          "min": [
+            5
+          ],
+          "max": [
+            14
+          ]
+        },
+        "sunlight_minutes": {
+          "min": [
+            45
+          ],
+          "max": [
+            160
+          ]
+        },
+        "stand_time_minutes": {
+          "min": [
+            260
+          ],
+          "max": [
+            560
+          ]
+        },
+        "exercise_time_minutes": {
+          "min": [
+            32
+          ],
+          "max": [
+            115
+          ]
+        },
+        "vo2_max": {
+          "min": [
+            31.0
+          ],
+          "max": [
+            52.0
+          ]
+        },
+        "blood_oxygen_saturation_percent": {
+          "min": [
+            95
+          ],
+          "max": [
+            99
+          ]
+        },
+        "blood_pressure_systolic_mmhg": {
+          "min": [
+            108
+          ],
+          "max": [
+            126
+          ]
+        },
+        "blood_pressure_diastolic_mmhg": {
+          "min": [
+            68
+          ],
+          "max": [
+            82
+          ]
+        },
+        "heart_rate_realtime_bpm": {
+          "min": [
+            58
+          ],
+          "max": [
+            72
+          ]
+        },
+        "resting_heart_rate_bpm": {
+          "min": [
+            42
+          ],
+          "max": [
+            64
+          ]
+        },
+        "hrv": {
+          "min": [
+            30
+          ],
+          "max": [
+            150
+          ]
+        },
+        "respiration_rate_bpm": {
+          "min": [
+            13
+          ],
+          "max": [
+            18
+          ]
+        },
+        "blood_pressure_requires_external_device": true
+      }
+    },
+    {
+      "personalInformation": {
+        "type": "M-H-C",
+        "label": "敏感的晨间鹿",
+        "id": "69a6a958c773dde99fc1734f"
+      },
+      "session_id": "69d74ea164510f62f4b14560",
+      "user_id": "69aea63eaf5e6cbf08027965",
+      "sleepProfile": "睡眠方面：早睡型，大脑容易安静下来，入睡过程相对顺利。但身体感官高度敏感，即使身体疲惫，感官依然高度活跃，对光、声、温度甚至微小环境变化都可能产生明显反应，轻微扰动就会产生惊跳或紧张感。夜间容易被轻微声响、光线变化或温度波动惊醒，导致浅睡比例偏高、深睡不足。睡眠高度依赖环境的安静和稳定，必须在极致安静、安全的环境中才能稍微放松。精神高度紧绷，心理防备性强，属于典型的高敏感、警觉度极高型用户。",
+      "likelyNightSleepEvents": [
+        "家电持续声",
+        "环境持续声",
+        "邻里持续声",
+        "自然持续声",
+        "突发撞击声",
+        "突发交通声",
+        "人声/门铃声",
+        "自然突发声",
+        "物品突发声",
+        "异常体动",
+        "噩梦应激",
+        "咳嗽",
+        "呼吸声",
+        "睡眠姿势切换",
+        "自然微动",
+        "单次体动",
+        "打鼾"
+      ],
+      "preference": "日常偏好：偏好高度可控和安静的环境，喜欢独处或只与亲密的人交往。倾向从事低干扰、低风险的活动，例如阅读、写作、冥想、轻度运动或在可控环境中进行兴趣爱好。对环境和生活节奏的要求严格，喜欢有序、稳定、可预测的安排，以减少意外刺激带来的紧张感。睡前偏好安静的放松方式，如轻音乐、冥想或简单的呼吸练习。总体生活方式呈现出小心谨慎、环境依赖强、独处导向的特点。",
+      "fitnessProfile": "该用户血压范围100-130/70-90 mmHg，心率55-95 bpm，血氧饱和度93%-98%，疲劳指数较高（7-10），呼吸频率14-20次/分钟，体温36.3-36.8℃。",
+      "sex": "男",
+      "date": {
+        "start": "2026-03-01",
+        "end": "2026-06-30"
+      },
+      "sleepTime": {
+        "min": [
+          "21:30"
+        ],
+        "max": [
+          "22:30"
+        ]
+      },
+      "awakeTime": {
+        "min": [
+          "06:00"
+        ],
+        "max": [
+          "07:00"
+        ]
+      },
+      "deepSleep": {
+        "min": [
+          16
+        ],
+        "max": [
+          21
+        ]
+      },
+      "awakeSleep": {
+        "min": [
+          7
+        ],
+        "max": [
+          13
+        ]
+      },
+      "sleepLatency": {
+        "min": [
+          8
+        ],
+        "max": [
+          18
+        ]
+      },
+      "sleepEfficiency": {
+        "min": [
+          82
+        ],
+        "max": [
+          90
+        ]
+      },
+      "nightAwakenings": {
+        "min": [
+          1
+        ],
+        "max": [
+          3
+        ]
+      },
+      "nightWakeTotalMinutes": {
+        "min": [
+          14
+        ],
+        "max": [
+          28
+        ]
+      },
+      "lightSleep": {
+        "min": [
+          48
+        ],
+        "max": [
+          55
+        ]
+      },
+      "remSleep": {
+        "min": [
+          20
+        ],
+        "max": [
+          24
+        ]
+      },
+      "fitness": {
+        "systolicPressure": {
+          "min": [
+            106
+          ],
+          "max": [
+            122
+          ]
+        },
+        "diastolicPressure": {
+          "min": [
+            66
+          ],
+          "max": [
+            80
+          ]
+        },
+        "bloodOxygen": {
+          "min": [
+            96
+          ],
+          "max": [
+            98
+          ]
+        },
+        "heartRate": {
+          "min": [
+            56
+          ],
+          "max": [
+            68
+          ]
+        },
+        "breathingRate": {
+          "min": [
+            12
+          ],
+          "max": [
+            17
+          ]
+        },
+        "bodyMovement": {
+          "min": [
+            10
+          ],
+          "max": [
+            20
+          ]
+        },
+        "fatigueIndex": {
+          "min": [
+            7
+          ],
+          "max": [
+            10
+          ]
+        }
+      },
+      "sleepTemperature": {
+        "min": [
+          17
+        ],
+        "max": [
+          21
+        ]
+      },
+      "sleepHumidity": {
+        "min": [
+          45
+        ],
+        "max": [
+          55
+        ]
+      },
+      "sleepIlluminance": {
+        "min": [
+          0
+        ],
+        "max": [
+          3
+        ]
+      },
+      "schedule": {
+        "min_events_per_day": 2,
+        "max_events_per_day": 4,
+        "min_total_minutes_per_day": 60,
+        "max_total_minutes_per_day": 240
+      },
+      "wearableMetrics": {
+        "step_count": {
+          "min": [
+            6700
+          ],
+          "max": [
+            13300
+          ]
+        },
+        "walking_distance_km": {
+          "min": [
+            4.5
+          ],
+          "max": [
+            11.0
+          ]
+        },
+        "running_distance_km": {
+          "min": [
+            1.0
+          ],
+          "max": [
+            5.4
+          ]
+        },
+        "floors_climbed": {
+          "min": [
+            8
+          ],
+          "max": [
+            28
+          ]
+        },
+        "active_calories_kcal": {
+          "min": [
+            290
+          ],
+          "max": [
+            820
+          ]
+        },
+        "cadence_spm": {
+          "min": [
+            96
+          ],
+          "max": [
+            130
+          ]
+        },
+        "pace_km_per_min": {
+          "min": [
+            0.085
+          ],
+          "max": [
+            0.155
+          ]
+        },
+        "noise_exposure_db": {
+          "min": [
+            38
+          ],
+          "max": [
+            70
+          ]
+        },
+        "hand_wash_count": {
+          "min": [
+            5
+          ],
+          "max": [
+            14
+          ]
+        },
+        "sunlight_minutes": {
+          "min": [
+            45
+          ],
+          "max": [
+            160
+          ]
+        },
+        "stand_time_minutes": {
+          "min": [
+            260
+          ],
+          "max": [
+            560
+          ]
+        },
+        "exercise_time_minutes": {
+          "min": [
+            32
+          ],
+          "max": [
+            115
+          ]
+        },
+        "vo2_max": {
+          "min": [
+            31.0
+          ],
+          "max": [
+            52.0
+          ]
+        },
+        "blood_oxygen_saturation_percent": {
+          "min": [
+            95
+          ],
+          "max": [
+            99
+          ]
+        },
+        "blood_pressure_systolic_mmhg": {
+          "min": [
+            106
+          ],
+          "max": [
+            122
+          ]
+        },
+        "blood_pressure_diastolic_mmhg": {
+          "min": [
+            66
+          ],
+          "max": [
+            80
+          ]
+        },
+        "heart_rate_realtime_bpm": {
+          "min": [
+            56
+          ],
+          "max": [
+            68
+          ]
+        },
+        "resting_heart_rate_bpm": {
+          "min": [
+            40
+          ],
+          "max": [
+            60
+          ]
+        },
+        "hrv": {
+          "min": [
+            30
+          ],
+          "max": [
+            150
+          ]
+        },
+        "respiration_rate_bpm": {
+          "min": [
+            12
+          ],
+          "max": [
+            17
+          ]
+        },
+        "blood_pressure_requires_external_device": true
+      }
+    },
+    {
+      "personalInformation": {
+        "type": "M-L-R",
+        "label": "效率至上考拉",
+        "id": "69a6a958c773dde99fc17350"
+      },
+      "session_id": "69d74f23d3139992f973e7a7",
+      "user_id": "69aea6d8af5e6cbf08027966",
+      "sleepProfile": "睡眠方面：作息规律，环境适应力强，对光线、声音等外界干扰不敏感。但睡前大脑容易过热，白天精力充沛、思维活跃，到了睡觉时间大脑仍在高速运转，导致入睡需要一定时间。不过一旦入睡，睡眠质量高且稳定，深睡比例充足，夜间几乎不会醒来。身体健康、恢复力强，作息与生理节律高度匹配。属于典型的入睡慢但睡得好的类型。",
+      "likelyNightSleepEvents": [
+        "入睡困难",
+        "突发撞击声",
+        "突发交通声",
+        "人声/门铃声",
+        "自然突发声",
+        "物品突发声",
+        "梦话",
+        "打鼾",
+        "睡眠姿势切换",
+        "肢体动作",
+        "自然微动",
+        "单次体动",
+        "呼吸声"
+      ],
+      "preference": "日常偏好：偏好高效率、有规律的生活方式。白天精力充沛，工作、学习或运动都能高效完成。保持健康饮食、规律运动，并注重身心平衡。睡前可能会进行一些思维活动，如复盘工作、规划明天或阅读专业内容，大脑需要一段时间才能从活跃状态切换到休息模式。生活节奏稳定，心理压力管理良好，整体生活方式呈现出健康、有序、高效且自律的特点。",
+      "fitnessProfile": "该用户日常血压正常（约110-120/70-80 mmHg），心率正常（60-80 bpm），血氧饱和度稳定在95-98%，呼吸频率12-18次/分钟，体温36.3-36.8℃，体重及BMI处于健康范围（BMI约18.5-24.9）。",
+      "sex": "男",
+      "date": {
+        "start": "2026-03-01",
+        "end": "2026-06-30"
+      },
+      "sleepTime": {
+        "min": [
+          "22:00"
+        ],
+        "max": [
+          "23:00"
+        ]
+      },
+      "awakeTime": {
+        "min": [
+          "06:00"
+        ],
+        "max": [
+          "07:00"
+        ]
+      },
+      "deepSleep": {
+        "min": [
+          18
+        ],
+        "max": [
+          23
+        ]
+      },
+      "awakeSleep": {
+        "min": [
+          4
+        ],
+        "max": [
+          9
+        ]
+      },
+      "sleepLatency": {
+        "min": [
+          15
+        ],
+        "max": [
+          28
+        ]
+      },
+      "sleepEfficiency": {
+        "min": [
+          87
+        ],
+        "max": [
+          93
+        ]
+      },
+      "nightAwakenings": {
+        "min": [
+          0
+        ],
+        "max": [
+          1
+        ]
+      },
+      "nightWakeTotalMinutes": {
+        "min": [
+          3
+        ],
+        "max": [
+          14
+        ]
+      },
+      "lightSleep": {
+        "min": [
+          46
+        ],
+        "max": [
+          52
+        ]
+      },
+      "remSleep": {
+        "min": [
+          19
+        ],
+        "max": [
+          23
+        ]
+      },
+      "fitness": {
+        "systolicPressure": {
+          "min": [
+            104
+          ],
+          "max": [
+            120
+          ]
+        },
+        "diastolicPressure": {
+          "min": [
+            64
+          ],
+          "max": [
+            78
+          ]
+        },
+        "bloodOxygen": {
+          "min": [
+            96
+          ],
+          "max": [
+            98
+          ]
+        },
+        "heartRate": {
+          "min": [
+            54
+          ],
+          "max": [
+            66
+          ]
+        },
+        "breathingRate": {
+          "min": [
+            12
+          ],
+          "max": [
+            16
+          ]
+        },
+        "bodyMovement": {
+          "min": [
+            6
+          ],
+          "max": [
+            14
+          ]
+        },
+        "fatigueIndex": {
+          "min": [
+            3
+          ],
+          "max": [
+            6
+          ]
+        }
+      },
+      "sleepTemperature": {
+        "min": [
+          18
+        ],
+        "max": [
+          22
+        ]
+      },
+      "sleepHumidity": {
+        "min": [
+          50
+        ],
+        "max": [
+          60
+        ]
+      },
+      "sleepIlluminance": {
+        "min": [
+          0
+        ],
+        "max": [
+          10
+        ]
+      },
+      "schedule": {
+        "min_events_per_day": 3,
+        "max_events_per_day": 6,
+        "min_total_minutes_per_day": 120,
+        "max_total_minutes_per_day": 420
+      },
+      "wearableMetrics": {
+        "step_count": {
+          "min": [
+            7700
+          ],
+          "max": [
+            15200
+          ]
+        },
+        "walking_distance_km": {
+          "min": [
+            4.5
+          ],
+          "max": [
+            11.0
+          ]
+        },
+        "running_distance_km": {
+          "min": [
+            1.6
+          ],
+          "max": [
+            6.9
+          ]
+        },
+        "floors_climbed": {
+          "min": [
+            8
+          ],
+          "max": [
+            28
+          ]
+        },
+        "active_calories_kcal": {
+          "min": [
+            380
+          ],
+          "max": [
+            1020
+          ]
+        },
+        "cadence_spm": {
+          "min": [
+            98
+          ],
+          "max": [
+            134
+          ]
+        },
+        "pace_km_per_min": {
+          "min": [
+            0.085
+          ],
+          "max": [
+            0.155
+          ]
+        },
+        "noise_exposure_db": {
+          "min": [
+            43
+          ],
+          "max": [
+            78
+          ]
+        },
+        "hand_wash_count": {
+          "min": [
+            5
+          ],
+          "max": [
+            14
+          ]
+        },
+        "sunlight_minutes": {
+          "min": [
+            45
+          ],
+          "max": [
+            160
+          ]
+        },
+        "stand_time_minutes": {
+          "min": [
+            260
+          ],
+          "max": [
+            560
+          ]
+        },
+        "exercise_time_minutes": {
+          "min": [
+            43
+          ],
+          "max": [
+            133
+          ]
+        },
+        "vo2_max": {
+          "min": [
+            33.8
+          ],
+          "max": [
+            56.6
+          ]
+        },
+        "blood_oxygen_saturation_percent": {
+          "min": [
+            95
+          ],
+          "max": [
+            99
+          ]
+        },
+        "blood_pressure_systolic_mmhg": {
+          "min": [
+            104
+          ],
+          "max": [
+            120
+          ]
+        },
+        "blood_pressure_diastolic_mmhg": {
+          "min": [
+            64
+          ],
+          "max": [
+            78
+          ]
+        },
+        "heart_rate_realtime_bpm": {
+          "min": [
+            54
+          ],
+          "max": [
+            66
+          ]
+        },
+        "resting_heart_rate_bpm": {
+          "min": [
+            40
+          ],
+          "max": [
+            58
+          ]
+        },
+        "hrv": {
+          "min": [
+            30
+          ],
+          "max": [
+            150
+          ]
+        },
+        "respiration_rate_bpm": {
+          "min": [
+            12
+          ],
+          "max": [
+            16
+          ]
+        },
+        "blood_pressure_requires_external_device": true
+      }
+    },
+    {
+      "personalInformation": {
+        "type": "M-L-C",
+        "label": "阳光漫步者",
+        "id": "69a6a958c773dde99fc17351"
+      },
+      "session_id": "69d74f6cd3139992f973f82c",
+      "user_id": "69aea6e3af5e6cbf08027967",
+      "sleepProfile": "睡眠方面：睡眠质量最优的类型。作息规律、环境适应力强、大脑容易安静。倒头就睡，一觉到天亮。入睡极快，通常5-15分钟即可入睡，深睡比例高，睡眠效率极高。几乎不受外界干扰，夜间很少醒来。身体恢复力强，不依赖复杂的助眠手段，只需通过简单而固定的睡前仪式就能自然进入睡眠状态。整体生活节奏有序，情绪相对稳定，压力管理能力较强，是典型的睡眠赢家。",
+      "likelyNightSleepEvents": [
+        "安静",
+        "呼吸声",
+        "自然微动",
+        "吞咽",
+        "打鼾",
+        "睡眠姿势切换",
+        "单次体动",
+        "突发撞击声",
+        "突发交通声",
+        "物品突发声",
+        "异常体动"
+      ],
+      "preference": "日常偏好：更喜欢做一些轻松且有实际意义的事情，例如简单运动、外出走走、看电影或做一些兴趣爱好。比较注重把事情落实完成，生活节奏较为踏实，喜欢在轻松中保持一定的效率和目标感。倾向于轻度放松型活动，如阅读、散步、简单运动、冥想或听播客，不太喜欢熬夜娱乐或过度刺激的活动。数字产品使用上较为克制，睡前通常减少长时间刷手机的习惯，更愿意通过一些简单的小仪式来结束一天。更重视舒适感、秩序感和效率感，追求自然、稳定、可持续的生活节奏。",
+      "fitnessProfile": "该用户日常血压正常（约110-120/70-80 mmHg），心率正常（60-75 bpm），血氧饱和度稳定在95-98%，呼吸频率12-18次/分钟，体温36.3-36.8℃，体重及BMI处于健康范围。",
+      "sex": "男",
+      "date": {
+        "start": "2026-04-01",
+        "end": "2026-05-15"
+      },
+      "sleepTime": {
+        "min": [
+          "22:00"
+        ],
+        "max": [
+          "23:00"
+        ]
+      },
+      "awakeTime": {
+        "min": [
+          "06:00"
+        ],
+        "max": [
+          "07:00"
+        ]
+      },
+      "deepSleep": {
+        "min": [
+          21
+        ],
+        "max": [
+          25
+        ]
+      },
+      "awakeSleep": {
+        "min": [
+          2
+        ],
+        "max": [
+          5
+        ]
+      },
+      "sleepLatency": {
+        "min": [
+          5
+        ],
+        "max": [
+          15
+        ]
+      },
+      "sleepEfficiency": {
+        "min": [
+          91
+        ],
+        "max": [
+          96
+        ]
+      },
+      "nightAwakenings": {
+        "min": [
+          0
+        ],
+        "max": [
+          1
+        ]
+      },
+      "nightWakeTotalMinutes": {
+        "min": [
+          0
+        ],
+        "max": [
+          10
+        ]
+      },
+      "lightSleep": {
+        "min": [
+          43
+        ],
+        "max": [
+          49
+        ]
+      },
+      "remSleep": {
+        "min": [
+          21
+        ],
+        "max": [
+          25
+        ]
+      },
+      "fitness": {
+        "systolicPressure": {
+          "min": [
+            98
+          ],
+          "max": [
+            114
+          ]
+        },
+        "diastolicPressure": {
+          "min": [
+            62
+          ],
+          "max": [
+            74
+          ]
+        },
+        "bloodOxygen": {
+          "min": [
+            96
+          ],
+          "max": [
+            98
+          ]
+        },
+        "heartRate": {
+          "min": [
+            50
+          ],
+          "max": [
+            62
+          ]
+        },
+        "breathingRate": {
+          "min": [
+            11
+          ],
+          "max": [
+            15
+          ]
+        },
+        "bodyMovement": {
+          "min": [
+            3
+          ],
+          "max": [
+            10
+          ]
+        },
+        "fatigueIndex": {
+          "min": [
+            3
+          ],
+          "max": [
+            5
+          ]
+        }
+      },
+      "sleepTemperature": {
+        "min": [
+          18
+        ],
+        "max": [
+          22
+        ]
+      },
+      "sleepHumidity": {
+        "min": [
+          50
+        ],
+        "max": [
+          60
+        ]
+      },
+      "sleepIlluminance": {
+        "min": [
+          0
+        ],
+        "max": [
+          10
+        ]
+      },
+      "schedule": {
+        "min_events_per_day": 2,
+        "max_events_per_day": 5,
+        "min_total_minutes_per_day": 90,
+        "max_total_minutes_per_day": 300
+      },
+      "wearableMetrics": {
+        "step_count": {
+          "min": [
+            6700
+          ],
+          "max": [
+            13300
+          ]
+        },
+        "walking_distance_km": {
+          "min": [
+            4.5
+          ],
+          "max": [
+            11.0
+          ]
+        },
+        "running_distance_km": {
+          "min": [
+            1.0
+          ],
+          "max": [
+            5.4
+          ]
+        },
+        "floors_climbed": {
+          "min": [
+            8
+          ],
+          "max": [
+            28
+          ]
+        },
+        "active_calories_kcal": {
+          "min": [
+            290
+          ],
+          "max": [
+            820
+          ]
+        },
+        "cadence_spm": {
+          "min": [
+            96
+          ],
+          "max": [
+            130
+          ]
+        },
+        "pace_km_per_min": {
+          "min": [
+            0.085
+          ],
+          "max": [
+            0.155
+          ]
+        },
+        "noise_exposure_db": {
+          "min": [
+            43
+          ],
+          "max": [
+            78
+          ]
+        },
+        "hand_wash_count": {
+          "min": [
+            5
+          ],
+          "max": [
+            14
+          ]
+        },
+        "sunlight_minutes": {
+          "min": [
+            45
+          ],
+          "max": [
+            160
+          ]
+        },
+        "stand_time_minutes": {
+          "min": [
+            260
+          ],
+          "max": [
+            560
+          ]
+        },
+        "exercise_time_minutes": {
+          "min": [
+            43
+          ],
+          "max": [
+            133
+          ]
+        },
+        "vo2_max": {
+          "min": [
+            33.8
+          ],
+          "max": [
+            56.6
+          ]
+        },
+        "blood_oxygen_saturation_percent": {
+          "min": [
+            95
+          ],
+          "max": [
+            99
+          ]
+        },
+        "blood_pressure_systolic_mmhg": {
+          "min": [
+            98
+          ],
+          "max": [
+            114
+          ]
+        },
+        "blood_pressure_diastolic_mmhg": {
+          "min": [
+            62
+          ],
+          "max": [
+            74
+          ]
+        },
+        "heart_rate_realtime_bpm": {
+          "min": [
+            50
+          ],
+          "max": [
+            62
+          ]
+        },
+        "resting_heart_rate_bpm": {
+          "min": [
+            40
+          ],
+          "max": [
+            54
+          ]
+        },
+        "hrv": {
+          "min": [
+            30
+          ],
+          "max": [
+            150
+          ]
+        },
+        "respiration_rate_bpm": {
+          "min": [
+            11
+          ],
+          "max": [
+            15
+          ]
+        },
+        "blood_pressure_requires_external_device": true
+      }
+    },
+    {
+      "personalInformation": {
+        "type": "E-H-R",
+        "label": "深夜灵感守望者",
+        "id": "69a6a958c773dde99fc17352"
+      },
+      "session_id": "69d74fa0d3139992f9740878",
+      "user_id": "69aea6e8af5e6cbf08027968",
+      "sleepProfile": "睡眠方面：睡眠质量最差的类型。夜间大脑极度活跃且感官高度敏感，入睡极其困难，入睡潜伏期通常在30-60分钟。夜晚思绪翻涌，对环境的每一个细微变化都有感知。即使入睡后也容易频繁醒来，夜间醒来2-4次，深睡严重不足（仅8%-15%）。长期处于睡眠负债状态，白天疲劳感强烈。睡眠效率极低（65%-80%），清醒比例高达15%-25%。越夜越精神，大脑在夜晚持续高速运转，容易激发创造力和灵感，但也导致入睡时间不断推迟。",
+      "likelyNightSleepEvents": [
+        "入睡困难",
+        "家电持续声",
+        "环境持续声",
+        "邻里持续声",
+        "自然持续声",
+        "突发撞击声",
+        "突发交通声",
+        "人声/门铃声",
+        "自然突发声",
+        "物品突发声",
+        "异常体动",
+        "噩梦应激",
+        "心率上升",
+        "梦话",
+        "睡眠姿势切换",
+        "肢体动作",
+        "打鼾"
+      ],
+      "preference": "日常偏好：倾向将夜晚作为创造和自我实现的时间，喜欢在深夜进行写作、绘画、编程、设计或其他能激发思维的活动。对环境要求较高，偏好安静、可控的空间，但在创作状态下也能忽略环境的不完美。白天可能用于必要事务处理或休息，核心精力和兴趣活动集中在夜间。情绪感知细腻，容易受到外界刺激的影响。整体生活方式呈现出夜晚高效创作、白天相对低调休整的节奏，追求精神充实和思维自由。",
+      "fitnessProfile": "该用户血压范围100-135/70-90 mmHg，心率55-100 bpm，血氧饱和度93%-98%，疲劳指数高（8-10），呼吸频率14-22次/分钟，体温36.3-36.9℃。",
+      "sex": "男",
+      "date": {
+        "start": "2026-04-01",
+        "end": "2026-05-15"
+      },
+      "sleepTime": {
+        "min": [
+          "00:00"
+        ],
+        "max": [
+          "01:30"
+        ]
+      },
+      "awakeTime": {
+        "min": [
+          "08:00"
+        ],
+        "max": [
+          "09:30"
+        ]
+      },
+      "deepSleep": {
+        "min": [
+          10
+        ],
+        "max": [
+          16
+        ]
+      },
+      "awakeSleep": {
+        "min": [
+          11
+        ],
+        "max": [
+          17
+        ]
+      },
+      "sleepLatency": {
+        "min": [
+          25
+        ],
+        "max": [
+          40
+        ]
+      },
+      "sleepEfficiency": {
+        "min": [
+          74
+        ],
+        "max": [
+          83
+        ]
+      },
+      "nightAwakenings": {
+        "min": [
+          2
+        ],
+        "max": [
+          3
+        ]
+      },
+      "nightWakeTotalMinutes": {
+        "min": [
+          48
+        ],
+        "max": [
+          78
+        ]
+      },
+      "lightSleep": {
+        "min": [
+          52
+        ],
+        "max": [
+          60
+        ]
+      },
+      "remSleep": {
+        "min": [
+          16
+        ],
+        "max": [
+          21
+        ]
+      },
+      "fitness": {
+        "systolicPressure": {
+          "min": [
+            114
+          ],
+          "max": [
+            134
+          ]
+        },
+        "diastolicPressure": {
+          "min": [
+            72
+          ],
+          "max": [
+            88
+          ]
+        },
+        "bloodOxygen": {
+          "min": [
+            96
+          ],
+          "max": [
+            98
+          ]
+        },
+        "heartRate": {
+          "min": [
+            62
+          ],
+          "max": [
+            78
+          ]
+        },
+        "breathingRate": {
+          "min": [
+            14
+          ],
+          "max": [
+            19
+          ]
+        },
+        "bodyMovement": {
+          "min": [
+            15
+          ],
+          "max": [
+            28
+          ]
+        },
+        "fatigueIndex": {
+          "min": [
+            8
+          ],
+          "max": [
+            10
+          ]
+        }
+      },
+      "sleepTemperature": {
+        "min": [
+          17
+        ],
+        "max": [
+          21
+        ]
+      },
+      "sleepHumidity": {
+        "min": [
+          45
+        ],
+        "max": [
+          55
+        ]
+      },
+      "sleepIlluminance": {
+        "min": [
+          0
+        ],
+        "max": [
+          5
+        ]
+      },
+      "schedule": {
+        "min_events_per_day": 2,
+        "max_events_per_day": 5,
+        "min_total_minutes_per_day": 90,
+        "max_total_minutes_per_day": 300
+      },
+      "wearableMetrics": {
+        "step_count": {
+          "min": [
+            5200
+          ],
+          "max": [
+            13200
+          ]
+        },
+        "walking_distance_km": {
+          "min": [
+            3.2
+          ],
+          "max": [
+            9.2
+          ]
+        },
+        "running_distance_km": {
+          "min": [
+            1.2
+          ],
+          "max": [
+            5.7
+          ]
+        },
+        "floors_climbed": {
+          "min": [
+            5
+          ],
+          "max": [
+            20
+          ]
+        },
+        "active_calories_kcal": {
+          "min": [
+            320
+          ],
+          "max": [
+            880
+          ]
+        },
+        "cadence_spm": {
+          "min": [
+            92
+          ],
+          "max": [
+            128
+          ]
+        },
+        "pace_km_per_min": {
+          "min": [
+            0.075
+          ],
+          "max": [
+            0.145
+          ]
+        },
+        "noise_exposure_db": {
+          "min": [
+            40
+          ],
+          "max": [
+            76
+          ]
+        },
+        "hand_wash_count": {
+          "min": [
+            4
+          ],
+          "max": [
+            12
+          ]
+        },
+        "sunlight_minutes": {
+          "min": [
+            20
+          ],
+          "max": [
+            120
+          ]
+        },
+        "stand_time_minutes": {
+          "min": [
+            210
+          ],
+          "max": [
+            480
+          ]
+        },
+        "exercise_time_minutes": {
+          "min": [
+            22
+          ],
+          "max": [
+            100
+          ]
+        },
+        "vo2_max": {
+          "min": [
+            28.0
+          ],
+          "max": [
+            47.0
+          ]
+        },
+        "blood_oxygen_saturation_percent": {
+          "min": [
+            95
+          ],
+          "max": [
+            99
+          ]
+        },
+        "blood_pressure_systolic_mmhg": {
+          "min": [
+            114
+          ],
+          "max": [
+            134
+          ]
+        },
+        "blood_pressure_diastolic_mmhg": {
+          "min": [
+            72
+          ],
+          "max": [
+            88
+          ]
+        },
+        "heart_rate_realtime_bpm": {
+          "min": [
+            62
+          ],
+          "max": [
+            78
+          ]
+        },
+        "resting_heart_rate_bpm": {
+          "min": [
+            46
+          ],
+          "max": [
+            70
+          ]
+        },
+        "hrv": {
+          "min": [
+            30
+          ],
+          "max": [
+            150
+          ]
+        },
+        "respiration_rate_bpm": {
+          "min": [
+            14
+          ],
+          "max": [
+            19
+          ]
+        },
+        "blood_pressure_requires_external_device": true
+      }
+    },
+    {
+      "personalInformation": {
+        "type": "E-H-C",
+        "label": "深海独奏家",
+        "id": "69a6a958c773dde99fc17353"
+      },
+      "session_id": "69d74fced3139992f9741b99",
+      "user_id": "69aea6eeaf5e6cbf08027969",
+      "sleepProfile": "睡眠方面：作息偏晚，大脑虽然容易安静下来，但身体感官极度敏感。性格内向，习惯独处，对外界环境与情绪变化极为敏感。入睡过程不算太难（入睡潜伏期15-35分钟），但夜间容易被环境变化惊醒，夜间醒来2-3次。对睡眠环境要求极高，需要完全黑暗、安静、温度适宜的条件，对光线、声音、温度或床铺舒适度都非常挑剔，一旦有轻微干扰就可能影响入睡。浅睡比例高（50%-62%），深睡不足（8%-18%），整体睡眠质量偏低，睡眠效率72%-85%。焦虑水平较高，夜晚思绪容易陷入反复思考。",
+      "likelyNightSleepEvents": [
+        "家电持续声",
+        "环境持续声",
+        "邻里持续声",
+        "自然持续声",
+        "突发撞击声",
+        "突发交通声",
+        "人声/门铃声",
+        "自然突发声",
+        "物品突发声",
+        "异常体动",
+        "噩梦应激",
+        "心率上升",
+        "入睡困难",
+        "咳嗽",
+        "呼吸声"
+      ],
+      "preference": "日常偏好：更倾向于安静、低社交的生活方式，喜欢独处时间，例如听音乐、阅读、写作、看电影或沉浸在个人兴趣中。相比热闹的社交活动，更偏好安静私密的空间，并会花较多精力去打造让自己感到安全和舒适的环境，例如布置房间、调整灯光或营造个人氛围。由于情绪与感知较为敏锐，更容易沉浸在思考、感受和情绪体验中，生活节奏整体偏慢但内心活动丰富。睡前偏好安静的放松方式来逐渐过渡到睡眠状态。",
+      "fitnessProfile": "该用户血压范围100-130/70-90 mmHg，心率55-95 bpm，血氧饱和度93%-98%，疲劳指数高（7-10），呼吸频率14-20次/分钟，体温36.3-36.8℃。",
+      "sex": "男",
+      "date": {
+        "start": "2026-03-01",
+        "end": "2026-06-30"
+      },
+      "sleepTime": {
+        "min": [
+          "23:30"
+        ],
+        "max": [
+          "01:00"
+        ]
+      },
+      "awakeTime": {
+        "min": [
+          "07:30"
+        ],
+        "max": [
+          "09:00"
+        ]
+      },
+      "deepSleep": {
+        "min": [
+          15
+        ],
+        "max": [
+          21
+        ]
+      },
+      "awakeSleep": {
+        "min": [
+          7
+        ],
+        "max": [
+          13
+        ]
+      },
+      "sleepLatency": {
+        "min": [
+          10
+        ],
+        "max": [
+          22
+        ]
+      },
+      "sleepEfficiency": {
+        "min": [
+          80
+        ],
+        "max": [
+          89
+        ]
+      },
+      "nightAwakenings": {
+        "min": [
+          1
+        ],
+        "max": [
+          3
+        ]
+      },
+      "nightWakeTotalMinutes": {
+        "min": [
+          14
+        ],
+        "max": [
+          32
+        ]
+      },
+      "lightSleep": {
+        "min": [
+          48
+        ],
+        "max": [
+          56
+        ]
+      },
+      "remSleep": {
+        "min": [
+          19
+        ],
+        "max": [
+          23
+        ]
+      },
+      "fitness": {
+        "systolicPressure": {
+          "min": [
+            110
+          ],
+          "max": [
+            128
+          ]
+        },
+        "diastolicPressure": {
+          "min": [
+            68
+          ],
+          "max": [
+            84
+          ]
+        },
+        "bloodOxygen": {
+          "min": [
+            96
+          ],
+          "max": [
+            98
+          ]
+        },
+        "heartRate": {
+          "min": [
+            58
+          ],
+          "max": [
+            72
+          ]
+        },
+        "breathingRate": {
+          "min": [
+            13
+          ],
+          "max": [
+            18
+          ]
+        },
+        "bodyMovement": {
+          "min": [
+            11
+          ],
+          "max": [
+            22
+          ]
+        },
+        "fatigueIndex": {
+          "min": [
+            7
+          ],
+          "max": [
+            10
+          ]
+        }
+      },
+      "sleepTemperature": {
+        "min": [
+          17
+        ],
+        "max": [
+          21
+        ]
+      },
+      "sleepHumidity": {
+        "min": [
+          45
+        ],
+        "max": [
+          55
+        ]
+      },
+      "sleepIlluminance": {
+        "min": [
+          0
+        ],
+        "max": [
+          3
+        ]
+      },
+      "schedule": {
+        "min_events_per_day": 2,
+        "max_events_per_day": 4,
+        "min_total_minutes_per_day": 60,
+        "max_total_minutes_per_day": 240
+      },
+      "wearableMetrics": {
+        "step_count": {
+          "min": [
+            4200
+          ],
+          "max": [
+            11300
+          ]
+        },
+        "walking_distance_km": {
+          "min": [
+            3.2
+          ],
+          "max": [
+            9.2
+          ]
+        },
+        "running_distance_km": {
+          "min": [
+            0.6
+          ],
+          "max": [
+            4.2
+          ]
+        },
+        "floors_climbed": {
+          "min": [
+            5
+          ],
+          "max": [
+            20
+          ]
+        },
+        "active_calories_kcal": {
+          "min": [
+            230
+          ],
+          "max": [
+            680
+          ]
+        },
+        "cadence_spm": {
+          "min": [
+            90
+          ],
+          "max": [
+            124
+          ]
+        },
+        "pace_km_per_min": {
+          "min": [
+            0.075
+          ],
+          "max": [
+            0.145
+          ]
+        },
+        "noise_exposure_db": {
+          "min": [
+            40
+          ],
+          "max": [
+            76
+          ]
+        },
+        "hand_wash_count": {
+          "min": [
+            4
+          ],
+          "max": [
+            12
+          ]
+        },
+        "sunlight_minutes": {
+          "min": [
+            20
+          ],
+          "max": [
+            120
+          ]
+        },
+        "stand_time_minutes": {
+          "min": [
+            210
+          ],
+          "max": [
+            480
+          ]
+        },
+        "exercise_time_minutes": {
+          "min": [
+            22
+          ],
+          "max": [
+            100
+          ]
+        },
+        "vo2_max": {
+          "min": [
+            28.0
+          ],
+          "max": [
+            47.0
+          ]
+        },
+        "blood_oxygen_saturation_percent": {
+          "min": [
+            95
+          ],
+          "max": [
+            99
+          ]
+        },
+        "blood_pressure_systolic_mmhg": {
+          "min": [
+            110
+          ],
+          "max": [
+            128
+          ]
+        },
+        "blood_pressure_diastolic_mmhg": {
+          "min": [
+            68
+          ],
+          "max": [
+            84
+          ]
+        },
+        "heart_rate_realtime_bpm": {
+          "min": [
+            58
+          ],
+          "max": [
+            72
+          ]
+        },
+        "resting_heart_rate_bpm": {
+          "min": [
+            42
+          ],
+          "max": [
+            64
+          ]
+        },
+        "hrv": {
+          "min": [
+            30
+          ],
+          "max": [
+            150
+          ]
+        },
+        "respiration_rate_bpm": {
+          "min": [
+            13
+          ],
+          "max": [
+            18
+          ]
+        },
+        "blood_pressure_requires_external_device": true
+      }
+    },
+    {
+      "personalInformation": {
+        "type": "E-L-R",
+        "label": "创意夜猫子",
+        "id": "69a6a958c773dde99fc17354"
+      },
+      "session_id": "69d74ffdd3139992f9742d91",
+      "user_id": "69aea6f3af5e6cbf0802796a",
+      "sleepProfile": "睡眠方面：典型的夜猫子。夜间大脑持续活跃，越夜越精神，自然而然地晚睡。习惯较晚入睡，大脑在夜晚依然保持活跃状态，思维持续运转，因此很难在较早时间进入睡眠，入睡潜伏期20-40分钟。但由于低敏感，对环境不挑剔，一旦入睡后睡眠质量尚可，深睡比例12%-22%，夜间醒来0-2次。并不是因为焦虑或压力而失眠，而是天生更适应夜晚节奏。身体对晚睡具有较强的耐受力，即使睡得较晚，整体状态也能维持稳定。情绪稳定，不容易因环境或心理因素影响睡眠，属于晚睡但睡得还行的类型。",
+      "likelyNightSleepEvents": [
+        "入睡困难",
+        "突发撞击声",
+        "突发交通声",
+        "人声/门铃声",
+        "自然突发声",
+        "物品突发声",
+        "梦话",
+        "打鼾",
+        "睡眠姿势切换",
+        "肢体动作",
+        "自然微动",
+        "呼吸声"
+      ],
+      "preference": "日常偏好：往往更喜欢在夜晚安排自己的时间，例如看视频、玩游戏、浏览信息、学习新内容或进行一些个人兴趣活动。夜晚对他们来说是思维最活跃、最放松的时间段，因此很多娱乐或自我时间都会集中在深夜。白天则更多用于完成工作或日常事务，整体生活节奏偏向夜间活跃型。通常不会过度关注睡眠问题，也较少刻意做复杂的助眠行为，生活方式整体比较随性、自然，更倾向顺应自己的生物节律生活。",
+      "fitnessProfile": "该用户血压范围100-125/70-85 mmHg，心率55-85 bpm，血氧饱和度93%-98%，疲劳指数中等（4-7），呼吸频率12-18次/分钟，体温36.3-36.8℃。",
+      "sex": "男",
+      "date": {
+        "start": "2026-03-01",
+        "end": "2026-06-30"
+      },
+      "sleepTime": {
+        "min": [
+          "23:30"
+        ],
+        "max": [
+          "01:00"
+        ]
+      },
+      "awakeTime": {
+        "min": [
+          "07:30"
+        ],
+        "max": [
+          "09:00"
+        ]
+      },
+      "deepSleep": {
+        "min": [
+          17
+        ],
+        "max": [
+          22
+        ]
+      },
+      "awakeSleep": {
+        "min": [
+          4
+        ],
+        "max": [
+          10
+        ]
+      },
+      "sleepLatency": {
+        "min": [
+          18
+        ],
+        "max": [
+          30
+        ]
+      },
+      "sleepEfficiency": {
+        "min": [
+          84
+        ],
+        "max": [
+          91
+        ]
+      },
+      "nightAwakenings": {
+        "min": [
+          0
+        ],
+        "max": [
+          1
+        ]
+      },
+      "nightWakeTotalMinutes": {
+        "min": [
+          4
+        ],
+        "max": [
+          16
+        ]
+      },
+      "lightSleep": {
+        "min": [
+          47
+        ],
+        "max": [
+          53
+        ]
+      },
+      "remSleep": {
+        "min": [
+          19
+        ],
+        "max": [
+          23
+        ]
+      },
+      "fitness": {
+        "systolicPressure": {
+          "min": [
+            108
+          ],
+          "max": [
+            124
+          ]
+        },
+        "diastolicPressure": {
+          "min": [
+            66
+          ],
+          "max": [
+            82
+          ]
+        },
+        "bloodOxygen": {
+          "min": [
+            96
+          ],
+          "max": [
+            98
+          ]
+        },
+        "heartRate": {
+          "min": [
+            56
+          ],
+          "max": [
+            70
+          ]
+        },
+        "breathingRate": {
+          "min": [
+            12
+          ],
+          "max": [
+            17
+          ]
+        },
+        "bodyMovement": {
+          "min": [
+            7
+          ],
+          "max": [
+            16
+          ]
+        },
+        "fatigueIndex": {
+          "min": [
+            4
+          ],
+          "max": [
+            7
+          ]
+        }
+      },
+      "sleepTemperature": {
+        "min": [
+          18
+        ],
+        "max": [
+          22
+        ]
+      },
+      "sleepHumidity": {
+        "min": [
+          50
+        ],
+        "max": [
+          60
+        ]
+      },
+      "sleepIlluminance": {
+        "min": [
+          0
+        ],
+        "max": [
+          10
+        ]
+      },
+      "schedule": {
+        "min_events_per_day": 2,
+        "max_events_per_day": 5,
+        "min_total_minutes_per_day": 90,
+        "max_total_minutes_per_day": 360
+      },
+      "wearableMetrics": {
+        "step_count": {
+          "min": [
+            5200
+          ],
+          "max": [
+            13200
+          ]
+        },
+        "walking_distance_km": {
+          "min": [
+            3.2
+          ],
+          "max": [
+            9.2
+          ]
+        },
+        "running_distance_km": {
+          "min": [
+            1.2
+          ],
+          "max": [
+            5.7
+          ]
+        },
+        "floors_climbed": {
+          "min": [
+            5
+          ],
+          "max": [
+            20
+          ]
+        },
+        "active_calories_kcal": {
+          "min": [
+            320
+          ],
+          "max": [
+            880
+          ]
+        },
+        "cadence_spm": {
+          "min": [
+            92
+          ],
+          "max": [
+            128
+          ]
+        },
+        "pace_km_per_min": {
+          "min": [
+            0.075
+          ],
+          "max": [
+            0.145
+          ]
+        },
+        "noise_exposure_db": {
+          "min": [
+            45
+          ],
+          "max": [
+            84
+          ]
+        },
+        "hand_wash_count": {
+          "min": [
+            4
+          ],
+          "max": [
+            12
+          ]
+        },
+        "sunlight_minutes": {
+          "min": [
+            20
+          ],
+          "max": [
+            120
+          ]
+        },
+        "stand_time_minutes": {
+          "min": [
+            210
+          ],
+          "max": [
+            480
+          ]
+        },
+        "exercise_time_minutes": {
+          "min": [
+            33
+          ],
+          "max": [
+            118
+          ]
+        },
+        "vo2_max": {
+          "min": [
+            30.8
+          ],
+          "max": [
+            51.6
+          ]
+        },
+        "blood_oxygen_saturation_percent": {
+          "min": [
+            95
+          ],
+          "max": [
+            99
+          ]
+        },
+        "blood_pressure_systolic_mmhg": {
+          "min": [
+            108
+          ],
+          "max": [
+            124
+          ]
+        },
+        "blood_pressure_diastolic_mmhg": {
+          "min": [
+            66
+          ],
+          "max": [
+            82
+          ]
+        },
+        "heart_rate_realtime_bpm": {
+          "min": [
+            56
+          ],
+          "max": [
+            70
+          ]
+        },
+        "resting_heart_rate_bpm": {
+          "min": [
+            40
+          ],
+          "max": [
+            62
+          ]
+        },
+        "hrv": {
+          "min": [
+            30
+          ],
+          "max": [
+            150
+          ]
+        },
+        "respiration_rate_bpm": {
+          "min": [
+            12
+          ],
+          "max": [
+            17
+          ]
+        },
+        "blood_pressure_requires_external_device": true
+      }
+    },
+    {
+      "personalInformation": {
+        "type": "E-L-C",
+        "label": "月光冲浪者",
+        "id": "69a6a958c773dde99fc17355"
+      },
+      "session_id": "69d7505ad3139992f9743e31",
+      "user_id": "69aea6f8af5e6cbf0802796b",
+      "sleepProfile": "睡眠方面：主动选择晚睡的夜间效率型。熬夜并非被动或失眠，而是出于个人节奏与生活偏好的自愿选择。享受深夜的安静与自由，在深夜时段精力更集中、情绪更放松。一旦决定睡觉，入睡迅速（入睡潜伏期5-20分钟），睡眠质量高，深睡比例15%-25%，睡眠效率85%-95%。低敏感让其不受环境干扰，低活跃的大脑让其随时能切换到睡眠模式，夜间很少醒来（0-1次）。唯一的问题是作息偏晚，早起时可能有起床困难，当早晨需要被闹钟强行唤醒时，往往会产生明显的起床痛苦感。",
+      "likelyNightSleepEvents": [
+        "安静",
+        "呼吸声",
+        "自然微动",
+        "打鼾",
+        "梦话",
+        "吞咽",
+        "睡眠姿势切换",
+        "单次体动",
+        "肢体动作",
+        "突发撞击声",
+        "突发交通声",
+        "物品突发声"
+      ],
+      "preference": "日常偏好：生活方式呈现出明显的夜间活跃型节奏。更习惯把一天中最放松或最专注的时间放在深夜，例如刷内容、追剧、游戏、思考、写作或进行一些个人兴趣活动。夜晚的安静与低干扰环境会让他们感到舒适和自由，因此往往主动延长清醒时间。对环境适应性强，不太挑剔睡眠条件。生活方式随性自然，顺应自己的生物节律，不会过度关注睡眠问题。",
+      "fitnessProfile": "该用户血压范围100-125/70-85 mmHg，心率55-85 bpm，血氧饱和度95%-98%，疲劳指数中等（4-7），呼吸频率12-18次/分钟，体温36.3-36.8℃。",
+      "sex": "男",
+      "date": {
+        "start": "2026-03-01",
+        "end": "2026-06-30"
+      },
+      "sleepTime": {
+        "min": [
+          "00:00"
+        ],
+        "max": [
+          "01:30"
+        ]
+      },
+      "awakeTime": {
+        "min": [
+          "08:00"
+        ],
+        "max": [
+          "09:30"
+        ]
+      },
+      "deepSleep": {
+        "min": [
+          20
+        ],
+        "max": [
+          25
+        ]
+      },
+      "awakeSleep": {
+        "min": [
+          2
+        ],
+        "max": [
+          7
+        ]
+      },
+      "sleepLatency": {
+        "min": [
+          5
+        ],
+        "max": [
+          15
+        ]
+      },
+      "sleepEfficiency": {
+        "min": [
+          89
+        ],
+        "max": [
+          95
+        ]
+      },
+      "nightAwakenings": {
+        "min": [
+          0
+        ],
+        "max": [
+          1
+        ]
+      },
+      "lightSleep": {
+        "min": [
+          44
+        ],
+        "max": [
+          50
+        ]
+      },
+      "remSleep": {
+        "min": [
+          21
+        ],
+        "max": [
+          25
+        ]
+      },
+      "fitness": {
+        "systolicPressure": {
+          "min": [
+            102
+          ],
+          "max": [
+            118
+          ]
+        },
+        "diastolicPressure": {
+          "min": [
+            64
+          ],
+          "max": [
+            78
+          ]
+        },
+        "bloodOxygen": {
+          "min": [
+            96
+          ],
+          "max": [
+            98
+          ]
+        },
+        "heartRate": {
+          "min": [
+            52
+          ],
+          "max": [
+            66
+          ]
+        },
+        "breathingRate": {
+          "min": [
+            11
+          ],
+          "max": [
+            16
+          ]
+        },
+        "bodyMovement": {
+          "min": [
+            4
+          ],
+          "max": [
+            12
+          ]
+        },
+        "fatigueIndex": {
+          "min": [
+            4
+          ],
+          "max": [
+            7
+          ]
+        }
+      },
+      "sleepTemperature": {
+        "min": [
+          18
+        ],
+        "max": [
+          22
+        ]
+      },
+      "sleepHumidity": {
+        "min": [
+          50
+        ],
+        "max": [
+          60
+        ]
+      },
+      "sleepIlluminance": {
+        "min": [
+          0
+        ],
+        "max": [
+          10
+        ]
+      },
+      "schedule": {
+        "min_events_per_day": 2,
+        "max_events_per_day": 5,
+        "min_total_minutes_per_day": 90,
+        "max_total_minutes_per_day": 300
+      },
+      "wearableMetrics": {
+        "step_count": {
+          "min": [
+            4200
+          ],
+          "max": [
+            11300
+          ]
+        },
+        "walking_distance_km": {
+          "min": [
+            3.2
+          ],
+          "max": [
+            9.2
+          ]
+        },
+        "running_distance_km": {
+          "min": [
+            0.6
+          ],
+          "max": [
+            4.2
+          ]
+        },
+        "floors_climbed": {
+          "min": [
+            5
+          ],
+          "max": [
+            20
+          ]
+        },
+        "active_calories_kcal": {
+          "min": [
+            230
+          ],
+          "max": [
+            680
+          ]
+        },
+        "cadence_spm": {
+          "min": [
+            90
+          ],
+          "max": [
+            124
+          ]
+        },
+        "pace_km_per_min": {
+          "min": [
+            0.075
+          ],
+          "max": [
+            0.145
+          ]
+        },
+        "noise_exposure_db": {
+          "min": [
+            45
+          ],
+          "max": [
+            84
+          ]
+        },
+        "hand_wash_count": {
+          "min": [
+            4
+          ],
+          "max": [
+            12
+          ]
+        },
+        "sunlight_minutes": {
+          "min": [
+            20
+          ],
+          "max": [
+            120
+          ]
+        },
+        "stand_time_minutes": {
+          "min": [
+            210
+          ],
+          "max": [
+            480
+          ]
+        },
+        "exercise_time_minutes": {
+          "min": [
+            33
+          ],
+          "max": [
+            118
+          ]
+        },
+        "vo2_max": {
+          "min": [
+            30.8
+          ],
+          "max": [
+            51.6
+          ]
+        },
+        "blood_oxygen_saturation_percent": {
+          "min": [
+            95
+          ],
+          "max": [
+            99
+          ]
+        },
+        "blood_pressure_systolic_mmhg": {
+          "min": [
+            102
+          ],
+          "max": [
+            118
+          ]
+        },
+        "blood_pressure_diastolic_mmhg": {
+          "min": [
+            64
+          ],
+          "max": [
+            78
+          ]
+        },
+        "heart_rate_realtime_bpm": {
+          "min": [
+            52
+          ],
+          "max": [
+            66
+          ]
+        },
+        "resting_heart_rate_bpm": {
+          "min": [
+            40
+          ],
+          "max": [
+            58
+          ]
+        },
+        "hrv": {
+          "min": [
+            30
+          ],
+          "max": [
+            150
+          ]
+        },
+        "respiration_rate_bpm": {
+          "min": [
+            11
+          ],
+          "max": [
+            16
+          ]
+        },
+        "blood_pressure_requires_external_device": true
+      }
+    }
+  ]
+}

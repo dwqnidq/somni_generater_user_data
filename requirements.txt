@@ -1,0 +1,6 @@
+# 本仓库脚本用到的第三方库（由 import 扫描汇总）
+requests>=2.28.0
+python-dotenv>=1.0.0
+pymongo>=4.6.0
+qiniu>=7.12.0
+pydub>=0.25.0

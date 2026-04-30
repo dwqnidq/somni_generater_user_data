@@ -1,0 +1,4446 @@
+[
+  {
+    "record_date": "2026-03-01",
+    "data_label": "good",
+    "raw_data": {
+      "apnea_count": 2,
+      "average_heartbeat": 75,
+      "average_respiration": 16,
+      "turnover_count": 6,
+      "awake_ratio": 11,
+      "deep_sleep_ratio": 17,
+      "light_sleep_ratio": 49,
+      "rem_ratio": 23,
+      "sleep_score": 89,
+      "total_sleep_minutes": 442,
+      "bed_time": "2026-03-01T15:59:00Z",
+      "sleep_time": "2026-03-01T16:15:00Z",
+      "wake_time": "2026-03-02T00:05:00Z",
+      "wake_up_time": "2026-03-02T00:16:00Z",
+      "sleep_latency": 16,
+      "sleep_efficiency": 89
+    },
+    "idf_data": [
+      {
+        "stage": "awake",
+        "start": "23:59",
+        "end": "00:15"
+      },
+      {
+        "stage": "light",
+        "start": "00:15",
+        "end": "00:42"
+      },
+      {
+        "stage": "deep",
+        "start": "00:42",
+        "end": "01:05"
+      },
+      {
+        "stage": "light",
+        "start": "01:05",
+        "end": "01:44"
+      },
+      {
+        "stage": "deep",
+        "start": "01:44",
+        "end": "02:17"
+      },
+      {
+        "stage": "light",
+        "start": "02:17",
+        "end": "02:54"
+      },
+      {
+        "stage": "deep",
+        "start": "02:54",
+        "end": "02:57"
+      },
+      {
+        "stage": "awake",
+        "start": "02:57",
+        "end": "03:12"
+      },
+      {
+        "stage": "deep",
+        "start": "03:12",
+        "end": "03:19"
+      },
+      {
+        "stage": "awake",
+        "start": "03:19",
+        "end": "03:32"
+      },
+      {
+        "stage": "deep",
+        "start": "03:32",
+        "end": "03:50"
+      },
+      {
+        "stage": "light",
+        "start": "03:50",
+        "end": "04:21"
+      },
+      {
+        "stage": "rem",
+        "start": "04:21",
+        "end": "04:46"
+      },
+      {
+        "stage": "light",
+        "start": "04:46",
+        "end": "05:26"
+      },
+      {
+        "stage": "rem",
+        "start": "05:26",
+        "end": "06:03"
+      },
+      {
+        "stage": "light",
+        "start": "06:03",
+        "end": "06:37"
+      },
+      {
+        "stage": "rem",
+        "start": "06:37",
+        "end": "07:27"
+      },
+      {
+        "stage": "light",
+        "start": "07:27",
+        "end": "08:05"
+      },
+      {
+        "stage": "awake",
+        "start": "08:05",
+        "end": "08:16"
+      }
+    ],
+    "create_time": "2026-04-29T12:21:48.710494Z",
+    "update_time": "2026-04-29T12:21:48.710494Z",
+    "uid": "69aea6eeaf5e6cbf08027969"
+  },
+  {
+    "record_date": "2026-03-02",
+    "data_label": "bad",
+    "raw_data": {
+      "apnea_count": 8,
+      "average_heartbeat": 77,
+      "average_respiration": 21,
+      "turnover_count": 17,
+      "awake_ratio": 19,
+      "deep_sleep_ratio": 11,
+      "light_sleep_ratio": 54,
+      "rem_ratio": 16,
+      "sleep_score": 75,
+      "total_sleep_minutes": 412,
+      "bed_time": "2026-03-02T16:57:00Z",
+      "sleep_time": "2026-03-02T17:24:00Z",
+      "wake_time": "2026-03-03T00:57:00Z",
+      "wake_up_time": "2026-03-03T01:26:00Z",
+      "sleep_latency": 27,
+      "sleep_efficiency": 81
+    },
+    "idf_data": [
+      {
+        "stage": "awake",
+        "start": "00:57",
+        "end": "01:24"
+      },
+      {
+        "stage": "light",
+        "start": "01:24",
+        "end": "01:50"
+      },
+      {
+        "stage": "deep",
+        "start": "01:50",
+        "end": "02:10"
+      },
+      {
+        "stage": "light",
+        "start": "02:10",
+        "end": "02:40"
+      },
+      {
+        "stage": "deep",
+        "start": "02:40",
+        "end": "03:06"
+      },
+      {
+        "stage": "light",
+        "start": "03:06",
+        "end": "03:29"
+      },
+      {
+        "stage": "deep",
+        "start": "03:29",
+        "end": "03:39"
+      },
+      {
+        "stage": "light",
+        "start": "03:39",
+        "end": "03:43"
+      },
+      {
+        "stage": "awake",
+        "start": "03:43",
+        "end": "04:00"
+      },
+      {
+        "stage": "light",
+        "start": "04:00",
+        "end": "04:25"
+      },
+      {
+        "stage": "rem",
+        "start": "04:25",
+        "end": "04:59"
+      },
+      {
+        "stage": "light",
+        "start": "04:59",
+        "end": "05:27"
+      },
+      {
+        "stage": "rem",
+        "start": "05:27",
+        "end": "05:31"
+      },
+      {
+        "stage": "awake",
+        "start": "05:31",
+        "end": "05:43"
+      },
+      {
+        "stage": "rem",
+        "start": "05:43",
+        "end": "05:48"
+      },
+      {
+        "stage": "awake",
+        "start": "05:48",
+        "end": "06:00"
+      },
+      {
+        "stage": "rem",
+        "start": "06:00",
+        "end": "06:27"
+      },
+      {
+        "stage": "light",
+        "start": "06:27",
+        "end": "06:57"
+      },
+      {
+        "stage": "rem",
+        "start": "06:57",
+        "end": "07:08"
+      },
+      {
+        "stage": "light",
+        "start": "07:08",
+        "end": "08:57"
+      },
+      {
+        "stage": "awake",
+        "start": "08:57",
+        "end": "09:26"
+      }
+    ],
+    "create_time": "2026-04-29T12:21:48.710494Z",
+    "update_time": "2026-04-29T12:21:48.710494Z",
+    "uid": "69aea6eeaf5e6cbf08027969"
+  },
+  {
+    "record_date": "2026-03-03",
+    "data_label": "good",
+    "raw_data": {
+      "apnea_count": 4,
+      "average_heartbeat": 65,
+      "average_respiration": 15,
+      "turnover_count": 8,
+      "awake_ratio": 11,
+      "deep_sleep_ratio": 17,
+      "light_sleep_ratio": 49,
+      "rem_ratio": 23,
+      "sleep_score": 92,
+      "total_sleep_minutes": 439,
+      "bed_time": "2026-03-03T15:51:00Z",
+      "sleep_time": "2026-03-03T16:01:00Z",
+      "wake_time": "2026-03-03T23:47:00Z",
+      "wake_up_time": "2026-03-04T00:04:00Z",
+      "sleep_latency": 10,
+      "sleep_efficiency": 89
+    },
+    "idf_data": [
+      {
+        "stage": "awake",
+        "start": "23:51",
+        "end": "00:01"
+      },
+      {
+        "stage": "light",
+        "start": "00:01",
+        "end": "00:23"
+      },
+      {
+        "stage": "deep",
+        "start": "00:23",
+        "end": "00:58"
+      },
+      {
+        "stage": "light",
+        "start": "00:58",
+        "end": "01:36"
+      },
+      {
+        "stage": "deep",
+        "start": "01:36",
+        "end": "02:11"
+      },
+      {
+        "stage": "light",
+        "start": "02:11",
+        "end": "02:36"
+      },
+      {
+        "stage": "awake",
+        "start": "02:36",
+        "end": "02:54"
+      },
+      {
+        "stage": "light",
+        "start": "02:54",
+        "end": "03:04"
+      },
+      {
+        "stage": "deep",
+        "start": "03:04",
+        "end": "03:18"
+      },
+      {
+        "stage": "light",
+        "start": "03:18",
+        "end": "03:56"
+      },
+      {
+        "stage": "rem",
+        "start": "03:56",
+        "end": "04:29"
+      },
+      {
+        "stage": "light",
+        "start": "04:29",
+        "end": "04:51"
+      },
+      {
+        "stage": "awake",
+        "start": "04:51",
+        "end": "05:00"
+      },
+      {
+        "stage": "light",
+        "start": "05:00",
+        "end": "05:02"
+      },
+      {
+        "stage": "rem",
+        "start": "05:02",
+        "end": "05:49"
+      },
+      {
+        "stage": "light",
+        "start": "05:49",
+        "end": "06:05"
+      },
+      {
+        "stage": "rem",
+        "start": "06:05",
+        "end": "06:38"
+      },
+      {
+        "stage": "light",
+        "start": "06:38",
+        "end": "07:47"
+      },
+      {
+        "stage": "awake",
+        "start": "07:47",
+        "end": "08:04"
+      }
+    ],
+    "create_time": "2026-04-29T12:21:48.710494Z",
+    "update_time": "2026-04-29T12:21:48.710494Z",
+    "uid": "69aea6eeaf5e6cbf08027969"
+  },
+  {
+    "record_date": "2026-03-04",
+    "data_label": "good",
+    "raw_data": {
+      "apnea_count": 3,
+      "average_heartbeat": 73,
+      "average_respiration": 15,
+      "turnover_count": 13,
+      "awake_ratio": 12,
+      "deep_sleep_ratio": 15,
+      "light_sleep_ratio": 49,
+      "rem_ratio": 24,
+      "sleep_score": 85,
+      "total_sleep_minutes": 446,
+      "bed_time": "2026-03-04T15:44:00Z",
+      "sleep_time": "2026-03-04T16:01:00Z",
+      "wake_time": "2026-03-04T23:59:00Z",
+      "wake_up_time": "2026-03-05T00:11:00Z",
+      "sleep_latency": 17,
+      "sleep_efficiency": 88
+    },
+    "idf_data": [
+      {
+        "stage": "awake",
+        "start": "23:44",
+        "end": "00:01"
+      },
+      {
+        "stage": "light",
+        "start": "00:01",
+        "end": "00:24"
+      },
+      {
+        "stage": "deep",
+        "start": "00:24",
+        "end": "00:55"
+      },
+      {
+        "stage": "light",
+        "start": "00:55",
+        "end": "01:31"
+      },
+      {
+        "stage": "deep",
+        "start": "01:31",
+        "end": "02:16"
+      },
+      {
+        "stage": "light",
+        "start": "02:16",
+        "end": "02:42"
+      },
+      {
+        "stage": "rem",
+        "start": "02:42",
+        "end": "03:04"
+      },
+      {
+        "stage": "light",
+        "start": "03:04",
+        "end": "03:24"
+      },
+      {
+        "stage": "awake",
+        "start": "03:24",
+        "end": "03:35"
+      },
+      {
+        "stage": "light",
+        "start": "03:35",
+        "end": "03:39"
+      },
+      {
+        "stage": "rem",
+        "start": "03:39",
+        "end": "04:22"
+      },
+      {
+        "stage": "light",
+        "start": "04:22",
+        "end": "04:25"
+      },
+      {
+        "stage": "awake",
+        "start": "04:25",
+        "end": "04:37"
+      },
+      {
+        "stage": "light",
+        "start": "04:37",
+        "end": "04:59"
+      },
+      {
+        "stage": "rem",
+        "start": "04:59",
+        "end": "05:37"
+      },
+      {
+        "stage": "awake",
+        "start": "05:37",
+        "end": "05:46"
+      },
+      {
+        "stage": "rem",
+        "start": "05:46",
+        "end": "05:57"
+      },
+      {
+        "stage": "light",
+        "start": "05:57",
+        "end": "06:14"
+      },
+      {
+        "stage": "rem",
+        "start": "06:14",
+        "end": "06:22"
+      },
+      {
+        "stage": "light",
+        "start": "06:22",
+        "end": "07:59"
+      },
+      {
+        "stage": "awake",
+        "start": "07:59",
+        "end": "08:11"
+      }
+    ],
+    "create_time": "2026-04-29T12:21:48.710494Z",
+    "update_time": "2026-04-29T12:21:48.710494Z",
+    "uid": "69aea6eeaf5e6cbf08027969"
+  },
+  {
+    "record_date": "2026-03-05",
+    "data_label": "bad",
+    "raw_data": {
+      "apnea_count": 11,
+      "average_heartbeat": 79,
+      "average_respiration": 16,
+      "turnover_count": 28,
+      "awake_ratio": 13,
+      "deep_sleep_ratio": 15,
+      "light_sleep_ratio": 53,
+      "rem_ratio": 19,
+      "sleep_score": 84,
+      "total_sleep_minutes": 399,
+      "bed_time": "2026-03-05T16:39:00Z",
+      "sleep_time": "2026-03-05T17:08:00Z",
+      "wake_time": "2026-03-06T00:02:00Z",
+      "wake_up_time": "2026-03-06T00:18:00Z",
+      "sleep_latency": 29,
+      "sleep_efficiency": 87
+    },
+    "idf_data": [
+      {
+        "stage": "awake",
+        "start": "00:39",
+        "end": "01:08"
+      },
+      {
+        "stage": "light",
+        "start": "01:08",
+        "end": "01:42"
+      },
+      {
+        "stage": "deep",
+        "start": "01:42",
+        "end": "02:22"
+      },
+      {
+        "stage": "light",
+        "start": "02:22",
+        "end": "02:26"
+      },
+      {
+        "stage": "awake",
+        "start": "02:26",
+        "end": "02:29"
+      },
+      {
+        "stage": "light",
+        "start": "02:29",
+        "end": "02:46"
+      },
+      {
+        "stage": "awake",
+        "start": "02:46",
+        "end": "02:50"
+      },
+      {
+        "stage": "light",
+        "start": "02:50",
+        "end": "03:02"
+      },
+      {
+        "stage": "deep",
+        "start": "03:02",
+        "end": "03:31"
+      },
+      {
+        "stage": "light",
+        "start": "03:31",
+        "end": "04:05"
+      },
+      {
+        "stage": "rem",
+        "start": "04:05",
+        "end": "04:47"
+      },
+      {
+        "stage": "light",
+        "start": "04:47",
+        "end": "05:04"
+      },
+      {
+        "stage": "rem",
+        "start": "05:04",
+        "end": "05:24"
+      },
+      {
+        "stage": "awake",
+        "start": "05:24",
+        "end": "05:27"
+      },
+      {
+        "stage": "rem",
+        "start": "05:27",
+        "end": "05:52"
+      },
+      {
+        "stage": "light",
+        "start": "05:52",
+        "end": "06:21"
+      },
+      {
+        "stage": "awake",
+        "start": "06:21",
+        "end": "06:23"
+      },
+      {
+        "stage": "light",
+        "start": "06:23",
+        "end": "07:02"
+      },
+      {
+        "stage": "awake",
+        "start": "07:02",
+        "end": "07:05"
+      },
+      {
+        "stage": "light",
+        "start": "07:05",
+        "end": "08:02"
+      },
+      {
+        "stage": "awake",
+        "start": "08:02",
+        "end": "08:18"
+      }
+    ],
+    "create_time": "2026-04-29T12:21:48.710494Z",
+    "update_time": "2026-04-29T12:21:48.710494Z",
+    "uid": "69aea6eeaf5e6cbf08027969"
+  },
+  {
+    "record_date": "2026-03-06",
+    "data_label": "good",
+    "raw_data": {
+      "apnea_count": 1,
+      "average_heartbeat": 68,
+      "average_respiration": 16,
+      "turnover_count": 12,
+      "awake_ratio": 11,
+      "deep_sleep_ratio": 17,
+      "light_sleep_ratio": 49,
+      "rem_ratio": 23,
+      "sleep_score": 88,
+      "total_sleep_minutes": 423,
+      "bed_time": "2026-03-06T16:03:00Z",
+      "sleep_time": "2026-03-06T16:22:00Z",
+      "wake_time": "2026-03-06T23:41:00Z",
+      "wake_up_time": "2026-03-06T23:58:00Z",
+      "sleep_latency": 19,
+      "sleep_efficiency": 89
+    },
+    "idf_data": [
+      {
+        "stage": "awake",
+        "start": "00:03",
+        "end": "00:22"
+      },
+      {
+        "stage": "light",
+        "start": "00:22",
+        "end": "00:47"
+      },
+      {
+        "stage": "deep",
+        "start": "00:47",
+        "end": "01:19"
+      },
+      {
+        "stage": "light",
+        "start": "01:19",
+        "end": "01:34"
+      },
+      {
+        "stage": "deep",
+        "start": "01:34",
+        "end": "01:54"
+      },
+      {
+        "stage": "light",
+        "start": "01:54",
+        "end": "02:15"
+      },
+      {
+        "stage": "deep",
+        "start": "02:15",
+        "end": "02:44"
+      },
+      {
+        "stage": "light",
+        "start": "02:44",
+        "end": "03:00"
+      },
+      {
+        "stage": "rem",
+        "start": "03:00",
+        "end": "03:20"
+      },
+      {
+        "stage": "light",
+        "start": "03:20",
+        "end": "03:44"
+      },
+      {
+        "stage": "rem",
+        "start": "03:44",
+        "end": "04:08"
+      },
+      {
+        "stage": "light",
+        "start": "04:08",
+        "end": "04:27"
+      },
+      {
+        "stage": "rem",
+        "start": "04:27",
+        "end": "04:34"
+      },
+      {
+        "stage": "awake",
+        "start": "04:34",
+        "end": "04:41"
+      },
+      {
+        "stage": "rem",
+        "start": "04:41",
+        "end": "05:18"
+      },
+      {
+        "stage": "light",
+        "start": "05:18",
+        "end": "05:32"
+      },
+      {
+        "stage": "rem",
+        "start": "05:32",
+        "end": "05:51"
+      },
+      {
+        "stage": "awake",
+        "start": "05:51",
+        "end": "06:00"
+      },
+      {
+        "stage": "rem",
+        "start": "06:00",
+        "end": "06:02"
+      },
+      {
+        "stage": "light",
+        "start": "06:02",
+        "end": "07:41"
+      },
+      {
+        "stage": "awake",
+        "start": "07:41",
+        "end": "07:58"
+      }
+    ],
+    "create_time": "2026-04-29T12:21:48.710494Z",
+    "update_time": "2026-04-29T12:21:48.710494Z",
+    "uid": "69aea6eeaf5e6cbf08027969"
+  },
+  {
+    "record_date": "2026-03-07",
+    "data_label": "bad",
+    "raw_data": {
+      "apnea_count": 9,
+      "average_heartbeat": 82,
+      "average_respiration": 20,
+      "turnover_count": 26,
+      "awake_ratio": 18,
+      "deep_sleep_ratio": 13,
+      "light_sleep_ratio": 53,
+      "rem_ratio": 16,
+      "sleep_score": 79,
+      "total_sleep_minutes": 397,
+      "bed_time": "2026-03-07T16:22:00Z",
+      "sleep_time": "2026-03-07T16:42:00Z",
+      "wake_time": "2026-03-07T23:55:00Z",
+      "wake_up_time": "2026-03-08T00:26:00Z",
+      "sleep_latency": 20,
+      "sleep_efficiency": 82
+    },
+    "idf_data": [
+      {
+        "stage": "awake",
+        "start": "00:22",
+        "end": "00:42"
+      },
+      {
+        "stage": "light",
+        "start": "00:42",
+        "end": "01:00"
+      },
+      {
+        "stage": "deep",
+        "start": "01:00",
+        "end": "01:39"
+      },
+      {
+        "stage": "light",
+        "start": "01:39",
+        "end": "02:04"
+      },
+      {
+        "stage": "deep",
+        "start": "02:04",
+        "end": "02:28"
+      },
+      {
+        "stage": "light",
+        "start": "02:28",
+        "end": "02:43"
+      },
+      {
+        "stage": "rem",
+        "start": "02:43",
+        "end": "02:48"
+      },
+      {
+        "stage": "awake",
+        "start": "02:48",
+        "end": "02:54"
+      },
+      {
+        "stage": "rem",
+        "start": "02:54",
+        "end": "03:10"
+      },
+      {
+        "stage": "light",
+        "start": "03:10",
+        "end": "03:21"
+      },
+      {
+        "stage": "awake",
+        "start": "03:21",
+        "end": "03:26"
+      },
+      {
+        "stage": "light",
+        "start": "03:26",
+        "end": "03:30"
+      },
+      {
+        "stage": "awake",
+        "start": "03:30",
+        "end": "03:36"
+      },
+      {
+        "stage": "light",
+        "start": "03:36",
+        "end": "03:55"
+      },
+      {
+        "stage": "awake",
+        "start": "03:55",
+        "end": "04:01"
+      },
+      {
+        "stage": "light",
+        "start": "04:01",
+        "end": "04:03"
+      },
+      {
+        "stage": "rem",
+        "start": "04:03",
+        "end": "04:35"
+      },
+      {
+        "stage": "light",
+        "start": "04:35",
+        "end": "04:58"
+      },
+      {
+        "stage": "rem",
+        "start": "04:58",
+        "end": "05:10"
+      },
+      {
+        "stage": "awake",
+        "start": "05:10",
+        "end": "05:16"
+      },
+      {
+        "stage": "rem",
+        "start": "05:16",
+        "end": "05:24"
+      },
+      {
+        "stage": "awake",
+        "start": "05:24",
+        "end": "05:31"
+      },
+      {
+        "stage": "rem",
+        "start": "05:31",
+        "end": "05:32"
+      },
+      {
+        "stage": "light",
+        "start": "05:32",
+        "end": "05:47"
+      },
+      {
+        "stage": "rem",
+        "start": "05:47",
+        "end": "05:50"
+      },
+      {
+        "stage": "light",
+        "start": "05:50",
+        "end": "07:55"
+      },
+      {
+        "stage": "awake",
+        "start": "07:55",
+        "end": "08:26"
+      }
+    ],
+    "create_time": "2026-04-29T12:21:48.710494Z",
+    "update_time": "2026-04-29T12:21:48.710494Z",
+    "uid": "69aea6eeaf5e6cbf08027969"
+  },
+  {
+    "record_date": "2026-03-08",
+    "data_label": "good",
+    "raw_data": {
+      "apnea_count": 4,
+      "average_heartbeat": 69,
+      "average_respiration": 15,
+      "turnover_count": 8,
+      "awake_ratio": 12,
+      "deep_sleep_ratio": 17,
+      "light_sleep_ratio": 49,
+      "rem_ratio": 22,
+      "sleep_score": 85,
+      "total_sleep_minutes": 437,
+      "bed_time": "2026-03-08T15:31:00Z",
+      "sleep_time": "2026-03-08T15:49:00Z",
+      "wake_time": "2026-03-08T23:36:00Z",
+      "wake_up_time": "2026-03-08T23:48:00Z",
+      "sleep_latency": 18,
+      "sleep_efficiency": 88
+    },
+    "idf_data": [
+      {
+        "stage": "awake",
+        "start": "23:31",
+        "end": "23:49"
+      },
+      {
+        "stage": "light",
+        "start": "23:49",
+        "end": "00:27"
+      },
+      {
+        "stage": "deep",
+        "start": "00:27",
+        "end": "00:47"
+      },
+      {
+        "stage": "light",
+        "start": "00:47",
+        "end": "01:08"
+      },
+      {
+        "stage": "deep",
+        "start": "01:08",
+        "end": "01:28"
+      },
+      {
+        "stage": "light",
+        "start": "01:28",
+        "end": "02:01"
+      },
+      {
+        "stage": "deep",
+        "start": "02:01",
+        "end": "02:08"
+      },
+      {
+        "stage": "awake",
+        "start": "02:08",
+        "end": "02:17"
+      },
+      {
+        "stage": "deep",
+        "start": "02:17",
+        "end": "02:31"
+      },
+      {
+        "stage": "light",
+        "start": "02:31",
+        "end": "03:06"
+      },
+      {
+        "stage": "deep",
+        "start": "03:06",
+        "end": "03:29"
+      },
+      {
+        "stage": "light",
+        "start": "03:29",
+        "end": "04:06"
+      },
+      {
+        "stage": "rem",
+        "start": "04:06",
+        "end": "04:20"
+      },
+      {
+        "stage": "awake",
+        "start": "04:20",
+        "end": "04:31"
+      },
+      {
+        "stage": "rem",
+        "start": "04:31",
+        "end": "04:45"
+      },
+      {
+        "stage": "awake",
+        "start": "04:45",
+        "end": "04:55"
+      },
+      {
+        "stage": "rem",
+        "start": "04:55",
+        "end": "05:05"
+      },
+      {
+        "stage": "light",
+        "start": "05:05",
+        "end": "05:33"
+      },
+      {
+        "stage": "rem",
+        "start": "05:33",
+        "end": "06:05"
+      },
+      {
+        "stage": "light",
+        "start": "06:05",
+        "end": "06:32"
+      },
+      {
+        "stage": "rem",
+        "start": "06:32",
+        "end": "06:55"
+      },
+      {
+        "stage": "light",
+        "start": "06:55",
+        "end": "07:11"
+      },
+      {
+        "stage": "rem",
+        "start": "07:11",
+        "end": "07:27"
+      },
+      {
+        "stage": "light",
+        "start": "07:27",
+        "end": "07:36"
+      },
+      {
+        "stage": "awake",
+        "start": "07:36",
+        "end": "07:48"
+      }
+    ],
+    "create_time": "2026-04-29T12:21:48.710494Z",
+    "update_time": "2026-04-29T12:21:48.710494Z",
+    "uid": "69aea6eeaf5e6cbf08027969"
+  },
+  {
+    "record_date": "2026-03-09",
+    "data_label": "good",
+    "raw_data": {
+      "apnea_count": 2,
+      "average_heartbeat": 72,
+      "average_respiration": 14,
+      "turnover_count": 13,
+      "awake_ratio": 11,
+      "deep_sleep_ratio": 19,
+      "light_sleep_ratio": 47,
+      "rem_ratio": 23,
+      "sleep_score": 91,
+      "total_sleep_minutes": 427,
+      "bed_time": "2026-03-09T15:43:00Z",
+      "sleep_time": "2026-03-09T15:53:00Z",
+      "wake_time": "2026-03-09T23:23:00Z",
+      "wake_up_time": "2026-03-09T23:43:00Z",
+      "sleep_latency": 10,
+      "sleep_efficiency": 89
+    },
+    "idf_data": [
+      {
+        "stage": "awake",
+        "start": "23:43",
+        "end": "23:53"
+      },
+      {
+        "stage": "light",
+        "start": "23:53",
+        "end": "00:28"
+      },
+      {
+        "stage": "deep",
+        "start": "00:28",
+        "end": "01:01"
+      },
+      {
+        "stage": "light",
+        "start": "01:01",
+        "end": "01:17"
+      },
+      {
+        "stage": "deep",
+        "start": "01:17",
+        "end": "01:57"
+      },
+      {
+        "stage": "light",
+        "start": "01:57",
+        "end": "02:26"
+      },
+      {
+        "stage": "deep",
+        "start": "02:26",
+        "end": "02:44"
+      },
+      {
+        "stage": "light",
+        "start": "02:44",
+        "end": "02:59"
+      },
+      {
+        "stage": "awake",
+        "start": "02:59",
+        "end": "03:05"
+      },
+      {
+        "stage": "light",
+        "start": "03:05",
+        "end": "03:07"
+      },
+      {
+        "stage": "rem",
+        "start": "03:07",
+        "end": "03:44"
+      },
+      {
+        "stage": "light",
+        "start": "03:44",
+        "end": "04:03"
+      },
+      {
+        "stage": "rem",
+        "start": "04:03",
+        "end": "04:20"
+      },
+      {
+        "stage": "light",
+        "start": "04:20",
+        "end": "04:39"
+      },
+      {
+        "stage": "awake",
+        "start": "04:39",
+        "end": "04:48"
+      },
+      {
+        "stage": "light",
+        "start": "04:48",
+        "end": "05:02"
+      },
+      {
+        "stage": "rem",
+        "start": "05:02",
+        "end": "05:37"
+      },
+      {
+        "stage": "light",
+        "start": "05:37",
+        "end": "05:52"
+      },
+      {
+        "stage": "rem",
+        "start": "05:52",
+        "end": "06:07"
+      },
+      {
+        "stage": "awake",
+        "start": "06:07",
+        "end": "06:15"
+      },
+      {
+        "stage": "rem",
+        "start": "06:15",
+        "end": "06:18"
+      },
+      {
+        "stage": "light",
+        "start": "06:18",
+        "end": "06:50"
+      },
+      {
+        "stage": "rem",
+        "start": "06:50",
+        "end": "06:53"
+      },
+      {
+        "stage": "light",
+        "start": "06:53",
+        "end": "07:23"
+      },
+      {
+        "stage": "awake",
+        "start": "07:23",
+        "end": "07:43"
+      }
+    ],
+    "create_time": "2026-04-29T12:21:48.710494Z",
+    "update_time": "2026-04-29T12:21:48.710494Z",
+    "uid": "69aea6eeaf5e6cbf08027969"
+  },
+  {
+    "record_date": "2026-03-10",
+    "data_label": "bad",
+    "raw_data": {
+      "apnea_count": 10,
+      "average_heartbeat": 74,
+      "average_respiration": 16,
+      "turnover_count": 19,
+      "awake_ratio": 18,
+      "deep_sleep_ratio": 13,
+      "light_sleep_ratio": 49,
+      "rem_ratio": 20,
+      "sleep_score": 76,
+      "total_sleep_minutes": 410,
+      "bed_time": "2026-03-10T16:22:00Z",
+      "sleep_time": "2026-03-10T16:55:00Z",
+      "wake_time": "2026-03-11T00:23:00Z",
+      "wake_up_time": "2026-03-11T00:41:00Z",
+      "sleep_latency": 33,
+      "sleep_efficiency": 82
+    },
+    "idf_data": [
+      {
+        "stage": "awake",
+        "start": "00:22",
+        "end": "00:55"
+      },
+      {
+        "stage": "light",
+        "start": "00:55",
+        "end": "01:31"
+      },
+      {
+        "stage": "deep",
+        "start": "01:31",
+        "end": "01:56"
+      },
+      {
+        "stage": "light",
+        "start": "01:56",
+        "end": "02:05"
+      },
+      {
+        "stage": "awake",
+        "start": "02:05",
+        "end": "02:14"
+      },
+      {
+        "stage": "light",
+        "start": "02:14",
+        "end": "02:40"
+      },
+      {
+        "stage": "deep",
+        "start": "02:40",
+        "end": "03:08"
+      },
+      {
+        "stage": "light",
+        "start": "03:08",
+        "end": "03:26"
+      },
+      {
+        "stage": "deep",
+        "start": "03:26",
+        "end": "03:30"
+      },
+      {
+        "stage": "awake",
+        "start": "03:30",
+        "end": "03:40"
+      },
+      {
+        "stage": "deep",
+        "start": "03:40",
+        "end": "03:48"
+      },
+      {
+        "stage": "light",
+        "start": "03:48",
+        "end": "04:05"
+      },
+      {
+        "stage": "rem",
+        "start": "04:05",
+        "end": "04:20"
+      },
+      {
+        "stage": "awake",
+        "start": "04:20",
+        "end": "04:28"
+      },
+      {
+        "stage": "rem",
+        "start": "04:28",
+        "end": "04:51"
+      },
+      {
+        "stage": "light",
+        "start": "04:51",
+        "end": "05:21"
+      },
+      {
+        "stage": "rem",
+        "start": "05:21",
+        "end": "05:36"
+      },
+      {
+        "stage": "light",
+        "start": "05:36",
+        "end": "05:55"
+      },
+      {
+        "stage": "rem",
+        "start": "05:55",
+        "end": "06:16"
+      },
+      {
+        "stage": "awake",
+        "start": "06:16",
+        "end": "06:27"
+      },
+      {
+        "stage": "rem",
+        "start": "06:27",
+        "end": "06:36"
+      },
+      {
+        "stage": "light",
+        "start": "06:36",
+        "end": "07:02"
+      },
+      {
+        "stage": "rem",
+        "start": "07:02",
+        "end": "07:19"
+      },
+      {
+        "stage": "light",
+        "start": "07:19",
+        "end": "08:23"
+      },
+      {
+        "stage": "awake",
+        "start": "08:23",
+        "end": "08:41"
+      }
+    ],
+    "create_time": "2026-04-29T12:21:48.710494Z",
+    "update_time": "2026-04-29T12:21:48.710494Z",
+    "uid": "69aea6eeaf5e6cbf08027969"
+  },
+  {
+    "record_date": "2026-03-11",
+    "data_label": "good",
+    "raw_data": {
+      "apnea_count": 3,
+      "average_heartbeat": 64,
+      "average_respiration": 16,
+      "turnover_count": 11,
+      "awake_ratio": 10,
+      "deep_sleep_ratio": 20,
+      "light_sleep_ratio": 46,
+      "rem_ratio": 24,
+      "sleep_score": 90,
+      "total_sleep_minutes": 421,
+      "bed_time": "2026-03-11T15:42:00Z",
+      "sleep_time": "2026-03-11T15:56:00Z",
+      "wake_time": "2026-03-11T23:17:00Z",
+      "wake_up_time": "2026-03-11T23:30:00Z",
+      "sleep_latency": 14,
+      "sleep_efficiency": 90
+    },
+    "idf_data": [
+      {
+        "stage": "awake",
+        "start": "23:42",
+        "end": "23:56"
+      },
+      {
+        "stage": "light",
+        "start": "23:56",
+        "end": "00:19"
+      },
+      {
+        "stage": "deep",
+        "start": "00:19",
+        "end": "00:52"
+      },
+      {
+        "stage": "light",
+        "start": "00:52",
+        "end": "01:27"
+      },
+      {
+        "stage": "awake",
+        "start": "01:27",
+        "end": "01:36"
+      },
+      {
+        "stage": "light",
+        "start": "01:36",
+        "end": "01:37"
+      },
+      {
+        "stage": "deep",
+        "start": "01:37",
+        "end": "02:03"
+      },
+      {
+        "stage": "light",
+        "start": "02:03",
+        "end": "02:22"
+      },
+      {
+        "stage": "deep",
+        "start": "02:22",
+        "end": "02:43"
+      },
+      {
+        "stage": "light",
+        "start": "02:43",
+        "end": "03:20"
+      },
+      {
+        "stage": "deep",
+        "start": "03:20",
+        "end": "03:34"
+      },
+      {
+        "stage": "light",
+        "start": "03:34",
+        "end": "03:52"
+      },
+      {
+        "stage": "rem",
+        "start": "03:52",
+        "end": "04:39"
+      },
+      {
+        "stage": "light",
+        "start": "04:39",
+        "end": "05:17"
+      },
+      {
+        "stage": "rem",
+        "start": "05:17",
+        "end": "05:33"
+      },
+      {
+        "stage": "light",
+        "start": "05:33",
+        "end": "05:52"
+      },
+      {
+        "stage": "awake",
+        "start": "05:52",
+        "end": "05:57"
+      },
+      {
+        "stage": "light",
+        "start": "05:57",
+        "end": "05:58"
+      },
+      {
+        "stage": "rem",
+        "start": "05:58",
+        "end": "06:04"
+      },
+      {
+        "stage": "awake",
+        "start": "06:04",
+        "end": "06:10"
+      },
+      {
+        "stage": "rem",
+        "start": "06:10",
+        "end": "06:34"
+      },
+      {
+        "stage": "light",
+        "start": "06:34",
+        "end": "06:48"
+      },
+      {
+        "stage": "rem",
+        "start": "06:48",
+        "end": "07:07"
+      },
+      {
+        "stage": "light",
+        "start": "07:07",
+        "end": "07:17"
+      },
+      {
+        "stage": "awake",
+        "start": "07:17",
+        "end": "07:30"
+      }
+    ],
+    "create_time": "2026-04-29T12:21:48.710494Z",
+    "update_time": "2026-04-29T12:21:48.710494Z",
+    "uid": "69aea6eeaf5e6cbf08027969"
+  },
+  {
+    "record_date": "2026-03-12",
+    "data_label": "good",
+    "raw_data": {
+      "apnea_count": 4,
+      "average_heartbeat": 73,
+      "average_respiration": 17,
+      "turnover_count": 9,
+      "awake_ratio": 12,
+      "deep_sleep_ratio": 20,
+      "light_sleep_ratio": 49,
+      "rem_ratio": 19,
+      "sleep_score": 85,
+      "total_sleep_minutes": 448,
+      "bed_time": "2026-03-12T15:40:00Z",
+      "sleep_time": "2026-03-12T15:53:00Z",
+      "wake_time": "2026-03-12T23:53:00Z",
+      "wake_up_time": "2026-03-13T00:08:00Z",
+      "sleep_latency": 13,
+      "sleep_efficiency": 88
+    },
+    "idf_data": [
+      {
+        "stage": "awake",
+        "start": "23:40",
+        "end": "23:53"
+      },
+      {
+        "stage": "light",
+        "start": "23:53",
+        "end": "00:29"
+      },
+      {
+        "stage": "deep",
+        "start": "00:29",
+        "end": "01:09"
+      },
+      {
+        "stage": "light",
+        "start": "01:09",
+        "end": "01:27"
+      },
+      {
+        "stage": "deep",
+        "start": "01:27",
+        "end": "01:53"
+      },
+      {
+        "stage": "awake",
+        "start": "01:53",
+        "end": "02:06"
+      },
+      {
+        "stage": "deep",
+        "start": "02:06",
+        "end": "02:10"
+      },
+      {
+        "stage": "light",
+        "start": "02:10",
+        "end": "02:29"
+      },
+      {
+        "stage": "deep",
+        "start": "02:29",
+        "end": "02:31"
+      },
+      {
+        "stage": "awake",
+        "start": "02:31",
+        "end": "02:50"
+      },
+      {
+        "stage": "deep",
+        "start": "02:50",
+        "end": "03:20"
+      },
+      {
+        "stage": "light",
+        "start": "03:20",
+        "end": "03:56"
+      },
+      {
+        "stage": "rem",
+        "start": "03:56",
+        "end": "04:37"
+      },
+      {
+        "stage": "light",
+        "start": "04:37",
+        "end": "05:08"
+      },
+      {
+        "stage": "rem",
+        "start": "05:08",
+        "end": "05:46"
+      },
+      {
+        "stage": "light",
+        "start": "05:46",
+        "end": "05:58"
+      },
+      {
+        "stage": "rem",
+        "start": "05:58",
+        "end": "06:16"
+      },
+      {
+        "stage": "light",
+        "start": "06:16",
+        "end": "07:53"
+      },
+      {
+        "stage": "awake",
+        "start": "07:53",
+        "end": "08:08"
+      }
+    ],
+    "create_time": "2026-04-29T12:21:48.710494Z",
+    "update_time": "2026-04-29T12:21:48.710494Z",
+    "uid": "69aea6eeaf5e6cbf08027969"
+  },
+  {
+    "record_date": "2026-03-13",
+    "data_label": "bad",
+    "raw_data": {
+      "apnea_count": 6,
+      "average_heartbeat": 81,
+      "average_respiration": 21,
+      "turnover_count": 29,
+      "awake_ratio": 17,
+      "deep_sleep_ratio": 11,
+      "light_sleep_ratio": 55,
+      "rem_ratio": 17,
+      "sleep_score": 78,
+      "total_sleep_minutes": 415,
+      "bed_time": "2026-03-13T16:18:00Z",
+      "sleep_time": "2026-03-13T16:43:00Z",
+      "wake_time": "2026-03-14T00:14:00Z",
+      "wake_up_time": "2026-03-14T00:38:00Z",
+      "sleep_latency": 25,
+      "sleep_efficiency": 83
+    },
+    "idf_data": [
+      {
+        "stage": "awake",
+        "start": "00:18",
+        "end": "00:43"
+      },
+      {
+        "stage": "light",
+        "start": "00:43",
+        "end": "01:17"
+      },
+      {
+        "stage": "deep",
+        "start": "01:17",
+        "end": "01:40"
+      },
+      {
+        "stage": "light",
+        "start": "01:40",
+        "end": "02:14"
+      },
+      {
+        "stage": "deep",
+        "start": "02:14",
+        "end": "02:46"
+      },
+      {
+        "stage": "light",
+        "start": "02:46",
+        "end": "03:11"
+      },
+      {
+        "stage": "awake",
+        "start": "03:11",
+        "end": "03:19"
+      },
+      {
+        "stage": "light",
+        "start": "03:19",
+        "end": "03:25"
+      },
+      {
+        "stage": "rem",
+        "start": "03:25",
+        "end": "03:55"
+      },
+      {
+        "stage": "light",
+        "start": "03:55",
+        "end": "04:20"
+      },
+      {
+        "stage": "rem",
+        "start": "04:20",
+        "end": "04:35"
+      },
+      {
+        "stage": "light",
+        "start": "04:35",
+        "end": "04:50"
+      },
+      {
+        "stage": "rem",
+        "start": "04:50",
+        "end": "05:11"
+      },
+      {
+        "stage": "light",
+        "start": "05:11",
+        "end": "05:25"
+      },
+      {
+        "stage": "awake",
+        "start": "05:25",
+        "end": "05:31"
+      },
+      {
+        "stage": "light",
+        "start": "05:31",
+        "end": "05:40"
+      },
+      {
+        "stage": "rem",
+        "start": "05:40",
+        "end": "05:49"
+      },
+      {
+        "stage": "awake",
+        "start": "05:49",
+        "end": "05:59"
+      },
+      {
+        "stage": "rem",
+        "start": "05:59",
+        "end": "06:09"
+      },
+      {
+        "stage": "light",
+        "start": "06:09",
+        "end": "07:06"
+      },
+      {
+        "stage": "awake",
+        "start": "07:06",
+        "end": "07:18"
+      },
+      {
+        "stage": "light",
+        "start": "07:18",
+        "end": "08:14"
+      },
+      {
+        "stage": "awake",
+        "start": "08:14",
+        "end": "08:38"
+      }
+    ],
+    "create_time": "2026-04-29T12:21:48.710494Z",
+    "update_time": "2026-04-29T12:21:48.710494Z",
+    "uid": "69aea6eeaf5e6cbf08027969"
+  },
+  {
+    "record_date": "2026-03-14",
+    "data_label": "bad",
+    "raw_data": {
+      "apnea_count": 10,
+      "average_heartbeat": 79,
+      "average_respiration": 19,
+      "turnover_count": 29,
+      "awake_ratio": 17,
+      "deep_sleep_ratio": 13,
+      "light_sleep_ratio": 53,
+      "rem_ratio": 17,
+      "sleep_score": 80,
+      "total_sleep_minutes": 409,
+      "bed_time": "2026-03-14T17:02:00Z",
+      "sleep_time": "2026-03-14T17:29:00Z",
+      "wake_time": "2026-03-15T00:56:00Z",
+      "wake_up_time": "2026-03-15T01:15:00Z",
+      "sleep_latency": 27,
+      "sleep_efficiency": 83
+    },
+    "idf_data": [
+      {
+        "stage": "awake",
+        "start": "01:02",
+        "end": "01:29"
+      },
+      {
+        "stage": "light",
+        "start": "01:29",
+        "end": "02:08"
+      },
+      {
+        "stage": "deep",
+        "start": "02:08",
+        "end": "02:48"
+      },
+      {
+        "stage": "light",
+        "start": "02:48",
+        "end": "03:24"
+      },
+      {
+        "stage": "awake",
+        "start": "03:24",
+        "end": "03:31"
+      },
+      {
+        "stage": "deep",
+        "start": "03:31",
+        "end": "03:38"
+      },
+      {
+        "stage": "awake",
+        "start": "03:38",
+        "end": "03:47"
+      },
+      {
+        "stage": "deep",
+        "start": "03:47",
+        "end": "04:04"
+      },
+      {
+        "stage": "light",
+        "start": "04:04",
+        "end": "04:14"
+      },
+      {
+        "stage": "awake",
+        "start": "04:14",
+        "end": "04:21"
+      },
+      {
+        "stage": "light",
+        "start": "04:21",
+        "end": "04:31"
+      },
+      {
+        "stage": "rem",
+        "start": "04:31",
+        "end": "04:51"
+      },
+      {
+        "stage": "light",
+        "start": "04:51",
+        "end": "05:09"
+      },
+      {
+        "stage": "rem",
+        "start": "05:09",
+        "end": "05:52"
+      },
+      {
+        "stage": "light",
+        "start": "05:52",
+        "end": "05:53"
+      },
+      {
+        "stage": "awake",
+        "start": "05:53",
+        "end": "05:58"
+      },
+      {
+        "stage": "light",
+        "start": "05:58",
+        "end": "06:27"
+      },
+      {
+        "stage": "rem",
+        "start": "06:27",
+        "end": "06:48"
+      },
+      {
+        "stage": "light",
+        "start": "06:48",
+        "end": "07:38"
+      },
+      {
+        "stage": "awake",
+        "start": "07:38",
+        "end": "07:41"
+      },
+      {
+        "stage": "light",
+        "start": "07:41",
+        "end": "07:42"
+      },
+      {
+        "stage": "awake",
+        "start": "07:42",
+        "end": "07:49"
+      },
+      {
+        "stage": "light",
+        "start": "07:49",
+        "end": "08:56"
+      },
+      {
+        "stage": "awake",
+        "start": "08:56",
+        "end": "09:15"
+      }
+    ],
+    "create_time": "2026-04-29T12:21:48.710494Z",
+    "update_time": "2026-04-29T12:21:48.710494Z",
+    "uid": "69aea6eeaf5e6cbf08027969"
+  },
+  {
+    "record_date": "2026-03-15",
+    "data_label": "good",
+    "raw_data": {
+      "apnea_count": 4,
+      "average_heartbeat": 71,
+      "average_respiration": 12,
+      "turnover_count": 8,
+      "awake_ratio": 12,
+      "deep_sleep_ratio": 17,
+      "light_sleep_ratio": 48,
+      "rem_ratio": 23,
+      "sleep_score": 90,
+      "total_sleep_minutes": 427,
+      "bed_time": "2026-03-15T16:00:00Z",
+      "sleep_time": "2026-03-15T16:11:00Z",
+      "wake_time": "2026-03-15T23:45:00Z",
+      "wake_up_time": "2026-03-16T00:05:00Z",
+      "sleep_latency": 11,
+      "sleep_efficiency": 88
+    },
+    "idf_data": [
+      {
+        "stage": "awake",
+        "start": "00:00",
+        "end": "00:11"
+      },
+      {
+        "stage": "light",
+        "start": "00:11",
+        "end": "00:23"
+      },
+      {
+        "stage": "deep",
+        "start": "00:23",
+        "end": "00:44"
+      },
+      {
+        "stage": "light",
+        "start": "00:44",
+        "end": "01:22"
+      },
+      {
+        "stage": "deep",
+        "start": "01:22",
+        "end": "01:52"
+      },
+      {
+        "stage": "light",
+        "start": "01:52",
+        "end": "01:53"
+      },
+      {
+        "stage": "awake",
+        "start": "01:53",
+        "end": "02:00"
+      },
+      {
+        "stage": "light",
+        "start": "02:00",
+        "end": "02:16"
+      },
+      {
+        "stage": "deep",
+        "start": "02:16",
+        "end": "02:38"
+      },
+      {
+        "stage": "light",
+        "start": "02:38",
+        "end": "03:03"
+      },
+      {
+        "stage": "deep",
+        "start": "03:03",
+        "end": "03:11"
+      },
+      {
+        "stage": "awake",
+        "start": "03:11",
+        "end": "03:24"
+      },
+      {
+        "stage": "deep",
+        "start": "03:24",
+        "end": "03:25"
+      },
+      {
+        "stage": "light",
+        "start": "03:25",
+        "end": "03:44"
+      },
+      {
+        "stage": "rem",
+        "start": "03:44",
+        "end": "04:18"
+      },
+      {
+        "stage": "light",
+        "start": "04:18",
+        "end": "04:35"
+      },
+      {
+        "stage": "rem",
+        "start": "04:35",
+        "end": "04:41"
+      },
+      {
+        "stage": "awake",
+        "start": "04:41",
+        "end": "04:48"
+      },
+      {
+        "stage": "rem",
+        "start": "04:48",
+        "end": "05:15"
+      },
+      {
+        "stage": "light",
+        "start": "05:15",
+        "end": "05:53"
+      },
+      {
+        "stage": "rem",
+        "start": "05:53",
+        "end": "06:24"
+      },
+      {
+        "stage": "light",
+        "start": "06:24",
+        "end": "06:47"
+      },
+      {
+        "stage": "rem",
+        "start": "06:47",
+        "end": "07:01"
+      },
+      {
+        "stage": "light",
+        "start": "07:01",
+        "end": "07:45"
+      },
+      {
+        "stage": "awake",
+        "start": "07:45",
+        "end": "08:05"
+      }
+    ],
+    "create_time": "2026-04-29T12:21:48.710494Z",
+    "update_time": "2026-04-29T12:21:48.710494Z",
+    "uid": "69aea6eeaf5e6cbf08027969"
+  },
+  {
+    "record_date": "2026-03-16",
+    "data_label": "bad",
+    "raw_data": {
+      "apnea_count": 8,
+      "average_heartbeat": 78,
+      "average_respiration": 17,
+      "turnover_count": 25,
+      "awake_ratio": 18,
+      "deep_sleep_ratio": 12,
+      "light_sleep_ratio": 51,
+      "rem_ratio": 19,
+      "sleep_score": 74,
+      "total_sleep_minutes": 397,
+      "bed_time": "2026-03-16T16:32:00Z",
+      "sleep_time": "2026-03-16T16:59:00Z",
+      "wake_time": "2026-03-17T00:21:00Z",
+      "wake_up_time": "2026-03-17T00:37:00Z",
+      "sleep_latency": 27,
+      "sleep_efficiency": 82
+    },
+    "idf_data": [
+      {
+        "stage": "awake",
+        "start": "00:32",
+        "end": "00:59"
+      },
+      {
+        "stage": "light",
+        "start": "00:59",
+        "end": "01:24"
+      },
+      {
+        "stage": "deep",
+        "start": "01:24",
+        "end": "01:46"
+      },
+      {
+        "stage": "light",
+        "start": "01:46",
+        "end": "02:13"
+      },
+      {
+        "stage": "deep",
+        "start": "02:13",
+        "end": "02:33"
+      },
+      {
+        "stage": "light",
+        "start": "02:33",
+        "end": "03:01"
+      },
+      {
+        "stage": "deep",
+        "start": "03:01",
+        "end": "03:17"
+      },
+      {
+        "stage": "light",
+        "start": "03:17",
+        "end": "03:37"
+      },
+      {
+        "stage": "rem",
+        "start": "03:37",
+        "end": "03:41"
+      },
+      {
+        "stage": "awake",
+        "start": "03:41",
+        "end": "03:52"
+      },
+      {
+        "stage": "rem",
+        "start": "03:52",
+        "end": "04:22"
+      },
+      {
+        "stage": "awake",
+        "start": "04:22",
+        "end": "04:26"
+      },
+      {
+        "stage": "rem",
+        "start": "04:26",
+        "end": "04:33"
+      },
+      {
+        "stage": "light",
+        "start": "04:33",
+        "end": "05:09"
+      },
+      {
+        "stage": "rem",
+        "start": "05:09",
+        "end": "05:28"
+      },
+      {
+        "stage": "light",
+        "start": "05:28",
+        "end": "05:59"
+      },
+      {
+        "stage": "awake",
+        "start": "05:59",
+        "end": "06:11"
+      },
+      {
+        "stage": "light",
+        "start": "06:11",
+        "end": "06:19"
+      },
+      {
+        "stage": "rem",
+        "start": "06:19",
+        "end": "06:20"
+      },
+      {
+        "stage": "awake",
+        "start": "06:20",
+        "end": "06:27"
+      },
+      {
+        "stage": "rem",
+        "start": "06:27",
+        "end": "06:40"
+      },
+      {
+        "stage": "awake",
+        "start": "06:40",
+        "end": "06:51"
+      },
+      {
+        "stage": "rem",
+        "start": "06:51",
+        "end": "07:09"
+      },
+      {
+        "stage": "light",
+        "start": "07:09",
+        "end": "08:21"
+      },
+      {
+        "stage": "awake",
+        "start": "08:21",
+        "end": "08:37"
+      }
+    ],
+    "create_time": "2026-04-29T12:21:48.710494Z",
+    "update_time": "2026-04-29T12:21:48.710494Z",
+    "uid": "69aea6eeaf5e6cbf08027969"
+  },
+  {
+    "record_date": "2026-03-17",
+    "data_label": "good",
+    "raw_data": {
+      "apnea_count": 3,
+      "average_heartbeat": 71,
+      "average_respiration": 17,
+      "turnover_count": 7,
+      "awake_ratio": 12,
+      "deep_sleep_ratio": 20,
+      "light_sleep_ratio": 48,
+      "rem_ratio": 20,
+      "sleep_score": 88,
+      "total_sleep_minutes": 436,
+      "bed_time": "2026-03-17T15:46:00Z",
+      "sleep_time": "2026-03-17T15:58:00Z",
+      "wake_time": "2026-03-17T23:49:00Z",
+      "wake_up_time": "2026-03-18T00:01:00Z",
+      "sleep_latency": 12,
+      "sleep_efficiency": 88
+    },
+    "idf_data": [
+      {
+        "stage": "awake",
+        "start": "23:46",
+        "end": "23:58"
+      },
+      {
+        "stage": "light",
+        "start": "23:58",
+        "end": "00:27"
+      },
+      {
+        "stage": "deep",
+        "start": "00:27",
+        "end": "00:53"
+      },
+      {
+        "stage": "light",
+        "start": "00:53",
+        "end": "01:12"
+      },
+      {
+        "stage": "deep",
+        "start": "01:12",
+        "end": "01:55"
+      },
+      {
+        "stage": "light",
+        "start": "01:55",
+        "end": "02:19"
+      },
+      {
+        "stage": "deep",
+        "start": "02:19",
+        "end": "02:49"
+      },
+      {
+        "stage": "light",
+        "start": "02:49",
+        "end": "03:08"
+      },
+      {
+        "stage": "rem",
+        "start": "03:08",
+        "end": "03:56"
+      },
+      {
+        "stage": "light",
+        "start": "03:56",
+        "end": "04:34"
+      },
+      {
+        "stage": "rem",
+        "start": "04:34",
+        "end": "05:05"
+      },
+      {
+        "stage": "awake",
+        "start": "05:05",
+        "end": "05:22"
+      },
+      {
+        "stage": "rem",
+        "start": "05:22",
+        "end": "05:31"
+      },
+      {
+        "stage": "light",
+        "start": "05:31",
+        "end": "05:35"
+      },
+      {
+        "stage": "awake",
+        "start": "05:35",
+        "end": "05:53"
+      },
+      {
+        "stage": "light",
+        "start": "05:53",
+        "end": "06:01"
+      },
+      {
+        "stage": "rem",
+        "start": "06:01",
+        "end": "06:12"
+      },
+      {
+        "stage": "light",
+        "start": "06:12",
+        "end": "07:49"
+      },
+      {
+        "stage": "awake",
+        "start": "07:49",
+        "end": "08:01"
+      }
+    ],
+    "create_time": "2026-04-29T12:21:48.710494Z",
+    "update_time": "2026-04-29T12:21:48.710494Z",
+    "uid": "69aea6eeaf5e6cbf08027969"
+  },
+  {
+    "record_date": "2026-03-18",
+    "data_label": "good",
+    "raw_data": {
+      "apnea_count": 3,
+      "average_heartbeat": 70,
+      "average_respiration": 14,
+      "turnover_count": 14,
+      "awake_ratio": 11,
+      "deep_sleep_ratio": 17,
+      "light_sleep_ratio": 49,
+      "rem_ratio": 23,
+      "sleep_score": 86,
+      "total_sleep_minutes": 439,
+      "bed_time": "2026-03-18T15:52:00Z",
+      "sleep_time": "2026-03-18T16:07:00Z",
+      "wake_time": "2026-03-18T23:51:00Z",
+      "wake_up_time": "2026-03-19T00:05:00Z",
+      "sleep_latency": 15,
+      "sleep_efficiency": 89
+    },
+    "idf_data": [
+      {
+        "stage": "awake",
+        "start": "23:52",
+        "end": "00:07"
+      },
+      {
+        "stage": "light",
+        "start": "00:07",
+        "end": "00:27"
+      },
+      {
+        "stage": "deep",
+        "start": "00:27",
+        "end": "01:02"
+      },
+      {
+        "stage": "light",
+        "start": "01:02",
+        "end": "01:30"
+      },
+      {
+        "stage": "deep",
+        "start": "01:30",
+        "end": "02:14"
+      },
+      {
+        "stage": "light",
+        "start": "02:14",
+        "end": "02:43"
+      },
+      {
+        "stage": "deep",
+        "start": "02:43",
+        "end": "02:48"
+      },
+      {
+        "stage": "light",
+        "start": "02:48",
+        "end": "03:01"
+      },
+      {
+        "stage": "rem",
+        "start": "03:01",
+        "end": "03:24"
+      },
+      {
+        "stage": "light",
+        "start": "03:24",
+        "end": "03:40"
+      },
+      {
+        "stage": "rem",
+        "start": "03:40",
+        "end": "03:58"
+      },
+      {
+        "stage": "light",
+        "start": "03:58",
+        "end": "04:01"
+      },
+      {
+        "stage": "awake",
+        "start": "04:01",
+        "end": "04:06"
+      },
+      {
+        "stage": "light",
+        "start": "04:06",
+        "end": "04:35"
+      },
+      {
+        "stage": "rem",
+        "start": "04:35",
+        "end": "04:41"
+      },
+      {
+        "stage": "awake",
+        "start": "04:41",
+        "end": "04:50"
+      },
+      {
+        "stage": "rem",
+        "start": "04:50",
+        "end": "05:00"
+      },
+      {
+        "stage": "light",
+        "start": "05:00",
+        "end": "05:24"
+      },
+      {
+        "stage": "rem",
+        "start": "05:24",
+        "end": "05:25"
+      },
+      {
+        "stage": "awake",
+        "start": "05:25",
+        "end": "05:36"
+      },
+      {
+        "stage": "rem",
+        "start": "05:36",
+        "end": "06:16"
+      },
+      {
+        "stage": "light",
+        "start": "06:16",
+        "end": "06:39"
+      },
+      {
+        "stage": "rem",
+        "start": "06:39",
+        "end": "06:54"
+      },
+      {
+        "stage": "light",
+        "start": "06:54",
+        "end": "07:51"
+      },
+      {
+        "stage": "awake",
+        "start": "07:51",
+        "end": "08:05"
+      }
+    ],
+    "create_time": "2026-04-29T12:21:48.710494Z",
+    "update_time": "2026-04-29T12:21:48.710494Z",
+    "uid": "69aea6eeaf5e6cbf08027969"
+  },
+  {
+    "record_date": "2026-03-19",
+    "data_label": "bad",
+    "raw_data": {
+      "apnea_count": 10,
+      "average_heartbeat": 81,
+      "average_respiration": 17,
+      "turnover_count": 27,
+      "awake_ratio": 17,
+      "deep_sleep_ratio": 14,
+      "light_sleep_ratio": 51,
+      "rem_ratio": 18,
+      "sleep_score": 81,
+      "total_sleep_minutes": 407,
+      "bed_time": "2026-03-19T17:36:00Z",
+      "sleep_time": "2026-03-19T18:00:00Z",
+      "wake_time": "2026-03-20T01:14:00Z",
+      "wake_up_time": "2026-03-20T01:46:00Z",
+      "sleep_latency": 24,
+      "sleep_efficiency": 83
+    },
+    "idf_data": [
+      {
+        "stage": "awake",
+        "start": "01:36",
+        "end": "02:00"
+      },
+      {
+        "stage": "light",
+        "start": "02:00",
+        "end": "02:21"
+      },
+      {
+        "stage": "deep",
+        "start": "02:21",
+        "end": "02:42"
+      },
+      {
+        "stage": "light",
+        "start": "02:42",
+        "end": "03:04"
+      },
+      {
+        "stage": "deep",
+        "start": "03:04",
+        "end": "03:05"
+      },
+      {
+        "stage": "awake",
+        "start": "03:05",
+        "end": "03:11"
+      },
+      {
+        "stage": "deep",
+        "start": "03:11",
+        "end": "03:38"
+      },
+      {
+        "stage": "light",
+        "start": "03:38",
+        "end": "03:52"
+      },
+      {
+        "stage": "awake",
+        "start": "03:52",
+        "end": "03:57"
+      },
+      {
+        "stage": "light",
+        "start": "03:57",
+        "end": "04:16"
+      },
+      {
+        "stage": "deep",
+        "start": "04:16",
+        "end": "04:36"
+      },
+      {
+        "stage": "light",
+        "start": "04:36",
+        "end": "04:52"
+      },
+      {
+        "stage": "rem",
+        "start": "04:52",
+        "end": "05:20"
+      },
+      {
+        "stage": "awake",
+        "start": "05:20",
+        "end": "05:23"
+      },
+      {
+        "stage": "rem",
+        "start": "05:23",
+        "end": "05:31"
+      },
+      {
+        "stage": "light",
+        "start": "05:31",
+        "end": "06:07"
+      },
+      {
+        "stage": "rem",
+        "start": "06:07",
+        "end": "06:29"
+      },
+      {
+        "stage": "awake",
+        "start": "06:29",
+        "end": "06:32"
+      },
+      {
+        "stage": "rem",
+        "start": "06:32",
+        "end": "07:00"
+      },
+      {
+        "stage": "light",
+        "start": "07:00",
+        "end": "07:13"
+      },
+      {
+        "stage": "awake",
+        "start": "07:13",
+        "end": "07:18"
+      },
+      {
+        "stage": "light",
+        "start": "07:18",
+        "end": "07:37"
+      },
+      {
+        "stage": "awake",
+        "start": "07:37",
+        "end": "07:42"
+      },
+      {
+        "stage": "light",
+        "start": "07:42",
+        "end": "09:14"
+      },
+      {
+        "stage": "awake",
+        "start": "09:14",
+        "end": "09:46"
+      }
+    ],
+    "create_time": "2026-04-29T12:21:48.710494Z",
+    "update_time": "2026-04-29T12:21:48.710494Z",
+    "uid": "69aea6eeaf5e6cbf08027969"
+  },
+  {
+    "record_date": "2026-03-20",
+    "data_label": "good",
+    "raw_data": {
+      "apnea_count": 3,
+      "average_heartbeat": 69,
+      "average_respiration": 18,
+      "turnover_count": 7,
+      "awake_ratio": 11,
+      "deep_sleep_ratio": 18,
+      "light_sleep_ratio": 49,
+      "rem_ratio": 22,
+      "sleep_score": 88,
+      "total_sleep_minutes": 446,
+      "bed_time": "2026-03-20T15:35:00Z",
+      "sleep_time": "2026-03-20T15:46:00Z",
+      "wake_time": "2026-03-20T23:41:00Z",
+      "wake_up_time": "2026-03-20T23:57:00Z",
+      "sleep_latency": 11,
+      "sleep_efficiency": 89
+    },
+    "idf_data": [
+      {
+        "stage": "awake",
+        "start": "23:35",
+        "end": "23:46"
+      },
+      {
+        "stage": "light",
+        "start": "23:46",
+        "end": "00:16"
+      },
+      {
+        "stage": "deep",
+        "start": "00:16",
+        "end": "00:38"
+      },
+      {
+        "stage": "light",
+        "start": "00:38",
+        "end": "01:09"
+      },
+      {
+        "stage": "deep",
+        "start": "01:09",
+        "end": "01:39"
+      },
+      {
+        "stage": "light",
+        "start": "01:39",
+        "end": "01:59"
+      },
+      {
+        "stage": "deep",
+        "start": "01:59",
+        "end": "02:30"
+      },
+      {
+        "stage": "light",
+        "start": "02:30",
+        "end": "02:53"
+      },
+      {
+        "stage": "deep",
+        "start": "02:53",
+        "end": "03:00"
+      },
+      {
+        "stage": "light",
+        "start": "03:00",
+        "end": "03:01"
+      },
+      {
+        "stage": "awake",
+        "start": "03:01",
+        "end": "03:16"
+      },
+      {
+        "stage": "light",
+        "start": "03:16",
+        "end": "03:48"
+      },
+      {
+        "stage": "rem",
+        "start": "03:48",
+        "end": "04:18"
+      },
+      {
+        "stage": "light",
+        "start": "04:18",
+        "end": "04:48"
+      },
+      {
+        "stage": "rem",
+        "start": "04:48",
+        "end": "05:07"
+      },
+      {
+        "stage": "light",
+        "start": "05:07",
+        "end": "05:41"
+      },
+      {
+        "stage": "rem",
+        "start": "05:41",
+        "end": "06:16"
+      },
+      {
+        "stage": "light",
+        "start": "06:16",
+        "end": "06:25"
+      },
+      {
+        "stage": "awake",
+        "start": "06:25",
+        "end": "06:39"
+      },
+      {
+        "stage": "light",
+        "start": "06:39",
+        "end": "06:44"
+      },
+      {
+        "stage": "rem",
+        "start": "06:44",
+        "end": "07:00"
+      },
+      {
+        "stage": "light",
+        "start": "07:00",
+        "end": "07:31"
+      },
+      {
+        "stage": "rem",
+        "start": "07:31",
+        "end": "07:41"
+      },
+      {
+        "stage": "awake",
+        "start": "07:41",
+        "end": "07:57"
+      }
+    ],
+    "create_time": "2026-04-29T12:21:48.710494Z",
+    "update_time": "2026-04-29T12:21:48.710494Z",
+    "uid": "69aea6eeaf5e6cbf08027969"
+  },
+  {
+    "record_date": "2026-03-21",
+    "data_label": "bad",
+    "raw_data": {
+      "apnea_count": 11,
+      "average_heartbeat": 76,
+      "average_respiration": 22,
+      "turnover_count": 22,
+      "awake_ratio": 19,
+      "deep_sleep_ratio": 11,
+      "light_sleep_ratio": 53,
+      "rem_ratio": 17,
+      "sleep_score": 72,
+      "total_sleep_minutes": 394,
+      "bed_time": "2026-03-21T16:18:00Z",
+      "sleep_time": "2026-03-21T16:42:00Z",
+      "wake_time": "2026-03-22T00:08:00Z",
+      "wake_up_time": "2026-03-22T00:24:00Z",
+      "sleep_latency": 24,
+      "sleep_efficiency": 81
+    },
+    "idf_data": [
+      {
+        "stage": "awake",
+        "start": "00:18",
+        "end": "00:42"
+      },
+      {
+        "stage": "light",
+        "start": "00:42",
+        "end": "01:17"
+      },
+      {
+        "stage": "deep",
+        "start": "01:17",
+        "end": "01:55"
+      },
+      {
+        "stage": "light",
+        "start": "01:55",
+        "end": "02:26"
+      },
+      {
+        "stage": "deep",
+        "start": "02:26",
+        "end": "02:41"
+      },
+      {
+        "stage": "light",
+        "start": "02:41",
+        "end": "02:57"
+      },
+      {
+        "stage": "rem",
+        "start": "02:57",
+        "end": "03:03"
+      },
+      {
+        "stage": "awake",
+        "start": "03:03",
+        "end": "03:18"
+      },
+      {
+        "stage": "rem",
+        "start": "03:18",
+        "end": "03:24"
+      },
+      {
+        "stage": "awake",
+        "start": "03:24",
+        "end": "03:37"
+      },
+      {
+        "stage": "rem",
+        "start": "03:37",
+        "end": "03:44"
+      },
+      {
+        "stage": "light",
+        "start": "03:44",
+        "end": "03:56"
+      },
+      {
+        "stage": "rem",
+        "start": "03:56",
+        "end": "04:37"
+      },
+      {
+        "stage": "light",
+        "start": "04:37",
+        "end": "05:16"
+      },
+      {
+        "stage": "rem",
+        "start": "05:16",
+        "end": "05:39"
+      },
+      {
+        "stage": "light",
+        "start": "05:39",
+        "end": "06:38"
+      },
+      {
+        "stage": "awake",
+        "start": "06:38",
+        "end": "06:54"
+      },
+      {
+        "stage": "light",
+        "start": "06:54",
+        "end": "06:59"
+      },
+      {
+        "stage": "awake",
+        "start": "06:59",
+        "end": "07:07"
+      },
+      {
+        "stage": "light",
+        "start": "07:07",
+        "end": "08:08"
+      },
+      {
+        "stage": "awake",
+        "start": "08:08",
+        "end": "08:24"
+      }
+    ],
+    "create_time": "2026-04-29T12:21:48.710494Z",
+    "update_time": "2026-04-29T12:21:48.710494Z",
+    "uid": "69aea6eeaf5e6cbf08027969"
+  },
+  {
+    "record_date": "2026-03-22",
+    "data_label": "bad",
+    "raw_data": {
+      "apnea_count": 10,
+      "average_heartbeat": 75,
+      "average_respiration": 22,
+      "turnover_count": 21,
+      "awake_ratio": 18,
+      "deep_sleep_ratio": 14,
+      "light_sleep_ratio": 53,
+      "rem_ratio": 15,
+      "sleep_score": 80,
+      "total_sleep_minutes": 406,
+      "bed_time": "2026-03-22T16:05:00Z",
+      "sleep_time": "2026-03-22T16:32:00Z",
+      "wake_time": "2026-03-22T23:53:00Z",
+      "wake_up_time": "2026-03-23T00:21:00Z",
+      "sleep_latency": 27,
+      "sleep_efficiency": 82
+    },
+    "idf_data": [
+      {
+        "stage": "awake",
+        "start": "00:05",
+        "end": "00:32"
+      },
+      {
+        "stage": "light",
+        "start": "00:32",
+        "end": "00:55"
+      },
+      {
+        "stage": "deep",
+        "start": "00:55",
+        "end": "01:40"
+      },
+      {
+        "stage": "light",
+        "start": "01:40",
+        "end": "01:51"
+      },
+      {
+        "stage": "awake",
+        "start": "01:51",
+        "end": "01:56"
+      },
+      {
+        "stage": "light",
+        "start": "01:56",
+        "end": "02:01"
+      },
+      {
+        "stage": "awake",
+        "start": "02:01",
+        "end": "02:10"
+      },
+      {
+        "stage": "light",
+        "start": "02:10",
+        "end": "02:14"
+      },
+      {
+        "stage": "awake",
+        "start": "02:14",
+        "end": "02:19"
+      },
+      {
+        "stage": "light",
+        "start": "02:19",
+        "end": "02:30"
+      },
+      {
+        "stage": "deep",
+        "start": "02:30",
+        "end": "02:54"
+      },
+      {
+        "stage": "light",
+        "start": "02:54",
+        "end": "03:11"
+      },
+      {
+        "stage": "rem",
+        "start": "03:11",
+        "end": "03:58"
+      },
+      {
+        "stage": "light",
+        "start": "03:58",
+        "end": "04:18"
+      },
+      {
+        "stage": "rem",
+        "start": "04:18",
+        "end": "04:45"
+      },
+      {
+        "stage": "light",
+        "start": "04:45",
+        "end": "04:49"
+      },
+      {
+        "stage": "awake",
+        "start": "04:49",
+        "end": "04:54"
+      },
+      {
+        "stage": "light",
+        "start": "04:54",
+        "end": "06:50"
+      },
+      {
+        "stage": "awake",
+        "start": "06:50",
+        "end": "07:01"
+      },
+      {
+        "stage": "light",
+        "start": "07:01",
+        "end": "07:53"
+      },
+      {
+        "stage": "awake",
+        "start": "07:53",
+        "end": "08:21"
+      }
+    ],
+    "create_time": "2026-04-29T12:21:48.710494Z",
+    "update_time": "2026-04-29T12:21:48.710494Z",
+    "uid": "69aea6eeaf5e6cbf08027969"
+  },
+  {
+    "record_date": "2026-03-23",
+    "data_label": "good",
+    "raw_data": {
+      "apnea_count": 4,
+      "average_heartbeat": 72,
+      "average_respiration": 17,
+      "turnover_count": 10,
+      "awake_ratio": 11,
+      "deep_sleep_ratio": 18,
+      "light_sleep_ratio": 49,
+      "rem_ratio": 22,
+      "sleep_score": 93,
+      "total_sleep_minutes": 423,
+      "bed_time": "2026-03-23T15:47:00Z",
+      "sleep_time": "2026-03-23T16:06:00Z",
+      "wake_time": "2026-03-23T23:32:00Z",
+      "wake_up_time": "2026-03-23T23:42:00Z",
+      "sleep_latency": 19,
+      "sleep_efficiency": 89
+    },
+    "idf_data": [
+      {
+        "stage": "awake",
+        "start": "23:47",
+        "end": "00:06"
+      },
+      {
+        "stage": "light",
+        "start": "00:06",
+        "end": "00:30"
+      },
+      {
+        "stage": "deep",
+        "start": "00:30",
+        "end": "00:58"
+      },
+      {
+        "stage": "light",
+        "start": "00:58",
+        "end": "01:33"
+      },
+      {
+        "stage": "deep",
+        "start": "01:33",
+        "end": "02:14"
+      },
+      {
+        "stage": "awake",
+        "start": "02:14",
+        "end": "02:28"
+      },
+      {
+        "stage": "light",
+        "start": "02:28",
+        "end": "03:06"
+      },
+      {
+        "stage": "deep",
+        "start": "03:06",
+        "end": "03:11"
+      },
+      {
+        "stage": "awake",
+        "start": "03:11",
+        "end": "03:20"
+      },
+      {
+        "stage": "deep",
+        "start": "03:20",
+        "end": "03:32"
+      },
+      {
+        "stage": "light",
+        "start": "03:32",
+        "end": "04:03"
+      },
+      {
+        "stage": "rem",
+        "start": "04:03",
+        "end": "04:39"
+      },
+      {
+        "stage": "light",
+        "start": "04:39",
+        "end": "05:03"
+      },
+      {
+        "stage": "rem",
+        "start": "05:03",
+        "end": "05:50"
+      },
+      {
+        "stage": "light",
+        "start": "05:50",
+        "end": "06:21"
+      },
+      {
+        "stage": "rem",
+        "start": "06:21",
+        "end": "06:42"
+      },
+      {
+        "stage": "light",
+        "start": "06:42",
+        "end": "07:32"
+      },
+      {
+        "stage": "awake",
+        "start": "07:32",
+        "end": "07:42"
+      }
+    ],
+    "create_time": "2026-04-29T12:21:48.710494Z",
+    "update_time": "2026-04-29T12:21:48.710494Z",
+    "uid": "69aea6eeaf5e6cbf08027969"
+  },
+  {
+    "record_date": "2026-03-24",
+    "data_label": "good",
+    "raw_data": {
+      "apnea_count": 3,
+      "average_heartbeat": 65,
+      "average_respiration": 16,
+      "turnover_count": 11,
+      "awake_ratio": 11,
+      "deep_sleep_ratio": 19,
+      "light_sleep_ratio": 49,
+      "rem_ratio": 21,
+      "sleep_score": 91,
+      "total_sleep_minutes": 434,
+      "bed_time": "2026-03-24T15:51:00Z",
+      "sleep_time": "2026-03-24T16:06:00Z",
+      "wake_time": "2026-03-24T23:50:00Z",
+      "wake_up_time": "2026-03-24T23:59:00Z",
+      "sleep_latency": 15,
+      "sleep_efficiency": 89
+    },
+    "idf_data": [
+      {
+        "stage": "awake",
+        "start": "23:51",
+        "end": "00:06"
+      },
+      {
+        "stage": "light",
+        "start": "00:06",
+        "end": "00:24"
+      },
+      {
+        "stage": "deep",
+        "start": "00:24",
+        "end": "00:51"
+      },
+      {
+        "stage": "light",
+        "start": "00:51",
+        "end": "01:06"
+      },
+      {
+        "stage": "deep",
+        "start": "01:06",
+        "end": "01:12"
+      },
+      {
+        "stage": "awake",
+        "start": "01:12",
+        "end": "01:24"
+      },
+      {
+        "stage": "deep",
+        "start": "01:24",
+        "end": "01:46"
+      },
+      {
+        "stage": "light",
+        "start": "01:46",
+        "end": "02:01"
+      },
+      {
+        "stage": "deep",
+        "start": "02:01",
+        "end": "02:28"
+      },
+      {
+        "stage": "light",
+        "start": "02:28",
+        "end": "03:06"
+      },
+      {
+        "stage": "deep",
+        "start": "03:06",
+        "end": "03:17"
+      },
+      {
+        "stage": "light",
+        "start": "03:17",
+        "end": "03:29"
+      },
+      {
+        "stage": "rem",
+        "start": "03:29",
+        "end": "03:35"
+      },
+      {
+        "stage": "awake",
+        "start": "03:35",
+        "end": "03:44"
+      },
+      {
+        "stage": "rem",
+        "start": "03:44",
+        "end": "04:17"
+      },
+      {
+        "stage": "light",
+        "start": "04:17",
+        "end": "04:41"
+      },
+      {
+        "stage": "awake",
+        "start": "04:41",
+        "end": "04:50"
+      },
+      {
+        "stage": "light",
+        "start": "04:50",
+        "end": "04:59"
+      },
+      {
+        "stage": "rem",
+        "start": "04:59",
+        "end": "05:35"
+      },
+      {
+        "stage": "light",
+        "start": "05:35",
+        "end": "06:00"
+      },
+      {
+        "stage": "rem",
+        "start": "06:00",
+        "end": "06:27"
+      },
+      {
+        "stage": "light",
+        "start": "06:27",
+        "end": "07:50"
+      },
+      {
+        "stage": "awake",
+        "start": "07:50",
+        "end": "07:59"
+      }
+    ],
+    "create_time": "2026-04-29T12:21:48.710494Z",
+    "update_time": "2026-04-29T12:21:48.710494Z",
+    "uid": "69aea6eeaf5e6cbf08027969"
+  },
+  {
+    "record_date": "2026-03-25",
+    "data_label": "bad",
+    "raw_data": {
+      "apnea_count": 11,
+      "average_heartbeat": 75,
+      "average_respiration": 20,
+      "turnover_count": 27,
+      "awake_ratio": 16,
+      "deep_sleep_ratio": 12,
+      "light_sleep_ratio": 56,
+      "rem_ratio": 16,
+      "sleep_score": 78,
+      "total_sleep_minutes": 426,
+      "bed_time": "2026-03-25T17:24:00Z",
+      "sleep_time": "2026-03-25T17:49:00Z",
+      "wake_time": "2026-03-26T01:31:00Z",
+      "wake_up_time": "2026-03-26T01:51:00Z",
+      "sleep_latency": 25,
+      "sleep_efficiency": 84
+    },
+    "idf_data": [
+      {
+        "stage": "awake",
+        "start": "01:24",
+        "end": "01:49"
+      },
+      {
+        "stage": "light",
+        "start": "01:49",
+        "end": "02:13"
+      },
+      {
+        "stage": "deep",
+        "start": "02:13",
+        "end": "02:58"
+      },
+      {
+        "stage": "light",
+        "start": "02:58",
+        "end": "03:10"
+      },
+      {
+        "stage": "deep",
+        "start": "03:10",
+        "end": "03:26"
+      },
+      {
+        "stage": "light",
+        "start": "03:26",
+        "end": "03:40"
+      },
+      {
+        "stage": "awake",
+        "start": "03:40",
+        "end": "03:45"
+      },
+      {
+        "stage": "light",
+        "start": "03:45",
+        "end": "04:11"
+      },
+      {
+        "stage": "rem",
+        "start": "04:11",
+        "end": "04:28"
+      },
+      {
+        "stage": "light",
+        "start": "04:28",
+        "end": "04:47"
+      },
+      {
+        "stage": "rem",
+        "start": "04:47",
+        "end": "05:13"
+      },
+      {
+        "stage": "light",
+        "start": "05:13",
+        "end": "05:39"
+      },
+      {
+        "stage": "rem",
+        "start": "05:39",
+        "end": "05:44"
+      },
+      {
+        "stage": "awake",
+        "start": "05:44",
+        "end": "05:53"
+      },
+      {
+        "stage": "rem",
+        "start": "05:53",
+        "end": "06:12"
+      },
+      {
+        "stage": "awake",
+        "start": "06:12",
+        "end": "06:16"
+      },
+      {
+        "stage": "rem",
+        "start": "06:16",
+        "end": "06:30"
+      },
+      {
+        "stage": "light",
+        "start": "06:30",
+        "end": "06:42"
+      },
+      {
+        "stage": "awake",
+        "start": "06:42",
+        "end": "06:47"
+      },
+      {
+        "stage": "light",
+        "start": "06:47",
+        "end": "07:27"
+      },
+      {
+        "stage": "awake",
+        "start": "07:27",
+        "end": "07:33"
+      },
+      {
+        "stage": "light",
+        "start": "07:33",
+        "end": "08:00"
+      },
+      {
+        "stage": "awake",
+        "start": "08:00",
+        "end": "08:07"
+      },
+      {
+        "stage": "light",
+        "start": "08:07",
+        "end": "09:31"
+      },
+      {
+        "stage": "awake",
+        "start": "09:31",
+        "end": "09:51"
+      }
+    ],
+    "create_time": "2026-04-29T12:21:48.710494Z",
+    "update_time": "2026-04-29T12:21:48.710494Z",
+    "uid": "69aea6eeaf5e6cbf08027969"
+  },
+  {
+    "record_date": "2026-03-26",
+    "data_label": "good",
+    "raw_data": {
+      "apnea_count": 4,
+      "average_heartbeat": 67,
+      "average_respiration": 13,
+      "turnover_count": 12,
+      "awake_ratio": 12,
+      "deep_sleep_ratio": 15,
+      "light_sleep_ratio": 49,
+      "rem_ratio": 24,
+      "sleep_score": 88,
+      "total_sleep_minutes": 423,
+      "bed_time": "2026-03-26T15:48:00Z",
+      "sleep_time": "2026-03-26T16:01:00Z",
+      "wake_time": "2026-03-26T23:38:00Z",
+      "wake_up_time": "2026-03-26T23:49:00Z",
+      "sleep_latency": 13,
+      "sleep_efficiency": 88
+    },
+    "idf_data": [
+      {
+        "stage": "awake",
+        "start": "23:48",
+        "end": "00:01"
+      },
+      {
+        "stage": "light",
+        "start": "00:01",
+        "end": "00:19"
+      },
+      {
+        "stage": "deep",
+        "start": "00:19",
+        "end": "00:50"
+      },
+      {
+        "stage": "light",
+        "start": "00:50",
+        "end": "01:01"
+      },
+      {
+        "stage": "awake",
+        "start": "01:01",
+        "end": "01:14"
+      },
+      {
+        "stage": "light",
+        "start": "01:14",
+        "end": "01:15"
+      },
+      {
+        "stage": "awake",
+        "start": "01:15",
+        "end": "01:29"
+      },
+      {
+        "stage": "light",
+        "start": "01:29",
+        "end": "01:36"
+      },
+      {
+        "stage": "deep",
+        "start": "01:36",
+        "end": "02:06"
+      },
+      {
+        "stage": "light",
+        "start": "02:06",
+        "end": "02:21"
+      },
+      {
+        "stage": "deep",
+        "start": "02:21",
+        "end": "02:32"
+      },
+      {
+        "stage": "light",
+        "start": "02:32",
+        "end": "03:02"
+      },
+      {
+        "stage": "rem",
+        "start": "03:02",
+        "end": "03:46"
+      },
+      {
+        "stage": "light",
+        "start": "03:46",
+        "end": "04:16"
+      },
+      {
+        "stage": "rem",
+        "start": "04:16",
+        "end": "04:38"
+      },
+      {
+        "stage": "light",
+        "start": "04:38",
+        "end": "04:58"
+      },
+      {
+        "stage": "rem",
+        "start": "04:58",
+        "end": "05:01"
+      },
+      {
+        "stage": "awake",
+        "start": "05:01",
+        "end": "05:08"
+      },
+      {
+        "stage": "rem",
+        "start": "05:08",
+        "end": "05:37"
+      },
+      {
+        "stage": "light",
+        "start": "05:37",
+        "end": "06:15"
+      },
+      {
+        "stage": "rem",
+        "start": "06:15",
+        "end": "06:32"
+      },
+      {
+        "stage": "light",
+        "start": "06:32",
+        "end": "07:38"
+      },
+      {
+        "stage": "awake",
+        "start": "07:38",
+        "end": "07:49"
+      }
+    ],
+    "create_time": "2026-04-29T12:21:48.710494Z",
+    "update_time": "2026-04-29T12:21:48.710494Z",
+    "uid": "69aea6eeaf5e6cbf08027969"
+  },
+  {
+    "record_date": "2026-03-27",
+    "data_label": "good",
+    "raw_data": {
+      "apnea_count": 4,
+      "average_heartbeat": 67,
+      "average_respiration": 16,
+      "turnover_count": 8,
+      "awake_ratio": 12,
+      "deep_sleep_ratio": 15,
+      "light_sleep_ratio": 49,
+      "rem_ratio": 24,
+      "sleep_score": 87,
+      "total_sleep_minutes": 447,
+      "bed_time": "2026-03-27T16:14:00Z",
+      "sleep_time": "2026-03-27T16:33:00Z",
+      "wake_time": "2026-03-28T00:29:00Z",
+      "wake_up_time": "2026-03-28T00:42:00Z",
+      "sleep_latency": 19,
+      "sleep_efficiency": 88
+    },
+    "idf_data": [
+      {
+        "stage": "awake",
+        "start": "00:14",
+        "end": "00:33"
+      },
+      {
+        "stage": "light",
+        "start": "00:33",
+        "end": "01:10"
+      },
+      {
+        "stage": "deep",
+        "start": "01:10",
+        "end": "01:31"
+      },
+      {
+        "stage": "light",
+        "start": "01:31",
+        "end": "01:52"
+      },
+      {
+        "stage": "deep",
+        "start": "01:52",
+        "end": "02:29"
+      },
+      {
+        "stage": "light",
+        "start": "02:29",
+        "end": "02:42"
+      },
+      {
+        "stage": "deep",
+        "start": "02:42",
+        "end": "03:00"
+      },
+      {
+        "stage": "light",
+        "start": "03:00",
+        "end": "03:29"
+      },
+      {
+        "stage": "rem",
+        "start": "03:29",
+        "end": "04:08"
+      },
+      {
+        "stage": "light",
+        "start": "04:08",
+        "end": "04:47"
+      },
+      {
+        "stage": "rem",
+        "start": "04:47",
+        "end": "05:19"
+      },
+      {
+        "stage": "light",
+        "start": "05:19",
+        "end": "05:44"
+      },
+      {
+        "stage": "rem",
+        "start": "05:44",
+        "end": "05:51"
+      },
+      {
+        "stage": "awake",
+        "start": "05:51",
+        "end": "06:05"
+      },
+      {
+        "stage": "rem",
+        "start": "06:05",
+        "end": "06:15"
+      },
+      {
+        "stage": "light",
+        "start": "06:15",
+        "end": "06:28"
+      },
+      {
+        "stage": "rem",
+        "start": "06:28",
+        "end": "06:53"
+      },
+      {
+        "stage": "awake",
+        "start": "06:53",
+        "end": "07:08"
+      },
+      {
+        "stage": "rem",
+        "start": "07:08",
+        "end": "07:17"
+      },
+      {
+        "stage": "light",
+        "start": "07:17",
+        "end": "08:29"
+      },
+      {
+        "stage": "awake",
+        "start": "08:29",
+        "end": "08:42"
+      }
+    ],
+    "create_time": "2026-04-29T12:21:48.710494Z",
+    "update_time": "2026-04-29T12:21:48.710494Z",
+    "uid": "69aea6eeaf5e6cbf08027969"
+  },
+  {
+    "record_date": "2026-03-28",
+    "data_label": "bad",
+    "raw_data": {
+      "apnea_count": 12,
+      "average_heartbeat": 82,
+      "average_respiration": 17,
+      "turnover_count": 36,
+      "awake_ratio": 15,
+      "deep_sleep_ratio": 11,
+      "light_sleep_ratio": 56,
+      "rem_ratio": 18,
+      "sleep_score": 82,
+      "total_sleep_minutes": 397,
+      "bed_time": "2026-03-28T17:14:00Z",
+      "sleep_time": "2026-03-28T17:45:00Z",
+      "wake_time": "2026-03-29T00:39:00Z",
+      "wake_up_time": "2026-03-29T01:02:00Z",
+      "sleep_latency": 31,
+      "sleep_efficiency": 85
+    },
+    "idf_data": [
+      {
+        "stage": "awake",
+        "start": "01:14",
+        "end": "01:45"
+      },
+      {
+        "stage": "light",
+        "start": "01:45",
+        "end": "01:58"
+      },
+      {
+        "stage": "deep",
+        "start": "01:58",
+        "end": "02:31"
+      },
+      {
+        "stage": "light",
+        "start": "02:31",
+        "end": "02:39"
+      },
+      {
+        "stage": "awake",
+        "start": "02:39",
+        "end": "02:41"
+      },
+      {
+        "stage": "light",
+        "start": "02:41",
+        "end": "03:07"
+      },
+      {
+        "stage": "deep",
+        "start": "03:07",
+        "end": "03:25"
+      },
+      {
+        "stage": "light",
+        "start": "03:25",
+        "end": "03:32"
+      },
+      {
+        "stage": "awake",
+        "start": "03:32",
+        "end": "03:35"
+      },
+      {
+        "stage": "light",
+        "start": "03:35",
+        "end": "03:53"
+      },
+      {
+        "stage": "rem",
+        "start": "03:53",
+        "end": "04:10"
+      },
+      {
+        "stage": "light",
+        "start": "04:10",
+        "end": "04:18"
+      },
+      {
+        "stage": "awake",
+        "start": "04:18",
+        "end": "04:21"
+      },
+      {
+        "stage": "light",
+        "start": "04:21",
+        "end": "04:26"
+      },
+      {
+        "stage": "rem",
+        "start": "04:26",
+        "end": "05:00"
+      },
+      {
+        "stage": "light",
+        "start": "05:00",
+        "end": "05:01"
+      },
+      {
+        "stage": "awake",
+        "start": "05:01",
+        "end": "05:04"
+      },
+      {
+        "stage": "light",
+        "start": "05:04",
+        "end": "05:31"
+      },
+      {
+        "stage": "rem",
+        "start": "05:31",
+        "end": "05:50"
+      },
+      {
+        "stage": "awake",
+        "start": "05:50",
+        "end": "05:53"
+      },
+      {
+        "stage": "rem",
+        "start": "05:53",
+        "end": "06:07"
+      },
+      {
+        "stage": "light",
+        "start": "06:07",
+        "end": "06:54"
+      },
+      {
+        "stage": "awake",
+        "start": "06:54",
+        "end": "06:57"
+      },
+      {
+        "stage": "light",
+        "start": "06:57",
+        "end": "08:39"
+      },
+      {
+        "stage": "awake",
+        "start": "08:39",
+        "end": "09:02"
+      }
+    ],
+    "create_time": "2026-04-29T12:21:48.710494Z",
+    "update_time": "2026-04-29T12:21:48.710494Z",
+    "uid": "69aea6eeaf5e6cbf08027969"
+  },
+  {
+    "record_date": "2026-03-29",
+    "data_label": "good",
+    "raw_data": {
+      "apnea_count": 1,
+      "average_heartbeat": 66,
+      "average_respiration": 17,
+      "turnover_count": 10,
+      "awake_ratio": 12,
+      "deep_sleep_ratio": 20,
+      "light_sleep_ratio": 49,
+      "rem_ratio": 19,
+      "sleep_score": 90,
+      "total_sleep_minutes": 432,
+      "bed_time": "2026-03-29T16:14:00Z",
+      "sleep_time": "2026-03-29T16:24:00Z",
+      "wake_time": "2026-03-30T00:06:00Z",
+      "wake_up_time": "2026-03-30T00:26:00Z",
+      "sleep_latency": 10,
+      "sleep_efficiency": 88
+    },
+    "idf_data": [
+      {
+        "stage": "awake",
+        "start": "00:14",
+        "end": "00:24"
+      },
+      {
+        "stage": "light",
+        "start": "00:24",
+        "end": "01:04"
+      },
+      {
+        "stage": "deep",
+        "start": "01:04",
+        "end": "01:32"
+      },
+      {
+        "stage": "light",
+        "start": "01:32",
+        "end": "01:55"
+      },
+      {
+        "stage": "deep",
+        "start": "01:55",
+        "end": "02:18"
+      },
+      {
+        "stage": "light",
+        "start": "02:18",
+        "end": "02:45"
+      },
+      {
+        "stage": "awake",
+        "start": "02:45",
+        "end": "03:00"
+      },
+      {
+        "stage": "deep",
+        "start": "03:00",
+        "end": "03:18"
+      },
+      {
+        "stage": "awake",
+        "start": "03:18",
+        "end": "03:33"
+      },
+      {
+        "stage": "deep",
+        "start": "03:33",
+        "end": "03:35"
+      },
+      {
+        "stage": "light",
+        "start": "03:35",
+        "end": "03:49"
+      },
+      {
+        "stage": "deep",
+        "start": "03:49",
+        "end": "04:16"
+      },
+      {
+        "stage": "light",
+        "start": "04:16",
+        "end": "04:28"
+      },
+      {
+        "stage": "rem",
+        "start": "04:28",
+        "end": "04:57"
+      },
+      {
+        "stage": "light",
+        "start": "04:57",
+        "end": "05:28"
+      },
+      {
+        "stage": "rem",
+        "start": "05:28",
+        "end": "05:46"
+      },
+      {
+        "stage": "light",
+        "start": "05:46",
+        "end": "06:04"
+      },
+      {
+        "stage": "rem",
+        "start": "06:04",
+        "end": "06:47"
+      },
+      {
+        "stage": "light",
+        "start": "06:47",
+        "end": "07:06"
+      },
+      {
+        "stage": "rem",
+        "start": "07:06",
+        "end": "07:09"
+      },
+      {
+        "stage": "light",
+        "start": "07:09",
+        "end": "08:06"
+      },
+      {
+        "stage": "awake",
+        "start": "08:06",
+        "end": "08:26"
+      }
+    ],
+    "create_time": "2026-04-29T12:21:48.710494Z",
+    "update_time": "2026-04-29T12:21:48.710494Z",
+    "uid": "69aea6eeaf5e6cbf08027969"
+  },
+  {
+    "record_date": "2026-03-30",
+    "data_label": "bad",
+    "raw_data": {
+      "apnea_count": 11,
+      "average_heartbeat": 76,
+      "average_respiration": 22,
+      "turnover_count": 15,
+      "awake_ratio": 16,
+      "deep_sleep_ratio": 12,
+      "light_sleep_ratio": 56,
+      "rem_ratio": 16,
+      "sleep_score": 81,
+      "total_sleep_minutes": 425,
+      "bed_time": "2026-03-30T17:21:00Z",
+      "sleep_time": "2026-03-30T17:48:00Z",
+      "wake_time": "2026-03-31T01:19:00Z",
+      "wake_up_time": "2026-03-31T01:46:00Z",
+      "sleep_latency": 27,
+      "sleep_efficiency": 84
+    },
+    "idf_data": [
+      {
+        "stage": "awake",
+        "start": "01:21",
+        "end": "01:48"
+      },
+      {
+        "stage": "light",
+        "start": "01:48",
+        "end": "02:05"
+      },
+      {
+        "stage": "deep",
+        "start": "02:05",
+        "end": "02:39"
+      },
+      {
+        "stage": "light",
+        "start": "02:39",
+        "end": "02:54"
+      },
+      {
+        "stage": "awake",
+        "start": "02:54",
+        "end": "03:03"
+      },
+      {
+        "stage": "light",
+        "start": "03:03",
+        "end": "03:06"
+      },
+      {
+        "stage": "deep",
+        "start": "03:06",
+        "end": "03:16"
+      },
+      {
+        "stage": "awake",
+        "start": "03:16",
+        "end": "03:24"
+      },
+      {
+        "stage": "deep",
+        "start": "03:24",
+        "end": "03:39"
+      },
+      {
+        "stage": "light",
+        "start": "03:39",
+        "end": "04:55"
+      },
+      {
+        "stage": "rem",
+        "start": "04:55",
+        "end": "05:12"
+      },
+      {
+        "stage": "awake",
+        "start": "05:12",
+        "end": "05:21"
+      },
+      {
+        "stage": "rem",
+        "start": "05:21",
+        "end": "05:48"
+      },
+      {
+        "stage": "light",
+        "start": "05:48",
+        "end": "06:14"
+      },
+      {
+        "stage": "rem",
+        "start": "06:14",
+        "end": "06:51"
+      },
+      {
+        "stage": "light",
+        "start": "06:51",
+        "end": "09:19"
+      },
+      {
+        "stage": "awake",
+        "start": "09:19",
+        "end": "09:46"
+      }
+    ],
+    "create_time": "2026-04-29T12:21:48.710494Z",
+    "update_time": "2026-04-29T12:21:48.710494Z",
+    "uid": "69aea6eeaf5e6cbf08027969"
+  },
+  {
+    "record_date": "2026-03-31",
+    "data_label": "good",
+    "raw_data": {
+      "apnea_count": 1,
+      "average_heartbeat": 76,
+      "average_respiration": 14,
+      "turnover_count": 14,
+      "awake_ratio": 11,
+      "deep_sleep_ratio": 19,
+      "light_sleep_ratio": 47,
+      "rem_ratio": 23,
+      "sleep_score": 91,
+      "total_sleep_minutes": 434,
+      "bed_time": "2026-03-31T15:42:00Z",
+      "sleep_time": "2026-03-31T15:53:00Z",
+      "wake_time": "2026-03-31T23:31:00Z",
+      "wake_up_time": "2026-03-31T23:49:00Z",
+      "sleep_latency": 11,
+      "sleep_efficiency": 89
+    },
+    "idf_data": [
+      {
+        "stage": "awake",
+        "start": "23:42",
+        "end": "23:53"
+      },
+      {
+        "stage": "light",
+        "start": "23:53",
+        "end": "00:27"
+      },
+      {
+        "stage": "deep",
+        "start": "00:27",
+        "end": "01:05"
+      },
+      {
+        "stage": "light",
+        "start": "01:05",
+        "end": "01:29"
+      },
+      {
+        "stage": "deep",
+        "start": "01:29",
+        "end": "02:06"
+      },
+      {
+        "stage": "light",
+        "start": "02:06",
+        "end": "02:43"
+      },
+      {
+        "stage": "deep",
+        "start": "02:43",
+        "end": "03:01"
+      },
+      {
+        "stage": "light",
+        "start": "03:01",
+        "end": "03:40"
+      },
+      {
+        "stage": "rem",
+        "start": "03:40",
+        "end": "03:55"
+      },
+      {
+        "stage": "light",
+        "start": "03:55",
+        "end": "04:04"
+      },
+      {
+        "stage": "awake",
+        "start": "04:04",
+        "end": "04:11"
+      },
+      {
+        "stage": "light",
+        "start": "04:11",
+        "end": "04:19"
+      },
+      {
+        "stage": "rem",
+        "start": "04:19",
+        "end": "04:25"
+      },
+      {
+        "stage": "awake",
+        "start": "04:25",
+        "end": "04:33"
+      },
+      {
+        "stage": "rem",
+        "start": "04:33",
+        "end": "05:09"
+      },
+      {
+        "stage": "light",
+        "start": "05:09",
+        "end": "05:43"
+      },
+      {
+        "stage": "rem",
+        "start": "05:43",
+        "end": "06:11"
+      },
+      {
+        "stage": "awake",
+        "start": "06:11",
+        "end": "06:20"
+      },
+      {
+        "stage": "rem",
+        "start": "06:20",
+        "end": "06:39"
+      },
+      {
+        "stage": "light",
+        "start": "06:39",
+        "end": "07:04"
+      },
+      {
+        "stage": "rem",
+        "start": "07:04",
+        "end": "07:12"
+      },
+      {
+        "stage": "light",
+        "start": "07:12",
+        "end": "07:31"
+      },
+      {
+        "stage": "awake",
+        "start": "07:31",
+        "end": "07:49"
+      }
+    ],
+    "create_time": "2026-04-29T12:21:48.710494Z",
+    "update_time": "2026-04-29T12:21:48.710494Z",
+    "uid": "69aea6eeaf5e6cbf08027969"
+  },
+  {
+    "record_date": "2026-04-01",
+    "data_label": "bad",
+    "raw_data": {
+      "apnea_count": 10,
+      "average_heartbeat": 79,
+      "average_respiration": 19,
+      "turnover_count": 20,
+      "awake_ratio": 15,
+      "deep_sleep_ratio": 12,
+      "light_sleep_ratio": 56,
+      "rem_ratio": 17,
+      "sleep_score": 83,
+      "total_sleep_minutes": 409,
+      "bed_time": "2026-04-01T16:11:00Z",
+      "sleep_time": "2026-04-01T16:45:00Z",
+      "wake_time": "2026-04-01T23:52:00Z",
+      "wake_up_time": "2026-04-02T00:11:00Z",
+      "sleep_latency": 34,
+      "sleep_efficiency": 85
+    },
+    "idf_data": [
+      {
+        "stage": "awake",
+        "start": "00:11",
+        "end": "00:45"
+      },
+      {
+        "stage": "light",
+        "start": "00:45",
+        "end": "01:00"
+      },
+      {
+        "stage": "deep",
+        "start": "01:00",
+        "end": "01:38"
+      },
+      {
+        "stage": "light",
+        "start": "01:38",
+        "end": "01:57"
+      },
+      {
+        "stage": "awake",
+        "start": "01:57",
+        "end": "02:02"
+      },
+      {
+        "stage": "light",
+        "start": "02:02",
+        "end": "02:19"
+      },
+      {
+        "stage": "deep",
+        "start": "02:19",
+        "end": "02:39"
+      },
+      {
+        "stage": "light",
+        "start": "02:39",
+        "end": "03:09"
+      },
+      {
+        "stage": "rem",
+        "start": "03:09",
+        "end": "03:16"
+      },
+      {
+        "stage": "awake",
+        "start": "03:16",
+        "end": "03:23"
+      },
+      {
+        "stage": "rem",
+        "start": "03:23",
+        "end": "03:52"
+      },
+      {
+        "stage": "light",
+        "start": "03:52",
+        "end": "04:07"
+      },
+      {
+        "stage": "rem",
+        "start": "04:07",
+        "end": "04:39"
+      },
+      {
+        "stage": "light",
+        "start": "04:39",
+        "end": "05:06"
+      },
+      {
+        "stage": "rem",
+        "start": "05:06",
+        "end": "05:20"
+      },
+      {
+        "stage": "light",
+        "start": "05:20",
+        "end": "05:53"
+      },
+      {
+        "stage": "awake",
+        "start": "05:53",
+        "end": "05:59"
+      },
+      {
+        "stage": "light",
+        "start": "05:59",
+        "end": "07:52"
+      },
+      {
+        "stage": "awake",
+        "start": "07:52",
+        "end": "08:11"
+      }
+    ],
+    "create_time": "2026-04-29T12:21:48.710494Z",
+    "update_time": "2026-04-29T12:21:48.710494Z",
+    "uid": "69aea6eeaf5e6cbf08027969"
+  }
+]

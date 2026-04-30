@@ -1,0 +1,353 @@
+{
+  "audioUrl": [
+    {
+      "url": "https://cdn.fulai.tech/audio/1773489392_ZQAYf1R9HrP.wav",
+      "duration_sec": 270
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773489394_zjS3vg8AypE.wav",
+      "duration_sec": 11
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773489395_FDxhzB5B6YV.wav",
+      "duration_sec": 42
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773489396_oMTsKyb2ZQV.wav",
+      "duration_sec": 3
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773489396_ATvS5i52l5O.wav",
+      "duration_sec": 1
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773489397_fVEDcf4zyJS.wav",
+      "duration_sec": 3
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773489398_lAl0QbcE4nZ.wav",
+      "duration_sec": 4
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773489400_Bxxnfj4Y6YO.wav",
+      "duration_sec": 1
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773489402_pMduSIy0Ade.wav",
+      "duration_sec": 2
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773489403_Io8ZW5UteOB.wav",
+      "duration_sec": 6
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773489404_sI65Q6f54Fw.wav",
+      "duration_sec": 1
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773489404_qF6qWBucMnX.wav",
+      "duration_sec": 2
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773489404_qMPeB3FXVpd.wav",
+      "duration_sec": 3
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773489406_LecItb2IZih.wav",
+      "duration_sec": 2
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773489407_otdyijVZPWD.wav",
+      "duration_sec": 34
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773489408_dk6QlT2F66v.wav",
+      "duration_sec": 11
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773489408_uWDdf5gbL5r.wav",
+      "duration_sec": 39
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773489410_5Pf7lXXcT36.wav",
+      "duration_sec": 26
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1774418407_a7Flz5rQBhg.wav",
+      "duration_sec": 53
+    }
+  ],
+  "sleepTalkingUrl": [
+    {
+      "url": "https://cdn.fulai.tech/audio/1774420553_soIYe8Rybzq.wav",
+      "duration_sec": 63
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1774420564_OmPoOvuiJhI.wav",
+      "duration_sec": 11
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1774420567_y4ToKfwBQtb.wav",
+      "duration_sec": 15
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1774420572_RrBD6b1sdSP.wav",
+      "duration_sec": 14
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1774420577_0y0Y3A9pOSw.wav",
+      "duration_sec": 70
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1774420584_EElC3WVeufq.wav",
+      "duration_sec": 49
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1774420592_1edGJpj4Kya.wav",
+      "duration_sec": 12
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1774420597_vEQgxyq9iTP.wav",
+      "duration_sec": 16
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1774422167_ZNzvcq1KwYk.wav",
+      "duration_sec": 4
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1774422170_Bjt3ZP2kD76.wav",
+      "duration_sec": 3
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1774422170_bvFoTfTwjvg.wav",
+      "duration_sec": 20
+    }
+  ],
+  "coughUrl": [
+    {
+      "url": "https://cdn.fulai.tech/audio/1773802162_5wlGFAtUQL1.wav",
+      "duration_sec": 8
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773802164_NTqxTaTMD1b.wav",
+      "duration_sec": 3
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773802164_Q7ijXZ5EL1Y.wav",
+      "duration_sec": 5
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773802165_i9h6ai5Ejbe.wav",
+      "duration_sec": 1
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773802165_6Kii0ry13Dd.wav",
+      "duration_sec": 1
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773802166_QCOg5i0s7OZ.wav",
+      "duration_sec": 1
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773802167_EQxKeokOwvg.wav",
+      "duration_sec": 2
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773802167_kZl2Wympcyz.wav",
+      "duration_sec": 7
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773802169_RhavMpW3LFc.wav",
+      "duration_sec": 7
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773802170_cuPWgMQnK4j.wav",
+      "duration_sec": 3
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773802170_mJCJZK8fOfv.wav",
+      "duration_sec": 2
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773802170_AKJDFy0N4Ze.wav",
+      "duration_sec": 1
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773802171_QvCKl27UHAu.wav",
+      "duration_sec": 8
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773802172_xg4xMyeSIkR.wav",
+      "duration_sec": 1
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773802172_gW0KRyfEq0I.wav",
+      "duration_sec": 2
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773802173_WOnhSzkMV2y.wav",
+      "duration_sec": 7
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773802174_AnYsU68Wszg.wav",
+      "duration_sec": 7
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773802175_GvmnpcD4Ca2.wav",
+      "duration_sec": 7
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773802176_AKBdaDnSQ0e.wav",
+      "duration_sec": 7
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773802177_n7ycJ1DWccR.wav",
+      "duration_sec": 9
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773802177_TiJUFmiAMqx.wav",
+      "duration_sec": 5
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773811812_8GjKj0qmZMx.wav",
+      "duration_sec": 1
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773811813_3MPwUezLC5o.wav",
+      "duration_sec": 28
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773811814_NTiFaXiI0p3.wav",
+      "duration_sec": 6
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773811814_UyAk46dagBh.wav",
+      "duration_sec": 16
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773811815_2tydKRG8WIH.wav",
+      "duration_sec": 3
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773811816_9i7OZeQjEUN.wav",
+      "duration_sec": 12
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773811816_xTsG4h9qOyX.wav",
+      "duration_sec": 1
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773811817_DWelBli3QtL.wav",
+      "duration_sec": 1
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773811817_QfMbgtu3ZyC.wav",
+      "duration_sec": 1
+    },
+    {
+      "url": "https://cdn.fulai.tech/audio/1773811818_mikS4kQPW2d.wav",
+      "duration_sec": 2
+    }
+  ],
+  "alreadyUploadedFileName": [
+    "grandpa-snoring-in-deep-sleep.mp3",
+    "long-snoring-man.mp3",
+    "man-snores-and-whistles.mp3",
+    "silent-adult-male-snoring.mp3",
+    "snoring-1.mp3",
+    "snoring-11.mp3",
+    "snoring-12.mp3",
+    "snoring-13.mp3",
+    "snoring-14.mp3",
+    "snoring-15.mp3",
+    "snoring-16.mp3",
+    "snoring-17.mp3",
+    "snoring-18.mp3",
+    "snoring-19.mp3",
+    "snoring-2.mp3",
+    "snoring-3.mp3",
+    "snoring-4.mp3",
+    "snoring-5.mp3",
+    "snoring-6.mp3",
+    "snoring-8.mp3",
+    "snoring-9.mp3",
+    "snoring-calm.mp3",
+    "snoring-long-breath.mp3",
+    "snoring-male-breath.mp3",
+    "snoring-male-close.mp3",
+    "snoring-male-gurgling.mp3",
+    "snoring-male-inhale-exhale.mp3",
+    "snoring-male-long-exhalation.mp3",
+    "snoring-male-long.mp3",
+    "snoring-male-muffled.mp3",
+    "snoring-male-short.mp3",
+    "snoring-male-whistling.mp3",
+    "snoring-strong-breath.mp3",
+    "snoring-with-a-whistle.mp3",
+    "the-snoring-of-a-man-who-sleeps-deeply.mp3",
+    "the-sound-of-a-man-snoring.mp3",
+    "the-sound-of-male-snoring-a-man-snores.mp3",
+    "the-sound-of-male-snoring.mp3",
+    "whistling-snoring-sound.mp3",
+    "whistling-snoring-sounds.mp3",
+    "039e4d7ed7ea46f391e388750df8b7d6.mp3",
+    "0baca4b0e46549f6875f6ddffdc9c29f.mp3",
+    "1631de08409c4683928642a00d794c01.mp3",
+    "1bacc044d55445f9a91f2ee0897b1489.mp3",
+    "369eff3721cb4583979ad625953cb451.mp3",
+    "437a8a7a5aa1453bb83a535a7f2bb7ff.mp3",
+    "43dfd5251f9e4254a87faaf324cccab2 (1).mp3",
+    "43dfd5251f9e4254a87faaf324cccab2 (2).mp3",
+    "43dfd5251f9e4254a87faaf324cccab2.mp3",
+    "58a2bb7ae55e4345b9c63923fa67b2c2.mp3",
+    "5e25736394034bd5806083366b64b7c5 (1).mp3",
+    "5e25736394034bd5806083366b64b7c5.mp3",
+    "5fbd78db73ee4694b8f7401807e5e464.mp3",
+    "75a93455e25a465780856ab1bbcf4383.mp3",
+    "88f6863ca75f4f66a78a1478c331a690.mp3",
+    "89596dc7836e464a8bdbc9ca37af814e.mp3",
+    "b044629a964e4a32957aae4d9b70bbee.mp3",
+    "c04c5847dedb4de9837e23bc5dad409f.mp3",
+    "dc0879ea2c8a4ea5848aacb3349b580a.mp3",
+    "df52e36895bc4b01917d287e45b4ee09.mp3",
+    "ec892f9faba844f4addd5db69a8dadaf.mp3",
+    "f93577adfb024acaa5e362aa97b6b029 (1).mp3",
+    "f93577adfb024acaa5e362aa97b6b029.mp3",
+    "fc7ad01828f44702b78bca03a9d8a4cc.mp3",
+    "fd9696aeb1a541ca9f81e1997d91f88b.mp3",
+    "ffc994565dc94349a11da1aa8805d3de.mp3",
+    "cough-1.mp3",
+    "cough-19.mp3",
+    "dry-cough-sound.mp3",
+    "female-cough.mp3",
+    "man-coughing.mp3",
+    "severe-cough-and-itching.mp3",
+    "sound-man-choking-and-coughing-male.mp3",
+    "the-long-sound-of-a-man39s-dry-cough.mp3",
+    "the-sound-of-a-man-coughing-hoarse.mp3",
+    "the-sound-of-a-man-coughing-when-he-chokes.mp3",
+    "the-sound-of-a-middle-aged-woman-coughing-with-a-cold.mp3",
+    "the-sound-of-a-smoker39s-cough.mp3",
+    "the-sound-of-a-teenager-coughing.mp3",
+    "the-sound-of-a-young-man-coughing-who-has-bronchitis-disease.mp3",
+    "the-sound-of-an-adult-man-pretending-to-cough.mp3",
+    "6041a419027dad1d28964e40_18868895_24.mp3",
+    "7495082353732111163.mp3",
+    "7534704389135649595.mp3",
+    "7567156669346056969.mp3",
+    "7595633154774371091.mp3",
+    "打呼噜.mp4",
+    "1773983858_Gg9mv4lkNaH_trimmed.wav",
+    "1773983858_Gg9mv4lkNaH_trimmed_1.wav",
+    "1773983858_Gg9mv4lkNaH_trimmed_2.wav",
+    "1773983858_Gg9mv4lkNaH_trimmed_3.wav",
+    "1773983858_Gg9mv4lkNaH_trimmed_4.wav",
+    "1773983858_Gg9mv4lkNaH_trimmed_5.wav",
+    "1773983865_OJD86HooN3t_trimmed.wav",
+    "1773983866_IZZozK8oldT_trimmed.wav",
+    "dream_trimmed.mp3",
+    "dream_trimmed_1.mp3",
+    "dream_trimmed_4.mp3",
+    "videoplayback.m4a"
+  ]
+}

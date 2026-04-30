@@ -1,0 +1,2062 @@
+[
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-01",
+    "event_timestamp": "01:17",
+    "event_type": "单次体动",
+    "type": "normal",
+    "code": "single_movement",
+    "detail": {
+      "trigger_cause": "检测到单次体动",
+      "action_taken": "触发体动突发性分析",
+      "result_summary": "判定为单次体动事件",
+      "duration_sec": 70
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.736625Z",
+    "update_time": "2026-04-29T12:21:49.736625Z",
+    "duration_sec": 70
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-01",
+    "event_timestamp": "02:28",
+    "event_type": "咳嗽",
+    "type": "normal",
+    "code": "cough",
+    "detail": {
+      "trigger_cause": "检测到用户咳嗽",
+      "action_taken": "触发呼吸干扰分析",
+      "result_summary": "判定为呼吸道轻微干扰",
+      "duration_sec": 20
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.736640Z",
+    "update_time": "2026-04-29T12:21:49.736640Z",
+    "duration_sec": 20
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-02",
+    "event_timestamp": "02:59",
+    "event_type": "单次体动",
+    "type": "normal",
+    "code": "single_movement",
+    "detail": {
+      "trigger_cause": "检测到单次体动",
+      "action_taken": "触发体动突发性分析",
+      "result_summary": "判定为单次体动事件",
+      "duration_sec": 48
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.756016Z",
+    "update_time": "2026-04-29T12:21:49.756016Z",
+    "duration_sec": 48
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-03",
+    "event_timestamp": "00:11",
+    "event_type": "入睡困难",
+    "type": "abnormal",
+    "code": "sleeping",
+    "detail": {
+      "trigger_cause": "检测到入睡困难情况",
+      "action_taken": "触发睡眠初始化阶段评估",
+      "result_summary": "判定为入睡阶段异常",
+      "duration_sec": 46
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.765964Z",
+    "update_time": "2026-04-29T12:21:49.765964Z",
+    "duration_sec": 46
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-03",
+    "event_timestamp": "02:22",
+    "event_type": "自然微动",
+    "type": "normal",
+    "code": "micro_movement",
+    "detail": {
+      "trigger_cause": "检测到自然微动",
+      "action_taken": "触发体动平稳性分析",
+      "result_summary": "判定为正常睡眠微动",
+      "duration_sec": 21
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.765989Z",
+    "update_time": "2026-04-29T12:21:49.765989Z",
+    "duration_sec": 21
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-03",
+    "event_timestamp": "03:56",
+    "event_type": "肢体动作",
+    "type": "normal",
+    "code": "body_movement",
+    "detail": {
+      "trigger_cause": "检测到肢体动作",
+      "action_taken": "触发体动模式分析",
+      "result_summary": "判定为正常干扰现象",
+      "duration_sec": 70
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.766001Z",
+    "update_time": "2026-04-29T12:21:49.766001Z",
+    "duration_sec": 70
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-03",
+    "event_timestamp": "05:17",
+    "event_type": "睡眠姿势切换",
+    "type": "normal",
+    "code": "posture_switch",
+    "detail": {
+      "trigger_cause": "检测到睡眠姿势切换",
+      "action_taken": "触发体位变化分析",
+      "result_summary": "判定为正常体位调整",
+      "duration_sec": 25
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.765996Z",
+    "update_time": "2026-04-29T12:21:49.765996Z",
+    "duration_sec": 25
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-04",
+    "event_timestamp": "00:36",
+    "event_type": "打鼾",
+    "type": "normal",
+    "code": "snoring",
+    "detail": {
+      "trigger_cause": "检测到用户打鼾",
+      "action_taken": "触发身体指标分析",
+      "result_summary": "判定为中度打鼾（42dB）",
+      "duration_sec": 302,
+      "snoring_value_db": 42,
+      "snoring_level": "中度"
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.774236Z",
+    "update_time": "2026-04-29T12:21:49.774236Z",
+    "duration_sec": 302
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-04",
+    "event_timestamp": "01:18",
+    "event_type": "咳嗽",
+    "type": "normal",
+    "code": "cough",
+    "detail": {
+      "trigger_cause": "检测到用户咳嗽",
+      "action_taken": "触发呼吸干扰分析",
+      "result_summary": "判定为呼吸道轻微干扰",
+      "duration_sec": 43
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.774231Z",
+    "update_time": "2026-04-29T12:21:49.774231Z",
+    "duration_sec": 43
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-04",
+    "event_timestamp": "01:42",
+    "event_type": "梦话",
+    "type": "normal",
+    "code": "sleep_talking",
+    "detail": {
+      "trigger_cause": "检测到用户梦话",
+      "action_taken": "触发语音特征分析",
+      "result_summary": "判定为睡眠语音现象",
+      "duration_sec": 21
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.774245Z",
+    "update_time": "2026-04-29T12:21:49.774245Z",
+    "duration_sec": 21
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-04",
+    "event_timestamp": "01:43",
+    "event_type": "呼吸声",
+    "type": "normal",
+    "code": "breathing",
+    "detail": {
+      "trigger_cause": "检测到呼吸声",
+      "action_taken": "触发呼吸节律分析",
+      "result_summary": "判定为正常干扰现象",
+      "duration_sec": 54
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.774222Z",
+    "update_time": "2026-04-29T12:21:49.774222Z",
+    "duration_sec": 54
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-04",
+    "event_timestamp": "04:55",
+    "event_type": "吞咽",
+    "type": "normal",
+    "code": "swallowing",
+    "detail": {
+      "trigger_cause": "检测到吞咽动作",
+      "action_taken": "触发生理微动作分析",
+      "result_summary": "判定为正常生理现象",
+      "duration_sec": 83
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.774241Z",
+    "update_time": "2026-04-29T12:21:49.774241Z",
+    "duration_sec": 83
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-04",
+    "event_timestamp": "07:53",
+    "event_type": "环境持续声",
+    "type": "abnormal",
+    "code": "environment_continuous",
+    "detail": {
+      "trigger_cause": "检测到环境持续声（持续性环境声），约81分贝（疑似持续大雨）",
+      "action_taken": "触发噪音监测分析",
+      "result_summary": "判定为持续性环境声干扰",
+      "duration_sec": 162
+    },
+    "related_event_id": "",
+    "sort_order": 7,
+    "create_time": "2026-04-29T20:21:49.771115Z",
+    "update_time": "2026-04-29T20:21:49.771118Z",
+    "duration_sec": 162,
+    "_id": "69f1f7dddef6df703ecf90a5",
+    "language": "zh"
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-04",
+    "event_timestamp": "07:55",
+    "event_type": "AI主动干预",
+    "type": "intervention",
+    "code": "environment_continuous",
+    "detail": {
+      "trigger_cause": "系统检测到持续性环境噪音警报",
+      "action_taken": "保持暗光环境，开启布朗噪音并随环境声抬升，始终比环境音低约5分贝，同时关闭嗅觉输出。",
+      "result_summary": "噪音干扰已缓解，睡眠保持稳定",
+      "duration_sec": 135
+    },
+    "related_event_id": "69f1f7dddef6df703ecf90a5",
+    "sort_order": 8,
+    "create_time": "2026-04-29T20:21:49.772009Z",
+    "update_time": "2026-04-29T20:21:49.772010Z",
+    "duration_sec": 135,
+    "_id": "69f1f7dddef6df703ecf90a9",
+    "language": "zh"
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-05",
+    "event_timestamp": "01:24",
+    "event_type": "噩梦应激",
+    "type": "abnormal",
+    "code": "nightmare",
+    "detail": {
+      "trigger_cause": "检测到噩梦相关生理反应",
+      "action_taken": "触发情绪状态分析",
+      "result_summary": "判定为情绪干扰影响",
+      "duration_sec": 167
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T20:21:49.777190Z",
+    "update_time": "2026-04-29T20:21:49.777192Z",
+    "duration_sec": 167,
+    "_id": "69f1f7dddef6df703ecf90aa",
+    "language": "zh"
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-05",
+    "event_timestamp": "01:26",
+    "event_type": "AI主动干预",
+    "type": "intervention",
+    "code": "nightmare",
+    "detail": {
+      "trigger_cause": "系统检测到噩梦应激警报",
+      "action_taken": "在暗光下提升布朗噪音至约25分贝（10秒渐变），并间歇释放薰衣草香氛1秒/10秒以稳定情绪。",
+      "result_summary": "成功平复情绪，恢复正常睡眠状态",
+      "duration_sec": 46
+    },
+    "related_event_id": "69f1f7dddef6df703ecf90aa",
+    "sort_order": 1,
+    "create_time": "2026-04-29T20:21:49.785764Z",
+    "update_time": "2026-04-29T20:21:49.785793Z",
+    "duration_sec": 46,
+    "_id": "69f1f7dddef6df703ecf90b1",
+    "language": "zh"
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-05",
+    "event_timestamp": "02:52",
+    "event_type": "呼吸声",
+    "type": "normal",
+    "code": "breathing",
+    "detail": {
+      "trigger_cause": "检测到呼吸声",
+      "action_taken": "触发呼吸节律分析",
+      "result_summary": "判定为正常干扰现象",
+      "duration_sec": 82
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.790062Z",
+    "update_time": "2026-04-29T12:21:49.790062Z",
+    "duration_sec": 82
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-05",
+    "event_timestamp": "04:32",
+    "event_type": "睡眠姿势切换",
+    "type": "normal",
+    "code": "posture_switch",
+    "detail": {
+      "trigger_cause": "检测到睡眠姿势切换",
+      "action_taken": "触发体位变化分析",
+      "result_summary": "判定为正常体位调整",
+      "duration_sec": 58
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.790071Z",
+    "update_time": "2026-04-29T12:21:49.790071Z",
+    "duration_sec": 58
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-06",
+    "event_timestamp": "01:01",
+    "event_type": "呼吸声",
+    "type": "normal",
+    "code": "breathing",
+    "detail": {
+      "trigger_cause": "检测到呼吸声",
+      "action_taken": "触发呼吸节律分析",
+      "result_summary": "判定为正常干扰现象",
+      "duration_sec": 43
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.795880Z",
+    "update_time": "2026-04-29T12:21:49.795880Z",
+    "duration_sec": 43
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-06",
+    "event_timestamp": "03:35",
+    "event_type": "咳嗽",
+    "type": "normal",
+    "code": "cough",
+    "detail": {
+      "trigger_cause": "检测到用户咳嗽",
+      "action_taken": "触发呼吸干扰分析",
+      "result_summary": "判定为呼吸道轻微干扰",
+      "duration_sec": 74
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.795889Z",
+    "update_time": "2026-04-29T12:21:49.795889Z",
+    "duration_sec": 74
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-06",
+    "event_timestamp": "03:56",
+    "event_type": "人声/门铃声",
+    "type": "abnormal",
+    "code": "voice_doorbell",
+    "detail": {
+      "trigger_cause": "检测到人声/门铃声（突发性环境声），约78分贝（疑似突然咳嗽 / 大喊）",
+      "action_taken": "触发噪音监测分析",
+      "result_summary": "判定为突发性环境声干扰",
+      "duration_sec": 41
+    },
+    "related_event_id": "",
+    "sort_order": 3,
+    "create_time": "2026-04-29T20:21:49.792932Z",
+    "update_time": "2026-04-29T20:21:49.792933Z",
+    "duration_sec": 41,
+    "_id": "69f1f7dddef6df703ecf90b6",
+    "language": "zh"
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-06",
+    "event_timestamp": "03:58",
+    "event_type": "AI主动干预",
+    "type": "intervention",
+    "code": "voice_doorbell",
+    "detail": {
+      "trigger_cause": "系统检测到一次性环境噪音警报",
+      "action_taken": "调暗环境光，约在半秒内播放短时布朗噪音，峰值低于突发声10分贝且整体不超过35分贝，约30秒后渐弱关闭。",
+      "result_summary": "突发噪音已掩蔽，睡眠保持稳定",
+      "duration_sec": 27
+    },
+    "related_event_id": "69f1f7dddef6df703ecf90b6",
+    "sort_order": 4,
+    "create_time": "2026-04-29T20:21:49.793736Z",
+    "update_time": "2026-04-29T20:21:49.793737Z",
+    "duration_sec": 27,
+    "_id": "69f1f7dddef6df703ecf90ba",
+    "language": "zh"
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-07",
+    "event_timestamp": "04:14",
+    "event_type": "睡眠姿势切换",
+    "type": "normal",
+    "code": "posture_switch",
+    "detail": {
+      "trigger_cause": "检测到睡眠姿势切换",
+      "action_taken": "触发体位变化分析",
+      "result_summary": "判定为正常体位调整",
+      "duration_sec": 86
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.803826Z",
+    "update_time": "2026-04-29T12:21:49.803826Z",
+    "duration_sec": 86
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-07",
+    "event_timestamp": "05:20",
+    "event_type": "自然微动",
+    "type": "normal",
+    "code": "micro_movement",
+    "detail": {
+      "trigger_cause": "检测到自然微动",
+      "action_taken": "触发体动平稳性分析",
+      "result_summary": "判定为正常睡眠微动",
+      "duration_sec": 27
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.803816Z",
+    "update_time": "2026-04-29T12:21:49.803816Z",
+    "duration_sec": 27
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-08",
+    "event_timestamp": "00:07",
+    "event_type": "入睡困难",
+    "type": "abnormal",
+    "code": "sleeping",
+    "detail": {
+      "trigger_cause": "检测到入睡困难情况",
+      "action_taken": "触发睡眠初始化阶段评估",
+      "result_summary": "判定为入睡阶段异常",
+      "duration_sec": 37
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.816404Z",
+    "update_time": "2026-04-29T12:21:49.816404Z",
+    "duration_sec": 37
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-08",
+    "event_timestamp": "00:50",
+    "event_type": "呼吸声",
+    "type": "normal",
+    "code": "breathing",
+    "detail": {
+      "trigger_cause": "检测到呼吸声",
+      "action_taken": "触发呼吸节律分析",
+      "result_summary": "判定为正常干扰现象",
+      "duration_sec": 80
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.816434Z",
+    "update_time": "2026-04-29T12:21:49.816434Z",
+    "duration_sec": 80
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-09",
+    "event_timestamp": "01:52",
+    "event_type": "呼吸声",
+    "type": "normal",
+    "code": "breathing",
+    "detail": {
+      "trigger_cause": "检测到呼吸声",
+      "action_taken": "触发呼吸节律分析",
+      "result_summary": "判定为正常干扰现象",
+      "duration_sec": 72
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.828159Z",
+    "update_time": "2026-04-29T12:21:49.828159Z",
+    "duration_sec": 72
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-09",
+    "event_timestamp": "04:41",
+    "event_type": "咳嗽",
+    "type": "normal",
+    "code": "cough_clearing",
+    "detail": {
+      "trigger_cause": "检测到咳嗽",
+      "action_taken": "触发呼吸道状态分析",
+      "result_summary": "判定为生理干扰情况",
+      "duration_sec": 10
+    },
+    "related_event_id": "",
+    "sort_order": 9,
+    "create_time": "2026-04-29T20:21:49.824477Z",
+    "update_time": "2026-04-29T20:21:49.824479Z",
+    "duration_sec": 10,
+    "_id": "69f1f7dddef6df703ecf90d5",
+    "language": "zh"
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-10",
+    "event_timestamp": "01:26",
+    "event_type": "睡眠姿势切换",
+    "type": "normal",
+    "code": "posture_switch",
+    "detail": {
+      "trigger_cause": "检测到睡眠姿势切换",
+      "action_taken": "触发体位变化分析",
+      "result_summary": "判定为正常体位调整",
+      "duration_sec": 55
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.844673Z",
+    "update_time": "2026-04-29T12:21:49.844673Z",
+    "duration_sec": 55
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-10",
+    "event_timestamp": "01:28",
+    "event_type": "入睡困难",
+    "type": "abnormal",
+    "code": "sleeping",
+    "detail": {
+      "trigger_cause": "检测到入睡困难情况",
+      "action_taken": "触发睡眠初始化阶段评估",
+      "result_summary": "判定为入睡阶段异常",
+      "duration_sec": 69
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.844649Z",
+    "update_time": "2026-04-29T12:21:49.844649Z",
+    "duration_sec": 69
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-11",
+    "event_timestamp": "00:10",
+    "event_type": "入睡困难",
+    "type": "abnormal",
+    "code": "sleeping",
+    "detail": {
+      "trigger_cause": "检测到入睡困难情况",
+      "action_taken": "触发睡眠初始化阶段评估",
+      "result_summary": "判定为入睡阶段异常",
+      "duration_sec": 89
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.849359Z",
+    "update_time": "2026-04-29T12:21:49.849359Z",
+    "duration_sec": 89
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-11",
+    "event_timestamp": "04:53",
+    "event_type": "呼吸声",
+    "type": "normal",
+    "code": "breathing",
+    "detail": {
+      "trigger_cause": "检测到呼吸声",
+      "action_taken": "触发呼吸节律分析",
+      "result_summary": "判定为正常干扰现象",
+      "duration_sec": 88
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.849393Z",
+    "update_time": "2026-04-29T12:21:49.849393Z",
+    "duration_sec": 88
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-11",
+    "event_timestamp": "06:24",
+    "event_type": "梦话",
+    "type": "normal",
+    "code": "sleep_talking",
+    "detail": {
+      "trigger_cause": "检测到梦话现象",
+      "action_taken": "触发睡眠状态分析",
+      "result_summary": "判定为轻微干扰情况",
+      "duration_sec": 10
+    },
+    "related_event_id": "",
+    "sort_order": 4,
+    "create_time": "2026-04-29T20:21:49.846501Z",
+    "update_time": "2026-04-29T20:21:49.846503Z",
+    "duration_sec": 10,
+    "_id": "69f1f7dddef6df703ecf90e7",
+    "language": "zh"
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-12",
+    "event_timestamp": "01:18",
+    "event_type": "噩梦应激",
+    "type": "abnormal",
+    "code": "nightmare",
+    "detail": {
+      "trigger_cause": "检测到噩梦相关生理反应",
+      "action_taken": "触发情绪状态分析",
+      "result_summary": "判定为情绪干扰影响",
+      "duration_sec": 179
+    },
+    "related_event_id": "",
+    "sort_order": 2,
+    "create_time": "2026-04-29T20:21:49.850645Z",
+    "update_time": "2026-04-29T20:21:49.850646Z",
+    "duration_sec": 179,
+    "_id": "69f1f7dddef6df703ecf90eb",
+    "language": "zh"
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-12",
+    "event_timestamp": "01:20",
+    "event_type": "AI主动干预",
+    "type": "intervention",
+    "code": "nightmare",
+    "detail": {
+      "trigger_cause": "系统检测到噩梦应激警报",
+      "action_taken": "播放布朗噪音并调至约25分贝，10秒内淡入淡出，同时以1秒开、10秒停的节奏释放薰衣草香氛，光线维持暗淡。",
+      "result_summary": "成功平复情绪，恢复正常睡眠状态",
+      "duration_sec": 74
+    },
+    "related_event_id": "69f1f7dddef6df703ecf90eb",
+    "sort_order": 3,
+    "create_time": "2026-04-29T20:21:49.859108Z",
+    "update_time": "2026-04-29T20:21:49.859109Z",
+    "duration_sec": 74,
+    "_id": "69f1f7dddef6df703ecf90f5",
+    "language": "zh"
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-12",
+    "event_timestamp": "04:29",
+    "event_type": "自然微动",
+    "type": "normal",
+    "code": "micro_movement",
+    "detail": {
+      "trigger_cause": "检测到自然微动",
+      "action_taken": "触发体动平稳性分析",
+      "result_summary": "判定为正常睡眠微动",
+      "duration_sec": 23
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.862533Z",
+    "update_time": "2026-04-29T12:21:49.862533Z",
+    "duration_sec": 23
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-13",
+    "event_timestamp": "04:09",
+    "event_type": "单次体动",
+    "type": "normal",
+    "code": "single_movement",
+    "detail": {
+      "trigger_cause": "检测到单次体动",
+      "action_taken": "触发体动突发性分析",
+      "result_summary": "判定为单次体动事件",
+      "duration_sec": 48
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.890031Z",
+    "update_time": "2026-04-29T12:21:49.890031Z",
+    "duration_sec": 48
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-14",
+    "event_timestamp": "02:37",
+    "event_type": "肢体动作",
+    "type": "normal",
+    "code": "body_movement",
+    "detail": {
+      "trigger_cause": "检测到肢体动作",
+      "action_taken": "触发体动模式分析",
+      "result_summary": "判定为正常干扰现象",
+      "duration_sec": 53
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.895482Z",
+    "update_time": "2026-04-29T12:21:49.895482Z",
+    "duration_sec": 53
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-14",
+    "event_timestamp": "03:10",
+    "event_type": "睡眠姿势切换",
+    "type": "normal",
+    "code": "posture_switch",
+    "detail": {
+      "trigger_cause": "检测到睡眠姿势切换",
+      "action_taken": "触发体位变化分析",
+      "result_summary": "判定为正常体位调整",
+      "duration_sec": 24
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.895477Z",
+    "update_time": "2026-04-29T12:21:49.895477Z",
+    "duration_sec": 24
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-14",
+    "event_timestamp": "04:52",
+    "event_type": "单次体动",
+    "type": "normal",
+    "code": "single_movement",
+    "detail": {
+      "trigger_cause": "检测到单次体动",
+      "action_taken": "触发体动突发性分析",
+      "result_summary": "判定为单次体动事件",
+      "duration_sec": 54
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.895471Z",
+    "update_time": "2026-04-29T12:21:49.895471Z",
+    "duration_sec": 54
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-15",
+    "event_timestamp": "00:22",
+    "event_type": "入睡困难",
+    "type": "abnormal",
+    "code": "sleeping",
+    "detail": {
+      "trigger_cause": "检测到入睡困难情况",
+      "action_taken": "触发睡眠初始化阶段评估",
+      "result_summary": "判定为入睡阶段异常",
+      "duration_sec": 45
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.903310Z",
+    "update_time": "2026-04-29T12:21:49.903310Z",
+    "duration_sec": 45
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-15",
+    "event_timestamp": "03:25",
+    "event_type": "突发交通声",
+    "type": "abnormal",
+    "code": "sudden_traffic",
+    "detail": {
+      "trigger_cause": "检测到突发交通声（突发性环境声），约72分贝（疑似物品倾倒）",
+      "action_taken": "触发噪音监测分析",
+      "result_summary": "判定为突发性环境声干扰",
+      "duration_sec": 18
+    },
+    "related_event_id": "",
+    "sort_order": 1,
+    "create_time": "2026-04-29T20:21:49.900553Z",
+    "update_time": "2026-04-29T20:21:49.900555Z",
+    "duration_sec": 18,
+    "_id": "69f1f7dddef6df703ecf910a",
+    "language": "zh"
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-15",
+    "event_timestamp": "03:27",
+    "event_type": "AI主动干预",
+    "type": "intervention",
+    "code": "sudden_traffic",
+    "detail": {
+      "trigger_cause": "系统检测到一次性环境噪音警报",
+      "action_taken": "调暗环境光，约在半秒内播放短时布朗噪音，峰值低于突发声10分贝且整体不超过35分贝，约30秒后渐弱关闭。",
+      "result_summary": "突发噪音已掩蔽，睡眠保持稳定",
+      "duration_sec": 17
+    },
+    "related_event_id": "69f1f7dddef6df703ecf910a",
+    "sort_order": 2,
+    "create_time": "2026-04-29T20:21:49.900901Z",
+    "update_time": "2026-04-29T20:21:49.900902Z",
+    "duration_sec": 17,
+    "_id": "69f1f7dddef6df703ecf910e",
+    "language": "zh"
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-15",
+    "event_timestamp": "04:16",
+    "event_type": "睡眠姿势切换",
+    "type": "normal",
+    "code": "posture_switch",
+    "detail": {
+      "trigger_cause": "检测到睡眠姿势切换",
+      "action_taken": "触发体位变化分析",
+      "result_summary": "判定为正常体位调整",
+      "duration_sec": 80
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.903333Z",
+    "update_time": "2026-04-29T12:21:49.903333Z",
+    "duration_sec": 80
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-15",
+    "event_timestamp": "04:43",
+    "event_type": "打鼾",
+    "type": "normal",
+    "code": "snoring",
+    "detail": {
+      "trigger_cause": "检测到用户打鼾",
+      "action_taken": "触发身体指标分析",
+      "result_summary": "判定为中度打鼾（40dB）",
+      "duration_sec": 351,
+      "snoring_value_db": 40,
+      "snoring_level": "中度"
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.903339Z",
+    "update_time": "2026-04-29T12:21:49.903339Z",
+    "duration_sec": 351
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-16",
+    "event_timestamp": "03:23",
+    "event_type": "睡眠姿势切换",
+    "type": "normal",
+    "code": "posture_switch",
+    "detail": {
+      "trigger_cause": "检测到睡眠姿势切换",
+      "action_taken": "触发体位变化分析",
+      "result_summary": "判定为正常体位调整",
+      "duration_sec": 81
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.921750Z",
+    "update_time": "2026-04-29T12:21:49.921750Z",
+    "duration_sec": 81
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-16",
+    "event_timestamp": "03:30",
+    "event_type": "自然微动",
+    "type": "normal",
+    "code": "micro_movement",
+    "detail": {
+      "trigger_cause": "检测到自然微动",
+      "action_taken": "触发体动平稳性分析",
+      "result_summary": "判定为正常睡眠微动",
+      "duration_sec": 43
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.921745Z",
+    "update_time": "2026-04-29T12:21:49.921745Z",
+    "duration_sec": 43
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-17",
+    "event_timestamp": "00:10",
+    "event_type": "入睡困难",
+    "type": "abnormal",
+    "code": "sleeping",
+    "detail": {
+      "trigger_cause": "检测到入睡困难情况",
+      "action_taken": "触发睡眠初始化阶段评估",
+      "result_summary": "判定为入睡阶段异常",
+      "duration_sec": 45
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.928020Z",
+    "update_time": "2026-04-29T12:21:49.928020Z",
+    "duration_sec": 45
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-17",
+    "event_timestamp": "04:59",
+    "event_type": "自然持续声",
+    "type": "abnormal",
+    "code": "nature_continuous",
+    "detail": {
+      "trigger_cause": "检测到自然持续声（持续性环境声），约76分贝（疑似打牌）",
+      "action_taken": "触发噪音监测分析",
+      "result_summary": "判定为持续性环境声干扰",
+      "duration_sec": 63
+    },
+    "related_event_id": "",
+    "sort_order": 4,
+    "create_time": "2026-04-29T20:21:49.924967Z",
+    "update_time": "2026-04-29T20:21:49.924969Z",
+    "duration_sec": 63,
+    "_id": "69f1f7dddef6df703ecf9121",
+    "language": "zh"
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-17",
+    "event_timestamp": "05:01",
+    "event_type": "AI主动干预",
+    "type": "intervention",
+    "code": "nature_continuous",
+    "detail": {
+      "trigger_cause": "系统检测到持续性环境噪音警报",
+      "action_taken": "调暗环境光，约在半秒内开始播放布朗噪音掩蔽环境声，音量不高于环境音低5分贝，并关闭香氛释放。",
+      "result_summary": "噪音干扰已缓解，睡眠保持稳定",
+      "duration_sec": 63
+    },
+    "related_event_id": "69f1f7dddef6df703ecf9121",
+    "sort_order": 5,
+    "create_time": "2026-04-29T20:21:49.926105Z",
+    "update_time": "2026-04-29T20:21:49.926106Z",
+    "duration_sec": 63,
+    "_id": "69f1f7dddef6df703ecf9124",
+    "language": "zh"
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-18",
+    "event_timestamp": "02:46",
+    "event_type": "噩梦应激",
+    "type": "abnormal",
+    "code": "nightmare",
+    "detail": {
+      "trigger_cause": "检测到噩梦相关生理反应",
+      "action_taken": "触发情绪状态分析",
+      "result_summary": "判定为情绪干扰影响",
+      "duration_sec": 123
+    },
+    "related_event_id": "",
+    "sort_order": 2,
+    "create_time": "2026-04-29T20:21:49.929493Z",
+    "update_time": "2026-04-29T20:21:49.929494Z",
+    "duration_sec": 123,
+    "_id": "69f1f7dddef6df703ecf9128",
+    "language": "zh"
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-18",
+    "event_timestamp": "02:48",
+    "event_type": "AI主动干预",
+    "type": "intervention",
+    "code": "nightmare",
+    "detail": {
+      "trigger_cause": "系统检测到噩梦应激警报",
+      "action_taken": "在暗光下提升布朗噪音至约25分贝（10秒渐变），并间歇释放薰衣草香氛1秒/10秒以稳定情绪。",
+      "result_summary": "成功平复情绪，恢复正常睡眠状态",
+      "duration_sec": 55
+    },
+    "related_event_id": "69f1f7dddef6df703ecf9128",
+    "sort_order": 3,
+    "create_time": "2026-04-29T20:21:49.937711Z",
+    "update_time": "2026-04-29T20:21:49.937712Z",
+    "duration_sec": 55,
+    "_id": "69f1f7dddef6df703ecf912f",
+    "language": "zh"
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-18",
+    "event_timestamp": "03:17",
+    "event_type": "自然微动",
+    "type": "normal",
+    "code": "natural_movement",
+    "detail": {
+      "trigger_cause": "检测到自然微动",
+      "action_taken": "触发睡眠状态分析",
+      "result_summary": "判定为无干扰情况",
+      "duration_sec": 19
+    },
+    "related_event_id": "",
+    "sort_order": 5,
+    "create_time": "2026-04-29T20:21:49.937522Z",
+    "update_time": "2026-04-29T20:21:49.937523Z",
+    "duration_sec": 19,
+    "_id": "69f1f7dddef6df703ecf912a",
+    "language": "zh"
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-18",
+    "event_timestamp": "05:33",
+    "event_type": "睡眠姿势切换",
+    "type": "normal",
+    "code": "posture_switch",
+    "detail": {
+      "trigger_cause": "检测到睡眠姿势切换",
+      "action_taken": "触发姿势变化分析",
+      "result_summary": "判定为姿势干扰影响",
+      "duration_sec": 14
+    },
+    "related_event_id": "",
+    "sort_order": 7,
+    "create_time": "2026-04-29T20:21:49.937291Z",
+    "update_time": "2026-04-29T20:21:49.937292Z",
+    "duration_sec": 14,
+    "_id": "69f1f7dddef6df703ecf912c",
+    "language": "zh"
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-18",
+    "event_timestamp": "07:01",
+    "event_type": "突发交通声",
+    "type": "abnormal",
+    "code": "sudden_traffic",
+    "detail": {
+      "trigger_cause": "检测到突发交通声（突发性环境声），约85分贝（疑似汽车鸣笛）",
+      "action_taken": "触发噪音监测分析",
+      "result_summary": "判定为突发性环境声干扰",
+      "duration_sec": 19
+    },
+    "related_event_id": "",
+    "sort_order": 10,
+    "create_time": "2026-04-29T20:21:49.935990Z",
+    "update_time": "2026-04-29T20:21:49.935991Z",
+    "duration_sec": 19,
+    "_id": "69f1f7dddef6df703ecf912e",
+    "language": "zh"
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-18",
+    "event_timestamp": "07:03",
+    "event_type": "AI主动干预",
+    "type": "intervention",
+    "code": "sudden_traffic",
+    "detail": {
+      "trigger_cause": "系统检测到一次性环境噪音警报",
+      "action_taken": "开启布朗噪音短时掩蔽突发声响，电平不超过35分贝、峰值克制在突发声下10分贝，数十秒后缓缓淡出。",
+      "result_summary": "突发噪音已掩蔽，睡眠保持稳定",
+      "duration_sec": 10
+    },
+    "related_event_id": "69f1f7dddef6df703ecf912e",
+    "sort_order": 11,
+    "create_time": "2026-04-29T20:21:49.937742Z",
+    "update_time": "2026-04-29T20:21:49.937743Z",
+    "duration_sec": 10,
+    "_id": "69f1f7dddef6df703ecf9131",
+    "language": "zh"
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-19",
+    "event_timestamp": "02:24",
+    "event_type": "入睡困难",
+    "type": "abnormal",
+    "code": "sleeping",
+    "detail": {
+      "trigger_cause": "检测到入睡困难情况",
+      "action_taken": "触发睡眠初始化阶段评估",
+      "result_summary": "判定为入睡阶段异常",
+      "duration_sec": 58
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.958014Z",
+    "update_time": "2026-04-29T12:21:49.958014Z",
+    "duration_sec": 58
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-19",
+    "event_timestamp": "03:41",
+    "event_type": "呼吸声",
+    "type": "normal",
+    "code": "breathing",
+    "detail": {
+      "trigger_cause": "检测到呼吸声",
+      "action_taken": "触发呼吸节律分析",
+      "result_summary": "判定为正常干扰现象",
+      "duration_sec": 25
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.958036Z",
+    "update_time": "2026-04-29T12:21:49.958036Z",
+    "duration_sec": 25
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-19",
+    "event_timestamp": "05:05",
+    "event_type": "睡眠姿势切换",
+    "type": "normal",
+    "code": "posture_switch",
+    "detail": {
+      "trigger_cause": "检测到睡眠姿势切换",
+      "action_taken": "触发体位变化分析",
+      "result_summary": "判定为正常体位调整",
+      "duration_sec": 80
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.958041Z",
+    "update_time": "2026-04-29T12:21:49.958041Z",
+    "duration_sec": 80
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-20",
+    "event_timestamp": "01:04",
+    "event_type": "睡眠姿势切换",
+    "type": "normal",
+    "code": "posture_switch",
+    "detail": {
+      "trigger_cause": "检测到睡眠姿势切换",
+      "action_taken": "触发体位变化分析",
+      "result_summary": "判定为正常体位调整",
+      "duration_sec": 66
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.971045Z",
+    "update_time": "2026-04-29T12:21:49.971045Z",
+    "duration_sec": 66
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-20",
+    "event_timestamp": "01:10",
+    "event_type": "呼吸声",
+    "type": "normal",
+    "code": "breathing",
+    "detail": {
+      "trigger_cause": "检测到呼吸声",
+      "action_taken": "触发呼吸节律分析",
+      "result_summary": "判定为正常干扰现象",
+      "duration_sec": 40
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.971038Z",
+    "update_time": "2026-04-29T12:21:49.971038Z",
+    "duration_sec": 40
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-21",
+    "event_timestamp": "01:36",
+    "event_type": "家电持续声",
+    "type": "abnormal",
+    "code": "appliance_continuous",
+    "detail": {
+      "trigger_cause": "检测到家电持续声（持续性环境声），约77分贝（疑似小区施工）",
+      "action_taken": "触发噪音监测分析",
+      "result_summary": "判定为持续性环境声干扰",
+      "duration_sec": 97
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T20:21:49.980803Z",
+    "update_time": "2026-04-29T20:21:49.980804Z",
+    "duration_sec": 97,
+    "_id": "69f1f7dddef6df703ecf9148",
+    "language": "zh"
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-21",
+    "event_timestamp": "01:38",
+    "event_type": "AI主动干预",
+    "type": "intervention",
+    "code": "appliance_continuous",
+    "detail": {
+      "trigger_cause": "系统检测到持续性环境噪音警报",
+      "action_taken": "调暗环境光，约在半秒内开始播放布朗噪音掩蔽环境声，音量不高于环境音低5分贝，并关闭香氛释放。",
+      "result_summary": "噪音干扰已缓解，睡眠保持稳定",
+      "duration_sec": 103
+    },
+    "related_event_id": "69f1f7dddef6df703ecf9148",
+    "sort_order": 1,
+    "create_time": "2026-04-29T20:21:49.980987Z",
+    "update_time": "2026-04-29T20:21:49.980988Z",
+    "duration_sec": 103,
+    "_id": "69f1f7dddef6df703ecf9151",
+    "language": "zh"
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-21",
+    "event_timestamp": "03:01",
+    "event_type": "咳嗽",
+    "type": "normal",
+    "code": "cough",
+    "detail": {
+      "trigger_cause": "检测到用户咳嗽",
+      "action_taken": "触发呼吸干扰分析",
+      "result_summary": "判定为呼吸道轻微干扰",
+      "duration_sec": 43
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.984157Z",
+    "update_time": "2026-04-29T12:21:49.984157Z",
+    "duration_sec": 43
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-21",
+    "event_timestamp": "04:35",
+    "event_type": "梦话",
+    "type": "normal",
+    "code": "sleep_talking",
+    "detail": {
+      "trigger_cause": "检测到用户梦话",
+      "action_taken": "触发语音特征分析",
+      "result_summary": "判定为睡眠语音现象",
+      "duration_sec": 33
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:49.984163Z",
+    "update_time": "2026-04-29T12:21:49.984163Z",
+    "duration_sec": 33
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-22",
+    "event_timestamp": "02:44",
+    "event_type": "肢体动作",
+    "type": "normal",
+    "code": "body_movement",
+    "detail": {
+      "trigger_cause": "检测到肢体动作",
+      "action_taken": "触发体动模式分析",
+      "result_summary": "判定为正常干扰现象",
+      "duration_sec": 85
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:50.002702Z",
+    "update_time": "2026-04-29T12:21:50.002702Z",
+    "duration_sec": 85
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-22",
+    "event_timestamp": "03:29",
+    "event_type": "噩梦应激",
+    "type": "abnormal",
+    "code": "nightmare",
+    "detail": {
+      "trigger_cause": "检测到噩梦相关生理反应",
+      "action_taken": "触发情绪状态分析",
+      "result_summary": "判定为情绪干扰影响",
+      "duration_sec": 148
+    },
+    "related_event_id": "",
+    "sort_order": 9,
+    "create_time": "2026-04-29T20:21:49.985679Z",
+    "update_time": "2026-04-29T20:21:49.985681Z",
+    "duration_sec": 148,
+    "_id": "69f1f7dddef6df703ecf915b",
+    "language": "zh"
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-22",
+    "event_timestamp": "03:31",
+    "event_type": "AI主动干预",
+    "type": "intervention",
+    "code": "nightmare",
+    "detail": {
+      "trigger_cause": "系统检测到噩梦应激警报",
+      "action_taken": "播放布朗噪音并调至约25分贝，10秒内淡入淡出，同时以1秒开、10秒停的节奏释放薰衣草香氛，光线维持暗淡。",
+      "result_summary": "成功平复情绪，恢复正常睡眠状态",
+      "duration_sec": 77
+    },
+    "related_event_id": "69f1f7dddef6df703ecf915b",
+    "sort_order": 10,
+    "create_time": "2026-04-29T20:21:49.998014Z",
+    "update_time": "2026-04-29T20:21:49.998015Z",
+    "duration_sec": 77,
+    "_id": "69f1f7dddef6df703ecf9163",
+    "language": "zh"
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-22",
+    "event_timestamp": "04:02",
+    "event_type": "咳嗽",
+    "type": "normal",
+    "code": "cough",
+    "detail": {
+      "trigger_cause": "检测到用户咳嗽",
+      "action_taken": "触发呼吸干扰分析",
+      "result_summary": "判定为呼吸道轻微干扰",
+      "duration_sec": 31
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:50.002694Z",
+    "update_time": "2026-04-29T12:21:50.002694Z",
+    "duration_sec": 31
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-23",
+    "event_timestamp": "04:55",
+    "event_type": "梦话",
+    "type": "normal",
+    "code": "sleep_talking",
+    "detail": {
+      "trigger_cause": "检测到用户梦话",
+      "action_taken": "触发语音特征分析",
+      "result_summary": "判定为睡眠语音现象",
+      "duration_sec": 65
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:50.008547Z",
+    "update_time": "2026-04-29T12:21:50.008547Z",
+    "duration_sec": 65
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-23",
+    "event_timestamp": "05:26",
+    "event_type": "呼吸声",
+    "type": "normal",
+    "code": "breathing",
+    "detail": {
+      "trigger_cause": "检测到呼吸声",
+      "action_taken": "触发呼吸节律分析",
+      "result_summary": "判定为正常干扰现象",
+      "duration_sec": 80
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:50.008541Z",
+    "update_time": "2026-04-29T12:21:50.008541Z",
+    "duration_sec": 80
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-24",
+    "event_timestamp": "00:21",
+    "event_type": "入睡困难",
+    "type": "abnormal",
+    "code": "sleeping",
+    "detail": {
+      "trigger_cause": "检测到入睡困难情况",
+      "action_taken": "触发睡眠初始化阶段评估",
+      "result_summary": "判定为入睡阶段异常",
+      "duration_sec": 42
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:50.014254Z",
+    "update_time": "2026-04-29T12:21:50.014254Z",
+    "duration_sec": 42
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-24",
+    "event_timestamp": "01:30",
+    "event_type": "自然微动",
+    "type": "normal",
+    "code": "micro_movement",
+    "detail": {
+      "trigger_cause": "检测到自然微动",
+      "action_taken": "触发体动平稳性分析",
+      "result_summary": "判定为正常睡眠微动",
+      "duration_sec": 45
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:50.014273Z",
+    "update_time": "2026-04-29T12:21:50.014273Z",
+    "duration_sec": 45
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-24",
+    "event_timestamp": "04:00",
+    "event_type": "睡眠姿势切换",
+    "type": "normal",
+    "code": "posture_switch",
+    "detail": {
+      "trigger_cause": "检测到睡眠姿势切换",
+      "action_taken": "触发体位变化分析",
+      "result_summary": "判定为正常体位调整",
+      "duration_sec": 48
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:50.014278Z",
+    "update_time": "2026-04-29T12:21:50.014278Z",
+    "duration_sec": 48
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-25",
+    "event_timestamp": "02:29",
+    "event_type": "自然持续声",
+    "type": "abnormal",
+    "code": "nature_continuous",
+    "detail": {
+      "trigger_cause": "检测到自然持续声（持续性环境声），约75分贝（疑似邻居持续说话）",
+      "action_taken": "触发噪音监测分析",
+      "result_summary": "判定为持续性环境声干扰",
+      "duration_sec": 163
+    },
+    "related_event_id": "",
+    "sort_order": 2,
+    "create_time": "2026-04-29T20:21:50.028248Z",
+    "update_time": "2026-04-29T20:21:50.028249Z",
+    "duration_sec": 163,
+    "_id": "69f1f7dedef6df703ecf916e",
+    "language": "zh"
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-25",
+    "event_timestamp": "02:31",
+    "event_type": "AI主动干预",
+    "type": "intervention",
+    "code": "nature_continuous",
+    "detail": {
+      "trigger_cause": "系统检测到持续性环境噪音警报",
+      "action_taken": "调暗环境光，约在半秒内开始播放布朗噪音掩蔽环境声，音量不高于环境音低5分贝，并关闭香氛释放。",
+      "result_summary": "噪音干扰已缓解，睡眠保持稳定",
+      "duration_sec": 68
+    },
+    "related_event_id": "69f1f7dedef6df703ecf916e",
+    "sort_order": 3,
+    "create_time": "2026-04-29T20:21:50.029112Z",
+    "update_time": "2026-04-29T20:21:50.029113Z",
+    "duration_sec": 68,
+    "_id": "69f1f7dedef6df703ecf9177",
+    "language": "zh"
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-25",
+    "event_timestamp": "02:49",
+    "event_type": "打鼾",
+    "type": "normal",
+    "code": "snoring",
+    "detail": {
+      "trigger_cause": "检测到用户打鼾",
+      "action_taken": "触发身体指标分析",
+      "result_summary": "判定为中度打鼾（40dB）",
+      "duration_sec": 300,
+      "snoring_value_db": 40,
+      "snoring_level": "中度"
+    },
+    "related_event_id": "",
+    "sort_order": 4,
+    "create_time": "2026-04-29T20:21:50.017307Z",
+    "update_time": "2026-04-29T20:21:50.017308Z",
+    "duration_sec": 300,
+    "_id": "69f1f7dedef6df703ecf916f",
+    "language": "zh"
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-25",
+    "event_timestamp": "04:22",
+    "event_type": "物品突发声",
+    "type": "abnormal",
+    "code": "object_sudden",
+    "detail": {
+      "trigger_cause": "检测到物品突发声（突发性环境声），约88分贝（疑似楼上掉东西）",
+      "action_taken": "触发噪音监测分析",
+      "result_summary": "判定为突发性环境声干扰",
+      "duration_sec": 32
+    },
+    "related_event_id": "",
+    "sort_order": 5,
+    "create_time": "2026-04-29T20:21:50.028706Z",
+    "update_time": "2026-04-29T20:21:50.028708Z",
+    "duration_sec": 32,
+    "_id": "69f1f7dedef6df703ecf9170",
+    "language": "zh"
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-25",
+    "event_timestamp": "04:24",
+    "event_type": "AI主动干预",
+    "type": "intervention",
+    "code": "object_sudden",
+    "detail": {
+      "trigger_cause": "系统检测到一次性环境噪音警报",
+      "action_taken": "开启布朗噪音短时掩蔽突发声响，电平不超过35分贝、峰值克制在突发声下10分贝，数十秒后缓缓淡出。",
+      "result_summary": "突发噪音已掩蔽，睡眠保持稳定",
+      "duration_sec": 31
+    },
+    "related_event_id": "69f1f7dedef6df703ecf9170",
+    "sort_order": 6,
+    "create_time": "2026-04-29T20:21:50.029131Z",
+    "update_time": "2026-04-29T20:21:50.029132Z",
+    "duration_sec": 31,
+    "_id": "69f1f7dedef6df703ecf9178",
+    "language": "zh"
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-25",
+    "event_timestamp": "06:11",
+    "event_type": "呼吸声",
+    "type": "normal",
+    "code": "breathing",
+    "detail": {
+      "trigger_cause": "检测到呼吸声",
+      "action_taken": "触发呼吸节律分析",
+      "result_summary": "判定为正常干扰现象",
+      "duration_sec": 33
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:50.033157Z",
+    "update_time": "2026-04-29T12:21:50.033157Z",
+    "duration_sec": 33
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-26",
+    "event_timestamp": "01:48",
+    "event_type": "呼吸声",
+    "type": "normal",
+    "code": "breathing",
+    "detail": {
+      "trigger_cause": "检测到呼吸声",
+      "action_taken": "触发呼吸节律分析",
+      "result_summary": "判定为正常干扰现象",
+      "duration_sec": 29
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:50.051787Z",
+    "update_time": "2026-04-29T12:21:50.051787Z",
+    "duration_sec": 29
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-26",
+    "event_timestamp": "04:26",
+    "event_type": "自然微动",
+    "type": "normal",
+    "code": "micro_movement",
+    "detail": {
+      "trigger_cause": "检测到自然微动",
+      "action_taken": "触发体动平稳性分析",
+      "result_summary": "判定为正常睡眠微动",
+      "duration_sec": 88
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:50.051796Z",
+    "update_time": "2026-04-29T12:21:50.051796Z",
+    "duration_sec": 88
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-27",
+    "event_timestamp": "00:52",
+    "event_type": "入睡困难",
+    "type": "abnormal",
+    "code": "sleeping",
+    "detail": {
+      "trigger_cause": "检测到入睡困难情况",
+      "action_taken": "触发睡眠初始化阶段评估",
+      "result_summary": "判定为入睡阶段异常",
+      "duration_sec": 77
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:50.057733Z",
+    "update_time": "2026-04-29T12:21:50.057733Z",
+    "duration_sec": 77
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-27",
+    "event_timestamp": "01:44",
+    "event_type": "异常体动",
+    "type": "abnormal",
+    "code": "movement",
+    "detail": {
+      "trigger_cause": "检测到异常体动模式",
+      "action_taken": "触发体动模式分析",
+      "result_summary": "判定为体动干扰问题",
+      "duration_sec": 84
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T20:21:50.055312Z",
+    "update_time": "2026-04-29T20:21:50.055314Z",
+    "duration_sec": 84,
+    "_id": "69f1f7dedef6df703ecf9188",
+    "language": "zh"
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-27",
+    "event_timestamp": "01:46",
+    "event_type": "AI主动干预",
+    "type": "intervention",
+    "code": "movement",
+    "detail": {
+      "trigger_cause": "系统检测到异常体动警报",
+      "action_taken": "关闭主照明，在约3秒内淡入播放22至25分贝布朗噪音并保持稳定，同时关闭香氛释放。",
+      "result_summary": "成功减少体动，提升睡眠质量",
+      "duration_sec": 47
+    },
+    "related_event_id": "69f1f7dedef6df703ecf9188",
+    "sort_order": 1,
+    "create_time": "2026-04-29T20:21:50.055604Z",
+    "update_time": "2026-04-29T20:21:50.055606Z",
+    "duration_sec": 47,
+    "_id": "69f1f7dedef6df703ecf918c",
+    "language": "zh"
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-27",
+    "event_timestamp": "02:51",
+    "event_type": "单次体动",
+    "type": "normal",
+    "code": "single_movement",
+    "detail": {
+      "trigger_cause": "检测到单次体动",
+      "action_taken": "触发体动突发性分析",
+      "result_summary": "判定为单次体动事件",
+      "duration_sec": 49
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:50.057754Z",
+    "update_time": "2026-04-29T12:21:50.057754Z",
+    "duration_sec": 49
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-28",
+    "event_timestamp": "02:49",
+    "event_type": "肢体动作",
+    "type": "normal",
+    "code": "body_movement",
+    "detail": {
+      "trigger_cause": "检测到肢体动作",
+      "action_taken": "触发体动模式分析",
+      "result_summary": "判定为正常干扰现象",
+      "duration_sec": 87
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:50.074285Z",
+    "update_time": "2026-04-29T12:21:50.074285Z",
+    "duration_sec": 87
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-29",
+    "event_timestamp": "00:34",
+    "event_type": "入睡困难",
+    "type": "abnormal",
+    "code": "sleeping",
+    "detail": {
+      "trigger_cause": "检测到入睡困难情况",
+      "action_taken": "触发睡眠初始化阶段评估",
+      "result_summary": "判定为入睡阶段异常",
+      "duration_sec": 48
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:50.081332Z",
+    "update_time": "2026-04-29T12:21:50.081332Z",
+    "duration_sec": 48
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-29",
+    "event_timestamp": "04:02",
+    "event_type": "呼吸声",
+    "type": "normal",
+    "code": "breathing",
+    "detail": {
+      "trigger_cause": "检测到呼吸声",
+      "action_taken": "触发呼吸节律分析",
+      "result_summary": "判定为正常干扰现象",
+      "duration_sec": 60
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:50.081354Z",
+    "update_time": "2026-04-29T12:21:50.081354Z",
+    "duration_sec": 60
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-29",
+    "event_timestamp": "04:23",
+    "event_type": "吞咽",
+    "type": "normal",
+    "code": "swallowing",
+    "detail": {
+      "trigger_cause": "检测到吞咽动作",
+      "action_taken": "触发生理微动作分析",
+      "result_summary": "判定为正常生理现象",
+      "duration_sec": 46
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:50.081359Z",
+    "update_time": "2026-04-29T12:21:50.081359Z",
+    "duration_sec": 46
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-29",
+    "event_timestamp": "05:40",
+    "event_type": "打鼾",
+    "type": "normal",
+    "code": "snoring",
+    "detail": {
+      "trigger_cause": "检测到用户打鼾",
+      "action_taken": "触发身体指标分析",
+      "result_summary": "判定为中度打鼾（50dB）",
+      "duration_sec": 782,
+      "snoring_value_db": 50,
+      "snoring_level": "中度"
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:50.081364Z",
+    "update_time": "2026-04-29T12:21:50.081364Z",
+    "duration_sec": 782
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-29",
+    "event_timestamp": "06:18",
+    "event_type": "自然持续声",
+    "type": "abnormal",
+    "code": "nature_continuous",
+    "detail": {
+      "trigger_cause": "检测到自然持续声（持续性环境声），约61分贝（疑似风扇持续嗡嗡声）",
+      "action_taken": "触发噪音监测分析",
+      "result_summary": "判定为持续性环境声干扰",
+      "duration_sec": 94
+    },
+    "related_event_id": "",
+    "sort_order": 3,
+    "create_time": "2026-04-29T20:21:50.078358Z",
+    "update_time": "2026-04-29T20:21:50.078359Z",
+    "duration_sec": 94,
+    "_id": "69f1f7dedef6df703ecf919c",
+    "language": "zh"
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-29",
+    "event_timestamp": "06:20",
+    "event_type": "AI主动干预",
+    "type": "intervention",
+    "code": "nature_continuous",
+    "detail": {
+      "trigger_cause": "系统检测到持续性环境噪音警报",
+      "action_taken": "转入暗环境，播放布朗噪音稳态跟随环境，峰值不超过环境低5分贝，香氛维持关闭。",
+      "result_summary": "噪音干扰已缓解，睡眠保持稳定",
+      "duration_sec": 70
+    },
+    "related_event_id": "69f1f7dedef6df703ecf919c",
+    "sort_order": 4,
+    "create_time": "2026-04-29T20:21:50.079408Z",
+    "update_time": "2026-04-29T20:21:50.079409Z",
+    "duration_sec": 70,
+    "_id": "69f1f7dedef6df703ecf919f",
+    "language": "zh"
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-30",
+    "event_timestamp": "02:15",
+    "event_type": "入睡困难",
+    "type": "abnormal",
+    "code": "sleeping",
+    "detail": {
+      "trigger_cause": "检测到入睡困难情况",
+      "action_taken": "触发睡眠初始化阶段评估",
+      "result_summary": "判定为入睡阶段异常",
+      "duration_sec": 34
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:50.097219Z",
+    "update_time": "2026-04-29T12:21:50.097219Z",
+    "duration_sec": 34
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-30",
+    "event_timestamp": "02:21",
+    "event_type": "吞咽",
+    "type": "normal",
+    "code": "swallowing",
+    "detail": {
+      "trigger_cause": "检测到吞咽动作",
+      "action_taken": "触发生理微动作分析",
+      "result_summary": "判定为正常生理现象",
+      "duration_sec": 82
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:50.097254Z",
+    "update_time": "2026-04-29T12:21:50.097254Z",
+    "duration_sec": 82
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-30",
+    "event_timestamp": "03:51",
+    "event_type": "自然微动",
+    "type": "normal",
+    "code": "micro_movement",
+    "detail": {
+      "trigger_cause": "检测到自然微动",
+      "action_taken": "触发体动平稳性分析",
+      "result_summary": "判定为正常睡眠微动",
+      "duration_sec": 77
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:50.097250Z",
+    "update_time": "2026-04-29T12:21:50.097250Z",
+    "duration_sec": 77
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-30",
+    "event_timestamp": "04:43",
+    "event_type": "单次体动",
+    "type": "normal",
+    "code": "single_movement",
+    "detail": {
+      "trigger_cause": "检测到单次体动",
+      "action_taken": "触发体动突发性分析",
+      "result_summary": "判定为单次体动事件",
+      "duration_sec": 79
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:50.097244Z",
+    "update_time": "2026-04-29T12:21:50.097244Z",
+    "duration_sec": 79
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-31",
+    "event_timestamp": "03:29",
+    "event_type": "单次体动",
+    "type": "normal",
+    "code": "single_movement",
+    "detail": {
+      "trigger_cause": "检测到单次体动",
+      "action_taken": "触发体动突发性分析",
+      "result_summary": "判定为单次体动事件",
+      "duration_sec": 67
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:50.103713Z",
+    "update_time": "2026-04-29T12:21:50.103713Z",
+    "duration_sec": 67
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-31",
+    "event_timestamp": "04:54",
+    "event_type": "邻里持续声",
+    "type": "abnormal",
+    "code": "neighbor_continuous",
+    "detail": {
+      "trigger_cause": "检测到邻里持续声（持续性环境声），约72分贝（疑似走动）",
+      "action_taken": "触发噪音监测分析",
+      "result_summary": "判定为持续性环境声干扰",
+      "duration_sec": 145
+    },
+    "related_event_id": "",
+    "sort_order": 2,
+    "create_time": "2026-04-29T20:21:50.101299Z",
+    "update_time": "2026-04-29T20:21:50.101300Z",
+    "duration_sec": 145,
+    "_id": "69f1f7dedef6df703ecf91ad",
+    "language": "zh"
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-31",
+    "event_timestamp": "04:56",
+    "event_type": "AI主动干预",
+    "type": "intervention",
+    "code": "neighbor_continuous",
+    "detail": {
+      "trigger_cause": "系统检测到持续性环境噪音警报",
+      "action_taken": "调暗环境光，约在半秒内开始播放布朗噪音掩蔽环境声，音量不高于环境音低5分贝，并关闭香氛释放。",
+      "result_summary": "噪音干扰已缓解，睡眠保持稳定",
+      "duration_sec": 87
+    },
+    "related_event_id": "69f1f7dedef6df703ecf91ad",
+    "sort_order": 3,
+    "create_time": "2026-04-29T20:21:50.101458Z",
+    "update_time": "2026-04-29T20:21:50.101459Z",
+    "duration_sec": 87,
+    "_id": "69f1f7dedef6df703ecf91b1",
+    "language": "zh"
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-03-31",
+    "event_timestamp": "05:01",
+    "event_type": "梦话",
+    "type": "normal",
+    "code": "sleep_talking",
+    "detail": {
+      "trigger_cause": "检测到用户梦话",
+      "action_taken": "触发语音特征分析",
+      "result_summary": "判定为睡眠语音现象",
+      "duration_sec": 51
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:50.103719Z",
+    "update_time": "2026-04-29T12:21:50.103719Z",
+    "duration_sec": 51
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-04-01",
+    "event_timestamp": "01:53",
+    "event_type": "打鼾",
+    "type": "normal",
+    "code": "snoring",
+    "detail": {
+      "trigger_cause": "检测到用户打鼾",
+      "action_taken": "触发身体指标分析",
+      "result_summary": "判定为中度打鼾（40dB）",
+      "duration_sec": 300,
+      "snoring_value_db": 40,
+      "snoring_level": "中度"
+    },
+    "related_event_id": "",
+    "sort_order": 1,
+    "create_time": "2026-04-29T20:21:50.107635Z",
+    "update_time": "2026-04-29T20:21:50.107636Z",
+    "duration_sec": 300,
+    "_id": "69f1f7dedef6df703ecf91b5",
+    "language": "zh"
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-04-01",
+    "event_timestamp": "02:51",
+    "event_type": "梦话",
+    "type": "normal",
+    "code": "sleep_talking",
+    "detail": {
+      "trigger_cause": "检测到梦话现象",
+      "action_taken": "触发睡眠状态分析",
+      "result_summary": "判定为轻微干扰情况",
+      "duration_sec": 10
+    },
+    "related_event_id": "",
+    "sort_order": 4,
+    "create_time": "2026-04-29T20:21:50.108851Z",
+    "update_time": "2026-04-29T20:21:50.108852Z",
+    "duration_sec": 10,
+    "_id": "69f1f7dedef6df703ecf91b7",
+    "language": "zh"
+  },
+  {
+    "uid": "69aea6eeaf5e6cbf08027969",
+    "record_date": "2026-04-01",
+    "event_timestamp": "03:06",
+    "event_type": "吞咽",
+    "type": "normal",
+    "code": "swallowing",
+    "detail": {
+      "trigger_cause": "检测到吞咽动作",
+      "action_taken": "触发生理微动作分析",
+      "result_summary": "判定为正常生理现象",
+      "duration_sec": 34
+    },
+    "related_event_id": "",
+    "sort_order": 0,
+    "create_time": "2026-04-29T12:21:50.112723Z",
+    "update_time": "2026-04-29T12:21:50.112723Z",
+    "duration_sec": 34
+  }
+]

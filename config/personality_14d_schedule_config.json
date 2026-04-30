@@ -1,0 +1,3730 @@
+{
+  "version": "1.1.1",
+  "generated_at": "2026-04-22T10:30:08Z",
+  "source": "output/personality_sleep_portraits.json",
+  "rules": {
+    "days": 14,
+    "events_per_day_fixed": false,
+    "event_name_fixed": false,
+    "non_overlap_required": true
+  },
+  "personalities": [
+    {
+      "personality_code": "M-H-R",
+      "personality_name": "完美主义百灵鸟",
+      "source_portraits": {
+        "sleep_portrait": "作息规律但入睡偏慢。坚持早睡早起，但高敏感让其对环境有一定要求，高活跃的大脑让睡前容易思绪纷飞。需要适当的环境控制和睡前放松才能顺利入睡。压力大时入睡时间会明显延长，夜间偶有觉醒。",
+        "schedule_portrait": "偏自律的晨型执行者。日程强调计划感与完成度，常把核心任务放在上午，固定安排运动和阅读；晚间会做复盘，但容易因思绪活跃而延长收尾时间。",
+        "fusion_portrait": "这是一个高自律但高负荷的晨型人格。白天执行力强、运动和阅读习惯稳定，但夜间大脑仍偏活跃且对环境敏感，容易出现入睡拖延与恢复不足。最优策略是保留白天高效率节奏，并在晚间提前降刺激、降低复盘强度。",
+        "high_frequency_activities": [
+          "晨间有氧或力量训练",
+          "通勤或晚间阅读",
+          "任务清单管理与日程复盘",
+          "低刺激放松活动"
+        ]
+      },
+      "events_per_day_range": {
+        "min": 3,
+        "max": 6
+      },
+      "days": [
+        {
+          "day_index": 1,
+          "date": "2026-04-01",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "输出型工作时段",
+              "start_time": "07:23",
+              "end_time": "07:59",
+              "duration_minutes": 36
+            },
+            {
+              "event_order": 2,
+              "event_name": "书摘整理",
+              "start_time": "09:51",
+              "end_time": "11:13",
+              "duration_minutes": 82
+            },
+            {
+              "event_order": 3,
+              "event_name": "低噪社交",
+              "start_time": "18:52",
+              "end_time": "19:40",
+              "duration_minutes": 48
+            }
+          ]
+        },
+        {
+          "day_index": 2,
+          "date": "2026-04-02",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "主题阅读",
+              "start_time": "07:04",
+              "end_time": "07:29",
+              "duration_minutes": 25
+            },
+            {
+              "event_order": 2,
+              "event_name": "轻量总结",
+              "start_time": "09:38",
+              "end_time": "10:26",
+              "duration_minutes": 48
+            },
+            {
+              "event_order": 3,
+              "event_name": "河边慢走",
+              "start_time": "12:34",
+              "end_time": "13:35",
+              "duration_minutes": 61
+            },
+            {
+              "event_order": 4,
+              "event_name": "核心力量训练",
+              "start_time": "18:55",
+              "end_time": "19:37",
+              "duration_minutes": 42
+            },
+            {
+              "event_order": 5,
+              "event_name": "项目推进时段",
+              "start_time": "20:17",
+              "end_time": "20:50",
+              "duration_minutes": 33
+            }
+          ]
+        },
+        {
+          "day_index": 3,
+          "date": "2026-04-03",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "周目标回看",
+              "start_time": "06:57",
+              "end_time": "07:22",
+              "duration_minutes": 25
+            },
+            {
+              "event_order": 2,
+              "event_name": "河边慢走",
+              "start_time": "09:42",
+              "end_time": "11:04",
+              "duration_minutes": 82
+            },
+            {
+              "event_order": 3,
+              "event_name": "晨跑",
+              "start_time": "15:54",
+              "end_time": "16:58",
+              "duration_minutes": 64
+            }
+          ]
+        },
+        {
+          "day_index": 4,
+          "date": "2026-04-04",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "轻量步行",
+              "start_time": "07:16",
+              "end_time": "07:48",
+              "duration_minutes": 32
+            },
+            {
+              "event_order": 2,
+              "event_name": "低噪社交",
+              "start_time": "10:06",
+              "end_time": "10:58",
+              "duration_minutes": 52
+            },
+            {
+              "event_order": 3,
+              "event_name": "瑜伽唤醒",
+              "start_time": "13:10",
+              "end_time": "13:54",
+              "duration_minutes": 44
+            },
+            {
+              "event_order": 4,
+              "event_name": "输出型工作时段",
+              "start_time": "15:46",
+              "end_time": "16:48",
+              "duration_minutes": 62
+            },
+            {
+              "event_order": 5,
+              "event_name": "思绪清空记录",
+              "start_time": "20:49",
+              "end_time": "21:12",
+              "duration_minutes": 23
+            }
+          ]
+        },
+        {
+          "day_index": 5,
+          "date": "2026-04-05",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "家庭交流时间",
+              "start_time": "07:03",
+              "end_time": "07:40",
+              "duration_minutes": 37
+            },
+            {
+              "event_order": 2,
+              "event_name": "核心力量训练",
+              "start_time": "09:42",
+              "end_time": "10:19",
+              "duration_minutes": 37
+            },
+            {
+              "event_order": 3,
+              "event_name": "项目推进时段",
+              "start_time": "12:39",
+              "end_time": "13:19",
+              "duration_minutes": 40
+            },
+            {
+              "event_order": 4,
+              "event_name": "晚间阅读",
+              "start_time": "15:28",
+              "end_time": "16:38",
+              "duration_minutes": 70
+            },
+            {
+              "event_order": 5,
+              "event_name": "任务清单整理",
+              "start_time": "19:07",
+              "end_time": "19:28",
+              "duration_minutes": 21
+            },
+            {
+              "event_order": 6,
+              "event_name": "河边慢走",
+              "start_time": "20:51",
+              "end_time": "21:14",
+              "duration_minutes": 23
+            }
+          ]
+        },
+        {
+          "day_index": 6,
+          "date": "2026-04-06",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "晚间阅读",
+              "start_time": "12:45",
+              "end_time": "13:36",
+              "duration_minutes": 51
+            },
+            {
+              "event_order": 2,
+              "event_name": "周目标回看",
+              "start_time": "15:53",
+              "end_time": "16:39",
+              "duration_minutes": 46
+            },
+            {
+              "event_order": 3,
+              "event_name": "餐后散步",
+              "start_time": "18:49",
+              "end_time": "19:11",
+              "duration_minutes": 22
+            },
+            {
+              "event_order": 4,
+              "event_name": "低噪社交",
+              "start_time": "20:33",
+              "end_time": "21:18",
+              "duration_minutes": 45
+            }
+          ]
+        },
+        {
+          "day_index": 7,
+          "date": "2026-04-07",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "关键任务冲刺",
+              "start_time": "06:52",
+              "end_time": "07:29",
+              "duration_minutes": 37
+            },
+            {
+              "event_order": 2,
+              "event_name": "安静阅读",
+              "start_time": "09:12",
+              "end_time": "10:23",
+              "duration_minutes": 71
+            },
+            {
+              "event_order": 3,
+              "event_name": "思绪清空记录",
+              "start_time": "12:46",
+              "end_time": "13:36",
+              "duration_minutes": 50
+            },
+            {
+              "event_order": 4,
+              "event_name": "晚间散步",
+              "start_time": "15:42",
+              "end_time": "16:59",
+              "duration_minutes": 77
+            },
+            {
+              "event_order": 5,
+              "event_name": "线下短聚",
+              "start_time": "18:50",
+              "end_time": "19:34",
+              "duration_minutes": 44
+            }
+          ]
+        },
+        {
+          "day_index": 8,
+          "date": "2026-04-08",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "知识输入阅读",
+              "start_time": "06:51",
+              "end_time": "07:34",
+              "duration_minutes": 43
+            },
+            {
+              "event_order": 2,
+              "event_name": "次日计划梳理",
+              "start_time": "09:33",
+              "end_time": "10:58",
+              "duration_minutes": 85
+            },
+            {
+              "event_order": 3,
+              "event_name": "轻量步行",
+              "start_time": "12:44",
+              "end_time": "13:48",
+              "duration_minutes": 64
+            },
+            {
+              "event_order": 4,
+              "event_name": "低噪社交",
+              "start_time": "15:40",
+              "end_time": "16:19",
+              "duration_minutes": 39
+            },
+            {
+              "event_order": 5,
+              "event_name": "晨间有氧训练",
+              "start_time": "18:47",
+              "end_time": "19:16",
+              "duration_minutes": 29
+            },
+            {
+              "event_order": 6,
+              "event_name": "深度思考时段",
+              "start_time": "20:22",
+              "end_time": "21:03",
+              "duration_minutes": 41
+            }
+          ]
+        },
+        {
+          "day_index": 9,
+          "date": "2026-04-09",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "次日计划梳理",
+              "start_time": "06:43",
+              "end_time": "07:13",
+              "duration_minutes": 30
+            },
+            {
+              "event_order": 2,
+              "event_name": "公园散步",
+              "start_time": "09:36",
+              "end_time": "10:17",
+              "duration_minutes": 41
+            },
+            {
+              "event_order": 3,
+              "event_name": "咖啡馆交流",
+              "start_time": "12:44",
+              "end_time": "13:46",
+              "duration_minutes": 62
+            },
+            {
+              "event_order": 4,
+              "event_name": "瑜伽唤醒",
+              "start_time": "15:45",
+              "end_time": "17:07",
+              "duration_minutes": 82
+            },
+            {
+              "event_order": 5,
+              "event_name": "项目推进时段",
+              "start_time": "18:29",
+              "end_time": "18:59",
+              "duration_minutes": 30
+            },
+            {
+              "event_order": 6,
+              "event_name": "书摘整理",
+              "start_time": "20:52",
+              "end_time": "21:37",
+              "duration_minutes": 45
+            }
+          ]
+        },
+        {
+          "day_index": 10,
+          "date": "2026-04-10",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "晚间散步",
+              "start_time": "06:45",
+              "end_time": "07:20",
+              "duration_minutes": 35
+            },
+            {
+              "event_order": 2,
+              "event_name": "社区活动参与",
+              "start_time": "09:43",
+              "end_time": "11:01",
+              "duration_minutes": 78
+            },
+            {
+              "event_order": 3,
+              "event_name": "拉伸激活",
+              "start_time": "12:33",
+              "end_time": "13:18",
+              "duration_minutes": 45
+            },
+            {
+              "event_order": 4,
+              "event_name": "专注工作块",
+              "start_time": "15:23",
+              "end_time": "16:19",
+              "duration_minutes": 56
+            },
+            {
+              "event_order": 5,
+              "event_name": "晚间阅读",
+              "start_time": "18:53",
+              "end_time": "19:37",
+              "duration_minutes": 44
+            },
+            {
+              "event_order": 6,
+              "event_name": "轻量总结",
+              "start_time": "20:29",
+              "end_time": "20:53",
+              "duration_minutes": 24
+            }
+          ]
+        },
+        {
+          "day_index": 11,
+          "date": "2026-04-11",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "好友见面",
+              "start_time": "07:24",
+              "end_time": "07:57",
+              "duration_minutes": 33
+            },
+            {
+              "event_order": 2,
+              "event_name": "晨跑",
+              "start_time": "09:27",
+              "end_time": "10:46",
+              "duration_minutes": 79
+            },
+            {
+              "event_order": 3,
+              "event_name": "深度思考时段",
+              "start_time": "13:02",
+              "end_time": "14:01",
+              "duration_minutes": 59
+            },
+            {
+              "event_order": 4,
+              "event_name": "知识输入阅读",
+              "start_time": "16:01",
+              "end_time": "17:07",
+              "duration_minutes": 66
+            },
+            {
+              "event_order": 5,
+              "event_name": "日程复盘",
+              "start_time": "19:00",
+              "end_time": "19:23",
+              "duration_minutes": 23
+            }
+          ]
+        },
+        {
+          "day_index": 12,
+          "date": "2026-04-12",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "关键任务冲刺",
+              "start_time": "09:31",
+              "end_time": "11:00",
+              "duration_minutes": 89
+            },
+            {
+              "event_order": 2,
+              "event_name": "任务清单整理",
+              "start_time": "15:37",
+              "end_time": "17:01",
+              "duration_minutes": 84
+            },
+            {
+              "event_order": 3,
+              "event_name": "线下短聚",
+              "start_time": "21:00",
+              "end_time": "21:43",
+              "duration_minutes": 43
+            }
+          ]
+        },
+        {
+          "day_index": 13,
+          "date": "2026-04-13",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "深度阅读",
+              "start_time": "09:16",
+              "end_time": "10:11",
+              "duration_minutes": 55
+            },
+            {
+              "event_order": 2,
+              "event_name": "轻量总结",
+              "start_time": "12:27",
+              "end_time": "13:03",
+              "duration_minutes": 36
+            },
+            {
+              "event_order": 3,
+              "event_name": "轻量步行",
+              "start_time": "15:26",
+              "end_time": "16:24",
+              "duration_minutes": 58
+            },
+            {
+              "event_order": 4,
+              "event_name": "社区活动参与",
+              "start_time": "18:55",
+              "end_time": "19:32",
+              "duration_minutes": 37
+            },
+            {
+              "event_order": 5,
+              "event_name": "核心力量训练",
+              "start_time": "20:28",
+              "end_time": "21:02",
+              "duration_minutes": 34
+            }
+          ]
+        },
+        {
+          "day_index": 14,
+          "date": "2026-04-14",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "深度阅读",
+              "start_time": "06:44",
+              "end_time": "07:35",
+              "duration_minutes": 51
+            },
+            {
+              "event_order": 2,
+              "event_name": "轻量总结",
+              "start_time": "09:53",
+              "end_time": "11:23",
+              "duration_minutes": 90
+            },
+            {
+              "event_order": 3,
+              "event_name": "公园散步",
+              "start_time": "12:26",
+              "end_time": "13:01",
+              "duration_minutes": 35
+            },
+            {
+              "event_order": 4,
+              "event_name": "关键任务冲刺",
+              "start_time": "20:23",
+              "end_time": "20:51",
+              "duration_minutes": 28
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "personality_code": "M-H-C",
+      "personality_name": "敏感晨间鹿",
+      "source_portraits": {
+        "sleep_portrait": "早睡型，大脑容易安静下来，入睡较为顺利。但身体感官敏感度高，夜间容易被轻微声响、光线变化或温度波动惊醒。醒来后通常能重新入睡，但浅睡比例偏高，深睡略低于正常水平。睡眠质量高度依赖环境的安静和稳定。",
+        "schedule_portrait": "偏自律且注重秩序的晨型生活者。习惯清晨启动一天，日程里稳定包含轻运动、阅读与安静独处；对环境舒适度要求较高，偏好可控、低噪的生活节奏。",
+        "fusion_portrait": "这是一个节律稳定、环境驱动明显的晨型人格。日程安排有序且持续投入健康活动，入睡整体顺利；但高敏感使其夜间抗干扰能力较弱，睡眠质量受外部条件影响较大。关键是维持固定作息并长期优化卧室环境。",
+        "high_frequency_activities": [
+          "晨间拉伸或轻量运动",
+          "固定时段阅读",
+          "居家整理与环境优化",
+          "低噪社交或短时散步"
+        ]
+      },
+      "events_per_day_range": {
+        "min": 2,
+        "max": 4
+      },
+      "days": [
+        {
+          "day_index": 1,
+          "date": "2026-04-01",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "深度阅读",
+              "start_time": "06:44",
+              "end_time": "07:27",
+              "duration_minutes": 43
+            },
+            {
+              "event_order": 2,
+              "event_name": "晨间有氧训练",
+              "start_time": "20:52",
+              "end_time": "21:27",
+              "duration_minutes": 35
+            }
+          ]
+        },
+        {
+          "day_index": 2,
+          "date": "2026-04-02",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "任务清单整理",
+              "start_time": "12:18",
+              "end_time": "12:52",
+              "duration_minutes": 34
+            },
+            {
+              "event_order": 2,
+              "event_name": "低噪社交",
+              "start_time": "15:10",
+              "end_time": "16:27",
+              "duration_minutes": 77
+            },
+            {
+              "event_order": 3,
+              "event_name": "安静阅读",
+              "start_time": "20:41",
+              "end_time": "21:19",
+              "duration_minutes": 38
+            }
+          ]
+        },
+        {
+          "day_index": 3,
+          "date": "2026-04-03",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "次日计划梳理",
+              "start_time": "09:53",
+              "end_time": "10:41",
+              "duration_minutes": 48
+            },
+            {
+              "event_order": 2,
+              "event_name": "快走热身",
+              "start_time": "15:49",
+              "end_time": "16:22",
+              "duration_minutes": 33
+            }
+          ]
+        },
+        {
+          "day_index": 4,
+          "date": "2026-04-04",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "好友见面",
+              "start_time": "09:54",
+              "end_time": "11:20",
+              "duration_minutes": 86
+            },
+            {
+              "event_order": 2,
+              "event_name": "晨间有氧训练",
+              "start_time": "13:07",
+              "end_time": "13:44",
+              "duration_minutes": 37
+            },
+            {
+              "event_order": 3,
+              "event_name": "舒缓散步",
+              "start_time": "18:48",
+              "end_time": "19:22",
+              "duration_minutes": 34
+            },
+            {
+              "event_order": 4,
+              "event_name": "项目推进时段",
+              "start_time": "20:45",
+              "end_time": "21:05",
+              "duration_minutes": 20
+            }
+          ]
+        },
+        {
+          "day_index": 5,
+          "date": "2026-04-05",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "河边慢走",
+              "start_time": "15:28",
+              "end_time": "16:10",
+              "duration_minutes": 42
+            },
+            {
+              "event_order": 2,
+              "event_name": "深度思考时段",
+              "start_time": "18:28",
+              "end_time": "19:13",
+              "duration_minutes": 45
+            }
+          ]
+        },
+        {
+          "day_index": 6,
+          "date": "2026-04-06",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "晨间有氧训练",
+              "start_time": "07:19",
+              "end_time": "08:06",
+              "duration_minutes": 47
+            },
+            {
+              "event_order": 2,
+              "event_name": "轻量步行",
+              "start_time": "12:12",
+              "end_time": "13:06",
+              "duration_minutes": 54
+            },
+            {
+              "event_order": 3,
+              "event_name": "项目推进时段",
+              "start_time": "15:35",
+              "end_time": "16:23",
+              "duration_minutes": 48
+            },
+            {
+              "event_order": 4,
+              "event_name": "咖啡馆交流",
+              "start_time": "20:55",
+              "end_time": "21:25",
+              "duration_minutes": 30
+            }
+          ]
+        },
+        {
+          "day_index": 7,
+          "date": "2026-04-07",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "舒缓散步",
+              "start_time": "09:45",
+              "end_time": "11:07",
+              "duration_minutes": 82
+            },
+            {
+              "event_order": 2,
+              "event_name": "次日计划梳理",
+              "start_time": "15:51",
+              "end_time": "17:04",
+              "duration_minutes": 73
+            },
+            {
+              "event_order": 3,
+              "event_name": "咖啡馆交流",
+              "start_time": "18:33",
+              "end_time": "19:05",
+              "duration_minutes": 32
+            },
+            {
+              "event_order": 4,
+              "event_name": "拉伸激活",
+              "start_time": "20:32",
+              "end_time": "21:03",
+              "duration_minutes": 31
+            }
+          ]
+        },
+        {
+          "day_index": 8,
+          "date": "2026-04-08",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "轻量步行",
+              "start_time": "07:23",
+              "end_time": "08:09",
+              "duration_minutes": 46
+            },
+            {
+              "event_order": 2,
+              "event_name": "输出型工作时段",
+              "start_time": "09:55",
+              "end_time": "10:36",
+              "duration_minutes": 41
+            },
+            {
+              "event_order": 3,
+              "event_name": "咖啡馆交流",
+              "start_time": "15:44",
+              "end_time": "16:40",
+              "duration_minutes": 56
+            },
+            {
+              "event_order": 4,
+              "event_name": "晚间阅读",
+              "start_time": "20:25",
+              "end_time": "20:53",
+              "duration_minutes": 28
+            }
+          ]
+        },
+        {
+          "day_index": 9,
+          "date": "2026-04-09",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "周目标回看",
+              "start_time": "09:38",
+              "end_time": "10:50",
+              "duration_minutes": 72
+            },
+            {
+              "event_order": 2,
+              "event_name": "低噪社交",
+              "start_time": "12:19",
+              "end_time": "13:24",
+              "duration_minutes": 65
+            },
+            {
+              "event_order": 3,
+              "event_name": "快走热身",
+              "start_time": "15:33",
+              "end_time": "16:39",
+              "duration_minutes": 66
+            }
+          ]
+        },
+        {
+          "day_index": 10,
+          "date": "2026-04-10",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "拉伸激活",
+              "start_time": "12:14",
+              "end_time": "12:52",
+              "duration_minutes": 38
+            },
+            {
+              "event_order": 2,
+              "event_name": "河边慢走",
+              "start_time": "18:19",
+              "end_time": "19:10",
+              "duration_minutes": 51
+            }
+          ]
+        },
+        {
+          "day_index": 11,
+          "date": "2026-04-11",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "瑜伽唤醒",
+              "start_time": "10:04",
+              "end_time": "10:39",
+              "duration_minutes": 35
+            },
+            {
+              "event_order": 2,
+              "event_name": "深度阅读",
+              "start_time": "12:50",
+              "end_time": "13:29",
+              "duration_minutes": 39
+            }
+          ]
+        },
+        {
+          "day_index": 12,
+          "date": "2026-04-12",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "核心力量训练",
+              "start_time": "07:19",
+              "end_time": "07:55",
+              "duration_minutes": 36
+            },
+            {
+              "event_order": 2,
+              "event_name": "主题阅读",
+              "start_time": "09:25",
+              "end_time": "10:55",
+              "duration_minutes": 90
+            },
+            {
+              "event_order": 3,
+              "event_name": "轻量步行",
+              "start_time": "12:49",
+              "end_time": "13:34",
+              "duration_minutes": 45
+            },
+            {
+              "event_order": 4,
+              "event_name": "专注工作块",
+              "start_time": "16:00",
+              "end_time": "16:37",
+              "duration_minutes": 37
+            }
+          ]
+        },
+        {
+          "day_index": 13,
+          "date": "2026-04-13",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "项目推进时段",
+              "start_time": "12:55",
+              "end_time": "13:25",
+              "duration_minutes": 30
+            },
+            {
+              "event_order": 2,
+              "event_name": "任务清单整理",
+              "start_time": "15:52",
+              "end_time": "17:07",
+              "duration_minutes": 75
+            }
+          ]
+        },
+        {
+          "day_index": 14,
+          "date": "2026-04-14",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "公园散步",
+              "start_time": "07:03",
+              "end_time": "07:50",
+              "duration_minutes": 47
+            },
+            {
+              "event_order": 2,
+              "event_name": "输出型工作时段",
+              "start_time": "09:17",
+              "end_time": "10:31",
+              "duration_minutes": 74
+            },
+            {
+              "event_order": 3,
+              "event_name": "任务清单整理",
+              "start_time": "12:24",
+              "end_time": "12:54",
+              "duration_minutes": 30
+            },
+            {
+              "event_order": 4,
+              "event_name": "深度阅读",
+              "start_time": "20:16",
+              "end_time": "20:52",
+              "duration_minutes": 36
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "personality_code": "M-L-R",
+      "personality_name": "效率考拉",
+      "source_portraits": {
+        "sleep_portrait": "作息规律，环境适应力强，但睡前大脑容易过热。白天精力充沛、思维活跃，到了睡觉时间大脑仍在运转，导致入睡需要一定时间。但一旦入睡，不易被外界干扰，睡眠连续性好，深睡比例正常。属于入睡慢但睡得好的类型。",
+        "schedule_portrait": "高效率的晨型结果导向者。白天执行力强，日程通常由工作冲刺、规律运动和知识输入构成；偏爱目标明确的阅读与训练，娱乐占比中等且常被功能化安排。",
+        "fusion_portrait": "这是一个以成果为核心的晨型高能人格。日程层面高密度输出与自我管理能力突出，睡眠层面则表现为入睡偏慢但睡中稳定。整体属于白天强、夜间收不住的模式，适合通过固定睡前降速流程来平衡恢复与效率。",
+        "high_frequency_activities": [
+          "晨跑或健身训练",
+          "主题式阅读学习",
+          "专注工作块管理",
+          "晚间低强度放松"
+        ]
+      },
+      "events_per_day_range": {
+        "min": 3,
+        "max": 6
+      },
+      "days": [
+        {
+          "day_index": 1,
+          "date": "2026-04-01",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "输出型工作时段",
+              "start_time": "07:09",
+              "end_time": "07:39",
+              "duration_minutes": 30
+            },
+            {
+              "event_order": 2,
+              "event_name": "周目标回看",
+              "start_time": "12:50",
+              "end_time": "13:33",
+              "duration_minutes": 43
+            },
+            {
+              "event_order": 3,
+              "event_name": "咖啡馆交流",
+              "start_time": "18:31",
+              "end_time": "19:01",
+              "duration_minutes": 30
+            },
+            {
+              "event_order": 4,
+              "event_name": "晨跑",
+              "start_time": "20:39",
+              "end_time": "21:23",
+              "duration_minutes": 44
+            }
+          ]
+        },
+        {
+          "day_index": 2,
+          "date": "2026-04-02",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "周目标回看",
+              "start_time": "09:49",
+              "end_time": "10:33",
+              "duration_minutes": 44
+            },
+            {
+              "event_order": 2,
+              "event_name": "舒缓散步",
+              "start_time": "12:27",
+              "end_time": "12:59",
+              "duration_minutes": 32
+            },
+            {
+              "event_order": 3,
+              "event_name": "线下短聚",
+              "start_time": "15:27",
+              "end_time": "16:00",
+              "duration_minutes": 33
+            },
+            {
+              "event_order": 4,
+              "event_name": "快走热身",
+              "start_time": "18:37",
+              "end_time": "19:01",
+              "duration_minutes": 24
+            },
+            {
+              "event_order": 5,
+              "event_name": "专注工作块",
+              "start_time": "20:29",
+              "end_time": "20:49",
+              "duration_minutes": 20
+            }
+          ]
+        },
+        {
+          "day_index": 3,
+          "date": "2026-04-03",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "思绪清空记录",
+              "start_time": "07:09",
+              "end_time": "07:50",
+              "duration_minutes": 41
+            },
+            {
+              "event_order": 2,
+              "event_name": "公园散步",
+              "start_time": "09:23",
+              "end_time": "10:15",
+              "duration_minutes": 52
+            },
+            {
+              "event_order": 3,
+              "event_name": "核心力量训练",
+              "start_time": "15:49",
+              "end_time": "16:51",
+              "duration_minutes": 62
+            },
+            {
+              "event_order": 4,
+              "event_name": "专注工作块",
+              "start_time": "18:22",
+              "end_time": "19:11",
+              "duration_minutes": 49
+            }
+          ]
+        },
+        {
+          "day_index": 4,
+          "date": "2026-04-04",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "晚间散步",
+              "start_time": "07:38",
+              "end_time": "08:10",
+              "duration_minutes": 32
+            },
+            {
+              "event_order": 2,
+              "event_name": "线下短聚",
+              "start_time": "09:40",
+              "end_time": "11:06",
+              "duration_minutes": 86
+            },
+            {
+              "event_order": 3,
+              "event_name": "晨跑",
+              "start_time": "12:27",
+              "end_time": "13:04",
+              "duration_minutes": 37
+            },
+            {
+              "event_order": 4,
+              "event_name": "深度思考时段",
+              "start_time": "15:56",
+              "end_time": "17:04",
+              "duration_minutes": 68
+            },
+            {
+              "event_order": 5,
+              "event_name": "晚间阅读",
+              "start_time": "18:26",
+              "end_time": "18:52",
+              "duration_minutes": 26
+            },
+            {
+              "event_order": 6,
+              "event_name": "任务清单整理",
+              "start_time": "20:50",
+              "end_time": "21:26",
+              "duration_minutes": 36
+            }
+          ]
+        },
+        {
+          "day_index": 5,
+          "date": "2026-04-05",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "社区活动参与",
+              "start_time": "07:16",
+              "end_time": "07:57",
+              "duration_minutes": 41
+            },
+            {
+              "event_order": 2,
+              "event_name": "关键任务冲刺",
+              "start_time": "12:49",
+              "end_time": "13:39",
+              "duration_minutes": 50
+            },
+            {
+              "event_order": 3,
+              "event_name": "任务清单整理",
+              "start_time": "19:03",
+              "end_time": "19:29",
+              "duration_minutes": 26
+            }
+          ]
+        },
+        {
+          "day_index": 6,
+          "date": "2026-04-06",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "关键任务冲刺",
+              "start_time": "09:30",
+              "end_time": "10:07",
+              "duration_minutes": 37
+            },
+            {
+              "event_order": 2,
+              "event_name": "书摘整理",
+              "start_time": "12:37",
+              "end_time": "13:36",
+              "duration_minutes": 59
+            },
+            {
+              "event_order": 3,
+              "event_name": "周目标回看",
+              "start_time": "15:21",
+              "end_time": "15:57",
+              "duration_minutes": 36
+            }
+          ]
+        },
+        {
+          "day_index": 7,
+          "date": "2026-04-07",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "知识输入阅读",
+              "start_time": "09:14",
+              "end_time": "10:22",
+              "duration_minutes": 68
+            },
+            {
+              "event_order": 2,
+              "event_name": "舒缓散步",
+              "start_time": "15:47",
+              "end_time": "16:43",
+              "duration_minutes": 56
+            },
+            {
+              "event_order": 3,
+              "event_name": "核心力量训练",
+              "start_time": "20:41",
+              "end_time": "21:26",
+              "duration_minutes": 45
+            }
+          ]
+        },
+        {
+          "day_index": 8,
+          "date": "2026-04-08",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "安静阅读",
+              "start_time": "06:47",
+              "end_time": "07:27",
+              "duration_minutes": 40
+            },
+            {
+              "event_order": 2,
+              "event_name": "次日计划梳理",
+              "start_time": "09:12",
+              "end_time": "10:29",
+              "duration_minutes": 77
+            },
+            {
+              "event_order": 3,
+              "event_name": "轻量步行",
+              "start_time": "12:35",
+              "end_time": "13:14",
+              "duration_minutes": 39
+            },
+            {
+              "event_order": 4,
+              "event_name": "低噪社交",
+              "start_time": "15:25",
+              "end_time": "16:05",
+              "duration_minutes": 40
+            },
+            {
+              "event_order": 5,
+              "event_name": "晨跑",
+              "start_time": "18:23",
+              "end_time": "19:16",
+              "duration_minutes": 53
+            },
+            {
+              "event_order": 6,
+              "event_name": "专注工作块",
+              "start_time": "20:43",
+              "end_time": "21:16",
+              "duration_minutes": 33
+            }
+          ]
+        },
+        {
+          "day_index": 9,
+          "date": "2026-04-09",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "任务清单整理",
+              "start_time": "06:56",
+              "end_time": "07:37",
+              "duration_minutes": 41
+            },
+            {
+              "event_order": 2,
+              "event_name": "舒缓散步",
+              "start_time": "09:16",
+              "end_time": "10:37",
+              "duration_minutes": 81
+            },
+            {
+              "event_order": 3,
+              "event_name": "低噪社交",
+              "start_time": "12:46",
+              "end_time": "13:15",
+              "duration_minutes": 29
+            },
+            {
+              "event_order": 4,
+              "event_name": "瑜伽唤醒",
+              "start_time": "15:18",
+              "end_time": "16:33",
+              "duration_minutes": 75
+            },
+            {
+              "event_order": 5,
+              "event_name": "关键任务冲刺",
+              "start_time": "18:15",
+              "end_time": "19:07",
+              "duration_minutes": 52
+            },
+            {
+              "event_order": 6,
+              "event_name": "书摘整理",
+              "start_time": "20:54",
+              "end_time": "21:33",
+              "duration_minutes": 39
+            }
+          ]
+        },
+        {
+          "day_index": 10,
+          "date": "2026-04-10",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "晚间散步",
+              "start_time": "07:06",
+              "end_time": "07:42",
+              "duration_minutes": 36
+            },
+            {
+              "event_order": 2,
+              "event_name": "好友见面",
+              "start_time": "09:29",
+              "end_time": "10:50",
+              "duration_minutes": 81
+            },
+            {
+              "event_order": 3,
+              "event_name": "晨跑",
+              "start_time": "12:32",
+              "end_time": "13:21",
+              "duration_minutes": 49
+            },
+            {
+              "event_order": 4,
+              "event_name": "书摘整理",
+              "start_time": "18:51",
+              "end_time": "19:17",
+              "duration_minutes": 26
+            },
+            {
+              "event_order": 5,
+              "event_name": "任务清单整理",
+              "start_time": "20:23",
+              "end_time": "20:52",
+              "duration_minutes": 29
+            }
+          ]
+        },
+        {
+          "day_index": 11,
+          "date": "2026-04-11",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "快走热身",
+              "start_time": "09:39",
+              "end_time": "10:56",
+              "duration_minutes": 77
+            },
+            {
+              "event_order": 2,
+              "event_name": "深度思考时段",
+              "start_time": "12:59",
+              "end_time": "13:49",
+              "duration_minutes": 50
+            },
+            {
+              "event_order": 3,
+              "event_name": "安静阅读",
+              "start_time": "15:42",
+              "end_time": "16:51",
+              "duration_minutes": 69
+            }
+          ]
+        },
+        {
+          "day_index": 12,
+          "date": "2026-04-12",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "瑜伽唤醒",
+              "start_time": "07:06",
+              "end_time": "07:44",
+              "duration_minutes": 38
+            },
+            {
+              "event_order": 2,
+              "event_name": "深度思考时段",
+              "start_time": "09:32",
+              "end_time": "10:11",
+              "duration_minutes": 39
+            },
+            {
+              "event_order": 3,
+              "event_name": "书摘整理",
+              "start_time": "12:29",
+              "end_time": "12:57",
+              "duration_minutes": 28
+            },
+            {
+              "event_order": 4,
+              "event_name": "思绪清空记录",
+              "start_time": "16:09",
+              "end_time": "16:56",
+              "duration_minutes": 47
+            },
+            {
+              "event_order": 5,
+              "event_name": "社区活动参与",
+              "start_time": "21:09",
+              "end_time": "21:54",
+              "duration_minutes": 45
+            }
+          ]
+        },
+        {
+          "day_index": 13,
+          "date": "2026-04-13",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "高优先级任务处理",
+              "start_time": "06:56",
+              "end_time": "07:39",
+              "duration_minutes": 43
+            },
+            {
+              "event_order": 2,
+              "event_name": "书摘整理",
+              "start_time": "09:37",
+              "end_time": "10:44",
+              "duration_minutes": 67
+            },
+            {
+              "event_order": 3,
+              "event_name": "家庭交流时间",
+              "start_time": "18:27",
+              "end_time": "19:15",
+              "duration_minutes": 48
+            },
+            {
+              "event_order": 4,
+              "event_name": "快走热身",
+              "start_time": "20:55",
+              "end_time": "21:23",
+              "duration_minutes": 28
+            }
+          ]
+        },
+        {
+          "day_index": 14,
+          "date": "2026-04-14",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "晚间阅读",
+              "start_time": "06:42",
+              "end_time": "07:35",
+              "duration_minutes": 53
+            },
+            {
+              "event_order": 2,
+              "event_name": "思绪清空记录",
+              "start_time": "09:34",
+              "end_time": "10:15",
+              "duration_minutes": 41
+            },
+            {
+              "event_order": 3,
+              "event_name": "舒缓散步",
+              "start_time": "12:44",
+              "end_time": "13:46",
+              "duration_minutes": 62
+            },
+            {
+              "event_order": 4,
+              "event_name": "好友见面",
+              "start_time": "15:29",
+              "end_time": "16:20",
+              "duration_minutes": 51
+            },
+            {
+              "event_order": 5,
+              "event_name": "晨间有氧训练",
+              "start_time": "18:35",
+              "end_time": "18:58",
+              "duration_minutes": 23
+            },
+            {
+              "event_order": 6,
+              "event_name": "深度思考时段",
+              "start_time": "20:55",
+              "end_time": "21:17",
+              "duration_minutes": 22
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "personality_code": "M-L-C",
+      "personality_name": "阳光漫步者",
+      "source_portraits": {
+        "sleep_portrait": "睡眠质量最优的类型。作息规律、环境适应力强、大脑容易安静。倒头就睡，一觉到天亮。深睡比例充足，睡眠效率高。几乎不受外界干扰，身体恢复力强。是典型的睡眠赢家。",
+        "schedule_portrait": "高度自律且稳定的晨型平衡者。生活结构清晰，长期保持运动和阅读习惯，工作、休闲与恢复节奏分配均衡，是健康型日程的典型样本。",
+        "fusion_portrait": "这是睡眠与日程双高分的稳定型人格。其生活节律、行为习惯和睡眠结构相互增强，形成高恢复、高执行、低波动的正循环。只要维持当前规律，不需要复杂干预即可长期保持良好状态。",
+        "high_frequency_activities": [
+          "固定晨练",
+          "持续阅读或学习",
+          "规律三餐与步行活动",
+          "早间完成关键任务"
+        ]
+      },
+      "events_per_day_range": {
+        "min": 2,
+        "max": 5
+      },
+      "days": [
+        {
+          "day_index": 1,
+          "date": "2026-04-01",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "深度思考时段",
+              "start_time": "06:41",
+              "end_time": "07:15",
+              "duration_minutes": 34
+            },
+            {
+              "event_order": 2,
+              "event_name": "晚间散步",
+              "start_time": "09:27",
+              "end_time": "10:03",
+              "duration_minutes": 36
+            },
+            {
+              "event_order": 3,
+              "event_name": "家庭交流时间",
+              "start_time": "15:43",
+              "end_time": "16:31",
+              "duration_minutes": 48
+            },
+            {
+              "event_order": 4,
+              "event_name": "核心力量训练",
+              "start_time": "20:23",
+              "end_time": "20:48",
+              "duration_minutes": 25
+            }
+          ]
+        },
+        {
+          "day_index": 2,
+          "date": "2026-04-02",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "线下短聚",
+              "start_time": "12:53",
+              "end_time": "13:23",
+              "duration_minutes": 30
+            },
+            {
+              "event_order": 2,
+              "event_name": "专注工作块",
+              "start_time": "20:27",
+              "end_time": "20:52",
+              "duration_minutes": 25
+            }
+          ]
+        },
+        {
+          "day_index": 3,
+          "date": "2026-04-03",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "任务清单整理",
+              "start_time": "12:23",
+              "end_time": "13:16",
+              "duration_minutes": 53
+            },
+            {
+              "event_order": 2,
+              "event_name": "晚间散步",
+              "start_time": "20:35",
+              "end_time": "21:16",
+              "duration_minutes": 41
+            }
+          ]
+        },
+        {
+          "day_index": 4,
+          "date": "2026-04-04",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "社区活动参与",
+              "start_time": "07:29",
+              "end_time": "08:01",
+              "duration_minutes": 32
+            },
+            {
+              "event_order": 2,
+              "event_name": "晨间有氧训练",
+              "start_time": "12:26",
+              "end_time": "13:25",
+              "duration_minutes": 59
+            },
+            {
+              "event_order": 3,
+              "event_name": "晚间阅读",
+              "start_time": "21:01",
+              "end_time": "21:29",
+              "duration_minutes": 28
+            }
+          ]
+        },
+        {
+          "day_index": 5,
+          "date": "2026-04-05",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "拉伸激活",
+              "start_time": "10:02",
+              "end_time": "10:49",
+              "duration_minutes": 47
+            },
+            {
+              "event_order": 2,
+              "event_name": "关键任务冲刺",
+              "start_time": "13:04",
+              "end_time": "13:56",
+              "duration_minutes": 52
+            },
+            {
+              "event_order": 3,
+              "event_name": "安静阅读",
+              "start_time": "18:34",
+              "end_time": "19:21",
+              "duration_minutes": 47
+            },
+            {
+              "event_order": 4,
+              "event_name": "线下短聚",
+              "start_time": "20:31",
+              "end_time": "20:57",
+              "duration_minutes": 26
+            }
+          ]
+        },
+        {
+          "day_index": 6,
+          "date": "2026-04-06",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "河边慢走",
+              "start_time": "12:32",
+              "end_time": "13:29",
+              "duration_minutes": 57
+            },
+            {
+              "event_order": 2,
+              "event_name": "家庭交流时间",
+              "start_time": "18:27",
+              "end_time": "19:00",
+              "duration_minutes": 33
+            }
+          ]
+        },
+        {
+          "day_index": 7,
+          "date": "2026-04-07",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "高优先级任务处理",
+              "start_time": "07:23",
+              "end_time": "08:11",
+              "duration_minutes": 48
+            },
+            {
+              "event_order": 2,
+              "event_name": "晚间散步",
+              "start_time": "09:26",
+              "end_time": "10:07",
+              "duration_minutes": 41
+            }
+          ]
+        },
+        {
+          "day_index": 8,
+          "date": "2026-04-08",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "轻量步行",
+              "start_time": "07:10",
+              "end_time": "08:01",
+              "duration_minutes": 51
+            },
+            {
+              "event_order": 2,
+              "event_name": "安静阅读",
+              "start_time": "09:22",
+              "end_time": "10:10",
+              "duration_minutes": 48
+            }
+          ]
+        },
+        {
+          "day_index": 9,
+          "date": "2026-04-09",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "家庭交流时间",
+              "start_time": "09:18",
+              "end_time": "10:25",
+              "duration_minutes": 67
+            },
+            {
+              "event_order": 2,
+              "event_name": "轻量总结",
+              "start_time": "12:26",
+              "end_time": "13:00",
+              "duration_minutes": 34
+            },
+            {
+              "event_order": 3,
+              "event_name": "餐后散步",
+              "start_time": "20:33",
+              "end_time": "20:57",
+              "duration_minutes": 24
+            }
+          ]
+        },
+        {
+          "day_index": 10,
+          "date": "2026-04-10",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "社区活动参与",
+              "start_time": "07:20",
+              "end_time": "07:54",
+              "duration_minutes": 34
+            },
+            {
+              "event_order": 2,
+              "event_name": "项目推进时段",
+              "start_time": "15:54",
+              "end_time": "16:40",
+              "duration_minutes": 46
+            },
+            {
+              "event_order": 3,
+              "event_name": "主题阅读",
+              "start_time": "20:39",
+              "end_time": "21:02",
+              "duration_minutes": 23
+            }
+          ]
+        },
+        {
+          "day_index": 11,
+          "date": "2026-04-11",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "日程复盘",
+              "start_time": "07:39",
+              "end_time": "08:09",
+              "duration_minutes": 30
+            },
+            {
+              "event_order": 2,
+              "event_name": "晨间有氧训练",
+              "start_time": "09:56",
+              "end_time": "11:04",
+              "duration_minutes": 68
+            },
+            {
+              "event_order": 3,
+              "event_name": "公园散步",
+              "start_time": "16:07",
+              "end_time": "17:11",
+              "duration_minutes": 64
+            },
+            {
+              "event_order": 4,
+              "event_name": "安静阅读",
+              "start_time": "18:53",
+              "end_time": "19:36",
+              "duration_minutes": 43
+            }
+          ]
+        },
+        {
+          "day_index": 12,
+          "date": "2026-04-12",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "项目推进时段",
+              "start_time": "10:09",
+              "end_time": "11:22",
+              "duration_minutes": 73
+            },
+            {
+              "event_order": 2,
+              "event_name": "河边慢走",
+              "start_time": "12:39",
+              "end_time": "13:09",
+              "duration_minutes": 30
+            },
+            {
+              "event_order": 3,
+              "event_name": "知识输入阅读",
+              "start_time": "15:26",
+              "end_time": "16:09",
+              "duration_minutes": 43
+            }
+          ]
+        },
+        {
+          "day_index": 13,
+          "date": "2026-04-13",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "项目推进时段",
+              "start_time": "07:10",
+              "end_time": "08:03",
+              "duration_minutes": 53
+            },
+            {
+              "event_order": 2,
+              "event_name": "知识输入阅读",
+              "start_time": "12:43",
+              "end_time": "13:38",
+              "duration_minutes": 55
+            },
+            {
+              "event_order": 3,
+              "event_name": "社区活动参与",
+              "start_time": "15:29",
+              "end_time": "16:12",
+              "duration_minutes": 43
+            },
+            {
+              "event_order": 4,
+              "event_name": "快走热身",
+              "start_time": "20:34",
+              "end_time": "21:14",
+              "duration_minutes": 40
+            }
+          ]
+        },
+        {
+          "day_index": 14,
+          "date": "2026-04-14",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "舒缓散步",
+              "start_time": "06:53",
+              "end_time": "07:45",
+              "duration_minutes": 52
+            },
+            {
+              "event_order": 2,
+              "event_name": "深度阅读",
+              "start_time": "09:17",
+              "end_time": "10:35",
+              "duration_minutes": 78
+            },
+            {
+              "event_order": 3,
+              "event_name": "次日计划梳理",
+              "start_time": "15:28",
+              "end_time": "16:19",
+              "duration_minutes": 51
+            },
+            {
+              "event_order": 4,
+              "event_name": "晨跑",
+              "start_time": "18:23",
+              "end_time": "18:57",
+              "duration_minutes": 34
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "personality_code": "E-H-R",
+      "personality_name": "创意夜猫子",
+      "source_portraits": {
+        "sleep_portrait": "睡眠质量较差的类型。夜间大脑活跃且感官敏感，入睡困难。夜晚思绪较多，对环境变化敏感。入睡后也偶有觉醒，深睡比例偏低。容易积累睡眠负债，白天精力不够充沛。建议通过规律运动和睡前放松来改善。",
+        "schedule_portrait": "偏放纵的夜型灵感驱动者。日程重心后移，夜间娱乐、创作和社交占比高；白天启动偏慢，运动与阅读执行波动较大，常出现临时起意和节奏漂移。",
+        "fusion_portrait": "这是高活跃高敏感的夜型高波动人格。日程偏向夜间刺激与即时反馈，进一步放大入睡困难和夜间觉醒风险，容易形成睡眠负债。改善重点是给夜间娱乐设置边界，并把运动与放松前置到傍晚时段。",
+        "high_frequency_activities": [
+          "夜间影音或游戏娱乐",
+          "深夜创作与社交互动",
+          "碎片化信息浏览",
+          "不固定时段补偿性运动"
+        ]
+      },
+      "events_per_day_range": {
+        "min": 2,
+        "max": 5
+      },
+      "days": [
+        {
+          "day_index": 1,
+          "date": "2026-04-01",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "兴趣内容浏览",
+              "start_time": "12:44",
+              "end_time": "13:53",
+              "duration_minutes": 69
+            },
+            {
+              "event_order": 2,
+              "event_name": "周目标回看",
+              "start_time": "16:21",
+              "end_time": "17:04",
+              "duration_minutes": 43
+            },
+            {
+              "event_order": 3,
+              "event_name": "社区活动参与",
+              "start_time": "19:00",
+              "end_time": "20:03",
+              "duration_minutes": 63
+            },
+            {
+              "event_order": 4,
+              "event_name": "河边慢走",
+              "start_time": "20:47",
+              "end_time": "21:20",
+              "duration_minutes": 33
+            }
+          ]
+        },
+        {
+          "day_index": 2,
+          "date": "2026-04-02",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "任务清单整理",
+              "start_time": "13:02",
+              "end_time": "14:01",
+              "duration_minutes": 59
+            },
+            {
+              "event_order": 2,
+              "event_name": "社区活动参与",
+              "start_time": "16:15",
+              "end_time": "17:16",
+              "duration_minutes": 61
+            },
+            {
+              "event_order": 3,
+              "event_name": "公园散步",
+              "start_time": "19:23",
+              "end_time": "20:02",
+              "duration_minutes": 39
+            },
+            {
+              "event_order": 4,
+              "event_name": "项目推进时段",
+              "start_time": "21:23",
+              "end_time": "22:05",
+              "duration_minutes": 42
+            },
+            {
+              "event_order": 5,
+              "event_name": "夜间创意写作",
+              "start_time": "22:32",
+              "end_time": "22:54",
+              "duration_minutes": 22
+            }
+          ]
+        },
+        {
+          "day_index": 3,
+          "date": "2026-04-03",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "周目标回看",
+              "start_time": "10:24",
+              "end_time": "10:50",
+              "duration_minutes": 26
+            },
+            {
+              "event_order": 2,
+              "event_name": "社区活动参与",
+              "start_time": "12:48",
+              "end_time": "13:24",
+              "duration_minutes": 36
+            },
+            {
+              "event_order": 3,
+              "event_name": "轻量步行",
+              "start_time": "15:45",
+              "end_time": "17:09",
+              "duration_minutes": 84
+            },
+            {
+              "event_order": 4,
+              "event_name": "高优先级任务处理",
+              "start_time": "19:10",
+              "end_time": "19:43",
+              "duration_minutes": 33
+            },
+            {
+              "event_order": 5,
+              "event_name": "创意草图整理",
+              "start_time": "21:12",
+              "end_time": "21:46",
+              "duration_minutes": 34
+            }
+          ]
+        },
+        {
+          "day_index": 4,
+          "date": "2026-04-04",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "关键任务冲刺",
+              "start_time": "16:46",
+              "end_time": "18:03",
+              "duration_minutes": 77
+            },
+            {
+              "event_order": 2,
+              "event_name": "周目标回看",
+              "start_time": "22:38",
+              "end_time": "23:15",
+              "duration_minutes": 37
+            }
+          ]
+        },
+        {
+          "day_index": 5,
+          "date": "2026-04-05",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "轻量步行",
+              "start_time": "10:18",
+              "end_time": "10:50",
+              "duration_minutes": 32
+            },
+            {
+              "event_order": 2,
+              "event_name": "项目推进时段",
+              "start_time": "13:40",
+              "end_time": "14:29",
+              "duration_minutes": 49
+            },
+            {
+              "event_order": 3,
+              "event_name": "夜间创意写作",
+              "start_time": "16:17",
+              "end_time": "17:33",
+              "duration_minutes": 76
+            },
+            {
+              "event_order": 4,
+              "event_name": "周目标回看",
+              "start_time": "21:47",
+              "end_time": "22:48",
+              "duration_minutes": 61
+            },
+            {
+              "event_order": 5,
+              "event_name": "线下短聚",
+              "start_time": "22:58",
+              "end_time": "23:35",
+              "duration_minutes": 37
+            }
+          ]
+        },
+        {
+          "day_index": 6,
+          "date": "2026-04-06",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "专注工作块",
+              "start_time": "09:56",
+              "end_time": "10:32",
+              "duration_minutes": 36
+            },
+            {
+              "event_order": 2,
+              "event_name": "周目标回看",
+              "start_time": "19:12",
+              "end_time": "20:24",
+              "duration_minutes": 72
+            }
+          ]
+        },
+        {
+          "day_index": 7,
+          "date": "2026-04-07",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "内容创作时段",
+              "start_time": "10:05",
+              "end_time": "10:53",
+              "duration_minutes": 48
+            },
+            {
+              "event_order": 2,
+              "event_name": "任务清单整理",
+              "start_time": "15:43",
+              "end_time": "16:17",
+              "duration_minutes": 34
+            },
+            {
+              "event_order": 3,
+              "event_name": "餐后散步",
+              "start_time": "21:21",
+              "end_time": "21:54",
+              "duration_minutes": 33
+            }
+          ]
+        },
+        {
+          "day_index": 8,
+          "date": "2026-04-08",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "低噪社交",
+              "start_time": "16:24",
+              "end_time": "17:35",
+              "duration_minutes": 71
+            },
+            {
+              "event_order": 2,
+              "event_name": "轻量步行",
+              "start_time": "19:12",
+              "end_time": "19:55",
+              "duration_minutes": 43
+            },
+            {
+              "event_order": 3,
+              "event_name": "专注工作块",
+              "start_time": "20:44",
+              "end_time": "21:43",
+              "duration_minutes": 59
+            },
+            {
+              "event_order": 4,
+              "event_name": "内容创作时段",
+              "start_time": "22:40",
+              "end_time": "23:15",
+              "duration_minutes": 35
+            }
+          ]
+        },
+        {
+          "day_index": 9,
+          "date": "2026-04-09",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "周目标回看",
+              "start_time": "10:08",
+              "end_time": "10:43",
+              "duration_minutes": 35
+            },
+            {
+              "event_order": 2,
+              "event_name": "社区活动参与",
+              "start_time": "13:24",
+              "end_time": "14:04",
+              "duration_minutes": 40
+            },
+            {
+              "event_order": 3,
+              "event_name": "晚间散步",
+              "start_time": "15:54",
+              "end_time": "17:08",
+              "duration_minutes": 74
+            },
+            {
+              "event_order": 4,
+              "event_name": "创意草图整理",
+              "start_time": "21:24",
+              "end_time": "22:03",
+              "duration_minutes": 39
+            },
+            {
+              "event_order": 5,
+              "event_name": "兴趣内容浏览",
+              "start_time": "22:32",
+              "end_time": "23:06",
+              "duration_minutes": 34
+            }
+          ]
+        },
+        {
+          "day_index": 10,
+          "date": "2026-04-10",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "低噪社交",
+              "start_time": "10:01",
+              "end_time": "10:27",
+              "duration_minutes": 26
+            },
+            {
+              "event_order": 2,
+              "event_name": "餐后散步",
+              "start_time": "13:12",
+              "end_time": "14:08",
+              "duration_minutes": 56
+            },
+            {
+              "event_order": 3,
+              "event_name": "输出型工作时段",
+              "start_time": "15:54",
+              "end_time": "16:54",
+              "duration_minutes": 60
+            },
+            {
+              "event_order": 4,
+              "event_name": "游戏娱乐",
+              "start_time": "20:53",
+              "end_time": "21:47",
+              "duration_minutes": 54
+            }
+          ]
+        },
+        {
+          "day_index": 11,
+          "date": "2026-04-11",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "项目推进时段",
+              "start_time": "13:24",
+              "end_time": "14:27",
+              "duration_minutes": 63
+            },
+            {
+              "event_order": 2,
+              "event_name": "作品打磨",
+              "start_time": "16:22",
+              "end_time": "17:39",
+              "duration_minutes": 77
+            },
+            {
+              "event_order": 3,
+              "event_name": "咖啡馆交流",
+              "start_time": "22:40",
+              "end_time": "23:04",
+              "duration_minutes": 24
+            }
+          ]
+        },
+        {
+          "day_index": 12,
+          "date": "2026-04-12",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "夜间创意写作",
+              "start_time": "13:17",
+              "end_time": "14:28",
+              "duration_minutes": 71
+            },
+            {
+              "event_order": 2,
+              "event_name": "兴趣内容浏览",
+              "start_time": "16:33",
+              "end_time": "17:04",
+              "duration_minutes": 31
+            },
+            {
+              "event_order": 3,
+              "event_name": "日程复盘",
+              "start_time": "19:26",
+              "end_time": "19:56",
+              "duration_minutes": 30
+            },
+            {
+              "event_order": 4,
+              "event_name": "线下短聚",
+              "start_time": "21:29",
+              "end_time": "22:49",
+              "duration_minutes": 80
+            }
+          ]
+        },
+        {
+          "day_index": 13,
+          "date": "2026-04-13",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "夜间音乐时段",
+              "start_time": "13:20",
+              "end_time": "14:41",
+              "duration_minutes": 81
+            },
+            {
+              "event_order": 2,
+              "event_name": "公园散步",
+              "start_time": "21:01",
+              "end_time": "22:07",
+              "duration_minutes": 66
+            },
+            {
+              "event_order": 3,
+              "event_name": "专注工作块",
+              "start_time": "22:31",
+              "end_time": "23:00",
+              "duration_minutes": 29
+            }
+          ]
+        },
+        {
+          "day_index": 14,
+          "date": "2026-04-14",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "夜间音乐时段",
+              "start_time": "10:04",
+              "end_time": "11:08",
+              "duration_minutes": 64
+            },
+            {
+              "event_order": 2,
+              "event_name": "好友见面",
+              "start_time": "15:42",
+              "end_time": "16:48",
+              "duration_minutes": 66
+            },
+            {
+              "event_order": 3,
+              "event_name": "公园散步",
+              "start_time": "18:50",
+              "end_time": "20:10",
+              "duration_minutes": 80
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "personality_code": "E-H-C",
+      "personality_name": "敏感都市夜行者",
+      "source_portraits": {
+        "sleep_portrait": "作息偏晚，大脑容易安静，入睡过程不算太难。但身体感官敏感，夜间容易被环境变化惊醒。对睡眠环境要求较高，需要安静、黑暗、温度适宜的条件。浅睡比例偏高，深睡略低于正常水平，整体睡眠质量中等偏下。",
+        "schedule_portrait": "偏放松的夜型感受优先者。更喜欢晚间进行娱乐和个人兴趣活动，日程安排较弹性；会保留一定阅读或轻学习，但整体更看重情绪舒适和环境氛围。",
+        "fusion_portrait": "这是晚节奏、重体验的夜型人格。日程并非高压，但夜间活动集中和高敏感特征叠加后，睡眠容易受环境变化影响而碎片化。整体策略是保持弹性日程的同时，提高夜间环境稳定度并控制娱乐结束时点。",
+        "high_frequency_activities": [
+          "晚间追剧或听播客",
+          "夜间轻社交或独处放松",
+          "氛围感阅读",
+          "低强度拉伸或散步"
+        ]
+      },
+      "events_per_day_range": {
+        "min": 2,
+        "max": 4
+      },
+      "days": [
+        {
+          "day_index": 1,
+          "date": "2026-04-01",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "追剧放松",
+              "start_time": "13:13",
+              "end_time": "14:15",
+              "duration_minutes": 62
+            },
+            {
+              "event_order": 2,
+              "event_name": "河边慢走",
+              "start_time": "15:44",
+              "end_time": "16:19",
+              "duration_minutes": 35
+            },
+            {
+              "event_order": 3,
+              "event_name": "内容创作时段",
+              "start_time": "21:17",
+              "end_time": "22:33",
+              "duration_minutes": 76
+            },
+            {
+              "event_order": 4,
+              "event_name": "深度阅读",
+              "start_time": "22:43",
+              "end_time": "23:17",
+              "duration_minutes": 34
+            }
+          ]
+        },
+        {
+          "day_index": 2,
+          "date": "2026-04-02",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "任务清单整理",
+              "start_time": "16:05",
+              "end_time": "17:26",
+              "duration_minutes": 81
+            },
+            {
+              "event_order": 2,
+              "event_name": "安静阅读",
+              "start_time": "21:16",
+              "end_time": "22:11",
+              "duration_minutes": 55
+            },
+            {
+              "event_order": 3,
+              "event_name": "社区活动参与",
+              "start_time": "22:21",
+              "end_time": "22:56",
+              "duration_minutes": 35
+            }
+          ]
+        },
+        {
+          "day_index": 3,
+          "date": "2026-04-03",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "公园散步",
+              "start_time": "10:23",
+              "end_time": "10:51",
+              "duration_minutes": 28
+            },
+            {
+              "event_order": 2,
+              "event_name": "深度阅读",
+              "start_time": "18:54",
+              "end_time": "19:44",
+              "duration_minutes": 50
+            },
+            {
+              "event_order": 3,
+              "event_name": "好友见面",
+              "start_time": "21:01",
+              "end_time": "21:35",
+              "duration_minutes": 34
+            }
+          ]
+        },
+        {
+          "day_index": 4,
+          "date": "2026-04-04",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "日程复盘",
+              "start_time": "10:42",
+              "end_time": "11:35",
+              "duration_minutes": 53
+            },
+            {
+              "event_order": 2,
+              "event_name": "播客脚本构思",
+              "start_time": "13:14",
+              "end_time": "14:22",
+              "duration_minutes": 68
+            },
+            {
+              "event_order": 3,
+              "event_name": "咖啡馆交流",
+              "start_time": "19:21",
+              "end_time": "19:54",
+              "duration_minutes": 33
+            },
+            {
+              "event_order": 4,
+              "event_name": "夜间影音放松",
+              "start_time": "21:12",
+              "end_time": "22:24",
+              "duration_minutes": 72
+            }
+          ]
+        },
+        {
+          "day_index": 5,
+          "date": "2026-04-05",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "晚间阅读",
+              "start_time": "13:49",
+              "end_time": "14:21",
+              "duration_minutes": 32
+            },
+            {
+              "event_order": 2,
+              "event_name": "轻社交聊天",
+              "start_time": "19:41",
+              "end_time": "21:00",
+              "duration_minutes": 79
+            },
+            {
+              "event_order": 3,
+              "event_name": "舒缓散步",
+              "start_time": "21:16",
+              "end_time": "22:02",
+              "duration_minutes": 46
+            }
+          ]
+        },
+        {
+          "day_index": 6,
+          "date": "2026-04-06",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "低噪社交",
+              "start_time": "12:58",
+              "end_time": "13:58",
+              "duration_minutes": 60
+            },
+            {
+              "event_order": 2,
+              "event_name": "追剧放松",
+              "start_time": "15:47",
+              "end_time": "16:19",
+              "duration_minutes": 32
+            },
+            {
+              "event_order": 3,
+              "event_name": "周目标回看",
+              "start_time": "21:04",
+              "end_time": "22:13",
+              "duration_minutes": 69
+            },
+            {
+              "event_order": 4,
+              "event_name": "内容创作时段",
+              "start_time": "22:26",
+              "end_time": "23:00",
+              "duration_minutes": 34
+            }
+          ]
+        },
+        {
+          "day_index": 7,
+          "date": "2026-04-07",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "家庭交流时间",
+              "start_time": "10:03",
+              "end_time": "10:55",
+              "duration_minutes": 52
+            },
+            {
+              "event_order": 2,
+              "event_name": "餐后散步",
+              "start_time": "16:15",
+              "end_time": "17:13",
+              "duration_minutes": 58
+            },
+            {
+              "event_order": 3,
+              "event_name": "知识输入阅读",
+              "start_time": "22:43",
+              "end_time": "23:23",
+              "duration_minutes": 40
+            }
+          ]
+        },
+        {
+          "day_index": 8,
+          "date": "2026-04-08",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "游戏娱乐",
+              "start_time": "10:23",
+              "end_time": "10:48",
+              "duration_minutes": 25
+            },
+            {
+              "event_order": 2,
+              "event_name": "日程复盘",
+              "start_time": "16:23",
+              "end_time": "17:51",
+              "duration_minutes": 88
+            },
+            {
+              "event_order": 3,
+              "event_name": "晚间阅读",
+              "start_time": "21:16",
+              "end_time": "22:35",
+              "duration_minutes": 79
+            },
+            {
+              "event_order": 4,
+              "event_name": "家庭交流时间",
+              "start_time": "22:45",
+              "end_time": "23:23",
+              "duration_minutes": 38
+            }
+          ]
+        },
+        {
+          "day_index": 9,
+          "date": "2026-04-09",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "餐后散步",
+              "start_time": "09:52",
+              "end_time": "10:54",
+              "duration_minutes": 62
+            },
+            {
+              "event_order": 2,
+              "event_name": "咖啡馆交流",
+              "start_time": "21:00",
+              "end_time": "22:11",
+              "duration_minutes": 71
+            },
+            {
+              "event_order": 3,
+              "event_name": "夜间影音放松",
+              "start_time": "22:39",
+              "end_time": "23:14",
+              "duration_minutes": 35
+            }
+          ]
+        },
+        {
+          "day_index": 10,
+          "date": "2026-04-10",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "思绪清空记录",
+              "start_time": "09:43",
+              "end_time": "10:18",
+              "duration_minutes": 35
+            },
+            {
+              "event_order": 2,
+              "event_name": "晚间阅读",
+              "start_time": "16:00",
+              "end_time": "16:38",
+              "duration_minutes": 38
+            },
+            {
+              "event_order": 3,
+              "event_name": "轻社交聊天",
+              "start_time": "21:21",
+              "end_time": "21:54",
+              "duration_minutes": 33
+            },
+            {
+              "event_order": 4,
+              "event_name": "河边慢走",
+              "start_time": "22:28",
+              "end_time": "22:53",
+              "duration_minutes": 25
+            }
+          ]
+        },
+        {
+          "day_index": 11,
+          "date": "2026-04-11",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "夜间创意写作",
+              "start_time": "10:44",
+              "end_time": "11:32",
+              "duration_minutes": 48
+            },
+            {
+              "event_order": 2,
+              "event_name": "兴趣内容浏览",
+              "start_time": "19:39",
+              "end_time": "21:04",
+              "duration_minutes": 85
+            },
+            {
+              "event_order": 3,
+              "event_name": "河边慢走",
+              "start_time": "21:14",
+              "end_time": "22:29",
+              "duration_minutes": 75
+            }
+          ]
+        },
+        {
+          "day_index": 12,
+          "date": "2026-04-12",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "舒缓散步",
+              "start_time": "19:17",
+              "end_time": "20:18",
+              "duration_minutes": 61
+            },
+            {
+              "event_order": 2,
+              "event_name": "作品打磨",
+              "start_time": "22:38",
+              "end_time": "23:18",
+              "duration_minutes": 40
+            }
+          ]
+        },
+        {
+          "day_index": 13,
+          "date": "2026-04-13",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "晚间散步",
+              "start_time": "16:11",
+              "end_time": "17:28",
+              "duration_minutes": 77
+            },
+            {
+              "event_order": 2,
+              "event_name": "次日计划梳理",
+              "start_time": "18:56",
+              "end_time": "20:12",
+              "duration_minutes": 76
+            }
+          ]
+        },
+        {
+          "day_index": 14,
+          "date": "2026-04-14",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "日程复盘",
+              "start_time": "15:41",
+              "end_time": "16:21",
+              "duration_minutes": 40
+            },
+            {
+              "event_order": 2,
+              "event_name": "好友见面",
+              "start_time": "22:21",
+              "end_time": "22:53",
+              "duration_minutes": 32
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "personality_code": "E-L-R",
+      "personality_name": "夜间猎手",
+      "source_portraits": {
+        "sleep_portrait": "典型的夜猫子。夜间大脑持续活跃，越夜越精神，自然而然地晚睡。但由于低敏感，对环境不挑剔，一旦入睡后睡眠连续性好。入睡主要障碍是大脑不愿停下来，而非环境干扰。属于晚睡但睡得还行的类型。",
+        "schedule_portrait": "偏放纵但效率感较强的夜型玩家。娱乐与兴趣探索集中在晚间，日程里常见游戏、内容消费和创意输出；阅读与运动会做，但多采用短时、机动式安排。",
+        "fusion_portrait": "这是功能性较强的夜型人格。其日程虽偏娱乐化，但因低敏感带来较好的睡中稳定性，整体仍可维持中上水平恢复。主要矛盾在于睡得晚而非睡不好，优化方向是减少深夜兴奋性活动时长并稳定起床节律。",
+        "high_frequency_activities": [
+          "夜间娱乐和内容创作",
+          "兴趣驱动型学习",
+          "短平快健身或球类活动",
+          "非固定时段阅读"
+        ]
+      },
+      "events_per_day_range": {
+        "min": 2,
+        "max": 5
+      },
+      "days": [
+        {
+          "day_index": 1,
+          "date": "2026-04-01",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "游戏娱乐",
+              "start_time": "12:58",
+              "end_time": "14:08",
+              "duration_minutes": 70
+            },
+            {
+              "event_order": 2,
+              "event_name": "好友见面",
+              "start_time": "19:21",
+              "end_time": "20:30",
+              "duration_minutes": 69
+            },
+            {
+              "event_order": 3,
+              "event_name": "安静阅读",
+              "start_time": "21:07",
+              "end_time": "22:09",
+              "duration_minutes": 62
+            },
+            {
+              "event_order": 4,
+              "event_name": "深度思考时段",
+              "start_time": "22:34",
+              "end_time": "23:11",
+              "duration_minutes": 37
+            }
+          ]
+        },
+        {
+          "day_index": 2,
+          "date": "2026-04-02",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "游戏娱乐",
+              "start_time": "10:18",
+              "end_time": "11:22",
+              "duration_minutes": 64
+            },
+            {
+              "event_order": 2,
+              "event_name": "知识输入阅读",
+              "start_time": "19:07",
+              "end_time": "20:06",
+              "duration_minutes": 59
+            }
+          ]
+        },
+        {
+          "day_index": 3,
+          "date": "2026-04-03",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "公园散步",
+              "start_time": "09:44",
+              "end_time": "10:22",
+              "duration_minutes": 38
+            },
+            {
+              "event_order": 2,
+              "event_name": "主题阅读",
+              "start_time": "15:48",
+              "end_time": "16:25",
+              "duration_minutes": 37
+            },
+            {
+              "event_order": 3,
+              "event_name": "夜间创意写作",
+              "start_time": "21:06",
+              "end_time": "22:25",
+              "duration_minutes": 79
+            },
+            {
+              "event_order": 4,
+              "event_name": "轻社交聊天",
+              "start_time": "22:35",
+              "end_time": "23:04",
+              "duration_minutes": 29
+            }
+          ]
+        },
+        {
+          "day_index": 4,
+          "date": "2026-04-04",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "深度阅读",
+              "start_time": "13:39",
+              "end_time": "14:12",
+              "duration_minutes": 33
+            },
+            {
+              "event_order": 2,
+              "event_name": "高优先级任务处理",
+              "start_time": "16:27",
+              "end_time": "17:38",
+              "duration_minutes": 71
+            },
+            {
+              "event_order": 3,
+              "event_name": "创意草图整理",
+              "start_time": "19:42",
+              "end_time": "21:07",
+              "duration_minutes": 85
+            },
+            {
+              "event_order": 4,
+              "event_name": "晚间散步",
+              "start_time": "23:18",
+              "end_time": "23:41",
+              "duration_minutes": 23
+            }
+          ]
+        },
+        {
+          "day_index": 5,
+          "date": "2026-04-05",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "灵感创作",
+              "start_time": "16:19",
+              "end_time": "17:33",
+              "duration_minutes": 74
+            },
+            {
+              "event_order": 2,
+              "event_name": "游戏娱乐",
+              "start_time": "19:24",
+              "end_time": "20:01",
+              "duration_minutes": 37
+            }
+          ]
+        },
+        {
+          "day_index": 6,
+          "date": "2026-04-06",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "低噪社交",
+              "start_time": "21:09",
+              "end_time": "21:51",
+              "duration_minutes": 42
+            },
+            {
+              "event_order": 2,
+              "event_name": "深度阅读",
+              "start_time": "22:34",
+              "end_time": "23:11",
+              "duration_minutes": 37
+            }
+          ]
+        },
+        {
+          "day_index": 7,
+          "date": "2026-04-07",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "轻社交聊天",
+              "start_time": "13:01",
+              "end_time": "14:12",
+              "duration_minutes": 71
+            },
+            {
+              "event_order": 2,
+              "event_name": "公园散步",
+              "start_time": "15:48",
+              "end_time": "17:09",
+              "duration_minutes": 81
+            },
+            {
+              "event_order": 3,
+              "event_name": "线下短聚",
+              "start_time": "19:01",
+              "end_time": "19:39",
+              "duration_minutes": 38
+            },
+            {
+              "event_order": 4,
+              "event_name": "知识输入阅读",
+              "start_time": "21:18",
+              "end_time": "21:54",
+              "duration_minutes": 36
+            },
+            {
+              "event_order": 5,
+              "event_name": "高优先级任务处理",
+              "start_time": "22:39",
+              "end_time": "23:10",
+              "duration_minutes": 31
+            }
+          ]
+        },
+        {
+          "day_index": 8,
+          "date": "2026-04-08",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "轻社交聊天",
+              "start_time": "10:06",
+              "end_time": "10:47",
+              "duration_minutes": 41
+            },
+            {
+              "event_order": 2,
+              "event_name": "河边慢走",
+              "start_time": "13:13",
+              "end_time": "13:48",
+              "duration_minutes": 35
+            },
+            {
+              "event_order": 3,
+              "event_name": "内容创作时段",
+              "start_time": "22:45",
+              "end_time": "23:09",
+              "duration_minutes": 24
+            }
+          ]
+        },
+        {
+          "day_index": 9,
+          "date": "2026-04-09",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "河边慢走",
+              "start_time": "09:57",
+              "end_time": "10:36",
+              "duration_minutes": 39
+            },
+            {
+              "event_order": 2,
+              "event_name": "项目推进时段",
+              "start_time": "18:40",
+              "end_time": "19:38",
+              "duration_minutes": 58
+            },
+            {
+              "event_order": 3,
+              "event_name": "轻社交聊天",
+              "start_time": "22:12",
+              "end_time": "22:40",
+              "duration_minutes": 28
+            }
+          ]
+        },
+        {
+          "day_index": 10,
+          "date": "2026-04-10",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "咖啡馆交流",
+              "start_time": "09:53",
+              "end_time": "10:23",
+              "duration_minutes": 30
+            },
+            {
+              "event_order": 2,
+              "event_name": "安静阅读",
+              "start_time": "13:22",
+              "end_time": "14:14",
+              "duration_minutes": 52
+            },
+            {
+              "event_order": 3,
+              "event_name": "播客脚本构思",
+              "start_time": "19:22",
+              "end_time": "20:41",
+              "duration_minutes": 79
+            },
+            {
+              "event_order": 4,
+              "event_name": "夜间音乐时段",
+              "start_time": "20:51",
+              "end_time": "22:01",
+              "duration_minutes": 70
+            },
+            {
+              "event_order": 5,
+              "event_name": "轻量步行",
+              "start_time": "22:39",
+              "end_time": "23:17",
+              "duration_minutes": 38
+            }
+          ]
+        },
+        {
+          "day_index": 11,
+          "date": "2026-04-11",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "夜间音乐时段",
+              "start_time": "19:08",
+              "end_time": "19:54",
+              "duration_minutes": 46
+            },
+            {
+              "event_order": 2,
+              "event_name": "舒缓散步",
+              "start_time": "21:46",
+              "end_time": "22:43",
+              "duration_minutes": 57
+            },
+            {
+              "event_order": 3,
+              "event_name": "社区活动参与",
+              "start_time": "23:17",
+              "end_time": "23:40",
+              "duration_minutes": 23
+            }
+          ]
+        },
+        {
+          "day_index": 12,
+          "date": "2026-04-12",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "舒缓散步",
+              "start_time": "19:50",
+              "end_time": "21:07",
+              "duration_minutes": 77
+            },
+            {
+              "event_order": 2,
+              "event_name": "咖啡馆交流",
+              "start_time": "21:38",
+              "end_time": "22:45",
+              "duration_minutes": 67
+            },
+            {
+              "event_order": 3,
+              "event_name": "晚间阅读",
+              "start_time": "22:59",
+              "end_time": "23:33",
+              "duration_minutes": 34
+            }
+          ]
+        },
+        {
+          "day_index": 13,
+          "date": "2026-04-13",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "灵感创作",
+              "start_time": "10:12",
+              "end_time": "10:49",
+              "duration_minutes": 37
+            },
+            {
+              "event_order": 2,
+              "event_name": "兴趣内容浏览",
+              "start_time": "13:22",
+              "end_time": "14:15",
+              "duration_minutes": 53
+            },
+            {
+              "event_order": 3,
+              "event_name": "输出型工作时段",
+              "start_time": "22:15",
+              "end_time": "22:40",
+              "duration_minutes": 25
+            }
+          ]
+        },
+        {
+          "day_index": 14,
+          "date": "2026-04-14",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "河边慢走",
+              "start_time": "13:12",
+              "end_time": "14:27",
+              "duration_minutes": 75
+            },
+            {
+              "event_order": 2,
+              "event_name": "社区活动参与",
+              "start_time": "16:16",
+              "end_time": "17:35",
+              "duration_minutes": 79
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "personality_code": "E-L-C",
+      "personality_name": "随性漫游者",
+      "source_portraits": {
+        "sleep_portrait": "主动选择晚睡的夜间效率型。享受深夜的安静与自由，但并非因为睡不着。一旦决定睡觉，入睡迅速，睡眠质量高。低敏感让其不受环境干扰，低活跃的大脑让其随时能切换到睡眠模式。唯一的问题是作息偏晚，早起时可能有起床困难。",
+        "schedule_portrait": "偏放松的夜型享乐者。日程娱乐性较高，倾向在夜间完成社交、影音和个人爱好；白天安排相对精简，运动与阅读存在但更随性，重视即时满足与生活体验。",
+        "fusion_portrait": "这是睡中质量较好但作息后移明显的夜型人格。日程以体验和娱乐为主，睡眠本身稳定、效率较高，但晚睡会压缩与社会时钟的重叠时间。建议在不破坏生活乐趣的前提下，建立可持续的晚间截止点与晨间唤醒机制。",
+        "high_frequency_activities": [
+          "夜间社交与娱乐消费",
+          "长时段影音或游戏",
+          "随性阅读",
+          "轻量活动与休闲散步"
+        ]
+      },
+      "events_per_day_range": {
+        "min": 2,
+        "max": 5
+      },
+      "days": [
+        {
+          "day_index": 1,
+          "date": "2026-04-01",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "书摘整理",
+              "start_time": "12:44",
+              "end_time": "13:15",
+              "duration_minutes": 31
+            },
+            {
+              "event_order": 2,
+              "event_name": "创意草图整理",
+              "start_time": "18:48",
+              "end_time": "19:52",
+              "duration_minutes": 64
+            },
+            {
+              "event_order": 3,
+              "event_name": "任务清单整理",
+              "start_time": "20:47",
+              "end_time": "21:17",
+              "duration_minutes": 30
+            },
+            {
+              "event_order": 4,
+              "event_name": "咖啡馆交流",
+              "start_time": "22:20",
+              "end_time": "22:47",
+              "duration_minutes": 27
+            }
+          ]
+        },
+        {
+          "day_index": 2,
+          "date": "2026-04-02",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "深度阅读",
+              "start_time": "09:40",
+              "end_time": "10:28",
+              "duration_minutes": 48
+            },
+            {
+              "event_order": 2,
+              "event_name": "餐后散步",
+              "start_time": "13:04",
+              "end_time": "14:08",
+              "duration_minutes": 64
+            },
+            {
+              "event_order": 3,
+              "event_name": "夜间音乐时段",
+              "start_time": "22:38",
+              "end_time": "23:18",
+              "duration_minutes": 40
+            }
+          ]
+        },
+        {
+          "day_index": 3,
+          "date": "2026-04-03",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "公园散步",
+              "start_time": "10:17",
+              "end_time": "10:46",
+              "duration_minutes": 29
+            },
+            {
+              "event_order": 2,
+              "event_name": "日程复盘",
+              "start_time": "16:18",
+              "end_time": "16:59",
+              "duration_minutes": 41
+            },
+            {
+              "event_order": 3,
+              "event_name": "低噪社交",
+              "start_time": "18:58",
+              "end_time": "20:21",
+              "duration_minutes": 83
+            },
+            {
+              "event_order": 4,
+              "event_name": "兴趣内容浏览",
+              "start_time": "20:46",
+              "end_time": "21:42",
+              "duration_minutes": 56
+            },
+            {
+              "event_order": 5,
+              "event_name": "深度阅读",
+              "start_time": "22:24",
+              "end_time": "22:56",
+              "duration_minutes": 32
+            }
+          ]
+        },
+        {
+          "day_index": 4,
+          "date": "2026-04-04",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "灵感创作",
+              "start_time": "10:34",
+              "end_time": "11:35",
+              "duration_minutes": 61
+            },
+            {
+              "event_order": 2,
+              "event_name": "周目标回看",
+              "start_time": "13:06",
+              "end_time": "14:06",
+              "duration_minutes": 60
+            },
+            {
+              "event_order": 3,
+              "event_name": "家庭交流时间",
+              "start_time": "16:30",
+              "end_time": "17:55",
+              "duration_minutes": 85
+            },
+            {
+              "event_order": 4,
+              "event_name": "夜间音乐时段",
+              "start_time": "19:07",
+              "end_time": "20:12",
+              "duration_minutes": 65
+            },
+            {
+              "event_order": 5,
+              "event_name": "知识输入阅读",
+              "start_time": "21:28",
+              "end_time": "22:05",
+              "duration_minutes": 37
+            }
+          ]
+        },
+        {
+          "day_index": 5,
+          "date": "2026-04-05",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "线下短聚",
+              "start_time": "13:47",
+              "end_time": "14:51",
+              "duration_minutes": 64
+            },
+            {
+              "event_order": 2,
+              "event_name": "舒缓散步",
+              "start_time": "21:49",
+              "end_time": "23:06",
+              "duration_minutes": 77
+            },
+            {
+              "event_order": 3,
+              "event_name": "作品打磨",
+              "start_time": "23:16",
+              "end_time": "23:39",
+              "duration_minutes": 23
+            }
+          ]
+        },
+        {
+          "day_index": 6,
+          "date": "2026-04-06",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "安静阅读",
+              "start_time": "16:15",
+              "end_time": "17:33",
+              "duration_minutes": 78
+            },
+            {
+              "event_order": 2,
+              "event_name": "轻量步行",
+              "start_time": "18:46",
+              "end_time": "20:02",
+              "duration_minutes": 76
+            },
+            {
+              "event_order": 3,
+              "event_name": "次日计划梳理",
+              "start_time": "22:50",
+              "end_time": "23:27",
+              "duration_minutes": 37
+            }
+          ]
+        },
+        {
+          "day_index": 7,
+          "date": "2026-04-07",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "夜间音乐时段",
+              "start_time": "09:40",
+              "end_time": "10:26",
+              "duration_minutes": 46
+            },
+            {
+              "event_order": 2,
+              "event_name": "晚间阅读",
+              "start_time": "13:23",
+              "end_time": "14:35",
+              "duration_minutes": 72
+            },
+            {
+              "event_order": 3,
+              "event_name": "灵感创作",
+              "start_time": "18:45",
+              "end_time": "19:25",
+              "duration_minutes": 40
+            },
+            {
+              "event_order": 4,
+              "event_name": "周目标回看",
+              "start_time": "21:02",
+              "end_time": "21:56",
+              "duration_minutes": 54
+            },
+            {
+              "event_order": 5,
+              "event_name": "低噪社交",
+              "start_time": "22:42",
+              "end_time": "23:22",
+              "duration_minutes": 40
+            }
+          ]
+        },
+        {
+          "day_index": 8,
+          "date": "2026-04-08",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "晚间阅读",
+              "start_time": "10:16",
+              "end_time": "11:08",
+              "duration_minutes": 52
+            },
+            {
+              "event_order": 2,
+              "event_name": "餐后散步",
+              "start_time": "13:15",
+              "end_time": "14:04",
+              "duration_minutes": 49
+            },
+            {
+              "event_order": 3,
+              "event_name": "任务清单整理",
+              "start_time": "19:13",
+              "end_time": "20:03",
+              "duration_minutes": 50
+            },
+            {
+              "event_order": 4,
+              "event_name": "好友见面",
+              "start_time": "20:50",
+              "end_time": "21:27",
+              "duration_minutes": 37
+            },
+            {
+              "event_order": 5,
+              "event_name": "追剧放松",
+              "start_time": "22:53",
+              "end_time": "23:27",
+              "duration_minutes": 34
+            }
+          ]
+        },
+        {
+          "day_index": 9,
+          "date": "2026-04-09",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "创意草图整理",
+              "start_time": "13:24",
+              "end_time": "14:46",
+              "duration_minutes": 82
+            },
+            {
+              "event_order": 2,
+              "event_name": "好友见面",
+              "start_time": "18:41",
+              "end_time": "19:53",
+              "duration_minutes": 72
+            },
+            {
+              "event_order": 3,
+              "event_name": "兴趣内容浏览",
+              "start_time": "20:57",
+              "end_time": "21:51",
+              "duration_minutes": 54
+            }
+          ]
+        },
+        {
+          "day_index": 10,
+          "date": "2026-04-10",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "思绪清空记录",
+              "start_time": "13:03",
+              "end_time": "13:43",
+              "duration_minutes": 40
+            },
+            {
+              "event_order": 2,
+              "event_name": "线下短聚",
+              "start_time": "15:55",
+              "end_time": "17:09",
+              "duration_minutes": 74
+            },
+            {
+              "event_order": 3,
+              "event_name": "夜间音乐时段",
+              "start_time": "18:43",
+              "end_time": "19:20",
+              "duration_minutes": 37
+            },
+            {
+              "event_order": 4,
+              "event_name": "晚间散步",
+              "start_time": "22:11",
+              "end_time": "22:33",
+              "duration_minutes": 22
+            }
+          ]
+        },
+        {
+          "day_index": 11,
+          "date": "2026-04-11",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "次日计划梳理",
+              "start_time": "10:15",
+              "end_time": "11:02",
+              "duration_minutes": 47
+            },
+            {
+              "event_order": 2,
+              "event_name": "兴趣内容浏览",
+              "start_time": "16:34",
+              "end_time": "17:27",
+              "duration_minutes": 53
+            },
+            {
+              "event_order": 3,
+              "event_name": "安静阅读",
+              "start_time": "19:12",
+              "end_time": "20:12",
+              "duration_minutes": 60
+            },
+            {
+              "event_order": 4,
+              "event_name": "公园散步",
+              "start_time": "21:17",
+              "end_time": "22:37",
+              "duration_minutes": 80
+            },
+            {
+              "event_order": 5,
+              "event_name": "作品打磨",
+              "start_time": "22:49",
+              "end_time": "23:29",
+              "duration_minutes": 40
+            }
+          ]
+        },
+        {
+          "day_index": 12,
+          "date": "2026-04-12",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "咖啡馆交流",
+              "start_time": "10:36",
+              "end_time": "11:06",
+              "duration_minutes": 30
+            },
+            {
+              "event_order": 2,
+              "event_name": "游戏娱乐",
+              "start_time": "13:20",
+              "end_time": "14:19",
+              "duration_minutes": 59
+            },
+            {
+              "event_order": 3,
+              "event_name": "知识输入阅读",
+              "start_time": "16:27",
+              "end_time": "17:43",
+              "duration_minutes": 76
+            },
+            {
+              "event_order": 4,
+              "event_name": "内容创作时段",
+              "start_time": "21:40",
+              "end_time": "22:21",
+              "duration_minutes": 41
+            },
+            {
+              "event_order": 5,
+              "event_name": "思绪清空记录",
+              "start_time": "23:06",
+              "end_time": "23:40",
+              "duration_minutes": 34
+            }
+          ]
+        },
+        {
+          "day_index": 13,
+          "date": "2026-04-13",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "游戏娱乐",
+              "start_time": "09:53",
+              "end_time": "10:31",
+              "duration_minutes": 38
+            },
+            {
+              "event_order": 2,
+              "event_name": "创意草图整理",
+              "start_time": "19:17",
+              "end_time": "20:16",
+              "duration_minutes": 59
+            },
+            {
+              "event_order": 3,
+              "event_name": "周目标回看",
+              "start_time": "20:57",
+              "end_time": "21:37",
+              "duration_minutes": 40
+            }
+          ]
+        },
+        {
+          "day_index": 14,
+          "date": "2026-04-14",
+          "events": [
+            {
+              "event_order": 1,
+              "event_name": "晚间散步",
+              "start_time": "13:10",
+              "end_time": "14:31",
+              "duration_minutes": 81
+            },
+            {
+              "event_order": 2,
+              "event_name": "轻量总结",
+              "start_time": "19:05",
+              "end_time": "20:08",
+              "duration_minutes": 63
+            },
+            {
+              "event_order": 3,
+              "event_name": "好友见面",
+              "start_time": "21:25",
+              "end_time": "22:36",
+              "duration_minutes": 71
+            },
+            {
+              "event_order": 4,
+              "event_name": "夜间影音放松",
+              "start_time": "22:46",
+              "end_time": "23:26",
+              "duration_minutes": 40
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

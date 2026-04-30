@@ -1,0 +1,1566 @@
+{
+  "_comment": "八人格睡眠健康数据生成配置。约束优先级：人格特征（三维编码 M/E·H/L·R/C + 各人格好/差叙事）高于一切；指标与时刻区间须与 docs/personas/各人格睡眠指标范围.md 一致并可被该叙事解释。deep/light/rem 比例均相对净睡眠时长(TST)，三者之和为100；awake 比例相对总卧床时长(TIB)。sleep_time_range 为实际入睡时刻（卧床+入睡潜伏期），脚本按 record_date 当天采样。sleep_event_probabilities 为每晚发生该事件至少一次的概率（0.0~1.0），基于人格特征设定。generation 为体征/环境采样间隔与事件触发默认值；人格对象可含同名 generation 键覆盖子字段。",
+  "generation": {
+    "_desc": "环境与体征按 sample_interval_sec 在 bed～wake_up 窗内等间隔生成；事件脚本读 event_triggers。",
+    "sample_interval_sec": 60,
+    "day_state_mix": {
+      "mode": "mixed",
+      "good_ratio": 0.5,
+      "max_bad_days_per_week": 3
+    },
+    "environment": {
+      "continuous_noise_db_min": 35,
+      "sudden_noise_db_min": 45,
+      "temperature_bedroom_range": [
+        22,
+        28
+      ],
+      "humidity_range": [
+        40,
+        65
+      ],
+      "illuminance_sleep_range": [
+        0,
+        5
+      ],
+      "sleep_onset_hot_temp_c": 28,
+      "sleep_pressure_noise_min": 60
+    },
+    "vitals": {
+      "night_hr_abnormal_min": 80,
+      "baseline_minutes_after_sleep_onset": 15
+    },
+    "event_triggers": {
+      "nightmare": {
+        "body_motion_window_sec": 10,
+        "body_motion_points": 2,
+        "body_motion_sum_min": 4,
+        "heart_rate_window_sec": 15,
+        "heart_rate_points": 3,
+        "heart_rate_vs_baseline_pct_min": 30,
+        "respiration_window_sec": 20,
+        "respiration_points": 4,
+        "respiration_vs_baseline_pct_min": 40
+      },
+      "abnormal_movement": {
+        "body_motion_count_min": 3,
+        "env_temperature_above_c": 28
+      },
+      "sleep_onset_difficulty": {
+        "sleep_latency_minutes_min": 30,
+        "turnover_window_minutes": 15,
+        "turnover_count_min": 6,
+        "respiration_sustain_minutes": 5,
+        "respiration_rate_above_per_min": 15
+      }
+    },
+    "event_feedback": {
+      "window_half_minutes": 5,
+      "insert_gap_sec": 5
+    }
+  },
+  "personas": [
+    {
+      "name": "完美主义百灵鸟",
+      "code": "M-H-R",
+      "identity_type": "策划者",
+      "user_id": "69aea593af5e6cbf08027964",
+      "date_range": {
+        "start": "2026-03-01",
+        "end": "2026-04-01"
+      },
+      "sleep_metric_states": {
+        "good": {
+          "_desc": "稳定态：节律规律，浅睡/深睡比例均衡，入睡尚可",
+          "sleep_time_range": [
+            "22:42",
+            "22:58"
+          ],
+          "bed_time_range": [
+            "22:22",
+            "22:38"
+          ],
+          "wake_up_time_range": [
+            "06:14",
+            "06:28"
+          ],
+          "total_sleep_minutes": [
+            420,
+            448
+          ],
+          "deep_sleep_ratio": [
+            13,
+            18
+          ],
+          "light_sleep_ratio": [
+            42,
+            50
+          ],
+          "rem_ratio": [
+            17,
+            24
+          ],
+          "awake_ratio": [
+            7,
+            11
+          ],
+          "night_awakenings": [
+            2,
+            4
+          ],
+          "sleep_latency": [
+            17,
+            25
+          ],
+          "sleep_efficiency": [
+            89,
+            93
+          ],
+          "wake_after_sleep": [
+            6,
+            11
+          ],
+          "average_heartbeat": [
+            68,
+            78
+          ],
+          "average_respiration": [
+            14,
+            20
+          ],
+          "apnea_count": [
+            1,
+            4
+          ],
+          "turnover_count": [
+            25,
+            40
+          ],
+          "schedule_jitter_minutes": 12
+        },
+        "bad": {
+          "_desc": "失衡态：入睡困难，清醒频繁，心率/呼吸偏高，深睡不足",
+          "sleep_time_range": [
+            "23:40",
+            "23:58"
+          ],
+          "bed_time_range": [
+            "23:15",
+            "23:32"
+          ],
+          "wake_up_time_range": [
+            "06:58",
+            "07:12"
+          ],
+          "total_sleep_minutes": [
+            390,
+            425
+          ],
+          "deep_sleep_ratio": [
+            9,
+            13
+          ],
+          "light_sleep_ratio": [
+            50,
+            58
+          ],
+          "rem_ratio": [
+            14,
+            20
+          ],
+          "awake_ratio": [
+            14,
+            19
+          ],
+          "night_awakenings": [
+            4,
+            7
+          ],
+          "sleep_latency": [
+            22,
+            36
+          ],
+          "sleep_efficiency": [
+            81,
+            86
+          ],
+          "wake_after_sleep": [
+            19,
+            25
+          ],
+          "average_heartbeat": [
+            74,
+            84
+          ],
+          "average_respiration": [
+            19,
+            24
+          ],
+          "apnea_count": [
+            2,
+            5
+          ],
+          "turnover_count": [
+            40,
+            55
+          ],
+          "schedule_jitter_minutes": 16
+        }
+      },
+      "sleep_event_probabilities": {
+        "_desc": "高敏感+高活跃：对声音/环境极敏感，入睡困难，体动频繁，易噩梦和心率波动",
+        "abnormal": {
+          "入睡困难": 0.5,
+          "噩梦应激": 0.2,
+          "心率上升": 0.15,
+          "异常体动": 0.2,
+          "持续性噪声": {
+            "家电持续声": 0.12,
+            "环境持续声": 0.18,
+            "邻里持续声": 0.2,
+            "自然持续声": 0.12
+          },
+          "一次性噪声": {
+            "突发撞击声": 0.12,
+            "突发交通声": 0.15,
+            "人声/门铃声": 0.12,
+            "自然突发声": 0.1,
+            "物品突发声": 0.1
+          }
+        },
+        "normal": {
+          "打鼾": 0.3,
+          "梦话": 0.25,
+          "咳嗽": 0.12,
+          "睡眠姿势切换": 0.4,
+          "肢体动作": 0.35,
+          "自然微动": 0.45,
+          "单次体动": 0.25,
+          "呼吸声": 0.15,
+          "吞咽": 0.15
+        },
+        "blocked_events": []
+      }
+    },
+    {
+      "name": "敏感的晨间鹿",
+      "code": "M-H-C",
+      "identity_type": "调音师",
+      "user_id": "69aea63eaf5e6cbf08027965",
+      "date_range": {
+        "start": "2026-03-01",
+        "end": "2026-04-01"
+      },
+      "sleep_metric_states": {
+        "good": {
+          "_desc": "稳定态：早睡，环境安静，深睡充足，夜醒极少",
+          "sleep_time_range": [
+            "22:20",
+            "22:34"
+          ],
+          "bed_time_range": [
+            "22:08",
+            "22:22"
+          ],
+          "wake_up_time_range": [
+            "06:06",
+            "06:18"
+          ],
+          "total_sleep_minutes": [
+            424,
+            452
+          ],
+          "deep_sleep_ratio": [
+            15,
+            20
+          ],
+          "light_sleep_ratio": [
+            41,
+            49
+          ],
+          "rem_ratio": [
+            17,
+            24
+          ],
+          "awake_ratio": [
+            8,
+            12
+          ],
+          "night_awakenings": [
+            1,
+            3
+          ],
+          "sleep_latency": [
+            8,
+            17
+          ],
+          "sleep_efficiency": [
+            88,
+            92
+          ],
+          "wake_after_sleep": [
+            5,
+            9
+          ],
+          "average_heartbeat": [
+            62,
+            72
+          ],
+          "average_respiration": [
+            12,
+            18
+          ],
+          "apnea_count": [
+            0,
+            3
+          ],
+          "turnover_count": [
+            22,
+            35
+          ],
+          "schedule_jitter_minutes": 12
+        },
+        "bad": {
+          "_desc": "失衡态：感官高度敏感，易被声响惊醒，深睡不足",
+          "sleep_time_range": [
+            "23:15",
+            "23:32"
+          ],
+          "bed_time_range": [
+            "22:55",
+            "23:12"
+          ],
+          "wake_up_time_range": [
+            "06:30",
+            "06:44"
+          ],
+          "total_sleep_minutes": [
+            398,
+            432
+          ],
+          "deep_sleep_ratio": [
+            11,
+            15
+          ],
+          "light_sleep_ratio": [
+            48,
+            56
+          ],
+          "rem_ratio": [
+            15,
+            21
+          ],
+          "awake_ratio": [
+            13,
+            18
+          ],
+          "night_awakenings": [
+            3,
+            6
+          ],
+          "sleep_latency": [
+            18,
+            32
+          ],
+          "sleep_efficiency": [
+            82,
+            87
+          ],
+          "wake_after_sleep": [
+            15,
+            21
+          ],
+          "average_heartbeat": [
+            68,
+            78
+          ],
+          "average_respiration": [
+            16,
+            22
+          ],
+          "apnea_count": [
+            2,
+            5
+          ],
+          "turnover_count": [
+            35,
+            50
+          ],
+          "schedule_jitter_minutes": 16
+        }
+      },
+      "sleep_event_probabilities": {
+        "_desc": "高敏感+低活跃：感官极度警觉，轻微声响即被惊醒，体动少但惊跳反应强",
+        "abnormal": {
+          "入睡困难": 0.25,
+          "噩梦应激": 0.25,
+          "心率上升": 0.08,
+          "异常体动": 0.12,
+          "持续性噪声": {
+            "家电持续声": 0.18,
+            "环境持续声": 0.22,
+            "邻里持续声": 0.28,
+            "自然持续声": 0.18
+          },
+          "一次性噪声": {
+            "突发撞击声": 0.22,
+            "突发交通声": 0.22,
+            "人声/门铃声": 0.22,
+            "自然突发声": 0.2,
+            "物品突发声": 0.2
+          }
+        },
+        "normal": {
+          "打鼾": 0.18,
+          "梦话": 0.12,
+          "咳嗽": 0.22,
+          "睡眠姿势切换": 0.22,
+          "肢体动作": 0.15,
+          "自然微动": 0.38,
+          "单次体动": 0.32,
+          "呼吸声": 0.3,
+          "吞咽": 0.15
+        },
+        "blocked_events": []
+      }
+    },
+    {
+      "name": "效率至上考拉",
+      "code": "M-L-R",
+      "identity_type": "执行师",
+      "user_id": "69aea6d8af5e6cbf08027966",
+      "date_range": {
+        "start": "2026-03-01",
+        "end": "2026-04-01"
+      },
+      "sleep_metric_states": {
+        "good": {
+          "_desc": "稳定态：入睡需要过渡，但一旦入睡质量极高，深睡充足",
+          "sleep_time_range": [
+            "22:45",
+            "23:02"
+          ],
+          "bed_time_range": [
+            "22:24",
+            "22:40"
+          ],
+          "wake_up_time_range": [
+            "06:32",
+            "06:45"
+          ],
+          "total_sleep_minutes": [
+            428,
+            455
+          ],
+          "deep_sleep_ratio": [
+            15,
+            20
+          ],
+          "light_sleep_ratio": [
+            40,
+            47
+          ],
+          "rem_ratio": [
+            17,
+            24
+          ],
+          "awake_ratio": [
+            6,
+            10
+          ],
+          "night_awakenings": [
+            1,
+            2
+          ],
+          "sleep_latency": [
+            18,
+            27
+          ],
+          "sleep_efficiency": [
+            90,
+            94
+          ],
+          "wake_after_sleep": [
+            4,
+            8
+          ],
+          "average_heartbeat": [
+            60,
+            70
+          ],
+          "average_respiration": [
+            13,
+            19
+          ],
+          "apnea_count": [
+            0,
+            3
+          ],
+          "turnover_count": [
+            15,
+            28
+          ],
+          "schedule_jitter_minutes": 12
+        },
+        "bad": {
+          "_desc": "失衡态：大脑入睡前过热，清醒频率升高",
+          "sleep_time_range": [
+            "23:42",
+            "00:00"
+          ],
+          "bed_time_range": [
+            "23:15",
+            "23:32"
+          ],
+          "wake_up_time_range": [
+            "06:58",
+            "07:12"
+          ],
+          "total_sleep_minutes": [
+            400,
+            432
+          ],
+          "deep_sleep_ratio": [
+            11,
+            14
+          ],
+          "light_sleep_ratio": [
+            49,
+            56
+          ],
+          "rem_ratio": [
+            14,
+            20
+          ],
+          "awake_ratio": [
+            12,
+            17
+          ],
+          "night_awakenings": [
+            3,
+            5
+          ],
+          "sleep_latency": [
+            22,
+            34
+          ],
+          "sleep_efficiency": [
+            83,
+            88
+          ],
+          "wake_after_sleep": [
+            13,
+            18
+          ],
+          "average_heartbeat": [
+            65,
+            75
+          ],
+          "average_respiration": [
+            16,
+            22
+          ],
+          "apnea_count": [
+            1,
+            4
+          ],
+          "turnover_count": [
+            28,
+            40
+          ],
+          "schedule_jitter_minutes": 16
+        }
+      },
+      "sleep_event_probabilities": {
+        "_desc": "低敏感+高活跃：对环境噪声不敏感，入睡慢但体动多，打鼾明显，极少被声音惊醒",
+        "abnormal": {
+          "入睡困难": 0.38,
+          "噩梦应激": 0.0,
+          "心率上升": 0.08,
+          "异常体动": 0.12,
+          "持续性噪声": {
+            "家电持续声": 0.0,
+            "环境持续声": 0.0,
+            "邻里持续声": 0.0,
+            "自然持续声": 0.0
+          },
+          "一次性噪声": {
+            "突发撞击声": 0.0,
+            "突发交通声": 0.0,
+            "人声/门铃声": 0.0,
+            "自然突发声": 0.0,
+            "物品突发声": 0.0
+          }
+        },
+        "normal": {
+          "打鼾": 0.45,
+          "梦话": 0.22,
+          "咳嗽": 0.08,
+          "睡眠姿势切换": 0.35,
+          "肢体动作": 0.4,
+          "自然微动": 0.42,
+          "单次体动": 0.35,
+          "呼吸声": 0.22,
+          "吞咽": 0.12
+        },
+        "blocked_events": [
+          "噩梦应激",
+          "家电持续声",
+          "环境持续声",
+          "邻里持续声",
+          "自然持续声",
+          "突发撞击声",
+          "突发交通声",
+          "人声/门铃声",
+          "自然突发声",
+          "物品突发声"
+        ]
+      }
+    },
+    {
+      "name": "阳光漫步者",
+      "code": "M-L-C",
+      "identity_type": "漫步者",
+      "user_id": "69aea6e3af5e6cbf08027967",
+      "date_range": {
+        "start": "2026-03-01",
+        "end": "2026-04-01"
+      },
+      "sleep_metric_states": {
+        "good": {
+          "_desc": "稳定态：睡眠质量最优，入睡极快，深睡高，几乎不醒",
+          "sleep_time_range": [
+            "22:02",
+            "22:18"
+          ],
+          "bed_time_range": [
+            "21:55",
+            "22:08"
+          ],
+          "wake_up_time_range": [
+            "06:05",
+            "06:18"
+          ],
+          "total_sleep_minutes": [
+            432,
+            460
+          ],
+          "deep_sleep_ratio": [
+            16,
+            20
+          ],
+          "light_sleep_ratio": [
+            40,
+            46
+          ],
+          "rem_ratio": [
+            16,
+            22
+          ],
+          "awake_ratio": [
+            5,
+            12
+          ],
+          "night_awakenings": [
+            1,
+            2
+          ],
+          "sleep_latency": [
+            6,
+            15
+          ],
+          "sleep_efficiency": [
+            88,
+            95
+          ],
+          "wake_after_sleep": [
+            4,
+            8
+          ],
+          "average_heartbeat": [
+            52,
+            62
+          ],
+          "average_respiration": [
+            11,
+            17
+          ],
+          "apnea_count": [
+            0,
+            2
+          ],
+          "turnover_count": [
+            10,
+            22
+          ],
+          "schedule_jitter_minutes": 12
+        },
+        "bad": {
+          "_desc": "失衡态：节律轻微波动，清醒略增",
+          "sleep_time_range": [
+            "22:48",
+            "23:05"
+          ],
+          "bed_time_range": [
+            "22:30",
+            "22:48"
+          ],
+          "wake_up_time_range": [
+            "06:28",
+            "06:42"
+          ],
+          "total_sleep_minutes": [
+            405,
+            440
+          ],
+          "deep_sleep_ratio": [
+            12,
+            16
+          ],
+          "light_sleep_ratio": [
+            46,
+            54
+          ],
+          "rem_ratio": [
+            15,
+            21
+          ],
+          "awake_ratio": [
+            11,
+            16
+          ],
+          "night_awakenings": [
+            2,
+            5
+          ],
+          "sleep_latency": [
+            14,
+            24
+          ],
+          "sleep_efficiency": [
+            84,
+            89
+          ],
+          "wake_after_sleep": [
+            11,
+            16
+          ],
+          "average_heartbeat": [
+            58,
+            68
+          ],
+          "average_respiration": [
+            13,
+            19
+          ],
+          "apnea_count": [
+            1,
+            3
+          ],
+          "turnover_count": [
+            20,
+            30
+          ],
+          "schedule_jitter_minutes": 16
+        }
+      },
+      "sleep_event_probabilities": {
+        "_desc": "低敏感+低活跃：最佳睡眠人格，事件极少，偶尔安静微动，环境几乎不构成干扰",
+        "abnormal": {
+          "入睡困难": 0.0,
+          "噩梦应激": 0.0,
+          "心率上升": 0.02,
+          "异常体动": 0.05,
+          "持续性噪声": {
+            "家电持续声": 0.0,
+            "环境持续声": 0.0,
+            "邻里持续声": 0.0,
+            "自然持续声": 0.0
+          },
+          "一次性噪声": {
+            "突发撞击声": 0.0,
+            "突发交通声": 0.0,
+            "人声/门铃声": 0.0,
+            "自然突发声": 0.0,
+            "物品突发声": 0.0
+          }
+        },
+        "normal": {
+          "打鼾": 0.28,
+          "梦话": 0.08,
+          "咳嗽": 0.05,
+          "睡眠姿势切换": 0.22,
+          "肢体动作": 0.15,
+          "自然微动": 0.45,
+          "单次体动": 0.3,
+          "呼吸声": 0.22,
+          "吞咽": 0.2
+        },
+        "blocked_events": [
+          "入睡困难",
+          "噩梦应激",
+          "家电持续声",
+          "环境持续声",
+          "邻里持续声",
+          "自然持续声",
+          "突发撞击声",
+          "突发交通声",
+          "人声/门铃声",
+          "自然突发声",
+          "物品突发声"
+        ]
+      }
+    },
+    {
+      "name": "深夜灵感守望者",
+      "code": "E-H-R",
+      "identity_type": "创作家",
+      "user_id": "69aea6e8af5e6cbf08027968",
+      "date_range": {
+        "start": "2026-03-01",
+        "end": "2026-04-01"
+      },
+      "sleep_metric_states": {
+        "good": {
+          "_desc": "稳定态：入睡后质量相对好，深睡可，REM充足",
+          "sleep_time_range": [
+            "00:07",
+            "01:22"
+          ],
+          "bed_time_range": [
+            "23:45",
+            "01:00"
+          ],
+          "wake_up_time_range": [
+            "08:00",
+            "09:30"
+          ],
+          "total_sleep_minutes": [
+            412,
+            442
+          ],
+          "deep_sleep_ratio": [
+            13,
+            18
+          ],
+          "light_sleep_ratio": [
+            42,
+            50
+          ],
+          "rem_ratio": [
+            18,
+            25
+          ],
+          "awake_ratio": [
+            7,
+            12
+          ],
+          "night_awakenings": [
+            2,
+            4
+          ],
+          "sleep_latency": [
+            16,
+            28
+          ],
+          "sleep_efficiency": [
+            88,
+            93
+          ],
+          "wake_after_sleep": [
+            6,
+            20
+          ],
+          "average_heartbeat": [
+            70,
+            82
+          ],
+          "average_respiration": [
+            15,
+            21
+          ],
+          "apnea_count": [
+            1,
+            3
+          ],
+          "turnover_count": [
+            30,
+            48
+          ],
+          "schedule_jitter_minutes": 50
+        },
+        "bad": {
+          "_desc": "失衡态：越夜越精神，入睡极难，频繁夜醒，深睡严重不足",
+          "sleep_time_range": [
+            "01:04",
+            "03:04"
+          ],
+          "bed_time_range": [
+            "00:30",
+            "02:30"
+          ],
+          "wake_up_time_range": [
+            "08:30",
+            "10:30"
+          ],
+          "total_sleep_minutes": [
+            382,
+            420
+          ],
+          "deep_sleep_ratio": [
+            9,
+            13
+          ],
+          "light_sleep_ratio": [
+            50,
+            58
+          ],
+          "rem_ratio": [
+            14,
+            21
+          ],
+          "awake_ratio": [
+            14,
+            20
+          ],
+          "night_awakenings": [
+            4,
+            7
+          ],
+          "sleep_latency": [
+            26,
+            42
+          ],
+          "sleep_efficiency": [
+            80,
+            86
+          ],
+          "wake_after_sleep": [
+            18,
+            35
+          ],
+          "average_heartbeat": [
+            76,
+            88
+          ],
+          "average_respiration": [
+            20,
+            25
+          ],
+          "apnea_count": [
+            3,
+            5
+          ],
+          "turnover_count": [
+            48,
+            65
+          ],
+          "schedule_jitter_minutes": 70
+        }
+      },
+      "sleep_event_probabilities": {
+        "_desc": "高敏感+高活跃+夜型：所有事件概率最高，入睡极难，频繁夜醒，体动多，声环境全面敏感",
+        "abnormal": {
+          "入睡困难": 0.65,
+          "噩梦应激": 0.28,
+          "心率上升": 0.22,
+          "异常体动": 0.28,
+          "持续性噪声": {
+            "家电持续声": 0.18,
+            "环境持续声": 0.22,
+            "邻里持续声": 0.28,
+            "自然持续声": 0.18
+          },
+          "一次性噪声": {
+            "突发撞击声": 0.18,
+            "突发交通声": 0.22,
+            "人声/门铃声": 0.18,
+            "自然突发声": 0.15,
+            "物品突发声": 0.15
+          }
+        },
+        "normal": {
+          "打鼾": 0.32,
+          "梦话": 0.32,
+          "咳嗽": 0.12,
+          "睡眠姿势切换": 0.42,
+          "肢体动作": 0.38,
+          "自然微动": 0.38,
+          "单次体动": 0.28,
+          "呼吸声": 0.18,
+          "吞咽": 0.12
+        },
+        "blocked_events": []
+      }
+    },
+    {
+      "name": "深海独奏家",
+      "code": "E-H-C",
+      "identity_type": "独奏家",
+      "user_id": "69aea6eeaf5e6cbf08027969",
+      "date_range": {
+        "start": "2026-03-01",
+        "end": "2026-04-01"
+      },
+      "sleep_metric_states": {
+        "good": {
+          "_desc": "稳定态：偏晚入睡，对环境极敏感，但深睡尚可",
+          "sleep_time_range": [
+            "23:46",
+            "01:01"
+          ],
+          "bed_time_range": [
+            "23:30",
+            "00:45"
+          ],
+          "wake_up_time_range": [
+            "07:30",
+            "09:00"
+          ],
+          "total_sleep_minutes": [
+            420,
+            448
+          ],
+          "deep_sleep_ratio": [
+            15,
+            20
+          ],
+          "light_sleep_ratio": [
+            41,
+            49
+          ],
+          "rem_ratio": [
+            17,
+            24
+          ],
+          "awake_ratio": [
+            8,
+            12
+          ],
+          "night_awakenings": [
+            2,
+            3
+          ],
+          "sleep_latency": [
+            10,
+            22
+          ],
+          "sleep_efficiency": [
+            88,
+            92
+          ],
+          "wake_after_sleep": [
+            7,
+            20
+          ],
+          "average_heartbeat": [
+            64,
+            76
+          ],
+          "average_respiration": [
+            12,
+            18
+          ],
+          "apnea_count": [
+            1,
+            4
+          ],
+          "turnover_count": [
+            22,
+            35
+          ],
+          "schedule_jitter_minutes": 50
+        },
+        "bad": {
+          "_desc": "失衡态：反复思考，夜醒频繁，浅睡高，睡眠效率低",
+          "sleep_time_range": [
+            "00:27",
+            "02:27"
+          ],
+          "bed_time_range": [
+            "00:00",
+            "02:00"
+          ],
+          "wake_up_time_range": [
+            "08:00",
+            "10:00"
+          ],
+          "total_sleep_minutes": [
+            392,
+            428
+          ],
+          "deep_sleep_ratio": [
+            11,
+            15
+          ],
+          "light_sleep_ratio": [
+            48,
+            56
+          ],
+          "rem_ratio": [
+            15,
+            21
+          ],
+          "awake_ratio": [
+            13,
+            19
+          ],
+          "night_awakenings": [
+            3,
+            6
+          ],
+          "sleep_latency": [
+            20,
+            34
+          ],
+          "sleep_efficiency": [
+            81,
+            87
+          ],
+          "wake_after_sleep": [
+            16,
+            32
+          ],
+          "average_heartbeat": [
+            70,
+            82
+          ],
+          "average_respiration": [
+            16,
+            22
+          ],
+          "apnea_count": [
+            2,
+            5
+          ],
+          "turnover_count": [
+            35,
+            50
+          ],
+          "schedule_jitter_minutes": 70
+        }
+      },
+      "sleep_event_probabilities": {
+        "_desc": "高敏感+低活跃+夜型：对声音/环境极度敏感，焦虑引发噩梦和心率异常，体动较少但惊醒频繁",
+        "abnormal": {
+          "入睡困难": 0.28,
+          "噩梦应激": 0.28,
+          "心率上升": 0.18,
+          "异常体动": 0.18,
+          "持续性噪声": {
+            "家电持续声": 0.22,
+            "环境持续声": 0.28,
+            "邻里持续声": 0.32,
+            "自然持续声": 0.22
+          },
+          "一次性噪声": {
+            "突发撞击声": 0.25,
+            "突发交通声": 0.25,
+            "人声/门铃声": 0.22,
+            "自然突发声": 0.22,
+            "物品突发声": 0.22
+          }
+        },
+        "normal": {
+          "打鼾": 0.15,
+          "梦话": 0.12,
+          "咳嗽": 0.22,
+          "睡眠姿势切换": 0.22,
+          "肢体动作": 0.12,
+          "自然微动": 0.3,
+          "单次体动": 0.32,
+          "呼吸声": 0.32,
+          "吞咽": 0.15
+        },
+        "blocked_events": []
+      }
+    },
+    {
+      "name": "创意夜猫子",
+      "code": "E-L-R",
+      "identity_type": "探险家",
+      "user_id": "69aea6f3af5e6cbf0802796a",
+      "date_range": {
+        "start": "2026-03-01",
+        "end": "2026-04-01"
+      },
+      "sleep_metric_states": {
+        "good": {
+          "_desc": "稳定态：晚睡但睡眠质量尚可，对环境不挑剔，不焦虑",
+          "sleep_time_range": [
+            "23:53",
+            "01:23"
+          ],
+          "bed_time_range": [
+            "23:30",
+            "01:00"
+          ],
+          "wake_up_time_range": [
+            "08:00",
+            "09:30"
+          ],
+          "total_sleep_minutes": [
+            425,
+            452
+          ],
+          "deep_sleep_ratio": [
+            15,
+            20
+          ],
+          "light_sleep_ratio": [
+            40,
+            47
+          ],
+          "rem_ratio": [
+            17,
+            24
+          ],
+          "awake_ratio": [
+            6,
+            10
+          ],
+          "night_awakenings": [
+            1,
+            3
+          ],
+          "sleep_latency": [
+            18,
+            28
+          ],
+          "sleep_efficiency": [
+            90,
+            94
+          ],
+          "wake_after_sleep": [
+            4,
+            15
+          ],
+          "average_heartbeat": [
+            62,
+            74
+          ],
+          "average_respiration": [
+            13,
+            19
+          ],
+          "apnea_count": [
+            1,
+            4
+          ],
+          "turnover_count": [
+            18,
+            32
+          ],
+          "schedule_jitter_minutes": 50
+        },
+        "bad": {
+          "_desc": "失衡态：大脑夜间持续活跃，入睡延迟，清醒增多",
+          "sleep_time_range": [
+            "00:56",
+            "02:56"
+          ],
+          "bed_time_range": [
+            "00:30",
+            "02:30"
+          ],
+          "wake_up_time_range": [
+            "08:30",
+            "10:30"
+          ],
+          "total_sleep_minutes": [
+            395,
+            430
+          ],
+          "deep_sleep_ratio": [
+            10,
+            14
+          ],
+          "light_sleep_ratio": [
+            49,
+            57
+          ],
+          "rem_ratio": [
+            14,
+            20
+          ],
+          "awake_ratio": [
+            12,
+            18
+          ],
+          "night_awakenings": [
+            3,
+            5
+          ],
+          "sleep_latency": [
+            20,
+            32
+          ],
+          "sleep_efficiency": [
+            82,
+            88
+          ],
+          "wake_after_sleep": [
+            14,
+            28
+          ],
+          "average_heartbeat": [
+            68,
+            80
+          ],
+          "average_respiration": [
+            17,
+            23
+          ],
+          "apnea_count": [
+            2,
+            5
+          ],
+          "turnover_count": [
+            32,
+            45
+          ],
+          "schedule_jitter_minutes": 70
+        }
+      },
+      "sleep_event_probabilities": {
+        "_desc": "低敏感+高活跃+夜型：天生夜晚节律，入睡慢但无焦虑，体动多，打鼾明显，对环境声耐受强",
+        "abnormal": {
+          "入睡困难": 0.42,
+          "噩梦应激": 0.0,
+          "心率上升": 0.08,
+          "异常体动": 0.15,
+          "持续性噪声": {
+            "家电持续声": 0.0,
+            "环境持续声": 0.0,
+            "邻里持续声": 0.0,
+            "自然持续声": 0.0
+          },
+          "一次性噪声": {
+            "突发撞击声": 0.0,
+            "突发交通声": 0.0,
+            "人声/门铃声": 0.0,
+            "自然突发声": 0.0,
+            "物品突发声": 0.0
+          }
+        },
+        "normal": {
+          "打鼾": 0.38,
+          "梦话": 0.28,
+          "咳嗽": 0.1,
+          "睡眠姿势切换": 0.35,
+          "肢体动作": 0.38,
+          "自然微动": 0.35,
+          "单次体动": 0.32,
+          "呼吸声": 0.25,
+          "吞咽": 0.12
+        },
+        "blocked_events": [
+          "噩梦应激",
+          "家电持续声",
+          "环境持续声",
+          "邻里持续声",
+          "自然持续声",
+          "突发撞击声",
+          "突发交通声",
+          "人声/门铃声",
+          "自然突发声",
+          "物品突发声"
+        ]
+      }
+    },
+    {
+      "name": "月光冲浪者",
+      "code": "E-L-C",
+      "identity_type": "享乐家",
+      "user_id": "69aea6f8af5e6cbf0802796b",
+      "date_range": {
+        "start": "2026-03-01",
+        "end": "2026-04-01"
+      },
+      "sleep_metric_states": {
+        "good": {
+          "_desc": "稳定态：主动晚睡，一旦入睡极快，效率高，夜间极少醒",
+          "sleep_time_range": [
+            "23:18",
+            "00:48"
+          ],
+          "bed_time_range": [
+            "23:00",
+            "00:30"
+          ],
+          "wake_up_time_range": [
+            "07:30",
+            "09:00"
+          ],
+          "total_sleep_minutes": [
+            430,
+            458
+          ],
+          "deep_sleep_ratio": [
+            16,
+            20
+          ],
+          "light_sleep_ratio": [
+            40,
+            46
+          ],
+          "rem_ratio": [
+            16,
+            22
+          ],
+          "awake_ratio": [
+            5,
+            12
+          ],
+          "night_awakenings": [
+            1,
+            2
+          ],
+          "sleep_latency": [
+            12,
+            24
+          ],
+          "sleep_efficiency": [
+            88,
+            95
+          ],
+          "wake_after_sleep": [
+            4,
+            14
+          ],
+          "average_heartbeat": [
+            54,
+            66
+          ],
+          "average_respiration": [
+            11,
+            17
+          ],
+          "apnea_count": [
+            0,
+            3
+          ],
+          "turnover_count": [
+            12,
+            25
+          ],
+          "schedule_jitter_minutes": 50
+        },
+        "bad": {
+          "_desc": "失衡态：熬夜过晚，睡眠压缩，起床困难",
+          "sleep_time_range": [
+            "00:27",
+            "02:27"
+          ],
+          "bed_time_range": [
+            "00:00",
+            "02:00"
+          ],
+          "wake_up_time_range": [
+            "08:00",
+            "10:00"
+          ],
+          "total_sleep_minutes": [
+            405,
+            440
+          ],
+          "deep_sleep_ratio": [
+            12,
+            16
+          ],
+          "light_sleep_ratio": [
+            46,
+            54
+          ],
+          "rem_ratio": [
+            15,
+            21
+          ],
+          "awake_ratio": [
+            11,
+            16
+          ],
+          "night_awakenings": [
+            2,
+            5
+          ],
+          "sleep_latency": [
+            20,
+            34
+          ],
+          "sleep_efficiency": [
+            84,
+            89
+          ],
+          "wake_after_sleep": [
+            10,
+            24
+          ],
+          "average_heartbeat": [
+            60,
+            72
+          ],
+          "average_respiration": [
+            12,
+            19
+          ],
+          "apnea_count": [
+            1,
+            4
+          ],
+          "turnover_count": [
+            25,
+            35
+          ],
+          "schedule_jitter_minutes": 70
+        }
+      },
+      "sleep_event_probabilities": {
+        "_desc": "低敏感+低活跃+夜型：入睡极快，夜间极安静，打鼾和微动偶有，极少被外界干扰",
+        "abnormal": {
+          "入睡困难": 0.0,
+          "噩梦应激": 0.0,
+          "心率上升": 0.03,
+          "异常体动": 0.06,
+          "持续性噪声": {
+            "家电持续声": 0.0,
+            "环境持续声": 0.0,
+            "邻里持续声": 0.0,
+            "自然持续声": 0.0
+          },
+          "一次性噪声": {
+            "突发撞击声": 0.0,
+            "突发交通声": 0.0,
+            "人声/门铃声": 0.0,
+            "自然突发声": 0.0,
+            "物品突发声": 0.0
+          }
+        },
+        "normal": {
+          "打鼾": 0.32,
+          "梦话": 0.2,
+          "咳嗽": 0.06,
+          "睡眠姿势切换": 0.28,
+          "肢体动作": 0.25,
+          "自然微动": 0.42,
+          "单次体动": 0.32,
+          "呼吸声": 0.28,
+          "吞咽": 0.2
+        },
+        "blocked_events": [
+          "入睡困难",
+          "噩梦应激",
+          "家电持续声",
+          "环境持续声",
+          "邻里持续声",
+          "自然持续声",
+          "突发撞击声",
+          "突发交通声",
+          "人声/门铃声",
+          "自然突发声",
+          "物品突发声"
+        ]
+      }
+    }
+  ]
+}
