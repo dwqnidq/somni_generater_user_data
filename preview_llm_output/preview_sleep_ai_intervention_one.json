@@ -1,213 +1,85 @@
 {
-  "record_date": "2026-03-01",
+  "record_date": "2026-03-11",
   "sleep_events": [
     [
       {
-        "uid": "69aea6d8af5e6cbf08027966",
-        "record_date": "2026-03-01",
-        "event_timestamp": "23:03",
-        "event_type": "突发交通声",
+        "uid": "69aea593af5e6cbf08027964",
+        "record_date": "2026-03-11",
+        "event_timestamp": "23:07",
+        "event_type": "入睡困难",
         "type": "abnormal",
-        "code": "sudden_traffic",
+        "code": "sleeping",
         "detail": {
-          "trigger_cause": "感知到室内突然出现类似家具磕碰的短促声响",
-          "action_taken": "识别环境噪音类型并启动干扰分析",
-          "result_summary": "确认为突发性声音干扰"
+          "trigger_cause": "识别到用户躺卧许久仍保持清醒状态，迟迟无法进入睡眠",
+          "action_taken": "启动入睡阶段状态监测与睡眠质量评估",
+          "result_summary": "确认为入睡过程异常"
         },
         "related_event_id": "",
         "sort_order": 0,
-        "create_time": "2026-04-29T15:12:57.334266Z",
-        "update_time": "2026-04-29T15:12:57.334269Z",
-        "duration_sec": 25,
-        "_id": "69f1af79012ba81c241fd83d",
-        "language": "zh"
+        "create_time": "2026-05-06T06:09:47.680193Z",
+        "update_time": "2026-05-06T06:09:47.680193Z",
+        "duration_sec": 305,
+        "_id": "69fadb2bf39380667f715712"
       },
       {
-        "uid": "69aea6d8af5e6cbf08027966",
-        "record_date": "2026-03-01",
-        "event_timestamp": "23:05",
+        "uid": "69aea593af5e6cbf08027964",
+        "record_date": "2026-03-11",
+        "event_timestamp": "23:09",
         "event_type": "AI主动干预",
         "type": "intervention",
-        "code": "sudden_traffic",
+        "code": "sleeping",
         "detail": {
-          "trigger_cause": "系统接到突发噪音警报信号",
-          "action_taken": "播放柔和白噪音以掩盖突兀声响，避免声音过大影响入睡",
-          "result_summary": "有效屏蔽突发噪音，睡眠未受打断"
+          "trigger_cause": "系统接到用户入睡困难的异常信号",
+          "action_taken": "播放轻柔舒缓的布朗噪音，间歇释放淡淡薰衣草香氛，搭配慢节奏柔和呼吸引导灯光，维持环境稳定避免打断状态",
+          "result_summary": "有效帮助用户平稳状态，顺利进入深度睡眠"
         },
-        "related_event_id": "69f1af79012ba81c241fd83d",
-        "sort_order": 1,
-        "create_time": "2026-04-29T15:12:57.336669Z",
-        "update_time": "2026-04-29T15:12:57.336670Z",
-        "duration_sec": 22,
-        "_id": "69f1af79012ba81c241fd842",
-        "language": "zh"
+        "related_event_id": "69fadb2bf39380667f715712",
+        "sort_order": 0,
+        "create_time": "2026-05-06T06:09:47.682568Z",
+        "update_time": "2026-05-06T06:09:47.682568Z",
+        "duration_sec": 29,
+        "_id": "69fadb2bf39380667f715715"
       }
     ],
     [
       {
-        "uid": "69aea6d8af5e6cbf08027966",
-        "record_date": "2026-03-01",
-        "event_timestamp": "23:14",
-        "event_type": "环境持续声",
-        "type": "abnormal",
-        "code": "environment_continuous",
-        "detail": {
-          "trigger_cause": "发现背景中存在持续的走动或摩擦声",
-          "action_taken": "监测持续性噪音强度并评估对睡眠的影响",
-          "result_summary": "归因为持续性环境噪音干扰"
-        },
-        "related_event_id": "",
-        "sort_order": 2,
-        "create_time": "2026-04-29T15:12:57.334471Z",
-        "update_time": "2026-04-29T15:12:57.334472Z",
-        "duration_sec": 146,
-        "_id": "69f1af79012ba81c241fd83e",
-        "language": "zh"
-      },
-      {
-        "uid": "69aea6d8af5e6cbf08027966",
-        "record_date": "2026-03-01",
-        "event_timestamp": "23:16",
-        "event_type": "AI主动干预",
-        "type": "intervention",
-        "code": "environment_continuous",
-        "detail": {
-          "trigger_cause": "系统识别到持续噪音干扰信号",
-          "action_taken": "调暗灯光营造静谧氛围，同时播放轻柔背景音弱化环境杂音",
-          "result_summary": "成功降低噪音感知，维持睡眠安稳"
-        },
-        "related_event_id": "69f1af79012ba81c241fd83e",
-        "sort_order": 3,
-        "create_time": "2026-04-29T15:12:57.336690Z",
-        "update_time": "2026-04-29T15:12:57.336692Z",
-        "duration_sec": 38,
-        "_id": "69f1af79012ba81c241fd843",
-        "language": "zh"
-      }
-    ],
-    [
-      {
-        "uid": "69aea6d8af5e6cbf08027966",
-        "record_date": "2026-03-01",
-        "event_timestamp": "03:31",
-        "event_type": "心率上升",
-        "type": "abnormal",
-        "code": "heart_rate_increase",
-        "detail": {
-          "trigger_cause": "检测到心跳频率明显加快，超出平稳睡眠区间",
-          "action_taken": "启动心率波动监测，分析生理状态变化原因",
-          "result_summary": "判定为心率调节出现波动"
-        },
-        "related_event_id": "",
-        "sort_order": 4,
-        "create_time": "2026-04-29T15:12:57.333611Z",
-        "update_time": "2026-04-29T15:12:57.333614Z",
-        "duration_sec": 136,
-        "_id": "69f1af79012ba81c241fd83f",
-        "language": "zh"
-      },
-      {
-        "uid": "69aea6d8af5e6cbf08027966",
-        "record_date": "2026-03-01",
-        "event_timestamp": "03:33",
-        "event_type": "AI主动干预",
-        "type": "intervention",
-        "code": "heart_rate_increase",
-        "detail": {
-          "trigger_cause": "系统接获心率异常升高信号",
-          "action_taken": "释放淡淡舒缓香氛，配合极低音量轻音乐帮助平复心跳",
-          "result_summary": "已实现心率平稳回落，恢复深睡状态"
-        },
-        "related_event_id": "69f1af79012ba81c241fd83f",
-        "sort_order": 5,
-        "create_time": "2026-04-29T15:12:57.336710Z",
-        "update_time": "2026-04-29T15:12:57.336712Z",
-        "duration_sec": 21,
-        "_id": "69f1af79012ba81c241fd844",
-        "language": "zh"
-      }
-    ],
-    [
-      {
-        "uid": "69aea6d8af5e6cbf08027966",
-        "record_date": "2026-03-01",
-        "event_timestamp": "03:34",
+        "uid": "69aea593af5e6cbf08027964",
+        "record_date": "2026-03-11",
+        "event_timestamp": "03:05",
         "event_type": "噩梦应激",
         "type": "abnormal",
         "code": "nightmare",
         "detail": {
-          "trigger_cause": "识别到呼吸急促及身体紧张等噩梦相关反应",
-          "action_taken": "分析情绪应激程度，判断是否需介入安抚",
-          "result_summary": "确认为情绪波动引起的睡眠干扰"
+          "trigger_cause": "感知到用户睡眠中出现呼吸急促、肢体异动等反常表现",
+          "action_taken": "启动睡眠情绪状态分析与持续状态监测",
+          "result_summary": "归因为睡眠中情绪波动导致的状态异常"
         },
         "related_event_id": "",
-        "sort_order": 6,
-        "create_time": "2026-04-29T15:12:57.331689Z",
-        "update_time": "2026-04-29T15:12:57.331699Z",
-        "duration_sec": 97,
-        "_id": "69f1af79012ba81c241fd840",
+        "sort_order": 5,
+        "create_time": "2026-05-06T14:09:47.672782Z",
+        "update_time": "2026-05-06T14:09:47.672784Z",
+        "duration_sec": 137,
+        "_id": "69fadb2bf39380667f71570d",
         "language": "zh"
       },
       {
-        "uid": "69aea6d8af5e6cbf08027966",
-        "record_date": "2026-03-01",
-        "event_timestamp": "03:36",
+        "uid": "69aea593af5e6cbf08027964",
+        "record_date": "2026-03-11",
+        "event_timestamp": "03:07",
         "event_type": "AI主动干预",
         "type": "intervention",
         "code": "nightmare",
         "detail": {
-          "trigger_cause": "系统检测到情绪应激信号",
-          "action_taken": "保持环境昏暗，通过间歇性舒缓香氛与微弱背景音安抚情绪",
-          "result_summary": "达成情绪平复，重新进入安稳睡眠"
+          "trigger_cause": "发现用户因做噩梦出现情绪不稳定状况",
+          "action_taken": "保持环境暗光的前提下，平缓调大舒缓白噪音音量，间歇释放淡薰衣草香氛，帮助平复情绪避免完全清醒",
+          "result_summary": "已实现情绪平稳调节，用户顺利回归正常睡眠状态"
         },
-        "related_event_id": "69f1af79012ba81c241fd840",
-        "sort_order": 7,
-        "create_time": "2026-04-29T15:12:57.336728Z",
-        "update_time": "2026-04-29T15:12:57.336729Z",
-        "duration_sec": 78,
-        "_id": "69f1af79012ba81c241fd845",
-        "language": "zh"
-      }
-    ],
-    [
-      {
-        "uid": "69aea6d8af5e6cbf08027966",
-        "record_date": "2026-03-01",
-        "event_timestamp": "05:07",
-        "event_type": "异常体动",
-        "type": "abnormal",
-        "code": "movement",
-        "detail": {
-          "trigger_cause": "发现翻身或肢体动作频率突然增加",
-          "action_taken": "追踪体动模式，评估是否存在清醒风险",
-          "result_summary": "识别为身体躁动导致的睡眠不稳"
-        },
-        "related_event_id": "",
-        "sort_order": 8,
-        "create_time": "2026-04-29T15:12:57.336403Z",
-        "update_time": "2026-04-29T15:12:57.336405Z",
-        "duration_sec": 76,
-        "_id": "69f1af79012ba81c241fd841",
-        "language": "zh"
-      },
-      {
-        "uid": "69aea6d8af5e6cbf08027966",
-        "record_date": "2026-03-01",
-        "event_timestamp": "05:09",
-        "event_type": "AI主动干预",
-        "type": "intervention",
-        "code": "movement",
-        "detail": {
-          "trigger_cause": "系统接收到频繁体动信号",
-          "action_taken": "维持黑暗环境，播放极轻微稳定背景音帮助身体放松静止",
-          "result_summary": "有效减少肢体活动，延续睡眠时长"
-        },
-        "related_event_id": "69f1af79012ba81c241fd841",
-        "sort_order": 9,
-        "create_time": "2026-04-29T15:12:57.336746Z",
-        "update_time": "2026-04-29T15:12:57.336747Z",
-        "duration_sec": 60,
-        "_id": "69f1af79012ba81c241fd846",
+        "related_event_id": "69fadb2bf39380667f71570d",
+        "sort_order": 6,
+        "create_time": "2026-05-06T14:09:47.677198Z",
+        "update_time": "2026-05-06T14:09:47.677199Z",
+        "duration_sec": 27,
+        "_id": "69fadb2bf39380667f715711",
         "language": "zh"
       }
     ]

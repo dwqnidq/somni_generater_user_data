@@ -12183,22 +12183,41 @@ _CONTINUOUS_NOISE_SOURCES = [
     "连续虫鸣",
 ]
 
-_DISPOSABLE_NOISE_SOURCES = [
-    "关门砰响",
-    "楼上掉东西",
-    "家具磕碰",
-    "汽车鸣笛",
-    "刹车",
-    "摩托车突然轰鸣",
-    "敲门声",
-    "门铃",
-    "突然咳嗽 / 大喊",
-    "炸雷",
-    "突然风声骤起",
-    "杯子掉落",
-    "物品倾倒",
-    "宠物突然叫",
-]
+_DISPOSABLE_NOISE_SOURCES_BY_CODE = {
+    "sudden_impact": [
+        "关门砰响",
+        "楼上掉东西",
+        "家具磕碰",
+        "重物撞击",
+        "物品倾倒",
+    ],
+    "sudden_traffic": [
+        "汽车鸣笛",
+        "急刹车",
+        "摩托车突然轰鸣",
+        "救护车警报",
+        "货车轰鸣驶过",
+    ],
+    "voice_doorbell": [
+        "敲门声",
+        "门铃",
+        "突然咳嗽或大喊",
+        "宠物突然叫",
+        "婴儿啼哭",
+    ],
+    "nature_sudden": [
+        "炸雷",
+        "突然风声骤起",
+        "大雨骤降",
+        "闪电雷鸣",
+    ],
+    "object_sudden": [
+        "杯子掉落",
+        "物品倾倒",
+        "抽屉开合声",
+        "书本落地",
+    ],
+}
 
 _EVENT_CODE_TO_INTERVENTION_FOCUS = {**{
     c: "持续性噪音干预方案" for c in _CONTINUOUS_NOISE_SLEEP_EVENT_CODES
@@ -12243,7 +12262,10 @@ def _format_noise_trigger_cause(event_code):
         kind = "持续性环境声"
         db = random.randint(58, 82)   # 持续噪声类：58–82 dB（与文档事件表一致）
     else:
-        obj = random.choice(_DISPOSABLE_NOISE_SOURCES)
+        sources = _DISPOSABLE_NOISE_SOURCES_BY_CODE.get(event_code) or list(
+            {s for pool in _DISPOSABLE_NOISE_SOURCES_BY_CODE.values() for s in pool}
+        )
+        obj = random.choice(sources)
         kind = "突发性环境声"
         db = random.randint(62, 88)   # 突发噪声类：62–88 dB（与文档事件表一致）
     return f"检测到{label}（{kind}），约{db}分贝（疑似{obj}）"

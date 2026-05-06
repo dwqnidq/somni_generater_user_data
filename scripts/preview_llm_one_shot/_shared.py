@@ -1,4 +1,4 @@
-"""预览脚本共用：工程根目录、加载 health 行、启用大模型（通义千问 / DashScope）开关。"""
+"""预览脚本共用：工程根目录、加载 health 行、启用大模型（豆包 / DashScope）开关。"""
 
 from __future__ import annotations
 
@@ -19,18 +19,19 @@ def bootstrap():
     os.chdir(PROJECT_ROOT)
 
 
-def apply_translate_qwen_env_defaults() -> None:
-    """将 TRANSLATE_* 透传为 QWEN_*，供预览脚本统一使用。"""
-    translate_base_url = os.getenv("TRANSLATE_BASE_URL", "").strip()
-    translate_model_name = os.getenv("TRANSLATE_MODEL_NAME", "").strip()
-    translate_enable_thinking = os.getenv("TRANSLATE_ENABLE_THINKING", "").strip()
 
-    if translate_base_url and not os.getenv("QWEN_BASE_URL"):
-        os.environ["QWEN_BASE_URL"] = translate_base_url
-    if translate_model_name and not os.getenv("QWEN_MODEL_NAME"):
-        os.environ["QWEN_MODEL_NAME"] = translate_model_name
-    if translate_enable_thinking and not os.getenv("QWEN_ENABLE_THINKING"):
-        os.environ["QWEN_ENABLE_THINKING"] = translate_enable_thinking
+def force_doubao_env() -> None:
+    """将 .env 中的豆包配置（BASE_URL / DOUBAO_API_KEY / MODEL_NAME）强制映射到
+    QWEN_BASE_URL / DASHSCOPE_API_KEY / QWEN_MODEL_NAME，供各预览脚本统一调用豆包模型。"""
+    base_url = (os.getenv("BASE_URL") or "").strip()
+    api_key = (os.getenv("DOUBAO_API_KEY") or "").strip()
+    model_name = (os.getenv("MODEL_NAME") or "").strip()
+    missing = [k for k, v in [("BASE_URL", base_url), ("DOUBAO_API_KEY", api_key), ("MODEL_NAME", model_name)] if not v]
+    if missing:
+        raise SystemExit("豆包配置缺失，请在 .env 中配置: " + ", ".join(missing))
+    os.environ["QWEN_BASE_URL"] = base_url
+    os.environ["QWEN_MODEL_NAME"] = model_name
+    os.environ["DASHSCOPE_API_KEY"] = api_key
 
 
 def base_arg_parser(description: str) -> argparse.ArgumentParser:

@@ -179,21 +179,25 @@ def _attach_snoring_payload(event: dict, env_day: list[dict], rng: random.Random
     detail = dict(event.get("detail") or {})
     detail["snoring_value_db"] = snore_db
     detail["snoring_level"] = lv
-    # 单条打鼾事件持续时长（秒）：显著长于普通事件，至少数分钟
-    duration_sec = int(detail.get("duration_sec") or rng.randint(300, 1200))
-    duration_sec = max(300, min(2400, duration_sec))
-    detail["duration_sec"] = duration_sec
     detail["result_summary"] = f"判定为{lv}打鼾（{snore_db}dB）"
     event["detail"] = detail
-    event["duration_sec"] = duration_sec
 
 
-def _default_duration_sec(event_type: str, code: str, rng: random.Random) -> int:
+def _default_duration_sec(
+    event_type: str,
+    code: str,
+    rng: random.Random,
+    duration_cfg: dict | None = None,
+) -> int:
+    if duration_cfg:
+        rng_val = duration_cfg.get(code)
+        if rng_val and len(rng_val) >= 2:
+            return rng.randint(int(rng_val[0]), int(rng_val[1]))
     if event_type == "打鼾" or code == "snoring":
-        return rng.randint(300, 1200)
+        return rng.randint(120, 900)
     if event_type in {"噩梦应激", "异常体动"} or code in {"nightmare", "movement", "abnormal_movement"}:
-        return rng.randint(60, 240)
-    return rng.randint(20, 90)
+        return rng.randint(30, 150)
+    return rng.randint(5, 45)
 
 
 def _abnormal_prob_map(persona: dict) -> dict[str, float]:
@@ -339,6 +343,7 @@ def _rebalance_one_night_events(
     persona: dict,
     vitals_day: list[dict],
     env_day: list[dict],
+    duration_cfg: dict | None = None,
 ) -> list[dict]:
     rng = random.Random(f"{uid}:{record_date}:sleep-events")
     abnormal_probs = _abnormal_prob_map(persona)
@@ -535,21 +540,62 @@ def _rebalance_one_night_events(
     out = selected + normal_selected + filtered_others
     for ev in out:
         detail = dict(ev.get("detail") or {})
-        d0 = ev.get("duration_sec", detail.get("duration_sec"))
-        if d0 is None:
-            d0 = _default_duration_sec(str(ev.get("event_type") or ""), str(ev.get("code") or ""), rng)
-        try:
-            d0 = int(round(float(d0)))
-        except Exception:
-            d0 = _default_duration_sec(str(ev.get("event_type") or ""), str(ev.get("code") or ""), rng)
-        if str(ev.get("event_type") or "") == "打鼾" or str(ev.get("code") or "") == "snoring":
-            d0 = max(300, min(2400, d0))
+        detail.pop("duration_sec", None)
+        if str(ev.get("type") or "") == "intervention":
+            d0 = rng.randint(10, 45)
         else:
-            d0 = max(10, min(900, d0))
-        ev["duration_sec"] = d0
-        detail["duration_sec"] = d0
+            code_str = str(ev.get("code") or "")
+            event_type_str = str(ev.get("event_type") or "")
+            d0 = _default_duration_sec(event_type_str, code_str, rng, duration_cfg)
+        ev["duration_sec"] = max(1, d0)
         ev["detail"] = detail
         _attach_snoring_payload(ev, env_day, rng)
+
+    # 为缺少 _id 的事件补 _id
+    for ev in out:
+        if not ev.get("_id"):
+            ev["_id"] = gh.generate_object_id()
+
+    # 为每个 abnormal 事件补配对的 AI 主动干预（若尚无对应干预）
+    existing_related = {
+        str(e.get("related_event_id") or "")
+        for e in out
+        if e.get("event_type") == "AI主动干预"
+    }
+    ts_now = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+    new_interventions = []
+    for ev in out:
+        if ev.get("type") != "abnormal":
+            continue
+        ev_id = str(ev.get("_id") or "")
+        if not ev_id or ev_id in existing_related:
+            continue
+        code = str(ev.get("code") or "")
+        event_name = str(ev.get("event_type") or "")
+        parent_min = _time_to_minutes(str(ev.get("event_timestamp") or ""))
+        ai_min = ((parent_min + 2) % 1440) if parent_min is not None else None
+        ai_ts = _minutes_to_hhmm(ai_min) if ai_min is not None else ev.get("event_timestamp", "")
+        ai_event = {
+            "uid": uid,
+            "record_date": record_date,
+            "event_timestamp": ai_ts,
+            "event_type": "AI主动干预",
+            "type": "intervention",
+            "code": code,
+            "detail": {
+                "trigger_cause": gh._ai_intervention_trigger_cause_for_code(code, event_name),
+                "action_taken": gh._fallback_intervention_action_taken(code),
+                "result_summary": gh._ai_intervention_result_summary_for_code(code),
+            },
+            "related_event_id": ev_id,
+            "sort_order": 0,
+            "create_time": ts_now,
+            "update_time": ts_now,
+            "duration_sec": rng.randint(10, 45),
+            "_id": gh.generate_object_id(),
+        }
+        new_interventions.append(ai_event)
+    out.extend(new_interventions)
     return out
 
 
@@ -612,6 +658,7 @@ def generate_sleep_events_for_persona(
 
     gen = merge_generation(cfg, persona)
     gopts = _generation_options_payload(gen, persona)
+    duration_cfg = gen.get("event_duration_sec") or {}
     code = persona.get("code") or "M-L-C"
 
     all_events: list[dict] = list(existing_kept)
@@ -654,6 +701,7 @@ def generate_sleep_events_for_persona(
             persona,
             vit_by_date.get(rds, []),
             env_by_date.get(rds, []),
+            duration_cfg=duration_cfg,
         )
         all_events.extend(tuned)
 

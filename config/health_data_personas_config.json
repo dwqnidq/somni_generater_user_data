@@ -57,6 +57,31 @@
     "event_feedback": {
       "window_half_minutes": 5,
       "insert_gap_sec": 5
+    },
+    "event_duration_sec": {
+      "_desc": "各事件 code 的 duration_sec 随机区间 [min, max]（秒），生成时从中均匀采样",
+      "snoring": [120, 900],
+      "sleep_talking": [10, 45],
+      "cough": [5, 20],
+      "posture_switch": [5, 25],
+      "body_movement": [10, 40],
+      "micro_movement": [5, 20],
+      "single_movement": [5, 20],
+      "breathing": [30, 120],
+      "swallowing": [5, 20],
+      "sleeping": [120, 600],
+      "nightmare": [30, 150],
+      "movement": [15, 60],
+      "heart_rate_increase": [30, 120],
+      "appliance_continuous": [60, 600],
+      "environment_continuous": [60, 600],
+      "nature_continuous": [60, 300],
+      "neighbor_continuous": [60, 300],
+      "sudden_impact": [1, 5],
+      "sudden_traffic": [3, 8],
+      "voice_doorbell": [5, 20],
+      "object_sudden": [2, 8],
+      "nature_sudden": [2, 8]
     }
   },
   "personas": [
@@ -136,6 +161,10 @@
             25,
             40
           ],
+          "daily_steps": [
+            9000,
+            12000
+          ],
           "schedule_jitter_minutes": 12
         },
         "bad": {
@@ -203,6 +232,10 @@
           "turnover_count": [
             40,
             55
+          ],
+          "daily_steps": [
+            6000,
+            9000
           ],
           "schedule_jitter_minutes": 16
         }
@@ -318,6 +351,10 @@
             22,
             35
           ],
+          "daily_steps": [
+            7000,
+            9500
+          ],
           "schedule_jitter_minutes": 12
         },
         "bad": {
@@ -385,6 +422,10 @@
           "turnover_count": [
             35,
             50
+          ],
+          "daily_steps": [
+            5000,
+            7500
           ],
           "schedule_jitter_minutes": 16
         }
@@ -500,6 +541,10 @@
             15,
             28
           ],
+          "daily_steps": [
+            10000,
+            14000
+          ],
           "schedule_jitter_minutes": 12
         },
         "bad": {
@@ -567,6 +612,10 @@
           "turnover_count": [
             28,
             40
+          ],
+          "daily_steps": [
+            7000,
+            10000
           ],
           "schedule_jitter_minutes": 16
         }
@@ -693,6 +742,10 @@
             10,
             22
           ],
+          "daily_steps": [
+            8000,
+            11000
+          ],
           "schedule_jitter_minutes": 12
         },
         "bad": {
@@ -760,6 +813,10 @@
           "turnover_count": [
             20,
             30
+          ],
+          "daily_steps": [
+            5500,
+            8000
           ],
           "schedule_jitter_minutes": 16
         }
@@ -887,6 +944,10 @@
             30,
             48
           ],
+          "daily_steps": [
+            7000,
+            10000
+          ],
           "schedule_jitter_minutes": 50
         },
         "bad": {
@@ -954,6 +1015,10 @@
           "turnover_count": [
             48,
             65
+          ],
+          "daily_steps": [
+            4500,
+            7000
           ],
           "schedule_jitter_minutes": 70
         }
@@ -1069,6 +1134,10 @@
             22,
             35
           ],
+          "daily_steps": [
+            5000,
+            7500
+          ],
           "schedule_jitter_minutes": 50
         },
         "bad": {
@@ -1136,6 +1205,10 @@
           "turnover_count": [
             35,
             50
+          ],
+          "daily_steps": [
+            3500,
+            5500
           ],
           "schedule_jitter_minutes": 70
         }
@@ -1251,6 +1324,10 @@
             18,
             32
           ],
+          "daily_steps": [
+            8000,
+            12000
+          ],
           "schedule_jitter_minutes": 50
         },
         "bad": {
@@ -1318,6 +1395,10 @@
           "turnover_count": [
             32,
             45
+          ],
+          "daily_steps": [
+            5500,
+            8500
           ],
           "schedule_jitter_minutes": 70
         }
@@ -1444,6 +1525,10 @@
             12,
             25
           ],
+          "daily_steps": [
+            6000,
+            8500
+          ],
           "schedule_jitter_minutes": 50
         },
         "bad": {
@@ -1511,6 +1596,10 @@
           "turnover_count": [
             25,
             35
+          ],
+          "daily_steps": [
+            4000,
+            6500
           ],
           "schedule_jitter_minutes": 70
         }

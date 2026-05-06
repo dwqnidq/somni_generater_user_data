@@ -9,17 +9,17 @@ from dotenv import load_dotenv
 
 from _shared import (
     PROJECT_ROOT,
-    apply_translate_qwen_env_defaults,
     base_arg_parser,
     bootstrap,
     default_out_path,
+    force_doubao_env,
     load_health_row,
     write_result,
 )
 
 bootstrap()
 load_dotenv(os.path.join(PROJECT_ROOT, ".env"))
-apply_translate_qwen_env_defaults()
+force_doubao_env()
 
 import generate_health_data as gh  # noqa: E402
 
