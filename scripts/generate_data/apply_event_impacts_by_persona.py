@@ -24,6 +24,11 @@ CONFIG_PATH = os.path.join(PROJECT_ROOT, "config", "health_data_personas_config.
 OUTPUT_DIR = os.path.join(PROJECT_ROOT, "output")
 
 
+def event_impacts_marker_path(uid: str, output_dir: str | None = None) -> str:
+    base = output_dir or OUTPUT_DIR
+    return os.path.join(base, f"{uid}_event_impacts_applied")
+
+
 def _time_to_minutes(hhmm: str) -> int | None:
     try:
         h, m = hhmm.split(":")
@@ -323,11 +328,26 @@ def _apply_vitals_impacts(events_day: list[dict], vitals_day: list[dict]) -> Non
                 vitals_day[idx]["metrics"] = metrics
 
 
-def apply_event_impacts_for_persona(persona: dict, start_date: str | None, end_date: str | None) -> bool:
+def apply_event_impacts_for_persona(
+    persona: dict,
+    start_date: str | None,
+    end_date: str | None,
+    *,
+    overwrite: bool = False,
+    output_dir: str | None = None,
+) -> bool:
     uid = persona["user_id"]
-    env_path = os.path.join(OUTPUT_DIR, f"{uid}_environment_data.json")
-    vit_path = os.path.join(OUTPUT_DIR, f"{uid}_vitals_data.json")
-    ev_path = os.path.join(OUTPUT_DIR, f"{uid}_sleep_events.json")
+    out = output_dir or OUTPUT_DIR
+    marker_path = event_impacts_marker_path(uid, out)
+    if not overwrite and os.path.exists(marker_path):
+        print(
+            f"[{uid}] 事件影响回写：已存在标记文件 {os.path.basename(marker_path)}，跳过"
+        )
+        return True
+
+    env_path = os.path.join(out, f"{uid}_environment_data.json")
+    vit_path = os.path.join(out, f"{uid}_vitals_data.json")
+    ev_path = os.path.join(out, f"{uid}_sleep_events.json")
     if not (os.path.exists(env_path) and os.path.exists(vit_path) and os.path.exists(ev_path)):
         print(f"[{uid}] 缺少 env/vitals/events 文件，跳过事件回写")
         return False
@@ -369,6 +389,10 @@ def apply_event_impacts_for_persona(persona: dict, start_date: str | None, end_d
 
     atomic_write_json(env_path, env_rows)
     atomic_write_json(vit_path, vit_rows)
+    try:
+        open(marker_path, "ab").close()
+    except OSError:
+        pass
     print(f"[{uid}] 事件影响已回写到 environment/vitals")
     return True
 
@@ -379,6 +403,11 @@ def main() -> None:
     parser.add_argument("--config", default=CONFIG_PATH)
     parser.add_argument("--start-date", default=None)
     parser.add_argument("--end-date", default=None)
+    parser.add_argument(
+        "--overwrite",
+        action="store_true",
+        help="忽略 output 下 {uid}_event_impacts_applied 标记并强制回写",
+    )
     args = parser.parse_args()
 
     with open(args.config, "r", encoding="utf-8") as f:
@@ -392,7 +421,9 @@ def main() -> None:
             return
 
     for p in personas:
-        apply_event_impacts_for_persona(p, args.start_date, args.end_date)
+        apply_event_impacts_for_persona(
+            p, args.start_date, args.end_date, overwrite=args.overwrite
+        )
     print("完成。")
 
 

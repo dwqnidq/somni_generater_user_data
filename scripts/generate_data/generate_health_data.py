@@ -482,12 +482,22 @@ def _qwen_clamp_max_tokens(max_tokens):
     return max(1, min(v, _QWEN_MAX_TOKENS))
 
 
-def _qwen_chat_url():
-    """DashScope OpenAI 兼容模式 chat/completions 完整 URL。
+def _llm_vendor() -> str:
+    """大模型供应方：豆包（火山方舟）或通义；见 ``llm_vendor_config.resolve_llm_vendor``。"""
+    from llm_vendor_config import resolve_llm_vendor
 
-    优先 QWEN_BASE_URL / DASHSCOPE_BASE_URL，其次 TRANSLATE_BASE_URL（与同仓库翻译脚本共用），
-    再回退 BASE_URL；均未设置时默认 DashScope 兼容端点。
-    """
+    return resolve_llm_vendor()
+
+
+def _qwen_chat_url():
+    """OpenAI 兼容 chat/completions 完整 URL（通义 DashScope 或火山方舟豆包，由 LLM_VENDOR 决定）。"""
+    if _llm_vendor() == "doubao":
+        base = (
+            os.getenv("DOUBAO_BASE_URL")
+            or os.getenv("BASE_URL")
+            or "https://ark.cn-beijing.volces.com/api/v3"
+        ).rstrip("/")
+        return f"{base}/chat/completions"
     base = (
         os.getenv("QWEN_BASE_URL")
         or os.getenv("DASHSCOPE_BASE_URL")
@@ -499,12 +509,21 @@ def _qwen_chat_url():
 
 
 def _qwen_api_key():
-    """优先 DASHSCOPE_API_KEY；兼容旧环境变量 DOUBAO_API_KEY。"""
+    """通义：优先 DASHSCOPE_API_KEY；豆包：优先 DOUBAO_API_KEY（见 LLM_VENDOR）。"""
+    if _llm_vendor() == "doubao":
+        return os.getenv("DOUBAO_API_KEY") or os.getenv("DASHSCOPE_API_KEY")
     return os.getenv("DASHSCOPE_API_KEY") or os.getenv("DOUBAO_API_KEY")
 
 
 def _qwen_model_name():
-    """优先 QWEN_MODEL_NAME，否则 MODEL_NAME，默认 qwen-plus。"""
+    """模型名：通义优先 QWEN_MODEL_NAME；豆包优先 DOUBAO_MODEL_NAME / MODEL_NAME。"""
+    if _llm_vendor() == "doubao":
+        return (
+            os.getenv("DOUBAO_MODEL_NAME")
+            or os.getenv("MODEL_NAME")
+            or os.getenv("QWEN_MODEL_NAME")
+            or "doubao-seed-2-0-mini-260215"
+        )
     return os.getenv("QWEN_MODEL_NAME") or os.getenv("MODEL_NAME") or "qwen-plus"
 _SLEEP_CLOCK_HHMM_RE = re.compile(r"^\d{1,2}:\d{2}(:\d{2})?$")
 PROMPT_DIR = os.path.join(PROJECT_ROOT, "prompt")
@@ -2174,7 +2193,15 @@ def _snoring_data_points_for_auditory_prompt(auditory_dict):
 
 
 def generate_auditory_module_via_qwen(
-    user_id, record_date, sleep_data, sleep_events_for_date, auditory_dict, output_dir="output"
+    user_id,
+    record_date,
+    sleep_data,
+    sleep_events_for_date,
+    auditory_dict,
+    output_dir="output",
+    *,
+    temperature=None,
+    top_p=None,
 ):
     """
     读取 prompt/sleep_audio_analysis.md，结合睡眠事件、睡眠指标、环境与听觉 audios，
@@ -2217,11 +2244,13 @@ def generate_auditory_module_via_qwen(
         + "返回仅包含 1 条元素的 JSON 数组（字段仅限 `target`、`description`），不要附加任何解释。\n\n"
         + json.dumps(payload, ensure_ascii=False)
     )
+    eff_temperature = 0.35 if temperature is None else temperature
     result = call_qwen_api(
         prompt,
         system_prompt=instruction,
         max_tokens=2048,
-        temperature=0.35,
+        temperature=eff_temperature,
+        top_p=top_p,
         sleep_report_llm=True,
     )
     if not result:
@@ -2267,18 +2296,22 @@ def build_sleep_events_index(user_id, output_dir="output"):
         return {}
     return idx
 
-# 调用阿里云 DashScope OpenAI 兼容接口（通义千问，配置见 .env：BASE_URL、DASHSCOPE_API_KEY、MODEL_NAME）
+# 调用 OpenAI 兼容 chat/completions：默认通义千问（DashScope）；LLM_VENDOR=doubao 时为火山方舟豆包（.env：BASE_URL、DOUBAO_API_KEY、MODEL_NAME 等）
 def call_qwen_api(
     user_prompt,
     system_prompt=None,
     max_tokens=None,
     temperature=None,
     *,
+    top_p=None,
     enable_thinking=False,
     sleep_report_llm=False,
 ):
-    """调用通义千问（DashScope 兼容模式）。temperature 为 None 时使用 QWEN_TEMPERATURE 或 DOUBAO_TEMPERATURE（默认 0.7）。
+    """调用大模型（OpenAI 兼容）：默认通义千问；设置 LLM_VENDOR=doubao 时走豆包（方舟）。
 
+    temperature 为 None 时使用 QWEN_TEMPERATURE 或 DOUBAO_TEMPERATURE（默认 0.7）。
+
+    top_p 为 None 时不写入请求体（由服务端默认）；否则写入 0–1 区间内的值。
     max_tokens 默认与上限均为 _QWEN_MAX_TOKENS（10000）。
     enable_thinking 控制是否开启深度思考，默认 False。
     sleep_report_llm 为 True 时仅检查 sleepReportAI（睡眠报告专用），忽略 USE_MODEL。
@@ -2307,6 +2340,19 @@ def call_qwen_api(
         messages.append({"role": "system", "content": system_prompt})
     messages.append({"role": "user", "content": user_prompt})
 
+    req_json = {
+        "model": model_name,
+        "messages": messages,
+        "temperature": temperature,
+        "max_tokens": mt,
+        "enable_thinking": bool(enable_thinking),
+    }
+    if top_p is not None:
+        req_json["top_p"] = max(0.0, min(1.0, float(top_p)))
+
+    _top_p_sent = req_json["top_p"] if "top_p" in req_json else "未传（服务端默认）"
+    print(f"[LLM 请求] temperature={temperature}, top_p={_top_p_sent}")
+
     last_error = None
     for attempt in range(_QWEN_RETRIES):
         try:
@@ -2317,13 +2363,7 @@ def call_qwen_api(
                         "Content-Type": "application/json",
                         "Authorization": f"Bearer {api_key}"
                     },
-                    json={
-                        "model": model_name,
-                        "messages": messages,
-                        "temperature": temperature,
-                        "max_tokens": mt,
-                        "enable_thinking": bool(enable_thinking),
-                    },
+                    json=req_json,
                     timeout=_QWEN_TIMEOUT
                 )
             response_data = response.json()
@@ -2975,6 +3015,12 @@ _EVENT_FEEDBACK_INSERT_MIN_GAP_MINUTES = max(
     int(os.getenv("SLEEP_EVENTS_FEEDBACK_INSERT_GAP_MIN", str(MIN_VITAL_ENV_COLLECTED_AT_GAP_MINUTES))),
 )
 
+# 默认关闭：睡眠事件阶段不向 vitals_data / environment_data 插入或改写采样行。
+# 需要旧版「按事件回填体征/环境」时设置环境变量 SLEEP_EVENT_FEEDBACK_TO_VITALS_ENV=1。
+SLEEP_EVENT_FEEDBACK_TO_VITALS_ENV = str(
+    os.getenv("SLEEP_EVENT_FEEDBACK_TO_VITALS_ENV", "")
+).strip().lower() in ("1", "true", "yes")
+
 _SLEEP_EVENT_FEEDBACK_PRIORITIES = {
     # 噪声：突发 > 持续 > 常规
     "sudden_impact": 100,
@@ -3006,9 +3052,10 @@ _SLEEP_EVENT_FEEDBACK_PRIORITIES = {
 
 def apply_sleep_event_feedback_to_fitness_and_environment(user_id):
     """
-    依据 sleep_events 反向修正 environment_data / vitals_data（按事件标识字段）：
-    - 每个事件最多修改一条最接近事件时刻的数据
-    - 仅处理 aaa.md 定义了“数据标识与范围”的事件
+    睡眠事件后的联动处理（默认不写 vitals_data / environment_data）：
+    - 当 SLEEP_EVENT_FEEDBACK_TO_VITALS_ENV=1 时：按事件向 environment_data / vitals_data
+      插入或改写最接近事件时刻的采样行（aaa.md 数据标识与范围）。
+    - 始终可能更新：噩梦相关的 health_data.idf_data、sleep_events 排序与联动事件。
     """
     sleep_events_file = os.path.join("output", f"{user_id}_sleep_events.json")
     environment_file = os.path.join("output", f"{user_id}_environment_data.json")
@@ -3610,72 +3657,73 @@ def apply_sleep_event_feedback_to_fitness_and_environment(user_id):
     vitals_updates = 0
     health_updates = 0
 
-    for job in direct_jobs:
-        rd = job["record_date"]
-        target_dt = job["target_dt"]
-        code = job["code"]
-        source = job["source"]
-        path = job["path"]
-        lo = job["lo"]
-        hi = job["hi"]
-        rows = environment_data if source == "environment" else vitals_data
-        target_utc_dt = job["target_utc_dt"]
-        matched = _find_row_by_target_utc_minute(rows, rd, target_utc_dt)
-        if matched is not None:
-            _, row, matched_utc = matched
-            matched_time_str = matched_utc.strftime("%Y-%m-%d %H:%M:%S")
-            op_reason = "matched_exact_utc_minute"
-        else:
-            tpl = _pick_template_row(rows, rd, target_dt)
-            row = _build_inserted_row_with_exact_utc(source, tpl, rd, target_utc_dt)
-            rows.append(row)
-            matched_time_str = target_utc_dt.strftime("%Y-%m-%d %H:%M:%S")
-            op_reason = "inserted_exact_utc_time"
-        old_v = _get_nested(row, path)
-        val = random.randint(lo, hi)
-        _set_nested(row, path, int(val))
+    if SLEEP_EVENT_FEEDBACK_TO_VITALS_ENV:
+        for job in direct_jobs:
+            rd = job["record_date"]
+            target_dt = job["target_dt"]
+            code = job["code"]
+            source = job["source"]
+            path = job["path"]
+            lo = job["lo"]
+            hi = job["hi"]
+            rows = environment_data if source == "environment" else vitals_data
+            target_utc_dt = job["target_utc_dt"]
+            matched = _find_row_by_target_utc_minute(rows, rd, target_utc_dt)
+            if matched is not None:
+                _, row, matched_utc = matched
+                matched_time_str = matched_utc.strftime("%Y-%m-%d %H:%M:%S")
+                op_reason = "matched_exact_utc_minute"
+            else:
+                tpl = _pick_template_row(rows, rd, target_dt)
+                row = _build_inserted_row_with_exact_utc(source, tpl, rd, target_utc_dt)
+                rows.append(row)
+                matched_time_str = target_utc_dt.strftime("%Y-%m-%d %H:%M:%S")
+                op_reason = "inserted_exact_utc_time"
+            old_v = _get_nested(row, path)
+            val = random.randint(lo, hi)
+            _set_nested(row, path, int(val))
 
-        if source == "environment":
-            environment_updates += 1
-            if tuple(path) == ("noise",):
-                row["noise_event_affected"] = True
-                row["noise_event_code"] = code
-                row["noise_event_update_time"] = generate_iso_date()
-        else:
-            vitals_updates += 1
+            if source == "environment":
+                environment_updates += 1
+                if tuple(path) == ("noise",):
+                    row["noise_event_affected"] = True
+                    row["noise_event_code"] = code
+                    row["noise_event_update_time"] = generate_iso_date()
+            else:
+                vitals_updates += 1
 
-        report_rows.append(
-            {
-                "event_id": job["event_id"],
-                "event_idx": job["event_idx"],
-                "record_date": rd,
-                "event_time": job["event_time"],
-                "code": code,
-                "source": source,
-                "field": job["field_key"],
-                "status": "updated",
-                "reason": op_reason,
-                "matched_row_id": row.get("_id") or "",
-                "matched_row_time": matched_time_str,
-                "distance_sec": 0,
-                "old_value": old_v,
-                "new_value": int(val),
-                "range": [lo, hi],
-                "window_start": job["window_start"].strftime("%Y-%m-%d %H:%M:%S"),
-                "window_end": job["window_end"].strftime("%Y-%m-%d %H:%M:%S"),
-                "inserted_collected_at_utc": row.get("collected_at") or "",
-                "target_utc_time": target_utc_dt.strftime("%Y-%m-%d %H:%M:%S"),
-            }
-        )
+            report_rows.append(
+                {
+                    "event_id": job["event_id"],
+                    "event_idx": job["event_idx"],
+                    "record_date": rd,
+                    "event_time": job["event_time"],
+                    "code": code,
+                    "source": source,
+                    "field": job["field_key"],
+                    "status": "updated",
+                    "reason": op_reason,
+                    "matched_row_id": row.get("_id") or "",
+                    "matched_row_time": matched_time_str,
+                    "distance_sec": 0,
+                    "old_value": old_v,
+                    "new_value": int(val),
+                    "range": [lo, hi],
+                    "window_start": job["window_start"].strftime("%Y-%m-%d %H:%M:%S"),
+                    "window_end": job["window_end"].strftime("%Y-%m-%d %H:%M:%S"),
+                    "inserted_collected_at_utc": row.get("collected_at") or "",
+                    "target_utc_time": target_utc_dt.strftime("%Y-%m-%d %H:%M:%S"),
+                }
+            )
 
-    if environment_updates > 0:
-        _rebalance_environment_noise_daily_after_feedback(environment_data)
-        with open(environment_file, "w", encoding="utf-8") as f:
-            json.dump(environment_data, f, ensure_ascii=False, indent=2)
+        if environment_updates > 0:
+            _rebalance_environment_noise_daily_after_feedback(environment_data)
+            with open(environment_file, "w", encoding="utf-8") as f:
+                json.dump(environment_data, f, ensure_ascii=False, indent=2)
 
-    if vitals_updates > 0:
-        with open(vitals_file, "w", encoding="utf-8") as f:
-            json.dump(vitals_data, f, ensure_ascii=False, indent=2)
+        if vitals_updates > 0:
+            with open(vitals_file, "w", encoding="utf-8") as f:
+                json.dump(vitals_data, f, ensure_ascii=False, indent=2)
 
     sleep_events_updates = 0
     sleep_events_ai_updates = 0
@@ -4302,6 +4350,7 @@ def generate_notice_via_qwen(
     environment_summary,
     personality_type,
     output_dir="output",
+    prev_sleep_data=None,
 ):
     """
     与 preview_sleep_notice 一致：完整说明放在 system，user 仅要求 JSON；temperature=0.35。
@@ -4333,6 +4382,11 @@ def generate_notice_via_qwen(
             "AUDITORY_EVENTS_JSON": json.dumps(auditory_events, ensure_ascii=False),
         },
     )
+    if prev_sleep_data:
+        prev_rd = str(prev_sleep_data.get("record_date") or "")
+        prev_json = json.dumps(prev_sleep_data, ensure_ascii=False)
+        system += f"\n\n前一日（{prev_rd}）睡眠数据：\n{prev_json}"
+
     user_msg = "请严格按系统说明仅输出一个 JSON 对象，不要 markdown 围栏或解释。"
     raw = call_qwen_api(
         user_msg,
@@ -4373,7 +4427,7 @@ def generate_main_summary_via_qwen(
 ):
     """
     与 preview_sleep_main_summary 一致：仅用 generate_health_data__main_summary_general.md
-    作为 system，user 要求 JSON summary；temperature=0.35。
+    作为 system，user 要求 JSON 含 title 与 summary；temperature=0.35。
     失败时返回 None，由调用方使用本地 fallback_summary。
     """
     if not sleepReportAI:
@@ -4401,7 +4455,13 @@ def generate_main_summary_via_qwen(
             "SLEEP_DATA_JSON": json.dumps(sleep_data_for_prompt, ensure_ascii=False),
         },
     )
-    user_msg = '请严格按系统说明仅输出 JSON：{"summary":"..."}，不要 markdown 围栏或解释。'
+    user_msg = (
+        '请严格依据 system 提示末尾「本次任务的真实输入」中的 JSON 作答；'
+        '仅输出 JSON：{"title":"...","summary":"..."}；'
+        "title 须与输入 JSON 顶层的 title 完全一致；"
+        "summary 中的数字须来自该 JSON，勿照抄文档示例；"
+        "不要 markdown 围栏或解释。"
+    )
     raw_out = call_qwen_api(
         user_msg,
         system_prompt=system,
@@ -4421,6 +4481,12 @@ def generate_main_summary_via_qwen(
     summary = str(parsed.get("summary", "")).strip()
     if not summary:
         return None
+    parsed_title = str(parsed.get("title", "")).strip()
+    canon = str(main_title or "").strip()
+    if parsed_title and canon and parsed_title != canon:
+        print(
+            f"  [警告] main.summary 模型返回的 title「{parsed_title}」与主标题「{canon}」不一致，已忽略"
+        )
     return summary
 
 
@@ -4675,7 +4741,7 @@ def generate_pain_point_module_via_qwen(sleep_data):
     return normalized[:3]
 
 
-def generate_quality_module_via_qwen(sleep_data):
+def generate_quality_module_via_qwen(sleep_data, *, temperature=None, top_p=None):
     """
     读取 prompt/sleep_quality_analysis_template.md，填入睡眠数据，
     调用通义千问生成 quality_analysis.module（dimensions 数组）。
@@ -4720,7 +4786,12 @@ def generate_quality_module_via_qwen(sleep_data):
     )
 
     result = call_qwen_api(
-        prompt, system_prompt=instruction, max_tokens=4096, sleep_report_llm=True
+        prompt,
+        system_prompt=instruction,
+        max_tokens=4096,
+        temperature=temperature,
+        top_p=top_p,
+        sleep_report_llm=True,
     )
     if not result:
         return None
@@ -5491,7 +5562,7 @@ def _compact_sleep_records_for_trend_14d_prompt(sleep_seg):
 
 
 def _compact_schedule_records_for_trend_14d_prompt(sched_seg):
-    """自锚定日起向后 14 天窗口内的日程记录，供 sleep_trend_14d_analysis 提示词 JSON 使用。"""
+    """自锚定日起向前 14 天窗口内的日程记录，供 sleep_trend_14d_analysis 提示词 JSON 使用。"""
     out = []
     for r in sorted(sched_seg or [], key=lambda x: str(x.get("event_date") or "")):
         if not isinstance(r, dict):
@@ -5520,6 +5591,8 @@ def generate_ai_analysis(
     """
     为用户每一天生成一条 AI 分析记录。
     每条记录以当天为起点，取当天起向后连续14天（含当天）的睡眠和日程数据。
+    日程优先读取 output/{{user_id}}_calendar_events.json（与旧 schedule_data 列表结构一致），
+    不存在时再回退读取 {{user_id}}_schedule_data.json。
     use_doubao=True 时读取 prompt/sleep_trend_14d_analysis.md，将 14 天睡眠与日程 JSON 附于提示词后调用大模型；
     模板缺失、无 API Key 或解析失败时回退为本地 _build_local_ai_analysis。
     use_doubao=False 时仅本地生成。
@@ -5542,7 +5615,8 @@ def generate_ai_analysis(
         atomic_write_json(stream_output_file, rows)
 
     health_file = os.path.join(output_dir, f"{user_id}_health_data.json")
-    schedule_file = os.path.join(output_dir, f"{user_id}_schedule_data.json")
+    calendar_file = os.path.join(output_dir, f"{user_id}_calendar_events.json")
+    schedule_file_legacy = os.path.join(output_dir, f"{user_id}_schedule_data.json")
 
     # 读取睡眠数据
     sleep_records = []
@@ -5552,13 +5626,20 @@ def generate_ai_analysis(
     else:
         print(f'  未找到睡眠数据文件: {health_file}')
 
-    # 读取日程数据
+    # 读取日程数据（与 calendar_events 同结构：列表项含 event_date 等；兼容旧版 schedule_data.json）
     schedule_records = []
-    if os.path.exists(schedule_file):
-        with open(schedule_file, 'r', encoding='utf-8') as f:
+    if os.path.exists(calendar_file):
+        with open(calendar_file, 'r', encoding='utf-8') as f:
+            schedule_records = json.load(f)
+    elif os.path.exists(schedule_file_legacy):
+        with open(schedule_file_legacy, 'r', encoding='utf-8') as f:
             schedule_records = json.load(f)
     else:
-        print(f'  未找到日程数据文件: {schedule_file}')
+        print(f'  未找到日程数据文件: {calendar_file}（或旧版 {schedule_file_legacy}）')
+    if isinstance(schedule_records, list):
+        schedule_records = [r for r in schedule_records if isinstance(r, dict)]
+    else:
+        schedule_records = []
 
     if not sleep_records:
         print(f'  用户 {user_id} 无睡眠数据，跳过 AI 分析')
@@ -5616,15 +5697,18 @@ def generate_ai_analysis(
     for record_date_str in all_sleep_dates:
         record_date = datetime.strptime(record_date_str, '%Y-%m-%d')
 
-        # 取 [record_date, record_date + 13天] 共14天的数据（以当天为起点向后延展）
+        # 取 [record_date - 13天, record_date] 共14天的数据（以当天为起点向前回溯）
         window_dates = set()
         for offset in range(14):
-            window_dates.add((record_date + timedelta(days=offset)).strftime('%Y-%m-%d'))
+            window_dates.add((record_date - timedelta(days=offset)).strftime('%Y-%m-%d'))
 
         sleep_seg = [r for d in window_dates for r in sleep_by_date.get(d, [])]
         sched_seg = [r for d in window_dates for r in schedule_by_date.get(d, [])]
 
         if not sleep_seg:
+            continue
+        # 数据不足14天，跳过模型调用
+        if len(sleep_seg) < 14:
             continue
 
         # 先统一计算关键指标，供大模型提示词和去重策略共用
@@ -5635,8 +5719,8 @@ def generate_ai_analysis(
         avg_awake = sum(r['raw_data'].get('awake_ratio', 0) for r in sleep_seg) / len(sleep_seg)
 
         if use_doubao:
-            period_start = record_date_str
-            period_end = (record_date + timedelta(days=13)).strftime('%Y-%m-%d')
+            period_start = (record_date - timedelta(days=13)).strftime('%Y-%m-%d')
+            period_end = record_date_str
             # 先本地生成，作为解析失败或未配置 API 时的回退
             title, sleep_insight, schedule_insight = _build_local_ai_analysis(
                 record_date_str, sleep_seg, sched_seg
@@ -12049,7 +12133,7 @@ _SLEEP_EVENT_DURATION_SEC_RANGES = {
     "movement": (15, 120),
     "heart_rate_increase": (20, 150),
     # normal
-    "snoring": (20, 180),
+    "snoring": (7, 8),
     "sleep_talking": (5, 40),
     "once_movement": (3, 20),
     "natural_movement": (3, 25),

@@ -15,6 +15,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import random
@@ -82,6 +83,15 @@ _EVENT_STAGE_ALLOWED = {
     "AI主动干预": {"light", "awake"},
     "异常体动": {"light", "awake"},
     "噪声事件": {"light", "awake"},
+    "家电持续声": {"light", "deep", "awake"},
+    "环境持续声": {"light", "deep", "awake"},
+    "邻里持续声": {"light", "deep", "awake"},
+    "自然持续声": {"light", "deep", "awake"},
+    "突发撞击声": {"light", "awake"},
+    "突发交通声": {"light", "awake"},
+    "人声/门铃声": {"light", "awake"},
+    "自然突发声": {"light", "awake"},
+    "物品突发声": {"light", "awake"},
 }
 
 
@@ -194,7 +204,7 @@ def _default_duration_sec(
         if rng_val and len(rng_val) >= 2:
             return rng.randint(int(rng_val[0]), int(rng_val[1]))
     if event_type == "打鼾" or code == "snoring":
-        return rng.randint(120, 900)
+        return rng.randint(7, 8)
     if event_type in {"噩梦应激", "异常体动"} or code in {"nightmare", "movement", "abnormal_movement"}:
         return rng.randint(30, 150)
     return rng.randint(5, 45)
@@ -234,6 +244,148 @@ def _normal_code_map() -> dict[str, str]:
         "呼吸声": "breathing",
         "吞咽": "swallowing",
     }
+
+
+def _resolve_high_prob_event(hp_entry: dict, rng: random.Random) -> tuple[str, str]:
+    """将 high_probability_events 条目解析为 (event_type, code)。
+    噪声类随机选取一个子类型。"""
+    label = hp_entry.get("label", "")
+    category = hp_entry.get("category")
+    if category == "持续性噪声":
+        sub_types = ["家电持续声", "环境持续声", "邻里持续声", "自然持续声"]
+        codes = ["appliance_continuous", "environment_continuous",
+                 "neighbor_continuous", "nature_continuous"]
+        idx = rng.randint(0, len(sub_types) - 1)
+        return sub_types[idx], codes[idx]
+    elif category == "一次性噪声":
+        sub_types = ["突发撞击声", "突发交通声", "人声/门铃声", "自然突发声", "物品突发声"]
+        codes = ["sudden_impact", "sudden_traffic", "voice_doorbell",
+                 "nature_sudden", "object_sudden"]
+        idx = rng.randint(0, len(sub_types) - 1)
+        return sub_types[idx], codes[idx]
+    else:
+        label_to_code = {
+            "入睡困难": "sleeping",
+            "噩梦应激": "nightmare",
+            "心率上升": "heart_rate_increase",
+            "异常体动": "movement",
+        }
+        return label, label_to_code.get(label, "")
+
+
+def _should_high_prob_occur(probability: float, rng: random.Random) -> bool:
+    """正态分布采样决定高概率事件是否发生。mean=probability, std=0.05。"""
+    sampled = rng.gauss(probability, 0.05)
+    return rng.random() < max(0.0, min(1.0, sampled))
+
+
+def _make_abnormal_event(
+    uid: str, record_date: str, event_hhmm: str, event_type: str, code: str,
+) -> dict:
+    ts = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+    detail_map = {
+        "入睡困难": ("检测到入睡困难情况", "触发睡眠状态分析", "判定为入睡干扰问题"),
+        "噩梦应激": ("检测到噩梦相关生理反应", "触发情绪状态分析", "判定为情绪干扰影响"),
+        "心率上升": ("检测到心率异常上升", "触发心脏状态分析", "判定为心率干扰影响"),
+        "异常体动": ("检测到异常体动模式", "触发体动模式分析", "判定为体动干扰问题"),
+        "家电持续声": ("检测到家电持续噪声", "触发噪音监测分析", "判定为持续性环境声干扰"),
+        "环境持续声": ("检测到环境持续噪声", "触发噪音监测分析", "判定为持续性环境声干扰"),
+        "邻里持续声": ("检测到邻里持续噪声", "触发噪音监测分析", "判定为持续性环境声干扰"),
+        "自然持续声": ("检测到自然持续噪声", "触发噪音监测分析", "判定为持续性环境声干扰"),
+        "突发撞击声": ("检测到突发撞击声", "触发噪音监测分析", "判定为突发性环境声干扰"),
+        "突发交通声": ("检测到突发交通声", "触发噪音监测分析", "判定为突发性环境声干扰"),
+        "人声/门铃声": ("检测到人声或门铃声", "触发噪音监测分析", "判定为突发性环境声干扰"),
+        "自然突发声": ("检测到自然突发声", "触发噪音监测分析", "判定为突发性环境声干扰"),
+        "物品突发声": ("检测到物品突发声", "触发噪音监测分析", "判定为突发性环境声干扰"),
+    }
+    tc, ac, rs = detail_map.get(
+        event_type, ("检测到异常事件", "触发事件分析", "判定为异常事件"),
+    )
+    return {
+        "uid": uid, "record_date": record_date,
+        "event_timestamp": event_hhmm, "event_type": event_type,
+        "type": "abnormal", "code": code,
+        "detail": {"trigger_cause": tc, "action_taken": ac, "result_summary": rs},
+        "related_event_id": "", "sort_order": 0,
+        "create_time": ts, "update_time": ts,
+    }
+
+
+def _snoring_config_for_persona(persona: dict, gen: dict) -> dict:
+    """按晨/夜型读取打鼾配置。"""
+    sc = gen.get("snoring_config") or {}
+    code = persona.get("code", "M-L-C")
+    is_evening = code.startswith("E")
+    base = sc.get("evening" if is_evening else "morning") or {}
+    return {
+        "occurrence_ratio": float(base.get("occurrence_ratio", 0.35 if is_evening else 0.25)),
+        "segment_count_range": base.get("segment_count_range", [2, 4] if is_evening else [1, 2]),
+        "total_minutes_range": base.get("total_minutes_range", [40, 55] if is_evening else [30, 40]),
+        "event_duration_sec": sc.get("event_duration_sec", [7, 8]),
+    }
+
+
+def _generate_snoring_segment_events(
+    uid: str,
+    record_date: str,
+    segment_start_min: int,
+    segment_duration_sec: int,
+    event_duration_range: list,
+    rng: random.Random,
+) -> list[dict]:
+    """在一段连续时间内生成紧密相邻的打鼾事件，noise_db 呈低→高→低曲线。"""
+    events = []
+    seg_dur_lo = int(event_duration_range[0])
+    seg_dur_hi = int(event_duration_range[1])
+    ts = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+
+    # 按分钟粒度生成：每分钟生成多条事件，同一分钟内 noise_db 相同
+    total_min = max(1, segment_duration_sec // 60)
+    base_db = 38
+    amplitude = 22
+
+    current_sec = 0
+    for min_offset in range(total_min):
+        # noise_db 抛物线：按分钟位置计算，低→高→低
+        if total_min > 1:
+            pos = min_offset / (total_min - 1)  # 0.0 ~ 1.0
+        else:
+            pos = 0.5
+        noise_db = int(round(base_db + amplitude * (1 - (2 * pos - 1) ** 2)))
+        noise_db += rng.randint(-2, 2)  # 小幅随机抖动
+        noise_db = max(35, min(62, noise_db))
+
+        event_min = (segment_start_min + min_offset) % 1440
+        hhmm = _minutes_to_hhmm(event_min)
+
+        # 该分钟内的事件数：60秒 / 单次时长
+        sec_in_min = 60 if min_offset < total_min - 1 else max(1, segment_duration_sec - current_sec)
+        n_events = max(1, sec_in_min // ((seg_dur_lo + seg_dur_hi) // 2))
+
+        for _ in range(n_events):
+            dur = rng.randint(seg_dur_lo, seg_dur_hi)
+            events.append({
+                "uid": uid,
+                "record_date": record_date,
+                "event_timestamp": hhmm,
+                "event_type": "打鼾",
+                "type": "normal",
+                "code": "snoring",
+                "detail": {
+                    "trigger_cause": "检测到用户打鼾",
+                    "action_taken": "触发身体指标分析",
+                    "result_summary": "判定为唤醒干扰",
+                },
+                "related_event_id": "",
+                "sort_order": 0,
+                "create_time": ts,
+                "update_time": ts,
+                "duration_sec": dur,
+                "noise_db": noise_db,
+            })
+            current_sec += dur
+
+    return events
 
 
 def _resp_high_5min(vitals_day: list[dict], threshold: int = 15) -> bool:
@@ -344,10 +496,23 @@ def _rebalance_one_night_events(
     vitals_day: list[dict],
     env_day: list[dict],
     duration_cfg: dict | None = None,
+    gen: dict | None = None,
 ) -> list[dict]:
     rng = random.Random(f"{uid}:{record_date}:sleep-events")
     abnormal_probs = _abnormal_prob_map(persona)
     normal_probs = _normal_prob_map(persona)
+    hp_events_cfg = (persona.get("sleep_event_probabilities") or {}).get("high_probability_events") or []
+
+    # 构建 force_allowed 集合：高概率事件的噪声类别绕过 blocked 过滤
+    force_allowed: set[str] = set()
+    for hp in hp_events_cfg:
+        category = hp.get("category")
+        if category == "持续性噪声":
+            force_allowed.update(["家电持续声", "环境持续声", "邻里持续声", "自然持续声"])
+        elif category == "一次性噪声":
+            force_allowed.update(["突发撞击声", "突发交通声", "人声/门铃声", "自然突发声", "物品突发声"])
+        else:
+            force_allowed.add(hp.get("label", ""))
 
     # 按人格阻止列表过滤事件（低敏感人格不应有入睡困难、噩梦、噪声事件）
     blocked = set(
@@ -356,8 +521,9 @@ def _rebalance_one_night_events(
     if blocked:
         events = [
             e for e in events
-            if str(e.get("event_type") or "") not in blocked
-            and str(e.get("code") or "") not in blocked
+            if (str(e.get("event_type") or "") not in blocked
+                and str(e.get("code") or "") not in blocked)
+            or str(e.get("event_type") or "") in force_allowed
         ]
 
     # 保险丝：异常总数/每类上限/最小间隔
@@ -414,6 +580,46 @@ def _rebalance_one_night_events(
                     pass
         kept.append(_make_sleeping_event(uid, record_date, _minutes_to_hhmm(stage_min)))
 
+    # --- 高概率事件注入（force_allowed 绕过 blocked 过滤） ---
+    for hp in hp_events_cfg:
+        prob = float(hp.get("probability", 0.9))
+        if not _should_high_prob_occur(prob, rng):
+            continue
+        et_name, et_code = _resolve_high_prob_event(hp, rng)
+        if not et_name or not et_code:
+            continue
+        # 噪声类高概率事件绕过 blocked 过滤
+        if et_name in blocked and et_name not in force_allowed:
+            continue
+        already = any(
+            str(e.get("event_type")) == et_name and e.get("type") == "abnormal"
+            for e in kept
+        )
+        if already:
+            continue
+        idf_data = sleep_rec.get("idf_data") or []
+        allowed = _EVENT_STAGE_ALLOWED.get(et_name, {"light", "awake"})
+        stage_min = _pick_minute_in_stage_windows(idf_data, allowed, rng)
+        if stage_min is None:
+            sleep_t = str(raw.get("sleep_time") or "")
+            stage_min = 30
+            if "T" in sleep_t:
+                hm_local = _utc_iso_to_local_hm(sleep_t, tz_offset_hours=8)
+                if hm_local:
+                    m = _time_to_minutes(hm_local)
+                    if m is not None:
+                        stage_min = (m + rng.randint(30, 180)) % 1440
+        kept.append(_make_abnormal_event(uid, record_date, _minutes_to_hhmm(stage_min), et_name, et_code))
+
+    # --- 异常事件零比例控制（确定性） ---
+    code = persona.get("code", "M-L-C")
+    is_evening = code.startswith("E")
+    zero_threshold = 0.3 if is_evening else 0.4
+    zero_hash = int(hashlib.md5(f"{uid}:{record_date}:zero-abnormal".encode()).hexdigest(), 16)
+    zero_hash_val = (zero_hash % 10000) / 10000.0
+    if zero_hash_val < zero_threshold:
+        kept = [e for e in kept if e.get("type") != "abnormal"]
+
     # 保险丝应用到 abnormal 主事件
     abnormal_primary = []
     normal_primary = []
@@ -457,6 +663,8 @@ def _rebalance_one_night_events(
     planned_types = set()
     for et, p in normal_probs.items():
         if et in blocked:
+            continue
+        if et == "打鼾":  # 打鼾单独处理
             continue
         if rng.random() < float(p):
             planned_types.add(et)
@@ -527,6 +735,71 @@ def _rebalance_one_night_events(
         normal_code_count[code] += 1
         last_nm = t
 
+    # --- 打鼾多段连续事件生成（独立于 normal 保险丝） ---
+    snoring_cfg = _snoring_config_for_persona(persona, gen or {})
+    snoring_events = []
+    if "打鼾" not in blocked:
+        if rng.random() < snoring_cfg["occurrence_ratio"]:
+            n_segments = rng.randint(
+                snoring_cfg["segment_count_range"][0],
+                snoring_cfg["segment_count_range"][1],
+            )
+            total_minutes = rng.randint(
+                snoring_cfg["total_minutes_range"][0],
+                snoring_cfg["total_minutes_range"][1],
+            )
+            total_sec = total_minutes * 60
+
+            raw = (sleep_rec.get("raw_data") or {})
+            sleep_t = str(raw.get("sleep_time") or "")
+            wake_t = str(raw.get("wake_time") or raw.get("wake_up_time") or "")
+            bed_min = _time_to_minutes(_utc_iso_to_local_hm(sleep_t, tz_offset_hours=8)) or 0
+            wake_min = _time_to_minutes(_utc_iso_to_local_hm(wake_t, tz_offset_hours=8)) or (bed_min + 420)
+            if wake_min < bed_min:
+                wake_min += 1440
+            sleep_window_sec = (wake_min - bed_min) * 60
+
+            # 将总时长分配到各段
+            # 每段最小10分钟
+            min_seg_sec = 10 * 60
+            segment_durations = []
+            remaining = total_sec
+            for i in range(n_segments):
+                if i == n_segments - 1:
+                    segment_durations.append(remaining)
+                else:
+                    # 剩余段数需要至少 min_seg_sec
+                    others_min = (n_segments - i - 1) * min_seg_sec
+                    max_share = remaining - others_min
+                    min_share = min_seg_sec
+                    if max_share < min_share:
+                        share = remaining // (n_segments - i)
+                    else:
+                        share = rng.randint(min_share, max_share)
+                    segment_durations.append(share)
+                    remaining -= share
+
+            # 在睡眠窗口内不重叠放置各段
+            used_ranges: list[tuple[int, int]] = []
+            for seg_dur_sec in segment_durations:
+                for _ in range(50):
+                    max_start_sec = max(0, sleep_window_sec - seg_dur_sec)
+                    start_sec = rng.randint(0, max_start_sec) if max_start_sec > 0 else 0
+                    start_min = (bed_min + start_sec // 60) % 1440
+                    end_sec = start_sec + seg_dur_sec
+                    overlap = any(start_sec < ue and end_sec > us for us, ue in used_ranges)
+                    if not overlap:
+                        used_ranges.append((start_sec, end_sec))
+                        break
+                seg_events = _generate_snoring_segment_events(
+                    uid, record_date, start_min, seg_dur_sec,
+                    snoring_cfg["event_duration_sec"], rng,
+                )
+                snoring_events.extend(seg_events)
+
+    # 移除 normal_selected 中的旧打鼾事件（来自 generate_health_data）
+    normal_selected = [e for e in normal_selected if str(e.get("code") or "") != "snoring"]
+
     valid_ids = {str(e.get("_id") or "") for e in selected if e.get("_id")}
     filtered_others = []
     for e in others:
@@ -537,19 +810,22 @@ def _rebalance_one_night_events(
         if not rid or rid in valid_ids:
             filtered_others.append(e)
 
-    out = selected + normal_selected + filtered_others
+    out = selected + normal_selected + snoring_events + filtered_others
     for ev in out:
         detail = dict(ev.get("detail") or {})
         detail.pop("duration_sec", None)
         if str(ev.get("type") or "") == "intervention":
             d0 = rng.randint(10, 45)
+        elif str(ev.get("code") or "") == "snoring":
+            d0 = ev.get("duration_sec", rng.randint(7, 8))
         else:
             code_str = str(ev.get("code") or "")
             event_type_str = str(ev.get("event_type") or "")
             d0 = _default_duration_sec(event_type_str, code_str, rng, duration_cfg)
         ev["duration_sec"] = max(1, d0)
         ev["detail"] = detail
-        _attach_snoring_payload(ev, env_day, rng)
+        if str(ev.get("code") or "") != "snoring":
+            _attach_snoring_payload(ev, env_day, rng)
 
     # 为缺少 _id 的事件补 _id
     for ev in out:
@@ -702,6 +978,7 @@ def generate_sleep_events_for_persona(
             vit_by_date.get(rds, []),
             env_by_date.get(rds, []),
             duration_cfg=duration_cfg,
+            gen=gen,
         )
         all_events.extend(tuned)
 

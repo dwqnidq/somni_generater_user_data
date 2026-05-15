@@ -50,13 +50,6 @@ DB_NAME = os.getenv("MONGODB_DB") or _extract_db_name_from_uri(MONGO_URI, fallba
 
 # 数据类型配置
 aaa = {
-    # "sessionIds": {
-    #     "collection": "somni_plans",
-    #     "isDate": {
-    #         "create_time": True,
-    #         "update_time": True,
-    #     }
-    # },
     "health_data": {
         "collection": "somni_records",
         "isDate": {
@@ -69,6 +62,20 @@ aaa = {
             "raw_data.wake_time": True,
         }
     },
+    "calendar_events": {
+        "collection": "somni_schedules",
+        "isDate": {
+            "create_time": True,
+            "update_time": True,
+        }
+    },
+    "intervention_schemes_interv": {
+        "collection": "somni_temp_plans",
+        "isDate": {
+            "create_time": True,
+            "update_time": True,
+        }
+    },
     "vitals_data": {
         "collection": "somni_physiological_data",
         "isDate": {
@@ -77,34 +84,34 @@ aaa = {
             "collected_at": True,
         }
     },
-    # "quiz_result": {
-    #     "collection": "quiz_results",
-    #     "isDate": {
-    #         "create_time": True,
-    #         "update_time": True,
-    #     }
-    # },
-    # "quiz_result_record": {
-    #     "collection":"somni_sessions",
-    #     "isDate":{
-    #         "create_time": True,
-    #         "update_time": True,
-    #     }
-    # },
-    # "survey_data": {
-    #     "collection": "quiz_answers",
-    #     "isDate": {
-    #         "create_time": True,
-    #         "update_time": True,
-    #     }
-    # },
-    "schedule_data": {
-        "collection": "somni_schedules",
+    "daily_emotion_steps": {
+        "collection": "somni_fusion",
         "isDate": {
             "create_time": True,
             "update_time": True,
         }
     },
+    "sleep_art_data": {
+        "collection": "somni_dream_universe_assets",
+        "isDate": {
+            "create_time": True,
+            "update_time": True,
+        }
+    },
+    "sleep_district": {
+        "collection": "somni_sleep_district",
+        "isDate": {
+            "create_time": True,
+            "update_time": True,
+        }
+    },
+    "sleep_analysis": {
+        "collection": "somni_sleep_analysis",
+        "isDate": {
+            "create_time": True,
+            "update_time": True,
+        }
+    }, 
     "sleep_events": {
         "collection": "somni_events",
         "isDate": {
@@ -127,13 +134,13 @@ aaa = {
             "collected_at": True,
         }
     },
-    "ai_analysis": {
+    "ai_analysis_14d": {
         "collection": "somni_ai_insights",
         "isDate": {
-           "create_time": True,
+            "create_time": True,
             "update_time": True,
         }
-    },
+    }
     # "personality_user_mapping": {
     #     "collection": "somni_personality_user_mapping",
     #     "isDate": {
@@ -141,13 +148,6 @@ aaa = {
     #         "update_time": True,
     #     }
     # },
-    # "sleep_plan_data": {
-    #      "collection": "somni_plans",
-    #     "isDate": {
-    #         "create_time": True,
-    #         "update_time": True,
-    #     }
-    # }
 }
 
 # 数据文件路径

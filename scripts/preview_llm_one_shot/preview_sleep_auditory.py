@@ -8,6 +8,8 @@ import os
 from dotenv import load_dotenv
 
 from _shared import (
+    PREVIEW_LLM_TEMPERATURE,
+    PREVIEW_LLM_TOP_P,
     PROJECT_ROOT,
     base_arg_parser,
     bootstrap,
@@ -21,34 +23,22 @@ bootstrap()
 load_dotenv(os.path.join(PROJECT_ROOT, ".env"))
 force_doubao_env()
 
-import generate_health_data as gh  # noqa: E402
+from generate_ai.runtime import bootstrap_llm  # noqa: E402
+from generate_sleep_auditory import generate_auditory_for_date  # noqa: E402
 
 
 def main():
+    bootstrap_llm()
     ap = base_arg_parser(__doc__ or "")
     args = ap.parse_args()
-    gh.set_model_switch(True)
     sleep_data, rd = load_health_row(args.user_id, args.record_date, args.output_dir)
-    idx = gh.build_sleep_events_index(args.user_id, output_dir=args.output_dir)
-    ev = idx.get(rd, [])
-    auditory = gh.generate_auditory(
-        sleep_data, user_id=args.user_id, sleep_events_index=idx, output_dir=args.output_dir
-    )
-    env_rows_by_date = gh.index_environment_noise_rows_by_record_date(
-        args.user_id, output_dir=args.output_dir
-    )
-    all_events = [event for events in idx.values() for event in events]
-    audios, data_points = gh.rebuild_auditory_audios_and_snoring_data_points(
-        rd,
+    output_dir = os.path.join(PROJECT_ROOT, args.output_dir)
+    mod = generate_auditory_for_date(
         args.user_id,
-        all_events,
         sleep_data,
-        env_rows_by_date.get(rd, []),
-    )
-    auditory["audios"] = audios
-    auditory["snoring_analysis"] = {"data_points": data_points}
-    mod = gh.generate_auditory_module_via_qwen(
-        args.user_id, rd, sleep_data, ev, auditory, output_dir=args.output_dir
+        output_dir,
+        temperature=PREVIEW_LLM_TEMPERATURE,
+        top_p=PREVIEW_LLM_TOP_P,
     )
     if not mod:
         raise SystemExit("生成失败（检查模板、密钥与模型返回 JSON）")

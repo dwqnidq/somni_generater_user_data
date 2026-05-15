@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""单条预览：睡眠痛点 analysis.module（传指定日期异常事件与 AI 干预事件组）。"""
+"""单条预览：睡眠事件环境干预分析 analysis.module（传指定日期异常事件与 AI 干预事件组）。"""
 
 from __future__ import annotations
 
@@ -9,6 +9,8 @@ import os
 from dotenv import load_dotenv
 
 from _shared import (
+    PREVIEW_LLM_TEMPERATURE,
+    PREVIEW_LLM_TOP_P,
     PROJECT_ROOT,
     base_arg_parser,
     bootstrap,
@@ -65,13 +67,16 @@ def main():
         prompt = (
             "以下为指定日期睡眠过程中检测到的异常事件与 AI 主动干预事件组（JSON 二维数组）。"
             "每个子数组包含一个异常事件及其关联的 AI 主动干预事件。"
-            "请仅依据这些事件组生成 JSON 数组，元素个数 0～3，不要附加解释。\n\n"
+            "请仅依据这些事件组生成 JSON 数组：须恰好 1 个元素（单个对象含 title、description），"
+            "多组事件必须融合在该对象的 description 中，不得拆成多条；不要附加解释。\n\n"
             + json.dumps(payload, ensure_ascii=False)
         )
         raw = gh.call_qwen_api(
             prompt,
             system_prompt=instruction,
             max_tokens=4096,
+            temperature=PREVIEW_LLM_TEMPERATURE,
+            top_p=PREVIEW_LLM_TOP_P,
             sleep_report_llm=True,
         )
         if not raw:
@@ -82,11 +87,11 @@ def main():
             except Exception:
                 mod = gh._parse_model_json_array(raw)
             if isinstance(mod, list):
-                mod = mod[:3]
+                mod = mod[:1]
 
     if mod is None or not isinstance(mod, list):
         raise SystemExit("生成失败（检查模板、密钥与模型返回 JSON）")
-    out = args.out.strip() or default_out_path("preview_sleep_pain_point_one")
+    out = args.out.strip() or default_out_path("preview_sleep_event_environment_intervention_analysis_one")
     write_result(out, {"record_date": rd, "pain_point_analysis_module": mod})
 
 

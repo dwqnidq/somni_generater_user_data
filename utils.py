@@ -1,10 +1,13 @@
 """文件作用：用于 utils 相关的数据处理或流程支持。"""
 
+import copy
 import json
 import os
 import tempfile
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import random
+import math
+import statistics
 import requests
 
 def parse_time(time_str, format='%H:%M'):
@@ -201,6 +204,184 @@ def get_open_meteo_weather(latitude, longitude, query_date=None, timezone="auto"
     }
 
 
+_CN_OFFSET = timedelta(hours=8)
+_CN_TZ = timezone(_CN_OFFSET, name="CST")
+_QWEATHER_HOST = "https://nv63yxq3rp.re.qweatherapi.com"
+
+
+def cn_aqi_six_level_from_display(aqi_display):
+    """
+    将 aqiDisplay 数值按常见 AQI 分段映射为 1~6 档及中文等级。
+    区间：0~50(1)优，51~100(2)良，101~150(3)轻度污染，151~200(4)中度污染，
+    201~300(5)重度污染，301~500(6)严重污染；>500 视为 (6)；无法解析为数字返回 null。
+    """
+    _null = {"aqi_six_level": None, "aqi_six_level_label": None, "aqi_six_level_display": None}
+    if aqi_display is None:
+        return _null
+    try:
+        v = float(str(aqi_display).strip())
+    except (TypeError, ValueError):
+        return _null
+    if v < 0:
+        return _null
+    if v <= 50:
+        n, label = 1, "优"
+    elif v <= 100:
+        n, label = 2, "良"
+    elif v <= 150:
+        n, label = 3, "轻度污染"
+    elif v <= 200:
+        n, label = 4, "中度污染"
+    elif v <= 300:
+        n, label = 5, "重度污染"
+    else:
+        n, label = 6, "严重污染"
+    return {
+        "aqi_six_level": n,
+        "aqi_six_level_label": label,
+        "aqi_six_level_display": f"({n}) {label}",
+    }
+
+
+def uv_index_to_light_level_label(uv_index):
+    """
+    将紫外线指数映射为光强档位文案（与和风日预报 uvIndex 数值口径一致）。
+    0~2 暗光，3~4 弱光，5~6 亮光，7 及以上为强光（含 11+）。
+    无法解析为数字时返回 None。
+    """
+    if uv_index is None:
+        return None
+    try:
+        v = float(str(uv_index).strip())
+    except (TypeError, ValueError):
+        return None
+    if v < 0:
+        return None
+    if v <= 2:
+        return "暗光"
+    if v <= 4:
+        return "弱光"
+    if v <= 6:
+        return "亮光"
+    return "强光"
+
+
+def fetch_qweather_today_snapshot(
+    *,
+    location="101010100",
+    latitude=39.9042,
+    longitude=116.4074,
+    api_key=None,
+    output_dir="output",
+    output_filename="qweather_today_snapshot.json",
+    timeout=15,
+):
+    """
+    调用和风天气（自定义域名）3 日预报与空气质量日预报，仅取「今日」（按中国标准时间日历日）
+    的日出/日落/紫外线/湿度，以及空气质量 indexes 中优先 CN AQI 的 aqiDisplay，并原子写入 output 下 JSON。
+
+    api_key: 和风 API Key；为空时读取环境变量 QWEATHER_API_KEY。当前自定义 Host 使用查询参数
+    ``key`` 鉴权（与 devapi 一致）；未配置时接口可能返回 401。
+
+    返回并写入的 dict 含键：sunrise、sunset、uvIndex、humidity、aqiDisplay。
+    uvIndex 为紫外线档位文案（0~2 暗光，3~4 弱光，5~6 亮光，7+ 强光），非数值。
+    aqiDisplay 为中国 AQI 六档中文等级（优/良/轻度污染/…），非原始指数。
+    """
+    try:
+        from dotenv import load_dotenv
+
+        _repo_root = os.path.dirname(os.path.abspath(__file__))
+        load_dotenv(os.path.join(_repo_root, ".env"))
+    except ImportError:
+        pass
+
+    today = datetime.now(_CN_TZ).date()
+    today_str = today.isoformat()
+
+    key = api_key or os.getenv("QWEATHER_API_KEY")
+    weather_params = {"location": location}
+    if key:
+        weather_params["key"] = key
+
+    weather_url = f"{_QWEATHER_HOST}/v7/weather/3d"
+    w_resp = requests.get(
+        weather_url,
+        params=weather_params,
+        timeout=timeout,
+    )
+    w_resp.raise_for_status()
+    w_data = w_resp.json()
+    if str(w_data.get("code")) != "200":
+        raise RuntimeError(f"和风天气 3d 接口异常: code={w_data.get('code')!r}")
+
+    daily_list = w_data.get("daily") or []
+    today_weather = next(
+        (d for d in daily_list if str(d.get("fxDate", "")) == today_str),
+        daily_list[0] if daily_list else None,
+    )
+    if not today_weather:
+        raise RuntimeError("和风天气 3d 返回中无 daily 数据")
+
+    air_url = f"{_QWEATHER_HOST}/airquality/v1/daily/{latitude}/{longitude}"
+    air_params = {"key": key} if key else None
+    a_resp = requests.get(air_url, params=air_params, timeout=timeout)
+    a_resp.raise_for_status()
+    a_data = a_resp.json()
+    if not isinstance(a_data, dict):
+        raise RuntimeError("空气质量接口返回非 JSON 对象")
+    days = a_data.get("days") or []
+
+    def _parse_air_utc(value):
+        if not value:
+            return None
+        s = str(value).strip()
+        if s.endswith("Z"):
+            s = s[:-1] + "+00:00"
+        try:
+            dt = datetime.fromisoformat(s)
+        except ValueError:
+            return None
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt.astimezone(timezone.utc)
+
+    def _day_covers_now_utc(day):
+        start = _parse_air_utc(day.get("forecastStartTime"))
+        end = _parse_air_utc(day.get("forecastEndTime"))
+        if start is None or end is None:
+            return False
+        now_utc = datetime.now(timezone.utc)
+        return start <= now_utc < end
+
+    today_air = next((d for d in days if _day_covers_now_utc(d)), None)
+    if today_air is None and days:
+        today_air = days[0]
+
+    aqi_display = None
+    if today_air:
+        indexes = today_air.get("indexes") or []
+        for idx in indexes:
+            if idx.get("code") == "cn-mee":
+                aqi_display = idx.get("aqiDisplay")
+                break
+        if aqi_display is None and indexes:
+            aqi_display = indexes[0].get("aqiDisplay")
+
+    raw_uv = today_weather.get("uvIndex")
+    aqi_lv = cn_aqi_six_level_from_display(aqi_display)
+    out = {
+        "sunrise": today_weather.get("sunrise"),
+        "sunset": today_weather.get("sunset"),
+        "uvIndex": uv_index_to_light_level_label(raw_uv),
+        "humidity": today_weather.get("humidity"),
+        "aqiDisplay": aqi_lv["aqi_six_level_label"],
+    }
+
+    out_path = os.path.join(os.path.abspath(output_dir), output_filename)
+    atomic_write_json(out_path, out, ensure_ascii=False, indent=2)
+    return out
+
+
 def _amap_geocode(address, api_key, city=None, timeout=10):
     """使用高德地理编码把地址转换为经纬度字符串（lng,lat）。"""
     url = "https://restapi.amap.com/v3/geocode/geo"
@@ -322,4 +503,347 @@ def get_amap_route_info(
         "congestion_ratio": congestion_ratio,
         "traffic_status_distance_m": traffic_status_counter,
         "raw_route": best_path,
+    }
+
+
+def _clamp_score(value):
+    """将分值限制在 0~100。"""
+    return max(0.0, min(100.0, float(value)))
+
+
+def _safe_float(value, default=0.0):
+    """尽量把输入转为 float。"""
+    try:
+        if value is None:
+            return float(default)
+        return float(value)
+    except (TypeError, ValueError):
+        return float(default)
+
+
+def _parse_iso_datetime(value):
+    """解析 ISO 时间字符串，兼容末尾 Z。"""
+    if not value:
+        return None
+    try:
+        return datetime.fromisoformat(str(value).replace("Z", ""))
+    except ValueError:
+        return None
+
+
+def _minutes_since_midnight(dt_obj):
+    """把 datetime 转为当天分钟数。"""
+    if dt_obj is None:
+        return None
+    return dt_obj.hour * 60 + dt_obj.minute + dt_obj.second / 60.0
+
+
+def score_sleep_duration(total_sleep_minutes):
+    """
+    睡眠时长得分：
+    - 7~9h: 100
+    - <7h: 每少30分钟扣10分，<=4h 记0分
+    - >9h: 每多30分钟扣5分，>=11h 记0分
+    """
+    minutes = _safe_float(total_sleep_minutes)
+    if minutes <= 240:
+        return 0.0
+    if 420 <= minutes <= 540:
+        return 100.0
+    if minutes < 420:
+        deduction_steps = math.ceil((420 - minutes) / 30.0)
+        return _clamp_score(100 - deduction_steps * 10)
+    if minutes >= 660:
+        return 0.0
+    deduction_steps = math.ceil((minutes - 540) / 30.0)
+    return _clamp_score(100 - deduction_steps * 5)
+
+
+def score_sleep_latency(latency_minutes):
+    """入睡快慢得分。"""
+    minutes = _safe_float(latency_minutes)
+    if minutes <= 15:
+        return 100.0
+    if minutes <= 30:
+        return 80.0
+    if minutes <= 45:
+        return 60.0
+    if minutes <= 60:
+        return 40.0
+    return 0.0
+
+
+def score_night_stability(stability_ratio):
+    """夜间安稳度得分（稳定占比 -> 分档）。"""
+    ratio = max(0.0, min(1.0, _safe_float(stability_ratio)))
+    if ratio >= 0.8:
+        return 100.0
+    if ratio >= 0.7:
+        return 80.0
+    if ratio >= 0.6:
+        return 60.0
+    if ratio >= 0.5:
+        return 40.0
+    return 0.0
+
+
+def score_sleep_regularity(fluctuation_minutes):
+    """作息规律度得分（综合波动分钟数 -> 分档）。"""
+    minutes = _safe_float(fluctuation_minutes)
+    if minutes <= 30:
+        return 100.0
+    if minutes <= 60:
+        return 80.0
+    if minutes <= 90:
+        return 60.0
+    if minutes <= 120:
+        return 40.0
+    return 0.0
+
+
+def score_no_abnormal_events(total_sleep_minutes, abnormal_total_duration_sec, abnormal_count):
+    """
+    异常事件得分（时长占比 + 次数修正）：
+    1) 基础占比 = (总睡眠时长 - 异常总时长) / 总睡眠时长
+    2) 次数修正：<=2 不变，3~5 *0.8，>=6 *0.6
+    3) 最终占比<30% 则 0 分，否则 最终占比*100
+    """
+    total_sleep_sec = _safe_float(total_sleep_minutes) * 60.0
+    abnormal_sec = max(0.0, _safe_float(abnormal_total_duration_sec))
+    count = _safe_float(abnormal_count)
+
+    if total_sleep_sec <= 0:
+        return 0.0, 0.0, 0.0
+
+    no_abnormal_sec = max(0.0, total_sleep_sec - abnormal_sec)
+    base_ratio = max(0.0, min(1.0, no_abnormal_sec / total_sleep_sec))
+
+    if count <= 2:
+        ratio_after_count = base_ratio
+    elif count <= 5:
+        ratio_after_count = base_ratio * 0.8
+    else:
+        ratio_after_count = base_ratio * 0.6
+
+    ratio_after_count = max(0.0, min(1.0, ratio_after_count))
+    if ratio_after_count < 0.3:
+        return 0.0, base_ratio, ratio_after_count
+    return _clamp_score(ratio_after_count * 100.0), base_ratio, ratio_after_count
+
+
+def _iter_user_ids_from_output_dir(output_dir):
+    """扫描 output 目录，找出含 health_data 的 uid。"""
+    user_ids = set()
+    for file_name in os.listdir(output_dir):
+        if file_name.endswith("_health_data.json"):
+            user_ids.add(file_name.replace("_health_data.json", ""))
+    return sorted(user_ids)
+
+
+def _load_json(path):
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def _build_abnormal_event_index(events):
+    """
+    以 record_date 聚合异常事件:
+    { date: {"abnormal_count": x, "abnormal_duration_sec": y} }
+    """
+    date_index = {}
+    for event in events:
+        if event.get("type") != "abnormal":
+            continue
+        record_date = event.get("record_date")
+        if not record_date:
+            continue
+        date_index.setdefault(record_date, {"abnormal_count": 0, "abnormal_duration_sec": 0.0})
+        date_index[record_date]["abnormal_count"] += 1
+        date_index[record_date]["abnormal_duration_sec"] += max(
+            0.0, _safe_float(event.get("duration_sec"))
+        )
+    return date_index
+
+
+def calculate_sleep_map_score_window(start_date, uid=None, days=14, output_dir="output"):
+    """
+    计算睡眠地图分数（按日期窗口，支持单用户/全用户）。
+
+    参数:
+    - start_date: 起始日期，YYYY-MM-DD
+    - uid: 可选。传入用户 id 时只算该用户；为空时统计 output 下所有用户。
+    - days: 窗口天数，默认 14 天（含起始日）
+    - output_dir: 数据目录，默认 output
+
+    返回 dict 中 nightly_records 每条在派生指标外，另含 source_health（当日 health 行）
+    与 source_sleep_events（当日睡眠事件列表，深拷贝）。
+    """
+    if days <= 0:
+        raise ValueError("days 必须大于 0")
+
+    start = datetime.strptime(start_date, "%Y-%m-%d").date()
+    end = start + timedelta(days=days - 1)
+    output_dir = os.path.abspath(output_dir)
+
+    if not os.path.isdir(output_dir):
+        raise FileNotFoundError(f"output 目录不存在: {output_dir}")
+
+    if uid:
+        user_ids = [uid]
+    else:
+        user_ids = _iter_user_ids_from_output_dir(output_dir)
+
+    all_total_sleep_minutes = []
+    all_sleep_latency_minutes = []
+    all_night_stability_ratios = []
+    all_abnormal_counts = []
+    all_abnormal_durations_sec = []
+    sleep_clock_minutes = []
+    wake_clock_minutes = []
+    nightly_records = []
+    users_included = set()
+
+    for current_uid in user_ids:
+        health_path = os.path.join(output_dir, f"{current_uid}_health_data.json")
+        events_path = os.path.join(output_dir, f"{current_uid}_sleep_events.json")
+        if not os.path.exists(health_path) or not os.path.exists(events_path):
+            continue
+
+        health_list = _load_json(health_path)
+        events_list = _load_json(events_path)
+        abnormal_by_date = _build_abnormal_event_index(events_list)
+        events_by_date = {}
+        for e in events_list:
+            rd = e.get("record_date")
+            if rd:
+                events_by_date.setdefault(rd, []).append(e)
+
+        for item in health_list:
+            record_date = item.get("record_date")
+            if not record_date:
+                continue
+            try:
+                record_day = datetime.strptime(record_date, "%Y-%m-%d").date()
+            except ValueError:
+                continue
+
+            if not (start <= record_day <= end):
+                continue
+
+            users_included.add(current_uid)
+            raw_data = item.get("raw_data", {})
+            total_sleep_minutes = max(0.0, _safe_float(raw_data.get("total_sleep_minutes")))
+            sleep_latency = max(0.0, _safe_float(raw_data.get("sleep_latency")))
+
+            event_stats = abnormal_by_date.get(
+                record_date, {"abnormal_count": 0, "abnormal_duration_sec": 0.0}
+            )
+            abnormal_count = event_stats["abnormal_count"]
+            abnormal_duration_sec = event_stats["abnormal_duration_sec"]
+            total_sleep_sec = total_sleep_minutes * 60.0
+            if total_sleep_sec > 0:
+                night_stability_ratio = max(
+                    0.0, min(1.0, (total_sleep_sec - abnormal_duration_sec) / total_sleep_sec)
+                )
+            else:
+                night_stability_ratio = 0.0
+
+            sleep_dt = _parse_iso_datetime(raw_data.get("sleep_time"))
+            wake_dt = _parse_iso_datetime(raw_data.get("wake_up_time"))
+            sleep_minutes_clock = _minutes_since_midnight(sleep_dt)
+            wake_minutes_clock = _minutes_since_midnight(wake_dt)
+
+            all_total_sleep_minutes.append(total_sleep_minutes)
+            all_sleep_latency_minutes.append(sleep_latency)
+            all_night_stability_ratios.append(night_stability_ratio)
+            all_abnormal_counts.append(float(abnormal_count))
+            all_abnormal_durations_sec.append(abnormal_duration_sec)
+            if sleep_minutes_clock is not None:
+                sleep_clock_minutes.append(sleep_minutes_clock)
+            if wake_minutes_clock is not None:
+                wake_clock_minutes.append(wake_minutes_clock)
+
+            nightly_records.append(
+                {
+                    "uid": current_uid,
+                    "record_date": record_date,
+                    "total_sleep_minutes": total_sleep_minutes,
+                    "sleep_latency_minutes": sleep_latency,
+                    "night_stability_ratio": night_stability_ratio,
+                    "abnormal_count": abnormal_count,
+                    "abnormal_duration_sec": abnormal_duration_sec,
+                    "sleep_time_minutes_of_day": sleep_minutes_clock,
+                    "wake_up_time_minutes_of_day": wake_minutes_clock,
+                    "source_health": copy.deepcopy(item),
+                    "source_sleep_events": copy.deepcopy(
+                        events_by_date.get(record_date, [])
+                    ),
+                }
+            )
+
+    if not nightly_records:
+        return {
+            "window": {"start_date": str(start), "end_date": str(end), "days": days},
+            "uid": uid,
+            "users_included": [],
+            "night_count": 0,
+            "message": "指定条件下无可用睡眠数据",
+        }
+
+    avg_total_sleep_minutes = statistics.mean(all_total_sleep_minutes)
+    avg_sleep_latency_minutes = statistics.mean(all_sleep_latency_minutes)
+    avg_night_stability_ratio = statistics.mean(all_night_stability_ratios)
+    avg_abnormal_count = statistics.mean(all_abnormal_counts)
+    avg_abnormal_duration_sec = statistics.mean(all_abnormal_durations_sec)
+    sleep_std = statistics.pstdev(sleep_clock_minutes) if len(sleep_clock_minutes) > 1 else 0.0
+    wake_std = statistics.pstdev(wake_clock_minutes) if len(wake_clock_minutes) > 1 else 0.0
+    regularity_fluctuation_minutes = (sleep_std + wake_std) / 2.0
+
+    sleep_duration_score = score_sleep_duration(avg_total_sleep_minutes)
+    sleep_latency_score = score_sleep_latency(avg_sleep_latency_minutes)
+    night_stability_score = score_night_stability(avg_night_stability_ratio)
+    regularity_score = score_sleep_regularity(regularity_fluctuation_minutes)
+    no_abnormal_score, abnormal_base_ratio, abnormal_final_ratio = score_no_abnormal_events(
+        total_sleep_minutes=avg_total_sleep_minutes,
+        abnormal_total_duration_sec=avg_abnormal_duration_sec,
+        abnormal_count=avg_abnormal_count,
+    )
+
+    total_score = (
+        sleep_duration_score * 0.25
+        + sleep_latency_score * 0.15
+        + night_stability_score * 0.25
+        + regularity_score * 0.15
+        + no_abnormal_score * 0.20
+    )
+
+    return {
+        "window": {"start_date": str(start), "end_date": str(end), "days": days},
+        "uid": uid,
+        "users_included": sorted(users_included),
+        "night_count": len(nightly_records),
+        "averages": {
+            "total_sleep_minutes": round(avg_total_sleep_minutes, 2),
+            "sleep_latency_minutes": round(avg_sleep_latency_minutes, 2),
+            "night_stability_ratio": round(avg_night_stability_ratio, 4),
+            "abnormal_count": round(avg_abnormal_count, 2),
+            "abnormal_duration_sec": round(avg_abnormal_duration_sec, 2),
+            "sleep_time_std_minutes": round(sleep_std, 2),
+            "wake_up_time_std_minutes": round(wake_std, 2),
+            "regularity_fluctuation_minutes": round(regularity_fluctuation_minutes, 2),
+        },
+        "scores": {
+            "sleep_duration_score": round(sleep_duration_score, 2),
+            "sleep_latency_score": round(sleep_latency_score, 2),
+            "night_stability_score": round(night_stability_score, 2),
+            "regularity_score": round(regularity_score, 2),
+            "no_abnormal_events_score": round(no_abnormal_score, 2),
+            "composite_score": round(_clamp_score(total_score), 2),
+        },
+        "abnormal_ratio_debug": {
+            "base_ratio": round(abnormal_base_ratio, 4),
+            "final_ratio_after_count_adjustment": round(abnormal_final_ratio, 4),
+        },
+        "formula": "最终综合得分=睡眠时长得分x0.25+入睡快慢得分x0.15+夜间安稳得分x0.25+作息规律度得分x0.15+无异常事件得分x0.20",
+        "nightly_records": nightly_records,
     }

@@ -1,86 +1,90 @@
 {
-  "record_date": "2026-03-11",
+  "record_date": "2026-05-01",
+  "sleep_time_points": {
+    "bed_time": "23:42",
+    "sleep_onset": "01:48",
+    "wake_after_sleep": "08:00",
+    "out_of_bed": "08:09"
+  },
   "sleep_events": [
     [
       {
-        "uid": "69aea593af5e6cbf08027964",
-        "record_date": "2026-03-11",
-        "event_timestamp": "23:07",
+        "uid": "69aea6f3af5e6cbf0802796a",
+        "record_date": "2026-05-01",
+        "event_timestamp": "02:11",
         "event_type": "入睡困难",
         "type": "abnormal",
         "code": "sleeping",
         "detail": {
-          "trigger_cause": "识别到用户躺卧许久仍保持清醒状态，迟迟无法进入睡眠",
-          "action_taken": "启动入睡阶段状态监测与睡眠质量评估",
-          "result_summary": "确认为入睡过程异常"
+          "trigger_cause": "感知到用户入睡过程迟迟没有进入稳定状态",
+          "action_taken": "启动入睡阶段的状态分析",
+          "result_summary": "确认为入睡过程出现异常"
         },
         "related_event_id": "",
         "sort_order": 0,
-        "create_time": "2026-05-06T06:09:47.680193Z",
-        "update_time": "2026-05-06T06:09:47.680193Z",
-        "duration_sec": 305,
-        "_id": "69fadb2bf39380667f715712"
+        "create_time": "2026-05-15T09:49:24.170961Z",
+        "update_time": "2026-05-15T09:49:24.170961Z",
+        "duration_sec": 572,
+        "_id": "6a06ec247641f90c8cfeb824"
       },
       {
-        "uid": "69aea593af5e6cbf08027964",
-        "record_date": "2026-03-11",
-        "event_timestamp": "23:09",
+        "uid": "69aea6f3af5e6cbf0802796a",
+        "record_date": "2026-05-01",
+        "event_timestamp": "02:13",
         "event_type": "AI主动干预",
         "type": "intervention",
         "code": "sleeping",
         "detail": {
-          "trigger_cause": "系统接到用户入睡困难的异常信号",
-          "action_taken": "播放轻柔舒缓的布朗噪音，间歇释放淡淡薰衣草香氛，搭配慢节奏柔和呼吸引导灯光，维持环境稳定避免打断状态",
-          "result_summary": "有效帮助用户平稳状态，顺利进入深度睡眠"
+          "trigger_cause": "识别到用户入睡困难的异常信号",
+          "action_taken": "释放薰衣草香氛，间隔5秒循环一次，播放轻柔的白噪音，节奏匹配呼吸频率",
+          "result_summary": "有效帮助用户稳定入睡，进入深度睡眠阶段"
         },
-        "related_event_id": "69fadb2bf39380667f715712",
+        "related_event_id": "6a06ec247641f90c8cfeb824",
         "sort_order": 0,
-        "create_time": "2026-05-06T06:09:47.682568Z",
-        "update_time": "2026-05-06T06:09:47.682568Z",
-        "duration_sec": 29,
-        "_id": "69fadb2bf39380667f715715"
+        "create_time": "2026-05-15T09:49:24.171039Z",
+        "update_time": "2026-05-15T09:49:24.171039Z",
+        "duration_sec": 27,
+        "_id": "6a06ec247641f90c8cfeb828"
       }
     ],
     [
       {
-        "uid": "69aea593af5e6cbf08027964",
-        "record_date": "2026-03-11",
-        "event_timestamp": "03:05",
-        "event_type": "噩梦应激",
+        "uid": "69aea6f3af5e6cbf0802796a",
+        "record_date": "2026-05-01",
+        "event_timestamp": "03:19",
+        "event_type": "人声/门铃声",
         "type": "abnormal",
-        "code": "nightmare",
+        "code": "voice_doorbell",
         "detail": {
-          "trigger_cause": "感知到用户睡眠中出现呼吸急促、肢体异动等反常表现",
-          "action_taken": "启动睡眠情绪状态分析与持续状态监测",
-          "result_summary": "归因为睡眠中情绪波动导致的状态异常"
+          "trigger_cause": "捕捉到突然出现的人声或门铃声",
+          "action_taken": "启动环境噪音的监测与分析",
+          "result_summary": "识别为突发性环境声响干扰"
         },
         "related_event_id": "",
-        "sort_order": 5,
-        "create_time": "2026-05-06T14:09:47.672782Z",
-        "update_time": "2026-05-06T14:09:47.672784Z",
-        "duration_sec": 137,
-        "_id": "69fadb2bf39380667f71570d",
-        "language": "zh"
+        "sort_order": 0,
+        "create_time": "2026-05-15T09:49:24.170982Z",
+        "update_time": "2026-05-15T09:49:24.170982Z",
+        "duration_sec": 5,
+        "_id": "6a06ec247641f90c8cfeb825"
       },
       {
-        "uid": "69aea593af5e6cbf08027964",
-        "record_date": "2026-03-11",
-        "event_timestamp": "03:07",
+        "uid": "69aea6f3af5e6cbf0802796a",
+        "record_date": "2026-05-01",
+        "event_timestamp": "03:21",
         "event_type": "AI主动干预",
         "type": "intervention",
-        "code": "nightmare",
+        "code": "voice_doorbell",
         "detail": {
-          "trigger_cause": "发现用户因做噩梦出现情绪不稳定状况",
-          "action_taken": "保持环境暗光的前提下，平缓调大舒缓白噪音音量，间歇释放淡薰衣草香氛，帮助平复情绪避免完全清醒",
-          "result_summary": "已实现情绪平稳调节，用户顺利回归正常睡眠状态"
+          "trigger_cause": "感知到突发性的环境声响信号",
+          "action_taken": "播放轻柔的短时白噪音，音量比突发声响更低，约30秒后慢慢停止",
+          "result_summary": "成功掩盖了突发声响，睡眠状态保持稳定"
         },
-        "related_event_id": "69fadb2bf39380667f71570d",
-        "sort_order": 6,
-        "create_time": "2026-05-06T14:09:47.677198Z",
-        "update_time": "2026-05-06T14:09:47.677199Z",
-        "duration_sec": 27,
-        "_id": "69fadb2bf39380667f715711",
-        "language": "zh"
+        "related_event_id": "6a06ec247641f90c8cfeb825",
+        "sort_order": 0,
+        "create_time": "2026-05-15T09:49:24.171039Z",
+        "update_time": "2026-05-15T09:49:24.171039Z",
+        "duration_sec": 25,
+        "_id": "6a06ec247641f90c8cfeb829"
       }
     ]
   ]

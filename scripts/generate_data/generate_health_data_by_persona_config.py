@@ -28,6 +28,31 @@ TIMEZONE_OFFSET = 8  # UTC+8
 CONFIG_PATH = os.path.join(PROJECT_ROOT, "config", "health_data_personas_config.json")
 OUTPUT_DIR = os.path.join(PROJECT_ROOT, "output")
 
+# ──────────────────────────────────────────────
+# 入睡潜伏期增强（按作息类型 M/E 抽样追加 extra latency）
+# ──────────────────────────────────────────────
+
+# 同一 (label) 下的多条规则按顺序对剩余样本不重叠抽取，比例基于该 label 的全体样本数。
+EXTRA_SLEEP_LATENCY_RULES: dict = {
+    "M": {  # 晨型
+        "good": [
+            {"ratio": 0.10, "extra_range": (60, 90)},
+            {"ratio": 0.30, "extra_range": (20, 60)},
+        ],
+        "bad": [
+            {"ratio": 0.10, "extra_range": (90, 120)},
+        ],
+    },
+    "E": {  # 夜型
+        "good": [
+            {"ratio": 0.20, "extra_range": (90, 120)},
+            {"ratio": 0.20, "extra_range": (40, 80)},
+        ],
+        "bad": [
+            {"ratio": 0.10, "extra_range": (120, 180)},
+        ],
+    },
+}
 
 # ──────────────────────────────────────────────
 # 时间工具函数
@@ -132,29 +157,16 @@ def _pick_sleep_latency_for_bed_range(
     return random.randint(lo, hi)
 
 
-def _find_feasible_shift_minutes(
-    bed_dt: datetime,
-    sleep_dt: datetime,
-    wake_up_dt: datetime,
-    sleep_range: list[str],
-    bed_range: list[str],
-    wake_up_range: list[str],
-    search_radius: int = 1440,
-) -> int | None:
-    """对 bed/sleep/wake_up 同时平移相同整数分钟，使三者钟点均落入配置区间；优先 |Δ| 最小。"""
-    candidates: list[int] = []
-    for d in range(-search_radius, search_radius + 1):
-        if (
-            _wall_clock_in_hhmm_range(bed_dt + timedelta(minutes=d), bed_range)
-            and _wall_clock_in_hhmm_range(sleep_dt + timedelta(minutes=d), sleep_range)
-            and _wall_clock_in_hhmm_range(wake_up_dt + timedelta(minutes=d), wake_up_range)
-        ):
-            candidates.append(d)
-    if not candidates:
-        return None
-    best = min(abs(c) for c in candidates)
-    narrowed = [c for c in candidates if abs(c) == best]
-    return random.choice(narrowed)
+def _compute_wake_up_window(bed_time_local: datetime, wake_up_range: list[str]) -> tuple[datetime, datetime]:
+    """推算起床时刻的绝对 datetime 窗口：以卧床时刻 +8h 为锚点找对应日历日。"""
+    approx_wake_day = (bed_time_local + timedelta(hours=8)).replace(
+        hour=0, minute=0, second=0, microsecond=0
+    )
+    w0, w1 = _window_start_end(approx_wake_day, wake_up_range[0], wake_up_range[1])
+    if w1 < bed_time_local + timedelta(hours=4):
+        w0 += timedelta(days=1)
+        w1 += timedelta(days=1)
+    return w0, w1
 
 
 # ──────────────────────────────────────────────
@@ -466,6 +478,43 @@ def _randint_range(rng: list) -> int:
     return random.randint(min(lo, hi), max(lo, hi))
 
 
+def _feasible_awake_ratio_interval(
+    awake_range: list,
+    tib_need_lo: int,
+    tib_need_hi: int,
+    sleep_latency: int,
+    wake_after_sleep: int,
+    tst_cfg_lo: int,
+    tst_cfg_hi: int,
+) -> tuple[int, int] | None:
+    """在已知 TIB 允许区间与潜伏/觉后清醒时，筛出能使 tst 合法采样的 awake_ratio 闭区间子集。
+
+    避免「总睡下限偏高 + 清醒比例上沿偏高 + TIB 上沿有限」导致 tst_lo_final > tst_hi_final。
+    """
+    a_lo, a_hi = int(awake_range[0]), int(awake_range[1])
+    a_lo, a_hi = min(a_lo, a_hi), max(a_lo, a_hi)
+    feas: list[int] = []
+    for a in range(a_lo, a_hi + 1):
+        eff = max(1, 100 - a)
+        tst_hi_final = min(
+            tst_cfg_hi,
+            tib_need_hi - sleep_latency - wake_after_sleep,
+            round(tib_need_hi * eff / 100),
+        )
+        tst_lo_final = max(
+            tst_cfg_lo,
+            min(
+                tib_need_lo - sleep_latency - wake_after_sleep,
+                round(tib_need_lo * eff / 100),
+            ),
+        )
+        if tst_lo_final <= tst_hi_final:
+            feas.append(a)
+    if not feas:
+        return None
+    return (min(feas), max(feas))
+
+
 def generate_day_record(record_date: date, uid: str, state_cfg: dict,
                         now_utc: datetime, state_label: str = "good",
                         schedule_anchor: dict | None = None,
@@ -475,7 +524,7 @@ def generate_day_record(record_date: date, uid: str, state_cfg: dict,
     schedule_anchor 由调用方预先计算：{"sleep_center": int(分钟), "jitter": int(分钟)}
     当存在时，入睡时间在 center ± jitter 内随机，而非从配置全范围采样。
     """
-    for _ in range(150):
+    for _ in range(100):
         rec = _try_generate_day_record_impl(
             record_date, uid, state_cfg, now_utc, state_label, schedule_anchor,
             persona_code,
@@ -483,8 +532,8 @@ def generate_day_record(record_date: date, uid: str, state_cfg: dict,
         if rec is not None:
             return rec
     raise RuntimeError(
-        "无法在 150 次尝试内使 bed/sleep/wake_up 经同一平移后同时落入配置区间："
-        f"uid={uid} record_date={record_date}"
+        f"配置参数无解：uid={uid} record_date={record_date} state={state_label}。"
+        "请检查 bed/sleep/wake_up_time_range 与 total_sleep_minutes/sleep_latency/wake_after_sleep 是否兼容。"
     )
 
 
@@ -497,9 +546,16 @@ def _try_generate_day_record_impl(
     schedule_anchor: dict | None,
     persona_code: str = "M-L-C",
 ) -> dict | None:
-    """单次随机生成；若不存在满足三向时间窗的整体平移则返回 None 供外层重试。"""
-    # ── 时间采样 ──────────────────────────────────
+    """正向采样：bed → sleep → tib，使 wake_up 直接命中配置窗，无需后置平移。
+
+    关键恒等式：wake_up_time = bed_time + tib
+    （latency、stages、夜醒、觉后清醒的分配只影响内部结构，不改变终点钟点）
+    因此约束 tib 落入 [ww0-bed, ww1-bed] 即可保证 wake_up ∈ wake_up_time_range。
+    返回 None 仅在配置参数组合本身无解时出现（极少），由外层少量重试覆盖。
+    """
     base_dt = datetime(record_date.year, record_date.month, record_date.day)
+
+    # ── 入睡时刻（含锚点逻辑）──
     if schedule_anchor:
         center = schedule_anchor["sleep_center"]
         jitter = schedule_anchor["jitter"]
@@ -518,51 +574,103 @@ def _try_generate_day_record_impl(
             base_dt, state_cfg["sleep_time_range"][0], state_cfg["sleep_time_range"][1]
         )
         sleep_time_local = _pick_random_in_datetime_window(sw0, sw1)
+
+    # ── 入睡潜伏：使 bed_time 落在 bed_time_range 内 ──
     sleep_latency = _pick_sleep_latency_for_bed_range(
         sleep_time_local, state_cfg["sleep_latency"], state_cfg["bed_time_range"]
     )
     bed_time_local = sleep_time_local - timedelta(minutes=sleep_latency)
     wake_after_sleep = _randint_range(state_cfg["wake_after_sleep"])
 
-    # ── 四段比例采样（各自在范围内且和为 100）────────────────
+    # wake_up_time = bed_time + tib，故 tib ∈ [ww0 - bed, ww1 - bed]
+    ww0, ww1 = _compute_wake_up_window(bed_time_local, state_cfg["wake_up_time_range"])
+    tib_need_lo = int((ww0 - bed_time_local).total_seconds() // 60)
+    tib_need_hi = int((ww1 - bed_time_local).total_seconds() // 60)
+
+    tst_cfg_lo = int(state_cfg["total_sleep_minutes"][0])
+    tst_cfg_hi = int(state_cfg["total_sleep_minutes"][1])
+    aw_feas = _feasible_awake_ratio_interval(
+        state_cfg["awake_ratio"],
+        tib_need_lo,
+        tib_need_hi,
+        sleep_latency,
+        wake_after_sleep,
+        tst_cfg_lo,
+        tst_cfg_hi,
+    )
+    if aw_feas is None:
+        return None
+
+    # ── 四段比例采样（各自在范围内且和为 100）；awake 先按 TIB×总睡约束收紧 ──
     deep_ratio, light_ratio, rem_ratio, awake_ratio = _sample_ratios_in_range(
         state_cfg["deep_sleep_ratio"],
         state_cfg["light_sleep_ratio"],
         state_cfg["rem_ratio"],
-        state_cfg["awake_ratio"],
+        list(aw_feas),
     )
 
-    # ── TIB：由 TST 种子和睡眠效率推导，确保 TST 贴合配置范围 ──
-    tst_seed = _randint_range(state_cfg["total_sleep_minutes"])
-    sleep_efficiency_seed = 100 - awake_ratio
+    # ── 约束 tst_seed 使最终 tib 落入允许区间 ──
+    # tib = max(tst + lat + wake_after, round(tst / eff * 100))
+    # 上界：两条路径都必须 <= tib_need_hi
+    # 下界：取两条路径下界的最小值（只需一条满足即可）
+    eff = max(1, 100 - int(awake_ratio))
+
+    tst_hi_final = min(
+        tst_cfg_hi,
+        tib_need_hi - sleep_latency - wake_after_sleep,
+        round(tib_need_hi * eff / 100),
+    )
+    tst_lo_final = max(
+        tst_cfg_lo,
+        min(
+            tib_need_lo - sleep_latency - wake_after_sleep,
+            round(tib_need_lo * eff / 100),
+        ),
+    )
+    if tst_lo_final > tst_hi_final:
+        return None
+
+    tst_seed = random.randint(tst_lo_final, tst_hi_final)
+    sleep_efficiency_seed = eff
     tib = max(
         tst_seed + sleep_latency + wake_after_sleep,
         round(tst_seed / max(1, sleep_efficiency_seed) * 100),
     )
 
-    # ── 各阶段分钟数依据 TIB 计算 ─────────────────────────
+    # 微调：tib 因 round() 偶尔越上界时，通过缩减 tst_seed 修正
+    if tib > tib_need_hi:
+        excess = tib - tib_need_hi
+        if tst_seed - excess >= tst_cfg_lo:
+            tst_seed -= excess
+            tib = tib_need_hi
+        else:
+            return None
+
+    # ── 各阶段分钟数依据 TIB 计算 ──
     deep_min = round(tib * deep_ratio / 100)
     light_min = round(tib * light_ratio / 100)
     rem_min = round(tib * rem_ratio / 100)
     total_sleep_min = deep_min + light_min + rem_min
 
-    # 三次 round() 累积误差可能使 total_sleep_min 偏出配置范围 ±1~2 分钟，
-    # 通过调整最大段（浅睡）来修正，保持 TIB 总账不变
-    tst_lo, tst_hi = int(state_cfg["total_sleep_minutes"][0]), int(state_cfg["total_sleep_minutes"][1])
-    if total_sleep_min < tst_lo:
-        light_min += tst_lo - total_sleep_min
-        total_sleep_min = tst_lo
-    elif total_sleep_min > tst_hi:
-        light_min -= total_sleep_min - tst_hi
+    # round() 累积误差修正（调浅睡）
+    if total_sleep_min < tst_cfg_lo:
+        light_min += tst_cfg_lo - total_sleep_min
+        total_sleep_min = tst_cfg_lo
+    elif total_sleep_min > tst_cfg_hi:
+        light_min -= total_sleep_min - tst_cfg_hi
         light_min = max(0, light_min)
         total_sleep_min = deep_min + light_min + rem_min
 
-    # ── 夜间清醒：awake 配额扣除入睡潜伏和觉后清醒后的余量 ────
+    # ── 夜间清醒 ──
     n_awakenings = _randint_range(state_cfg["night_awakenings"])
     nighttime_awake = max(0, tib - total_sleep_min - sleep_latency - wake_after_sleep)
     awakening_durations = _split_awake(nighttime_awake, n_awakenings)
 
-    # ── 输出用四段比例：由实际分钟反推，再裁剪到配置区间并凑整为和 100 ──
+    # ── 时间节点（由 bed_time + tib 直接推算）──
+    wake_up_time_local = bed_time_local + timedelta(minutes=tib)
+    wake_time_local = wake_up_time_local - timedelta(minutes=wake_after_sleep)
+
+    # ── 输出用四段比例：由实际分钟反推，裁剪到配置区间并凑整为和 100 ──
     awake_total_min = sleep_latency + wake_after_sleep + sum(awakening_durations)
     dr, lr, rr, ar = (
         state_cfg["deep_sleep_ratio"],
@@ -582,45 +690,20 @@ def _try_generate_day_record_impl(
 
     sleep_efficiency = min(100, max(0, round(100 * total_sleep_min / max(1, tib))))
 
-    # ── 时间节点 ──────────────────────────────────────────
-    wake_time_local = sleep_time_local + timedelta(
-        minutes=total_sleep_min + sum(awakening_durations)
-    )
-    wake_up_time_local = wake_time_local + timedelta(minutes=wake_after_sleep)
-
-    # 方案 A：整体平移钟点，使 bed/sleep/wake_up 落入配置区间，不改变睡眠结构分钟数
-    shift_m = _find_feasible_shift_minutes(
-        bed_time_local,
-        sleep_time_local,
-        wake_up_time_local,
-        state_cfg["sleep_time_range"],
-        state_cfg["bed_time_range"],
-        state_cfg["wake_up_time_range"],
-    )
-    if shift_m is None:
-        return None
-    td_shift = timedelta(minutes=shift_m)
-    bed_time_local += td_shift
-    sleep_time_local += td_shift
-    wake_time_local += td_shift
-    wake_up_time_local += td_shift
-
-    # ── 其他体征指标 ────────────────────────────────
+    # ── 其他体征指标 ──
     avg_heartbeat = _randint_range(state_cfg["average_heartbeat"])
     avg_respiration = _randint_range(state_cfg["average_respiration"])
     apnea_count = _randint_range(state_cfg["apnea_count"])
     turnover_count = _randint_range(state_cfg["turnover_count"])
 
-    # ── UTC 时间 ────────────────────────────────────
+    # ── UTC 时间 ──
     bed_time_utc = _local_to_utc_iso(bed_time_local)
     sleep_time_utc = _local_to_utc_iso(sleep_time_local)
     wake_time_utc = _local_to_utc_iso(wake_time_local)
     wake_up_time_utc = _local_to_utc_iso(wake_up_time_local)
 
-    sleep_score = compute_sleep_score(sleep_efficiency, deep_ratio,
-                                      rem_ratio, awake_ratio)
+    sleep_score = compute_sleep_score(sleep_efficiency, deep_ratio, rem_ratio, awake_ratio)
 
-    # ── idf_data（须与平移后的 bed_time_local 一致）────────────────
     idf = build_idf_data(
         bed_time_local, sleep_latency,
         total_sleep_min, deep_min, light_min, rem_min, wake_after_sleep,
@@ -655,6 +738,148 @@ def _try_generate_day_record_impl(
         "update_time": ts,
         "uid": uid,
     }
+
+
+
+
+
+def _augment_record_with_extra_sleep_latency(rec: dict, extra_minutes: int) -> None:
+    """为单条记录追加 extra_minutes 分钟的入睡潜伏期：
+    - sleep_time 推后 take（=min(extra, 可削减的睡眠段长度)）；bed_time / wake_time / wake_up_time 不变
+    - idf_data：起始 awake 段延长 take，从睡眠+夜间清醒段尾部等量裁剪 take 分钟
+      （idf 总长 = TIB 不变，末尾觉后 awake 段与 wake_up_time 钟点保持不变）
+    - raw_data.total_sleep_minutes / sleep_efficiency 由最终 timeline 重新计算，确保与 idf 严格一致
+    - raw_data.sleep_latency 字段保持不变（用户主观感受值，不重新计算）
+    """
+    raw = rec["raw_data"]
+    bed_dt = datetime.strptime(raw["bed_time"], "%Y-%m-%dT%H:%M:%SZ")
+    sleep_dt = datetime.strptime(raw["sleep_time"], "%Y-%m-%dT%H:%M:%SZ")
+    wake_up_dt = datetime.strptime(raw["wake_up_time"], "%Y-%m-%dT%H:%M:%SZ")
+    tib = max(1, int((wake_up_dt - bed_dt).total_seconds() // 60))
+
+    idf = rec.get("idf_data") or []
+    if not idf:
+        return
+
+    timeline: list = []
+    for seg in idf:
+        dur = (_hhmm_to_minutes(seg["end"]) - _hhmm_to_minutes(seg["start"])) % 1440
+        if dur == 0:
+            dur = 1440
+        timeline.extend([seg["stage"]] * dur)
+
+    insert_at = 0
+    while insert_at < len(timeline) and timeline[insert_at] == "awake":
+        insert_at += 1
+    if insert_at >= len(timeline):
+        return
+
+    tail_awake_len = 0
+    for stage in reversed(timeline):
+        if stage == "awake":
+            tail_awake_len += 1
+        else:
+            break
+    sleep_end = len(timeline) - tail_awake_len
+
+    take = min(extra_minutes, sleep_end - insert_at)
+    if take <= 0:
+        return
+
+    new_timeline = (
+        timeline[:insert_at]
+        + ["awake"] * take
+        + timeline[insert_at:sleep_end - take]
+        + timeline[sleep_end:]
+    )
+
+    bed_local_dt = bed_dt + timedelta(hours=TIMEZONE_OFFSET)
+    rec["idf_data"] = _timeline_to_idf(new_timeline, bed_local_dt)
+
+    new_tst = sum(1 for st in new_timeline if st != "awake")
+    last_non_awake_end_idx = max(
+        (i for i, st in enumerate(new_timeline) if st != "awake"),
+        default=-1,
+    ) + 1
+    raw["sleep_time"] = (sleep_dt + timedelta(minutes=take)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    raw["wake_time"] = (bed_dt + timedelta(minutes=last_non_awake_end_idx)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    raw["total_sleep_minutes"] = new_tst
+    raw["sleep_efficiency"] = min(100, max(0, round(100 * new_tst / tib)))
+
+
+def _pick_evenly_spaced_indices(
+    positions: list[int], n_target: int, occupied: set[int] | None = None
+) -> list[int]:
+    """在已按日期序排列的位置数组 positions 中均匀分桶抽取 n_target 个：
+    每桶内优先选与"上一个被选位置 / occupied 已占位置"间隔 ≥ 2 的候选，
+    支持跨 label 共享 occupied 排除以达到全局"尽量不相邻"。"""
+    n = len(positions)
+    if n_target <= 0 or n == 0:
+        return []
+    if n_target >= n:
+        return list(positions)
+    occ = occupied or set()
+    picked: list[int] = []
+    last_pos = -10
+    for k in range(n_target):
+        lo = k * n // n_target
+        hi = (k + 1) * n // n_target
+        bucket = list(range(lo, hi))
+        far = [
+            i for i in bucket
+            if positions[i] - last_pos >= 2
+            and all(abs(positions[i] - p) >= 2 for p in occ)
+        ]
+        if not far:
+            far = [i for i in bucket if positions[i] - last_pos >= 2]
+        chosen_idx = random.choice(far if far else bucket)
+        picked.append(positions[chosen_idx])
+        last_pos = positions[chosen_idx]
+    return picked
+
+
+def _apply_extra_sleep_latency_for_records(records: list, persona_code: str) -> None:
+    """按人格作息类型（code 首位 M/E）从 good/bad 子集中不重叠抽取若干档位，
+    分别为各档位内的样本追加随机 extra latency。
+
+    抽样策略：
+    - 同一 label 的多个规则共用一份分桶选出的"被增强"位置集合，再随机切片分配给各规则
+    - 跨 label 之间共享 occupied 集合：先处理目标量小的 label（如 bad），
+      再处理 label（如 good）时避免新选位置与已占位置在日期上相邻
+    """
+    persona_type = (persona_code or "")[:1]
+    rules_by_label = EXTRA_SLEEP_LATENCY_RULES.get(persona_type)
+    if not rules_by_label:
+        return
+
+    label_plans: list[tuple[list[dict], list[int], list[int], int]] = []
+    for label, rule_list in rules_by_label.items():
+        sub_indices = [i for i, r in enumerate(records) if r.get("data_label") == label]
+        n_total = len(sub_indices)
+        if n_total == 0:
+            continue
+        targets_per_rule = [int(round(n_total * rule["ratio"])) for rule in rule_list]
+        n_target_total = min(sum(targets_per_rule), n_total)
+        if n_target_total <= 0:
+            continue
+        label_plans.append((rule_list, targets_per_rule, sub_indices, n_target_total))
+
+    label_plans.sort(key=lambda x: x[3])
+
+    occupied: set[int] = set()
+    for rule_list, targets_per_rule, sub_indices, n_target_total in label_plans:
+        picked = _pick_evenly_spaced_indices(sub_indices, n_target_total, occupied)
+        occupied.update(picked)
+        random.shuffle(picked)
+        cursor = 0
+        for rule, n_t in zip(rule_list, targets_per_rule):
+            n_t = min(n_t, len(picked) - cursor)
+            if n_t <= 0:
+                continue
+            lo, hi = rule["extra_range"]
+            for idx in picked[cursor:cursor + n_t]:
+                _augment_record_with_extra_sleep_latency(records[idx], random.randint(lo, hi))
+            cursor += n_t
 
 
 # ──────────────────────────────────────────────
@@ -742,6 +967,8 @@ def generate_persona_health_data(
             persona_code=code,
         )
         records.append(rec)
+
+    _apply_extra_sleep_latency_for_records(records, code)
 
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     with open(out_file, "w", encoding="utf-8") as f:

@@ -60,28 +60,123 @@
     },
     "event_duration_sec": {
       "_desc": "各事件 code 的 duration_sec 随机区间 [min, max]（秒），生成时从中均匀采样",
-      "snoring": [120, 900],
-      "sleep_talking": [10, 45],
-      "cough": [5, 20],
-      "posture_switch": [5, 25],
-      "body_movement": [10, 40],
-      "micro_movement": [5, 20],
-      "single_movement": [5, 20],
-      "breathing": [30, 120],
-      "swallowing": [5, 20],
-      "sleeping": [120, 600],
-      "nightmare": [30, 150],
-      "movement": [15, 60],
-      "heart_rate_increase": [30, 120],
-      "appliance_continuous": [60, 600],
-      "environment_continuous": [60, 600],
-      "nature_continuous": [60, 300],
-      "neighbor_continuous": [60, 300],
-      "sudden_impact": [1, 5],
-      "sudden_traffic": [3, 8],
-      "voice_doorbell": [5, 20],
-      "object_sudden": [2, 8],
-      "nature_sudden": [2, 8]
+      "snoring": [
+        7,
+        8
+      ],
+      "sleep_talking": [
+        10,
+        45
+      ],
+      "cough": [
+        5,
+        20
+      ],
+      "posture_switch": [
+        5,
+        25
+      ],
+      "body_movement": [
+        10,
+        40
+      ],
+      "micro_movement": [
+        5,
+        20
+      ],
+      "single_movement": [
+        5,
+        20
+      ],
+      "breathing": [
+        30,
+        120
+      ],
+      "swallowing": [
+        5,
+        20
+      ],
+      "sleeping": [
+        120,
+        600
+      ],
+      "nightmare": [
+        30,
+        150
+      ],
+      "movement": [
+        15,
+        60
+      ],
+      "heart_rate_increase": [
+        30,
+        120
+      ],
+      "appliance_continuous": [
+        60,
+        600
+      ],
+      "environment_continuous": [
+        60,
+        600
+      ],
+      "nature_continuous": [
+        60,
+        300
+      ],
+      "neighbor_continuous": [
+        60,
+        300
+      ],
+      "sudden_impact": [
+        1,
+        5
+      ],
+      "sudden_traffic": [
+        3,
+        8
+      ],
+      "voice_doorbell": [
+        5,
+        20
+      ],
+      "object_sudden": [
+        2,
+        8
+      ],
+      "nature_sudden": [
+        2,
+        8
+      ]
+    },
+    "snoring_config": {
+      "_desc": "打鼾生成参数。occurrence_ratio 为有打鼾的夜晚占比；segment_count_range 为每晚打鼾段数范围；total_minutes_range 为所有打鼾段合计时长范围（分钟）；event_duration_sec 为单条打鼾事件时长范围（秒）",
+      "morning": {
+        "occurrence_ratio": 0.25,
+        "segment_count_range": [
+          1,
+          2
+        ],
+        "total_minutes_range": [
+          30,
+          40
+        ]
+      },
+      "evening": {
+        "occurrence_ratio": 0.35,
+        "segment_count_range": [
+          2,
+          4
+        ],
+        "total_minutes_range": [
+          40,
+          55
+        ]
+      },
+      "event_duration_sec": [
+        7,
+        8
+      ]
     }
   },
   "personas": [
@@ -91,8 +186,8 @@
       "identity_type": "策划者",
       "user_id": "69aea593af5e6cbf08027964",
       "date_range": {
-        "start": "2026-03-01",
-        "end": "2026-04-01"
+        "start": "2026-04-18",
+        "end": "2026-05-31"
       },
       "sleep_metric_states": {
         "good": {
@@ -102,23 +197,23 @@
             "22:58"
           ],
           "bed_time_range": [
-            "22:22",
-            "22:38"
+            "22:35",
+            "22:55"
           ],
           "wake_up_time_range": [
-            "06:14",
-            "06:28"
+            "06:18",
+            "06:35"
           ],
           "total_sleep_minutes": [
-            420,
+            408,
             448
           ],
           "deep_sleep_ratio": [
-            13,
-            18
+            12,
+            17
           ],
           "light_sleep_ratio": [
-            42,
+            43,
             50
           ],
           "rem_ratio": [
@@ -126,36 +221,36 @@
             24
           ],
           "awake_ratio": [
-            7,
-            11
+            8,
+            12
           ],
           "night_awakenings": [
             2,
             4
           ],
           "sleep_latency": [
-            17,
-            25
+            22,
+            34
           ],
           "sleep_efficiency": [
             89,
             93
           ],
           "wake_after_sleep": [
-            6,
-            11
+            7,
+            13
           ],
           "average_heartbeat": [
-            68,
-            78
+            62,
+            72
           ],
           "average_respiration": [
-            14,
-            20
+            12,
+            18
           ],
           "apnea_count": [
-            1,
-            4
+            2,
+            5
           ],
           "turnover_count": [
             25,
@@ -174,20 +269,20 @@
             "23:58"
           ],
           "bed_time_range": [
-            "23:15",
-            "23:32"
+            "23:20",
+            "23:45"
           ],
           "wake_up_time_range": [
             "06:58",
-            "07:12"
+            "07:15"
           ],
           "total_sleep_minutes": [
-            390,
-            425
+            382,
+            420
           ],
           "deep_sleep_ratio": [
-            9,
-            13
+            8,
+            12
           ],
           "light_sleep_ratio": [
             50,
@@ -198,36 +293,36 @@
             20
           ],
           "awake_ratio": [
-            14,
-            19
+            16,
+            21
           ],
           "night_awakenings": [
             4,
             7
           ],
           "sleep_latency": [
-            22,
-            36
+            30,
+            46
           ],
           "sleep_efficiency": [
             81,
             86
           ],
           "wake_after_sleep": [
-            19,
-            25
+            18,
+            26
           ],
           "average_heartbeat": [
-            74,
-            84
+            68,
+            78
           ],
           "average_respiration": [
-            19,
-            24
+            15,
+            21
           ],
           "apnea_count": [
-            2,
-            5
+            8,
+            15
           ],
           "turnover_count": [
             40,
@@ -272,7 +367,19 @@
           "呼吸声": 0.15,
           "吞咽": 0.15
         },
-        "blocked_events": []
+        "blocked_events": [],
+        "high_probability_events": [
+          {
+            "label": "心率上升",
+            "category": null,
+            "probability": 0.9
+          },
+          {
+            "label": "入睡困难",
+            "category": null,
+            "probability": 0.9
+          }
+        ]
       }
     },
     {
@@ -281,8 +388,8 @@
       "identity_type": "调音师",
       "user_id": "69aea63eaf5e6cbf08027965",
       "date_range": {
-        "start": "2026-03-01",
-        "end": "2026-04-01"
+        "start": "2026-04-18",
+        "end": "2026-05-31"
       },
       "sleep_metric_states": {
         "good": {
@@ -292,60 +399,60 @@
             "22:34"
           ],
           "bed_time_range": [
-            "22:08",
-            "22:22"
+            "22:15",
+            "22:35"
           ],
           "wake_up_time_range": [
-            "06:06",
-            "06:18"
+            "06:10",
+            "06:28"
           ],
           "total_sleep_minutes": [
-            424,
-            452
+            382,
+            414
           ],
           "deep_sleep_ratio": [
-            15,
-            20
+            13,
+            18
           ],
           "light_sleep_ratio": [
-            41,
-            49
+            42,
+            50
           ],
           "rem_ratio": [
-            17,
-            24
+            16,
+            23
           ],
           "awake_ratio": [
-            8,
-            12
+            10,
+            14
           ],
           "night_awakenings": [
-            1,
-            3
+            3,
+            5
           ],
           "sleep_latency": [
             8,
-            17
+            18
           ],
           "sleep_efficiency": [
             88,
             92
           ],
           "wake_after_sleep": [
-            5,
-            9
+            14,
+            24
           ],
           "average_heartbeat": [
-            62,
-            72
+            68,
+            78
           ],
           "average_respiration": [
-            12,
-            18
+            15,
+            21
           ],
           "apnea_count": [
-            0,
-            3
+            1,
+            4
           ],
           "turnover_count": [
             22,
@@ -364,60 +471,60 @@
             "23:32"
           ],
           "bed_time_range": [
-            "22:55",
-            "23:12"
+            "23:00",
+            "23:25"
           ],
           "wake_up_time_range": [
-            "06:30",
-            "06:44"
+            "06:35",
+            "06:55"
           ],
           "total_sleep_minutes": [
-            398,
-            432
+            355,
+            388
           ],
           "deep_sleep_ratio": [
-            11,
-            15
+            10,
+            14
           ],
           "light_sleep_ratio": [
-            48,
+            47,
             56
           ],
           "rem_ratio": [
-            15,
-            21
+            14,
+            20
           ],
           "awake_ratio": [
-            13,
-            18
+            16,
+            23
           ],
           "night_awakenings": [
-            3,
-            6
+            5,
+            8
           ],
           "sleep_latency": [
             18,
-            32
+            30
           ],
           "sleep_efficiency": [
             82,
             87
           ],
           "wake_after_sleep": [
-            15,
-            21
+            24,
+            38
           ],
           "average_heartbeat": [
-            68,
-            78
+            74,
+            84
           ],
           "average_respiration": [
-            16,
-            22
+            18,
+            24
           ],
           "apnea_count": [
-            2,
-            5
+            6,
+            12
           ],
           "turnover_count": [
             35,
@@ -462,7 +569,19 @@
           "呼吸声": 0.3,
           "吞咽": 0.15
         },
-        "blocked_events": []
+        "blocked_events": [],
+        "high_probability_events": [
+          {
+            "label": "环境噪音",
+            "category": "持续性噪声",
+            "probability": 0.9
+          },
+          {
+            "label": "异常体动",
+            "category": null,
+            "probability": 0.9
+          }
+        ]
       }
     },
     {
@@ -471,8 +590,8 @@
       "identity_type": "执行师",
       "user_id": "69aea6d8af5e6cbf08027966",
       "date_range": {
-        "start": "2026-03-01",
-        "end": "2026-04-01"
+         "start": "2026-04-18",
+        "end": "2026-05-31"
       },
       "sleep_metric_states": {
         "good": {
@@ -482,60 +601,60 @@
             "23:02"
           ],
           "bed_time_range": [
-            "22:24",
-            "22:40"
+            "22:00",
+            "22:23"
           ],
           "wake_up_time_range": [
-            "06:32",
-            "06:45"
+            "06:00",
+            "07:15"
           ],
           "total_sleep_minutes": [
-            428,
-            455
+            448,
+            484
           ],
           "deep_sleep_ratio": [
-            15,
-            20
+            18,
+            23
           ],
           "light_sleep_ratio": [
-            40,
-            47
+            38,
+            45
           ],
           "rem_ratio": [
-            17,
+            18,
             24
           ],
           "awake_ratio": [
-            6,
-            10
+            4,
+            8
           ],
           "night_awakenings": [
             1,
             2
           ],
           "sleep_latency": [
-            18,
-            27
+            10,
+            22
           ],
           "sleep_efficiency": [
             90,
             94
           ],
           "wake_after_sleep": [
-            4,
-            8
+            3,
+            7
           ],
           "average_heartbeat": [
-            60,
-            70
+            52,
+            62
           ],
           "average_respiration": [
-            13,
-            19
+            11,
+            16
           ],
           "apnea_count": [
             0,
-            3
+            2
           ],
           "turnover_count": [
             15,
@@ -554,60 +673,60 @@
             "00:00"
           ],
           "bed_time_range": [
-            "23:15",
-            "23:32"
+            "22:35",
+            "22:55"
           ],
           "wake_up_time_range": [
-            "06:58",
-            "07:12"
+            "06:40",
+            "07:45"
           ],
           "total_sleep_minutes": [
-            400,
-            432
+            425,
+            468
           ],
           "deep_sleep_ratio": [
-            11,
-            14
-          ],
-          "light_sleep_ratio": [
-            49,
-            56
-          ],
-          "rem_ratio": [
-            14,
-            20
-          ],
-          "awake_ratio": [
-            12,
+            13,
             17
           ],
+          "light_sleep_ratio": [
+            45,
+            52
+          ],
+          "rem_ratio": [
+            16,
+            22
+          ],
+          "awake_ratio": [
+            9,
+            13
+          ],
           "night_awakenings": [
-            3,
-            5
+            2,
+            4
           ],
           "sleep_latency": [
-            22,
-            34
+            15,
+            30
           ],
           "sleep_efficiency": [
             83,
             88
           ],
           "wake_after_sleep": [
-            13,
-            18
+            9,
+            15
           ],
           "average_heartbeat": [
-            65,
-            75
+            57,
+            67
           ],
           "average_respiration": [
-            16,
-            22
+            13,
+            19
           ],
           "apnea_count": [
-            1,
-            4
+            2,
+            6
           ],
           "turnover_count": [
             28,
@@ -663,6 +782,18 @@
           "人声/门铃声",
           "自然突发声",
           "物品突发声"
+        ],
+        "high_probability_events": [
+          {
+            "label": "入睡困难",
+            "category": null,
+            "probability": 0.9
+          },
+          {
+            "label": "突发噪音",
+            "category": "一次性噪声",
+            "probability": 0.9
+          }
         ]
       }
     },
@@ -672,71 +803,71 @@
       "identity_type": "漫步者",
       "user_id": "69aea6e3af5e6cbf08027967",
       "date_range": {
-        "start": "2026-03-01",
-        "end": "2026-04-01"
+         "start": "2026-04-18",
+        "end": "2026-05-31"
       },
       "sleep_metric_states": {
         "good": {
           "_desc": "稳定态：睡眠质量最优，入睡极快，深睡高，几乎不醒",
           "sleep_time_range": [
-            "22:02",
-            "22:18"
+            "22:41",
+            "23:26"
           ],
           "bed_time_range": [
-            "21:55",
-            "22:08"
+            "22:35",
+            "23:10"
           ],
           "wake_up_time_range": [
-            "06:05",
-            "06:18"
+            "06:40",
+            "08:15"
           ],
           "total_sleep_minutes": [
-            432,
-            460
+            418,
+            450
           ],
           "deep_sleep_ratio": [
-            16,
+            15,
             20
           ],
           "light_sleep_ratio": [
-            40,
-            46
+            41,
+            47
           ],
           "rem_ratio": [
             16,
             22
           ],
           "awake_ratio": [
-            5,
+            8,
             12
           ],
           "night_awakenings": [
-            1,
-            2
+            2,
+            4
           ],
           "sleep_latency": [
             6,
-            15
+            16
           ],
           "sleep_efficiency": [
             88,
             95
           ],
           "wake_after_sleep": [
-            4,
-            8
+            7,
+            14
           ],
           "average_heartbeat": [
-            52,
-            62
+            57,
+            69
           ],
           "average_respiration": [
-            11,
-            17
+            12,
+            18
           ],
           "apnea_count": [
-            0,
-            2
+            1,
+            4
           ],
           "turnover_count": [
             10,
@@ -751,43 +882,43 @@
         "bad": {
           "_desc": "失衡态：节律轻微波动，清醒略增",
           "sleep_time_range": [
-            "22:48",
-            "23:05"
+            "23:12",
+            "00:05"
           ],
           "bed_time_range": [
-            "22:30",
-            "22:48"
+            "23:00",
+            "23:40"
           ],
           "wake_up_time_range": [
-            "06:28",
-            "06:42"
+            "08:05",
+            "08:45"
           ],
           "total_sleep_minutes": [
-            405,
-            440
+            400,
+            433
           ],
           "deep_sleep_ratio": [
-            12,
-            16
+            11,
+            15
           ],
           "light_sleep_ratio": [
-            46,
-            54
+            47,
+            55
           ],
           "rem_ratio": [
             15,
             21
           ],
           "awake_ratio": [
-            11,
-            16
+            14,
+            20
           ],
           "night_awakenings": [
-            2,
-            5
+            3,
+            6
           ],
           "sleep_latency": [
-            14,
+            12,
             24
           ],
           "sleep_efficiency": [
@@ -795,20 +926,20 @@
             89
           ],
           "wake_after_sleep": [
-            11,
-            16
+            14,
+            24
           ],
           "average_heartbeat": [
-            58,
-            68
+            62,
+            74
           ],
           "average_respiration": [
-            13,
-            19
+            15,
+            21
           ],
           "apnea_count": [
-            1,
-            3
+            3,
+            8
           ],
           "turnover_count": [
             20,
@@ -865,6 +996,18 @@
           "人声/门铃声",
           "自然突发声",
           "物品突发声"
+        ],
+        "high_probability_events": [
+          {
+            "label": "突发噪音",
+            "category": "一次性噪声",
+            "probability": 0.9
+          },
+          {
+            "label": "异常体动",
+            "category": null,
+            "probability": 0.9
+          }
         ]
       }
     },
@@ -874,8 +1017,8 @@
       "identity_type": "创作家",
       "user_id": "69aea6e8af5e6cbf08027968",
       "date_range": {
-        "start": "2026-03-01",
-        "end": "2026-04-01"
+         "start": "2026-04-18",
+        "end": "2026-05-31"
       },
       "sleep_metric_states": {
         "good": {
@@ -885,23 +1028,23 @@
             "01:22"
           ],
           "bed_time_range": [
-            "23:45",
-            "01:00"
+            "00:10",
+            "01:30"
           ],
           "wake_up_time_range": [
-            "08:00",
-            "09:30"
+            "08:35",
+            "10:00"
           ],
           "total_sleep_minutes": [
-            412,
-            442
+            400,
+            440
           ],
           "deep_sleep_ratio": [
-            13,
-            18
+            12,
+            17
           ],
           "light_sleep_ratio": [
-            42,
+            43,
             50
           ],
           "rem_ratio": [
@@ -909,36 +1052,36 @@
             25
           ],
           "awake_ratio": [
-            7,
-            12
+            9,
+            13
           ],
           "night_awakenings": [
             2,
             4
           ],
           "sleep_latency": [
-            16,
-            28
+            22,
+            36
           ],
           "sleep_efficiency": [
             88,
             93
           ],
           "wake_after_sleep": [
-            6,
-            20
+            8,
+            22
           ],
           "average_heartbeat": [
-            70,
-            82
+            68,
+            80
           ],
           "average_respiration": [
-            15,
-            21
+            14,
+            20
           ],
           "apnea_count": [
-            1,
-            3
+            3,
+            7
           ],
           "turnover_count": [
             30,
@@ -957,20 +1100,20 @@
             "03:04"
           ],
           "bed_time_range": [
-            "00:30",
-            "02:30"
+            "01:00",
+            "03:20"
           ],
           "wake_up_time_range": [
-            "08:30",
-            "10:30"
+            "09:10",
+            "11:20"
           ],
           "total_sleep_minutes": [
             382,
             420
           ],
           "deep_sleep_ratio": [
-            9,
-            13
+            8,
+            12
           ],
           "light_sleep_ratio": [
             50,
@@ -981,36 +1124,36 @@
             21
           ],
           "awake_ratio": [
-            14,
-            20
+            17,
+            23
           ],
           "night_awakenings": [
             4,
             7
           ],
           "sleep_latency": [
-            26,
-            42
+            34,
+            52
           ],
           "sleep_efficiency": [
             80,
             86
           ],
           "wake_after_sleep": [
-            18,
-            35
+            20,
+            38
           ],
           "average_heartbeat": [
-            76,
-            88
+            74,
+            86
           ],
           "average_respiration": [
-            20,
-            25
+            17,
+            23
           ],
           "apnea_count": [
-            3,
-            5
+            10,
+            18
           ],
           "turnover_count": [
             48,
@@ -1055,7 +1198,19 @@
           "呼吸声": 0.18,
           "吞咽": 0.12
         },
-        "blocked_events": []
+        "blocked_events": [],
+        "high_probability_events": [
+          {
+            "label": "入睡困难",
+            "category": null,
+            "probability": 0.9
+          },
+          {
+            "label": "心率上升",
+            "category": null,
+            "probability": 0.9
+          }
+        ]
       }
     },
     {
@@ -1064,8 +1219,8 @@
       "identity_type": "独奏家",
       "user_id": "69aea6eeaf5e6cbf08027969",
       "date_range": {
-        "start": "2026-03-01",
-        "end": "2026-04-01"
+        "start": "2026-04-18",
+        "end": "2026-05-31"
       },
       "sleep_metric_states": {
         "good": {
@@ -1075,60 +1230,60 @@
             "01:01"
           ],
           "bed_time_range": [
-            "23:30",
-            "00:45"
+            "23:45",
+            "01:15"
           ],
           "wake_up_time_range": [
-            "07:30",
-            "09:00"
+            "08:05",
+            "09:40"
           ],
           "total_sleep_minutes": [
-            420,
-            448
+            374,
+            406
           ],
           "deep_sleep_ratio": [
-            15,
-            20
+            13,
+            18
           ],
           "light_sleep_ratio": [
-            41,
-            49
+            42,
+            50
           ],
           "rem_ratio": [
-            17,
-            24
+            16,
+            23
           ],
           "awake_ratio": [
-            8,
-            12
+            10,
+            15
           ],
           "night_awakenings": [
-            2,
-            3
+            3,
+            5
           ],
           "sleep_latency": [
-            10,
-            22
+            12,
+            24
           ],
           "sleep_efficiency": [
             88,
             92
           ],
           "wake_after_sleep": [
-            7,
-            20
+            15,
+            28
           ],
           "average_heartbeat": [
-            64,
-            76
+            74,
+            86
           ],
           "average_respiration": [
-            12,
-            18
+            16,
+            23
           ],
           "apnea_count": [
-            1,
-            4
+            2,
+            5
           ],
           "turnover_count": [
             22,
@@ -1147,60 +1302,60 @@
             "02:27"
           ],
           "bed_time_range": [
-            "00:00",
-            "02:00"
+            "00:30",
+            "02:50"
           ],
           "wake_up_time_range": [
-            "08:00",
-            "10:00"
+            "08:45",
+            "11:00"
           ],
           "total_sleep_minutes": [
-            392,
-            428
+            355,
+            388
           ],
           "deep_sleep_ratio": [
-            11,
-            15
+            10,
+            14
           ],
           "light_sleep_ratio": [
-            48,
+            47,
             56
           ],
           "rem_ratio": [
-            15,
-            21
+            14,
+            20
           ],
           "awake_ratio": [
-            13,
-            19
+            17,
+            24
           ],
           "night_awakenings": [
-            3,
-            6
+            5,
+            8
           ],
           "sleep_latency": [
-            20,
-            34
+            18,
+            32
           ],
           "sleep_efficiency": [
             81,
             87
           ],
           "wake_after_sleep": [
-            16,
-            32
+            26,
+            42
           ],
           "average_heartbeat": [
-            70,
-            82
+            80,
+            92
           ],
           "average_respiration": [
-            16,
-            22
+            20,
+            27
           ],
           "apnea_count": [
-            2,
-            5
+            7,
+            13
           ],
           "turnover_count": [
             35,
@@ -1245,7 +1400,19 @@
           "呼吸声": 0.32,
           "吞咽": 0.15
         },
-        "blocked_events": []
+        "blocked_events": [],
+        "high_probability_events": [
+          {
+            "label": "噩梦应激",
+            "category": null,
+            "probability": 0.9
+          },
+          {
+            "label": "异常体动",
+            "category": null,
+            "probability": 0.9
+          }
+        ]
       }
     },
     {
@@ -1254,8 +1421,8 @@
       "identity_type": "探险家",
       "user_id": "69aea6f3af5e6cbf0802796a",
       "date_range": {
-        "start": "2026-03-01",
-        "end": "2026-04-01"
+        "start": "2026-04-18",
+        "end": "2026-05-31"
       },
       "sleep_metric_states": {
         "good": {
@@ -1265,40 +1432,40 @@
             "01:23"
           ],
           "bed_time_range": [
-            "23:30",
-            "01:00"
+            "23:25",
+            "00:40"
           ],
           "wake_up_time_range": [
-            "08:00",
-            "09:30"
+            "08:05",
+            "09:20"
           ],
           "total_sleep_minutes": [
-            425,
-            452
+            438,
+            485
           ],
           "deep_sleep_ratio": [
-            15,
-            20
+            16,
+            21
           ],
           "light_sleep_ratio": [
             40,
-            47
+            46
           ],
           "rem_ratio": [
             17,
-            24
+            23
           ],
           "awake_ratio": [
-            6,
+            5,
             10
           ],
           "night_awakenings": [
             1,
-            3
+            2
           ],
           "sleep_latency": [
-            18,
-            28
+            12,
+            24
           ],
           "sleep_efficiency": [
             90,
@@ -1306,19 +1473,19 @@
           ],
           "wake_after_sleep": [
             4,
-            15
+            10
           ],
           "average_heartbeat": [
-            62,
-            74
+            57,
+            69
           ],
           "average_respiration": [
-            13,
-            19
+            12,
+            18
           ],
           "apnea_count": [
             1,
-            4
+            3
           ],
           "turnover_count": [
             18,
@@ -1337,60 +1504,60 @@
             "02:56"
           ],
           "bed_time_range": [
-            "00:30",
-            "02:30"
+            "00:20",
+            "02:10"
           ],
           "wake_up_time_range": [
-            "08:30",
+            "08:45",
             "10:30"
           ],
           "total_sleep_minutes": [
-            395,
-            430
+            408,
+            448
           ],
           "deep_sleep_ratio": [
-            10,
-            14
+            12,
+            16
           ],
           "light_sleep_ratio": [
-            49,
-            57
+            46,
+            54
           ],
           "rem_ratio": [
-            14,
-            20
+            15,
+            21
           ],
           "awake_ratio": [
-            12,
-            18
+            10,
+            15
           ],
           "night_awakenings": [
-            3,
-            5
+            2,
+            4
           ],
           "sleep_latency": [
-            20,
-            32
+            22,
+            36
           ],
           "sleep_efficiency": [
             82,
             88
           ],
           "wake_after_sleep": [
-            14,
-            28
+            10,
+            18
           ],
           "average_heartbeat": [
-            68,
-            80
+            63,
+            75
           ],
           "average_respiration": [
-            17,
-            23
+            14,
+            20
           ],
           "apnea_count": [
-            2,
-            5
+            4,
+            9
           ],
           "turnover_count": [
             32,
@@ -1446,6 +1613,18 @@
           "人声/门铃声",
           "自然突发声",
           "物品突发声"
+        ],
+        "high_probability_events": [
+          {
+            "label": "入睡困难",
+            "category": null,
+            "probability": 0.9
+          },
+          {
+            "label": "突发噪音",
+            "category": "一次性噪声",
+            "probability": 0.9
+          }
         ]
       }
     },
@@ -1455,71 +1634,71 @@
       "identity_type": "享乐家",
       "user_id": "69aea6f8af5e6cbf0802796b",
       "date_range": {
-        "start": "2026-03-01",
-        "end": "2026-04-01"
+         "start": "2026-04-18",
+        "end": "2026-05-31"
       },
       "sleep_metric_states": {
         "good": {
           "_desc": "稳定态：主动晚睡，一旦入睡极快，效率高，夜间极少醒",
           "sleep_time_range": [
-            "23:18",
-            "00:48"
+            "23:48",
+            "01:35"
           ],
           "bed_time_range": [
-            "23:00",
-            "00:30"
+            "23:40",
+            "01:20"
           ],
           "wake_up_time_range": [
-            "07:30",
-            "09:00"
+            "09:00",
+            "10:40"
           ],
           "total_sleep_minutes": [
-            430,
-            458
+            415,
+            448
           ],
           "deep_sleep_ratio": [
-            16,
+            15,
             20
           ],
           "light_sleep_ratio": [
-            40,
-            46
+            41,
+            47
           ],
           "rem_ratio": [
             16,
             22
           ],
           "awake_ratio": [
-            5,
-            12
+            7,
+            11
           ],
           "night_awakenings": [
-            1,
-            2
+            2,
+            3
           ],
           "sleep_latency": [
-            12,
-            24
+            8,
+            18
           ],
           "sleep_efficiency": [
             88,
             95
           ],
           "wake_after_sleep": [
-            4,
+            6,
             14
           ],
           "average_heartbeat": [
-            54,
-            66
+            62,
+            76
           ],
           "average_respiration": [
-            11,
-            17
+            13,
+            20
           ],
           "apnea_count": [
-            0,
-            3
+            1,
+            4
           ],
           "turnover_count": [
             12,
@@ -1534,64 +1713,64 @@
         "bad": {
           "_desc": "失衡态：熬夜过晚，睡眠压缩，起床困难",
           "sleep_time_range": [
-            "00:27",
-            "02:27"
+            "00:54",
+            "02:40"
           ],
           "bed_time_range": [
-            "00:00",
-            "02:00"
+            "00:40",
+            "03:00"
           ],
           "wake_up_time_range": [
-            "08:00",
-            "10:00"
+            "09:40",
+            "11:50"
           ],
           "total_sleep_minutes": [
-            405,
-            440
+            382,
+            414
           ],
           "deep_sleep_ratio": [
-            12,
-            16
+            11,
+            15
           ],
           "light_sleep_ratio": [
-            46,
-            54
+            47,
+            55
           ],
           "rem_ratio": [
             15,
             21
           ],
           "awake_ratio": [
-            11,
-            16
+            13,
+            18
           ],
           "night_awakenings": [
-            2,
+            3,
             5
           ],
           "sleep_latency": [
-            20,
-            34
+            14,
+            28
           ],
           "sleep_efficiency": [
             84,
             89
           ],
           "wake_after_sleep": [
-            10,
-            24
+            14,
+            26
           ],
           "average_heartbeat": [
-            60,
-            72
+            68,
+            80
           ],
           "average_respiration": [
-            12,
-            19
+            16,
+            23
           ],
           "apnea_count": [
-            1,
-            4
+            4,
+            9
           ],
           "turnover_count": [
             25,
@@ -1648,6 +1827,18 @@
           "人声/门铃声",
           "自然突发声",
           "物品突发声"
+        ],
+        "high_probability_events": [
+          {
+            "label": "异常体动",
+            "category": null,
+            "probability": 0.9
+          },
+          {
+            "label": "心率上升",
+            "category": null,
+            "probability": 0.9
+          }
         ]
       }
     }

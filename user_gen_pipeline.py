@@ -42,6 +42,49 @@ class UserGenContext:
     use_doubao: bool = False
 
 
+def _ctx_user_data_json(ctx: UserGenContext, suffix: str) -> str:
+    """返回 output_dir 下 `{user_id}_{suffix}` 的绝对路径（suffix 如 health_data.json）。"""
+    od = getattr(ctx.generator, "output_dir", None) or "output"
+    return os.path.join(od, f"{ctx.user_id}_{suffix}")
+
+
+def _report_audios_state_path(ctx: UserGenContext) -> str:
+    return _ctx_user_data_json(ctx, "report_audios.state.json")
+
+
+def _report_audios_sources_unchanged(ctx: UserGenContext) -> bool:
+    """若 state 中记录的 sleep_report / sleep_events 修改时间与当前文件一致，则认为 report_audios 已跑过且源未变。"""
+    state_path = _report_audios_state_path(ctx)
+    sr = _ctx_user_data_json(ctx, "sleep_report.json")
+    se = _ctx_user_data_json(ctx, "sleep_events.json")
+    if not (os.path.isfile(state_path) and os.path.isfile(sr) and os.path.isfile(se)):
+        return False
+    try:
+        with open(state_path, "r", encoding="utf-8") as f:
+            st = json.load(f)
+        if not isinstance(st, dict):
+            return False
+        mr = float(st.get("sleep_report_mtime", -1.0))
+        me = float(st.get("sleep_events_mtime", -1.0))
+        return os.path.getmtime(sr) == mr and os.path.getmtime(se) == me
+    except Exception:
+        return False
+
+
+def _write_report_audios_state(ctx: UserGenContext) -> None:
+    sr = _ctx_user_data_json(ctx, "sleep_report.json")
+    se = _ctx_user_data_json(ctx, "sleep_events.json")
+    if not (os.path.isfile(sr) and os.path.isfile(se)):
+        return
+    atomic_write_json(
+        _report_audios_state_path(ctx),
+        {
+            "sleep_report_mtime": os.path.getmtime(sr),
+            "sleep_events_mtime": os.path.getmtime(se),
+        },
+    )
+
+
 def _date_in_ctx_range(date_str: str, ctx: UserGenContext) -> bool:
     """判断 YYYY-MM-DD 日期是否落在当前用户生成窗口内。"""
     if not date_str:
@@ -76,6 +119,10 @@ def _append_json_item(file_path: str, item: dict) -> int:
 
 def pipeline_step_health(ctx: UserGenContext) -> None:
     print("\n1. 生成健康数据...")
+    health_path = _ctx_user_data_json(ctx, "health_data.json")
+    if os.path.isfile(health_path):
+        print(f"用户 {ctx.user_id} 的健康数据已存在，跳过")
+        return
     g = _gh()
     personality_type = ctx.user.get("personalInformation", {}).get("type", "M-L-C")
     sleep_outlier_by_date = g.build_sleep_outlier_mode_by_date(
@@ -96,13 +143,17 @@ def pipeline_step_health(ctx: UserGenContext) -> None:
         health_data_list.append(sleep_data)
         current_date += timedelta(days=1)
     _gh().strip_sleep_calendar_flags_from_health_records(health_data_list)
-    output_file = os.path.join(ctx.generator.output_dir, f"{ctx.user_id}_health_data.json")
+    output_file = _ctx_user_data_json(ctx, "health_data.json")
     atomic_write_json(output_file, health_data_list)
     print(f"已生成用户 {ctx.user_id} 的健康数据，共{len(health_data_list)}条，保存到 {output_file}")
 
 
 def pipeline_step_fitness(ctx: UserGenContext) -> None:
     print("\n2. 生成体征数据...")
+    fitness_path = _ctx_user_data_json(ctx, "fitness_data.json")
+    if os.path.isfile(fitness_path):
+        print(f"用户 {ctx.user_id} 的体征数据 fitness_data 已存在，跳过")
+        return
     fitness_data = ctx.generator.generate_fitness_data(
         ctx.user_id, ctx.user, ctx.start_date, ctx.end_date
     )
@@ -117,13 +168,15 @@ def pipeline_step_fitness(ctx: UserGenContext) -> None:
 
 def pipeline_step_schedule(ctx: UserGenContext) -> None:
     print("\n6. 生成日程数据...")
+    schedule_path = _ctx_user_data_json(ctx, "schedule_data.json")
+    if os.path.isfile(schedule_path):
+        print(f"用户 {ctx.user_id} 的日程数据已存在，跳过")
+        return
     try:
         schedule_data_list = ctx.generator.generate_schedule_data(
             ctx.user_id, ctx.start_date, ctx.end_date, 8, ctx.user_preference
         )
-        schedule_output_file = os.path.join(
-            ctx.generator.output_dir, f"{ctx.user_id}_schedule_data.json"
-        )
+        schedule_output_file = _ctx_user_data_json(ctx, "schedule_data.json")
         atomic_write_json(schedule_output_file, schedule_data_list)
         print(
             f"已生成用户 {ctx.user_id} 的日程数据，共{len(schedule_data_list)}条，保存到 {schedule_output_file}"
@@ -163,6 +216,10 @@ def pipeline_step_ai_analysis(ctx: UserGenContext) -> None:
 
 def pipeline_step_environment(ctx: UserGenContext) -> None:
     print("\n10. 生成环境数据...")
+    environment_path = _ctx_user_data_json(ctx, "environment_data.json")
+    if os.path.isfile(environment_path):
+        print(f"用户 {ctx.user_id} 的环境数据已存在，跳过")
+        return
     try:
         environment_data_list = ctx.generator.generate_multiple_environment_data(
             ctx.user_id, ctx.start_date_str, ctx.end_date_str
@@ -185,6 +242,10 @@ def pipeline_step_environment(ctx: UserGenContext) -> None:
 def pipeline_step_event_feedback(ctx: UserGenContext) -> None:
     g = _gh()
     print("\n10.5 根据睡眠事件回填体征/环境数据...")
+    feedback_report_path = _ctx_user_data_json(ctx, "event_feedback_report.json")
+    if os.path.isfile(feedback_report_path):
+        print(f"用户 {ctx.user_id} 的事件回填报告已存在，跳过")
+        return
     try:
         result = g.apply_sleep_event_feedback_to_fitness_and_environment(ctx.user_id)
         fit_n = int((result or {}).get("fitness_updates", 0) or 0)
@@ -205,6 +266,10 @@ def pipeline_step_event_feedback(ctx: UserGenContext) -> None:
 
 def pipeline_step_vitals(ctx: UserGenContext) -> None:
     print("\n9. 生成体征数据 (vitals_data)...")
+    vitals_path = _ctx_user_data_json(ctx, "vitals_data.json")
+    if os.path.isfile(vitals_path):
+        print(f"用户 {ctx.user_id} 的体征数据 vitals_data 已存在，跳过")
+        return
     try:
         with open(ctx.generator.config_file, "r", encoding="utf-8") as f:
             config = json.load(f)
@@ -215,9 +280,7 @@ def pipeline_step_vitals(ctx: UserGenContext) -> None:
             for data in vital_signs:
                 if "session_id" not in data:
                     data["session_id"] = session_id
-            vitals_output_file = os.path.join(
-                ctx.generator.output_dir, f"{ctx.user_id}_vitals_data.json"
-            )
+            vitals_output_file = _ctx_user_data_json(ctx, "vitals_data.json")
             atomic_write_json(vitals_output_file, vital_signs)
             print(
                 f"已生成用户 {ctx.user_id} 的体征数据 (vitals_data)，共{len(vital_signs)}条，保存到 {vitals_output_file}"
@@ -230,27 +293,11 @@ def pipeline_step_vitals(ctx: UserGenContext) -> None:
 
 def _run_sleep_report_for_user(ctx: UserGenContext) -> None:
     g = _gh()
-    sleep_report_file = f"output/{ctx.user_id}_sleep_report.json"
-    health_data_file = f"output/{ctx.user_id}_health_data.json"
-    if os.path.exists(sleep_report_file):
-        try:
-            with open(sleep_report_file, "r", encoding="utf-8") as f:
-                existing_reports = json.load(f)
-            if isinstance(existing_reports, list) and len(existing_reports) > 0:
-                # 如果 health_data 比 sleep_report 更新，则强制重新生成，确保数据同步
-                if os.path.exists(health_data_file):
-                    health_mtime = os.path.getmtime(health_data_file)
-                    report_mtime = os.path.getmtime(sleep_report_file)
-                    if health_mtime <= report_mtime:
-                        print(f"  用户 {ctx.user_id} 的睡眠报告已生成，跳过")
-                        return
-                    print(f"  health_data 比 sleep_report 更新，重新生成睡眠报告以保持同步")
-                else:
-                    print(f"  用户 {ctx.user_id} 的睡眠报告已生成，跳过")
-                    return
-        except Exception:
-            pass
-        print(f"  用户 {ctx.user_id} 的睡眠报告为空或损坏，将重新生成")
+    sleep_report_file = _ctx_user_data_json(ctx, "sleep_report.json")
+    health_data_file = _ctx_user_data_json(ctx, "health_data.json")
+    if os.path.isfile(sleep_report_file):
+        print(f"  用户 {ctx.user_id} 的睡眠报告已存在，跳过")
+        return
     if not os.path.exists(health_data_file):
         print(f"  健康数据文件 {health_data_file} 不存在")
         return
@@ -337,7 +384,7 @@ def pipeline_step_sleep_report(ctx: UserGenContext) -> None:
 def pipeline_step_sleep_events(ctx: UserGenContext) -> None:
     g = _gh()
     print("\n10. 生成睡眠事件...")
-    output_file = f"output/{ctx.user_id}_sleep_events.json"
+    output_file = _ctx_user_data_json(ctx, "sleep_events.json")
     if os.path.exists(output_file):
         print(f"  用户 {ctx.user_id} 的睡眠事件数据已生成，跳过")
         return
@@ -497,12 +544,15 @@ def pipeline_step_sleep_events(ctx: UserGenContext) -> None:
 def pipeline_step_report_audios(ctx: UserGenContext) -> None:
     g = _gh()
     print("\n12. 处理睡眠报告中的audios，添加time字段...")
+    if _report_audios_sources_unchanged(ctx):
+        print(f"  用户 {ctx.user_id} 的 report_audios 已完成且源文件未变化，跳过")
+        return
 
     env_rows_by_date: Dict[str, list[Tuple[datetime, int]]] = (
         g.index_environment_noise_rows_by_record_date(ctx.user_id)
     )
 
-    sleep_events_file = f"output/{ctx.user_id}_sleep_events.json"
+    sleep_events_file = _ctx_user_data_json(ctx, "sleep_events.json")
     sleep_events = []
     if os.path.exists(sleep_events_file):
         try:
@@ -510,7 +560,7 @@ def pipeline_step_report_audios(ctx: UserGenContext) -> None:
                 sleep_events = json.load(f)
         except Exception as e:
             print(f"  读取用户 {ctx.user_id} 的睡眠事件文件时出错: {str(e)}")
-    sleep_report_file = f"output/{ctx.user_id}_sleep_report.json"
+    sleep_report_file = _ctx_user_data_json(ctx, "sleep_report.json")
     sleep_reports = []
     if os.path.exists(sleep_report_file):
         try:
@@ -588,6 +638,8 @@ def pipeline_step_report_audios(ctx: UserGenContext) -> None:
             )
         except Exception as e:
             print(f"  写回用户 {ctx.user_id} 的睡眠事件文件时出错: {str(e)}")
+
+    _write_report_audios_state(ctx)
 
 
 USER_DATA_PIPELINE_ORDER: Tuple[str, ...] = (

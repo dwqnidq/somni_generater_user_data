@@ -7,13 +7,18 @@ import json
 import os
 import sys
 
+# 本目录下预览脚本统一使用的大模型采样参数（与批量生成 pipeline 区分）
+PREVIEW_LLM_TEMPERATURE = 0.7
+PREVIEW_LLM_TOP_P = 0.5
+
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(os.path.dirname(SCRIPT_DIR))
 GEN_DIR = os.path.join(PROJECT_ROOT, "scripts", "generate_data")
+GEN_AI_DIR = os.path.join(GEN_DIR, "generate_ai")
 
 
 def bootstrap():
-    for p in (PROJECT_ROOT, GEN_DIR):
+    for p in (PROJECT_ROOT, GEN_DIR, GEN_AI_DIR):
         if p not in sys.path:
             sys.path.insert(0, p)
     os.chdir(PROJECT_ROOT)
@@ -21,17 +26,16 @@ def bootstrap():
 
 
 def force_doubao_env() -> None:
-    """将 .env 中的豆包配置（BASE_URL / DOUBAO_API_KEY / MODEL_NAME）强制映射到
-    QWEN_BASE_URL / DASHSCOPE_API_KEY / QWEN_MODEL_NAME，供各预览脚本统一调用豆包模型。"""
-    base_url = (os.getenv("BASE_URL") or "").strip()
-    api_key = (os.getenv("DOUBAO_API_KEY") or "").strip()
-    model_name = (os.getenv("MODEL_NAME") or "").strip()
-    missing = [k for k, v in [("BASE_URL", base_url), ("DOUBAO_API_KEY", api_key), ("MODEL_NAME", model_name)] if not v]
-    if missing:
-        raise SystemExit("豆包配置缺失，请在 .env 中配置: " + ", ".join(missing))
-    os.environ["QWEN_BASE_URL"] = base_url
-    os.environ["QWEN_MODEL_NAME"] = model_name
-    os.environ["DASHSCOPE_API_KEY"] = api_key
+    """加载 .env 并固定 ``LLM_VENDOR=doubao``（火山方舟 + MODEL_NAME）。"""
+    try:
+        from dotenv import load_dotenv
+
+        load_dotenv(os.path.join(PROJECT_ROOT, ".env"))
+    except ImportError:
+        pass
+    from generate_ai.runtime import apply_doubao_env
+
+    apply_doubao_env(strict=True)
 
 
 def base_arg_parser(description: str) -> argparse.ArgumentParser:
@@ -60,6 +64,33 @@ def default_out_path(name: str) -> str:
     sub = os.path.join(os.getcwd(), "preview_llm_output")
     os.makedirs(sub, exist_ok=True)
     return os.path.join(sub, f"{name}.json")
+
+
+def load_sleep_report_main_title(user_id: str, record_date: str, output_dir: str) -> str:
+    """从 ``{PROJECT_ROOT}/{output_dir}/{user_id}_sleep_report.json`` 读取指定日的 ``main.title``。"""
+    path = os.path.join(PROJECT_ROOT, output_dir, f"{user_id}_sleep_report.json")
+    if not os.path.isfile(path):
+        raise FileNotFoundError(
+            f"未找到睡眠报告文件: {path}（主摘要标签须从该文件对应日期的 main.title 读取）"
+        )
+    with open(path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    if not isinstance(data, list):
+        raise ValueError(f"{path} 应为 JSON 数组")
+    for item in data:
+        if not isinstance(item, dict):
+            continue
+        if str(item.get("record_date") or "").strip() != record_date:
+            continue
+        main = item.get("main")
+        if isinstance(main, dict):
+            t = str(main.get("title") or "").strip()
+            if t:
+                return t
+        raise ValueError(
+            f"{path} 中 record_date={record_date} 的条目缺少有效的 main.title"
+        )
+    raise ValueError(f"{path} 中未找到 record_date={record_date} 的睡眠报告条目")
 
 
 def load_health_row(user_id: str, record_date: str, output_dir: str) -> tuple[dict, str]:
