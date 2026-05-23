@@ -1,0 +1,1738 @@
+[
+  {
+    "_id": "6a0e91e97ad5cb751ff8b9e9",
+    "uid": "69aea6f3af5e6cbf0802796a",
+    "stats_date": "2026-05-01",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "创意夜猫子",
+    "score": 91,
+    "sleep_seconds": 28140,
+    "deep_sleep_seconds": 6565,
+    "deep_sleep_ratio": 0.21,
+    "evaluation": "你的作息特别规律，睡眠时长充足，深睡扎实且入睡顺滑，都远超同城伙伴，不过夜间偶尔醒的情况比多数人稍多一点，整体排名相当亮眼。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 21,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 28140,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 16,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:33.000Z",
+    "update_time": "2026-05-21T05:02:33.000Z"
+  },
+  {
+    "_id": "6a0e91e9a6d64346d21301b6",
+    "uid": "69aea6f3af5e6cbf0802796a",
+    "stats_date": "2026-05-02",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "创意夜猫子",
+    "score": 99,
+    "sleep_seconds": 27360,
+    "deep_sleep_seconds": 6388,
+    "deep_sleep_ratio": 0.21,
+    "evaluation": "你的睡眠整体表现远超同城平均，入睡顺滑、深度修复到位，作息规律又睡得稳，就连睡眠时长也给得很足，几乎没什么拖后腿的地方，排名在同城里相当靠前。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 21,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 27750,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 100,
+        "weight": 0.15,
+        "value": 14,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 95,
+        "weight": 0.2,
+        "value": 1,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 98,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:33.000Z",
+    "update_time": "2026-05-21T05:02:33.000Z"
+  },
+  {
+    "_id": "6a0e91e9a3dd7cbc4722ab99",
+    "uid": "69aea6f3af5e6cbf0802796a",
+    "stats_date": "2026-05-03",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "创意夜猫子",
+    "score": 70,
+    "sleep_seconds": 25080,
+    "deep_sleep_seconds": 3542,
+    "deep_sleep_ratio": 0.12,
+    "evaluation": "你的生物钟特别稳，躺下也能很快睡着，这俩帮你拿到了不错的同城睡眠排名；不过深睡偏浅，夜里偶尔醒的情况也比多数人多一点，其他方面和大家差不多",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 60,
+        "weight": 0.25,
+        "value": 12,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 90,
+        "weight": 0.25,
+        "value": 26860,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 21,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 1,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 65,
+        "weight": 0.15,
+        "value": "Great",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:33.000Z",
+    "update_time": "2026-05-21T05:02:33.000Z"
+  },
+  {
+    "_id": "6a0e91e97588c9e6c6cffcec",
+    "uid": "69aea6f3af5e6cbf0802796a",
+    "stats_date": "2026-05-04",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "创意夜猫子",
+    "score": 90,
+    "sleep_seconds": 28440,
+    "deep_sleep_seconds": 6640,
+    "deep_sleep_ratio": 0.21,
+    "evaluation": "你倒头就睡不折腾，深睡特别扎实，作息也很稳，睡眠时长也给够了，不过夜里偶尔醒的情况比多数同城人稍多一点，整体排名在同城里挺靠前的。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 21,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 27255,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 100,
+        "weight": 0.15,
+        "value": 19,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 72,
+        "weight": 0.15,
+        "value": "Great",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:33.000Z",
+    "update_time": "2026-05-21T05:02:33.000Z"
+  },
+  {
+    "_id": "6a0e91e900d44a80dced8a66",
+    "uid": "69aea6f3af5e6cbf0802796a",
+    "stats_date": "2026-05-05",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "创意夜猫子",
+    "score": 75,
+    "sleep_seconds": 25980,
+    "deep_sleep_seconds": 3665,
+    "deep_sleep_ratio": 0.12,
+    "evaluation": "你作息特别规律，入睡也很顺滑，睡眠时长也充足，其他方面和同城伙伴差不多，整体排名挺靠前的。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 60,
+        "weight": 0.25,
+        "value": 12,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 27000,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 21,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 78,
+        "weight": 0.15,
+        "value": "Great",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:33.000Z",
+    "update_time": "2026-05-21T05:02:33.000Z"
+  },
+  {
+    "_id": "6a0e91e94bdb19f04f608f26",
+    "uid": "69aea6f3af5e6cbf0802796a",
+    "stats_date": "2026-05-06",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "创意夜猫子",
+    "score": 91,
+    "sleep_seconds": 27180,
+    "deep_sleep_seconds": 6338,
+    "deep_sleep_ratio": 0.21,
+    "evaluation": "你的睡眠表现相当亮眼，深睡特别扎实，入睡顺滑且作息规律，睡眠时长充足，夜里也睡得稳，整体在同城里属于拔尖的水平",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 21,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 27030,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 21,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 85,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 80,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:33.000Z",
+    "update_time": "2026-05-21T05:02:33.000Z"
+  },
+  {
+    "_id": "6a0e91e939b869b0f8af991a",
+    "uid": "69aea6f3af5e6cbf0802796a",
+    "stats_date": "2026-05-07",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "创意夜猫子",
+    "score": 80,
+    "sleep_seconds": 25200,
+    "deep_sleep_seconds": 4685,
+    "deep_sleep_ratio": 0.16,
+    "evaluation": "你这作息特别规律，生物钟稳得很，入睡和深睡质量也都在线，睡眠时长也够，不过夜里偶尔会有小醒的情况，这让你在同城的排名相当靠前。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 80,
+        "weight": 0.25,
+        "value": 16,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 26769,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 23,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 83,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:33.000Z",
+    "update_time": "2026-05-21T05:02:33.000Z"
+  },
+  {
+    "_id": "6a0e91e910c9f4e53b54dfc0",
+    "uid": "69aea6f3af5e6cbf0802796a",
+    "stats_date": "2026-05-08",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "创意夜猫子",
+    "score": 92,
+    "sleep_seconds": 28980,
+    "deep_sleep_seconds": 6754,
+    "deep_sleep_ratio": 0.21,
+    "evaluation": "你的深睡特别扎实，生物钟格外规律，入睡顺滑不折腾，睡眠时长充足，夜里睡得也稳，整体在同城里表现相当亮眼。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 21,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 27045,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 23,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 85,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 86,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:33.000Z",
+    "update_time": "2026-05-21T05:02:33.000Z"
+  },
+  {
+    "_id": "6a0e91e9d8beba9a7d363403",
+    "uid": "69aea6f3af5e6cbf0802796a",
+    "stats_date": "2026-05-09",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "创意夜猫子",
+    "score": 89,
+    "sleep_seconds": 27480,
+    "deep_sleep_seconds": 6401,
+    "deep_sleep_ratio": 0.21,
+    "evaluation": "你的深睡特别扎实，入睡顺滑还作息规律，整体睡眠底子相当不错，不过夜里偶尔醒的小状况稍微拖了点后腿，其他方面和同城多数人差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 21,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 27093,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 23,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 89,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:33.000Z",
+    "update_time": "2026-05-21T05:02:33.000Z"
+  },
+  {
+    "_id": "6a0e91e93327b0c4d5b65ffb",
+    "uid": "69aea6f3af5e6cbf0802796a",
+    "stats_date": "2026-05-10",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "创意夜猫子",
+    "score": 78,
+    "sleep_seconds": 26160,
+    "deep_sleep_seconds": 3614,
+    "deep_sleep_ratio": 0.12,
+    "evaluation": "你的入睡顺滑度和作息稳定性都远超同城水平，稳稳托住了你的排名；睡眠时长也比多数同城伙伴更充足，其他方面和大家差不多，整体表现相当亮眼。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 60,
+        "weight": 0.25,
+        "value": 12,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 27000,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 23,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 83,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:33.000Z",
+    "update_time": "2026-05-21T05:02:33.000Z"
+  },
+  {
+    "_id": "6a0e91e9428fc939a977591a",
+    "uid": "69aea6f3af5e6cbf0802796a",
+    "stats_date": "2026-05-11",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "创意夜猫子",
+    "score": 96,
+    "sleep_seconds": 27720,
+    "deep_sleep_seconds": 6451,
+    "deep_sleep_ratio": 0.21,
+    "evaluation": "你的深睡特别扎实，睡眠时长也给够了，入睡顺滑不折腾，夜里几乎不怎么醒，生物钟稳得很，整体睡眠底子在同城相当能打，其他方面和大伙差不离，排名靠前也是情理之中。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 21,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 27065,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 100,
+        "weight": 0.15,
+        "value": 22,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 95,
+        "weight": 0.2,
+        "value": 1,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 82,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:33.000Z",
+    "update_time": "2026-05-21T05:02:33.000Z"
+  },
+  {
+    "_id": "6a0e91e98542d220c263c775",
+    "uid": "69aea6f3af5e6cbf0802796a",
+    "stats_date": "2026-05-12",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "创意夜猫子",
+    "score": 82,
+    "sleep_seconds": 25620,
+    "deep_sleep_seconds": 4410,
+    "deep_sleep_ratio": 0.15,
+    "evaluation": "你的入睡顺滑度和作息稳定性都远超同城，深睡质量扎实，睡眠时长也充足，虽然夜里偶尔会有小波动，这也让你在同城的睡眠排名相当靠前。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 80,
+        "weight": 0.25,
+        "value": 15,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 26945,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 23,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 75,
+        "weight": 0.15,
+        "value": "Great",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:33.000Z",
+    "update_time": "2026-05-21T05:02:33.000Z"
+  },
+  {
+    "_id": "6a0e91e982503f79f55aafad",
+    "uid": "69aea6f3af5e6cbf0802796a",
+    "stats_date": "2026-05-13",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "创意夜猫子",
+    "score": 74,
+    "sleep_seconds": 24540,
+    "deep_sleep_seconds": 3427,
+    "deep_sleep_ratio": 0.12,
+    "evaluation": "你入睡很顺滑、作息也特别稳，这两点在同城里很出彩，帮你稳住了不错的排名；不过深睡稍浅、夜里偶尔醒的小情况稍微拖了点后腿，其他方面和大伙差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 60,
+        "weight": 0.25,
+        "value": 12,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 90,
+        "weight": 0.25,
+        "value": 26760,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 23,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 71,
+        "weight": 0.15,
+        "value": "Great",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:33.000Z",
+    "update_time": "2026-05-21T05:02:33.000Z"
+  },
+  {
+    "_id": "6a0e91e9073ff3e0bd3a10c3",
+    "uid": "69aea6f3af5e6cbf0802796a",
+    "stats_date": "2026-05-14",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "创意夜猫子",
+    "score": 87,
+    "sleep_seconds": 27480,
+    "deep_sleep_seconds": 6401,
+    "deep_sleep_ratio": 0.21,
+    "evaluation": "你的深睡特别扎实，入睡顺滑且生物钟很稳，睡眠时长也充足，整体睡眠底子在同城相当亮眼，夜间醒觉的情况也比多数人稍少。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 21,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 26811,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 23,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 73,
+        "weight": 0.15,
+        "value": "Great",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:33.000Z",
+    "update_time": "2026-05-21T05:02:33.000Z"
+  },
+  {
+    "_id": "6a0e91e96e2b377b5c264a3f",
+    "uid": "69aea6f3af5e6cbf0802796a",
+    "stats_date": "2026-05-15",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "创意夜猫子",
+    "score": 71,
+    "sleep_seconds": 24660,
+    "deep_sleep_seconds": 4007,
+    "deep_sleep_ratio": 0.14,
+    "evaluation": "你的作息特别规律，入睡也很顺滑，这俩点让你在同城的睡眠排名里靠前不少；不过深睡偏浅、夜里偶尔会醒，稍微拖了点后腿，其他方面和大伙差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 60,
+        "weight": 0.25,
+        "value": 14,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 90,
+        "weight": 0.25,
+        "value": 26563,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 24,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 71,
+        "weight": 0.15,
+        "value": "Great",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:33.000Z",
+    "update_time": "2026-05-21T05:02:33.000Z"
+  },
+  {
+    "_id": "6a0e91e9cb2275ce70602ec8",
+    "uid": "69aea6f3af5e6cbf0802796a",
+    "stats_date": "2026-05-16",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "创意夜猫子",
+    "score": 90,
+    "sleep_seconds": 26400,
+    "deep_sleep_seconds": 6161,
+    "deep_sleep_ratio": 0.21,
+    "evaluation": "你入睡特别顺滑，深睡扎实作息也稳，这些都帮你在同城排名里靠前不少，不过夜里偶尔醒的小状况稍微拖了点后腿，其余方面和大伙差不了多少。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 21,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 26494,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 100,
+        "weight": 0.15,
+        "value": 24,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 75,
+        "weight": 0.15,
+        "value": "Great",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:33.000Z",
+    "update_time": "2026-05-21T05:02:33.000Z"
+  },
+  {
+    "_id": "6a0e91e9d3acb976c8e0f087",
+    "uid": "69aea6f3af5e6cbf0802796a",
+    "stats_date": "2026-05-17",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "创意夜猫子",
+    "score": 91,
+    "sleep_seconds": 28560,
+    "deep_sleep_seconds": 6665,
+    "deep_sleep_ratio": 0.21,
+    "evaluation": "你的深睡特别扎实，入睡顺滑不折腾，作息也很规律，这让你在同城睡眠排名里相当靠前，睡眠时长和夜间稳定性也和多数人差不多，整体表现挺亮眼的。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 21,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 26743,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 23,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 85,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 79,
+        "weight": 0.15,
+        "value": "Great",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:33.000Z",
+    "update_time": "2026-05-21T05:02:33.000Z"
+  },
+  {
+    "_id": "6a0e91e929b737ced67af786",
+    "uid": "69aea6f3af5e6cbf0802796a",
+    "stats_date": "2026-05-18",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "创意夜猫子",
+    "score": 80,
+    "sleep_seconds": 24480,
+    "deep_sleep_seconds": 4320,
+    "deep_sleep_ratio": 0.15,
+    "evaluation": "你入睡顺滑、作息规律、深睡扎实，夜里也睡得挺稳，这些都帮你在同城排名里站稳了脚跟，不过睡眠时间稍微没那么充足，整体表现挺亮眼的。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 80,
+        "weight": 0.25,
+        "value": 15,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 90,
+        "weight": 0.25,
+        "value": 26460,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 24,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 76,
+        "weight": 0.15,
+        "value": "Great",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:33.000Z",
+    "update_time": "2026-05-21T05:02:33.000Z"
+  },
+  {
+    "_id": "6a0e91e9115ec45efd046ea6",
+    "uid": "69aea6f3af5e6cbf0802796a",
+    "stats_date": "2026-05-19",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "创意夜猫子",
+    "score": 87,
+    "sleep_seconds": 27360,
+    "deep_sleep_seconds": 6388,
+    "deep_sleep_ratio": 0.21,
+    "evaluation": "你的深睡特别扎实，入睡顺滑，作息也很规律，睡眠时长也够用，整体在同城表现挺靠前的，只是夜里偶尔会醒几次拖了点后腿，其他方面和大伙差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 21,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 26559,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 23,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 76,
+        "weight": 0.15,
+        "value": "Great",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:33.000Z",
+    "update_time": "2026-05-21T05:02:33.000Z"
+  },
+  {
+    "_id": "6a0e91e94f2be4a2e6f3d333",
+    "uid": "69aea6f3af5e6cbf0802796a",
+    "stats_date": "2026-05-20",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "创意夜猫子",
+    "score": 78,
+    "sleep_seconds": 25440,
+    "deep_sleep_seconds": 4183,
+    "deep_sleep_ratio": 0.14,
+    "evaluation": "你的入睡特别顺滑，作息也很规律，这两点在同城里表现亮眼，稳稳托住了你的排名，睡眠时长也很充足，其他方面和大伙差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 60,
+        "weight": 0.25,
+        "value": 14,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 26434,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 23,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 79,
+        "weight": 0.15,
+        "value": "Great",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:33.000Z",
+    "update_time": "2026-05-21T05:02:33.000Z"
+  },
+  {
+    "_id": "6a0e91e9633875b9b0189c27",
+    "uid": "69aea6f3af5e6cbf0802796a",
+    "stats_date": "2026-05-21",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "创意夜猫子",
+    "score": 88,
+    "sleep_seconds": 27000,
+    "deep_sleep_seconds": 6287,
+    "deep_sleep_ratio": 0.21,
+    "evaluation": "你的深睡特别扎实，睡眠时长也很充足，入睡顺滑作息规律，整体底子很不错；不过夜里偶尔醒的情况稍微拖了点后腿，其他方面和同城多数人差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 21,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 26563,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 22,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 78,
+        "weight": 0.15,
+        "value": "Great",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:33.000Z",
+    "update_time": "2026-05-21T05:02:33.000Z"
+  },
+  {
+    "_id": "6a0e91e93242b10dd06126aa",
+    "uid": "69aea6f3af5e6cbf0802796a",
+    "stats_date": "2026-05-22",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "创意夜猫子",
+    "score": 80,
+    "sleep_seconds": 26340,
+    "deep_sleep_seconds": 4781,
+    "deep_sleep_ratio": 0.16,
+    "evaluation": "你的入睡效率特别顺滑，作息也很稳，深睡质量和睡眠时长都不错，整体睡眠底子在同城挺扎实；不过夜里容易醒的情况比多数同城人多，稍微拖了点排名的后腿，其他方面和大家差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 80,
+        "weight": 0.25,
+        "value": 16,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 26374,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 22,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 55,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 78,
+        "weight": 0.15,
+        "value": "Great",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:33.000Z",
+    "update_time": "2026-05-21T05:02:33.000Z"
+  },
+  {
+    "_id": "6a0e91e9113967fa13e4eb92",
+    "uid": "69aea6f3af5e6cbf0802796a",
+    "stats_date": "2026-05-23",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "创意夜猫子",
+    "score": 87,
+    "sleep_seconds": 28440,
+    "deep_sleep_seconds": 6640,
+    "deep_sleep_ratio": 0.21,
+    "evaluation": "你的深睡特别扎实，入睡顺滑、作息稳定，睡眠时长也给够了，整体在同城里很亮眼，不过夜里偶尔会醒几次拖了点后腿，其他方面和大伙差不多",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 21,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 26443,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 23,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 75,
+        "weight": 0.15,
+        "value": "Great",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:33.000Z",
+    "update_time": "2026-05-21T05:02:33.000Z"
+  },
+  {
+    "_id": "6a0e91e9052ade5ff0dc78cf",
+    "uid": "69aea6f3af5e6cbf0802796a",
+    "stats_date": "2026-05-24",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "创意夜猫子",
+    "score": 87,
+    "sleep_seconds": 27480,
+    "deep_sleep_seconds": 6413,
+    "deep_sleep_ratio": 0.21,
+    "evaluation": "你的深睡特别扎实，入睡顺滑又作息规律，睡眠时长也很充足，这些都让你在同城排名里很靠前；不过夜间偶尔会醒的情况比多数人稍多一点，稍微拖了点后腿，其他方面和大家差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 21,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 26537,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 22,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 75,
+        "weight": 0.15,
+        "value": "Great",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:33.000Z",
+    "update_time": "2026-05-21T05:02:33.000Z"
+  },
+  {
+    "_id": "6a0e91e96f51fbbb89283e90",
+    "uid": "69aea6f3af5e6cbf0802796a",
+    "stats_date": "2026-05-25",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "创意夜猫子",
+    "score": 78,
+    "sleep_seconds": 26580,
+    "deep_sleep_seconds": 4064,
+    "deep_sleep_ratio": 0.13,
+    "evaluation": "你的入睡顺滑度和作息稳定性在同城里格外亮眼，睡眠时长也够给力，其他方面和大部分同城伙伴差不多，整体排名能排在不错的梯队里。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 60,
+        "weight": 0.25,
+        "value": 13,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 26456,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 23,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 78,
+        "weight": 0.15,
+        "value": "Great",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:33.000Z",
+    "update_time": "2026-05-21T05:02:33.000Z"
+  },
+  {
+    "_id": "6a0e91e969d7fc18a9c4e612",
+    "uid": "69aea6f3af5e6cbf0802796a",
+    "stats_date": "2026-05-26",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "创意夜猫子",
+    "score": 91,
+    "sleep_seconds": 26760,
+    "deep_sleep_seconds": 6250,
+    "deep_sleep_ratio": 0.21,
+    "evaluation": "你入睡顺滑、深睡修复扎实、作息也很稳当，睡眠时长也充足，不过夜里偶尔会醒几次稍微拖了点后腿，其他方面和同城多数人差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 21,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 26537,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 100,
+        "weight": 0.15,
+        "value": 22,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 82,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:33.000Z",
+    "update_time": "2026-05-21T05:02:33.000Z"
+  },
+  {
+    "_id": "6a0e91e9f6504b1b36548999",
+    "uid": "69aea6f3af5e6cbf0802796a",
+    "stats_date": "2026-05-27",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "创意夜猫子",
+    "score": 84,
+    "sleep_seconds": 26100,
+    "deep_sleep_seconds": 3947,
+    "deep_sleep_ratio": 0.13,
+    "evaluation": "你的入睡顺滑度、作息稳定性还有夜间睡眠连续性都远超同城伙伴，睡眠时长也很充足，只是深睡质量稍显不足，整体在同城的睡眠表现相当亮眼。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 60,
+        "weight": 0.25,
+        "value": 13,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 26649,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 22,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 95,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 88,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:33.000Z",
+    "update_time": "2026-05-21T05:02:33.000Z"
+  },
+  {
+    "_id": "6a0e91e9b987b1ab1c03aa36",
+    "uid": "69aea6f3af5e6cbf0802796a",
+    "stats_date": "2026-05-28",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "创意夜猫子",
+    "score": 92,
+    "sleep_seconds": 27480,
+    "deep_sleep_seconds": 6401,
+    "deep_sleep_ratio": 0.21,
+    "evaluation": "你这深睡特别扎实，作息还特别规律，入睡顺滑又睡得够久，夜里也睡得稳，整体在同城的表现相当亮眼，其他方面和大伙差不太多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 21,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 26649,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 21,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 85,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 85,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:33.000Z",
+    "update_time": "2026-05-21T05:02:33.000Z"
+  },
+  {
+    "_id": "6a0e91e9444c7835ce0a7a72",
+    "uid": "69aea6f3af5e6cbf0802796a",
+    "stats_date": "2026-05-29",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "创意夜猫子",
+    "score": 89,
+    "sleep_seconds": 27960,
+    "deep_sleep_seconds": 6527,
+    "deep_sleep_ratio": 0.21,
+    "evaluation": "你的深睡特别扎实，作息规律又入睡顺滑，睡眠时长也够，这些都帮你排在靠前的位置，不过夜里偶尔醒的情况比多数同城人稍多一点，其他方面都差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 21,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 26884,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 20,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 88,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:33.000Z",
+    "update_time": "2026-05-21T05:02:33.000Z"
+  },
+  {
+    "_id": "6a0e91e9af0eabd4ed637a15",
+    "uid": "69aea6f3af5e6cbf0802796a",
+    "stats_date": "2026-05-30",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "创意夜猫子",
+    "score": 89,
+    "sleep_seconds": 25440,
+    "deep_sleep_seconds": 4437,
+    "deep_sleep_ratio": 0.15,
+    "evaluation": "你的作息特别规律，入睡也顺滑不折腾，深睡质量扎实，夜里也睡得稳，睡眠时长也足够，整体睡眠表现在同城里相当亮眼，其他方面也都和多数人差不多甚至更出色。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 80,
+        "weight": 0.25,
+        "value": 15,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 26816,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 21,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 95,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 85,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:33.000Z",
+    "update_time": "2026-05-21T05:02:33.000Z"
+  },
+  {
+    "_id": "6a0e91e9e8f7f48736b6a7cf",
+    "uid": "69aea6f3af5e6cbf0802796a",
+    "stats_date": "2026-05-31",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "创意夜猫子",
+    "score": 81,
+    "sleep_seconds": 26460,
+    "deep_sleep_seconds": 4982,
+    "deep_sleep_ratio": 0.16,
+    "evaluation": "你的作息特别规律，生物钟准得离谱，这可是让你排名靠前的底气；睡眠时长够、入睡顺滑、深睡也扎实，不过夜里偶尔会醒几次，其他方面和同城大伙差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 80,
+        "weight": 0.25,
+        "value": 16,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 26666,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 22,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 85,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:33.000Z",
+    "update_time": "2026-05-21T05:02:33.000Z"
+  }
+]

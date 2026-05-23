@@ -30,6 +30,7 @@ for _p in (PROJECT_ROOT, GEN_DATA_DIR):
     if _p not in sys.path:
         sys.path.insert(0, _p)
 
+from generate_ai.llm_resume import run_llm_date_batch  # noqa: E402
 from generate_ai.multi_day_llm_helpers import apply_max_records  # noqa: E402
 from generate_ai.runtime import PROJECT_ROOT, bootstrap_llm, iter_uids  # noqa: E402
 
@@ -108,6 +109,7 @@ def generate_intervention_for_uid(
     end_date: Optional[str] = None,
     retry_delay: float = 0.5,
     max_records: Optional[int] = None,
+    resume: bool = False,
 ) -> List[dict]:
     """为单个用户批量生成每日 pain_point_analysis_module。
 
@@ -127,19 +129,22 @@ def generate_intervention_for_uid(
 
     dates = apply_max_records(dates, max_records)
 
-    results: List[dict] = []
-    for i, rd in enumerate(dates):
-        print(f"  [{i + 1}/{len(dates)}] uid={uid} date={rd} …", end=" ", flush=True)
+    out_path = os.path.join(output_dir, f"{uid}_sleep_event_environment_intervention.json")
+
+    def _one(rd: str) -> Optional[dict]:
         mod = generate_intervention_for_date(rd, events_index.get(rd, []))
         if mod is None:
-            print("失败（已跳过）")
-        else:
-            print(f"完成（{len(mod)} 条）")
-            results.append({"uid": uid, "record_date": rd, "pain_point_analysis_module": mod})
-        if i < len(dates) - 1:
-            time.sleep(retry_delay)
+            return None
+        return {"uid": uid, "record_date": rd, "pain_point_analysis_module": mod}
 
-    return results
+    return run_llm_date_batch(
+        uid=uid,
+        output_path=out_path,
+        resume=resume,
+        dates=dates,
+        process_date=_one,
+        retry_delay=retry_delay,
+    )
 
 
 # ---------------------------------------------------------------------------

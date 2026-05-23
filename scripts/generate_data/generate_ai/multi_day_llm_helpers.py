@@ -68,3 +68,20 @@ def effective_start_after_skips(
     if range_start and nxt < range_start:
         return range_start
     return nxt
+
+
+def first_anchor_backward_14_health(
+    health_dates: set[str],
+    range_start: Optional[str] = None,
+    range_end: Optional[str] = None,
+) -> Optional[str]:
+    """返回范围内第一个「向前 14 天 health 齐全」的锚点日（用于共性/按日 LLM，不依赖其它步骤跳过日）。"""
+    candidates = sorted(health_dates)
+    if range_start:
+        candidates = [d for d in candidates if d >= range_start]
+    if range_end:
+        candidates = [d for d in candidates if d <= range_end]
+    for d in candidates:
+        if backward_14_health_complete(d, health_dates):
+            return d
+    return None

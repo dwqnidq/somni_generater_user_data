@@ -31,6 +31,7 @@ for _p in (PROJECT_ROOT, GEN_DATA_DIR):
     if _p not in sys.path:
         sys.path.insert(0, _p)
 
+from generate_ai.llm_resume import run_llm_date_batch  # noqa: E402
 from generate_ai.multi_day_llm_helpers import apply_max_records  # noqa: E402
 from generate_ai.runtime import PROJECT_ROOT, bootstrap_llm, iter_uids, load_health_rows  # noqa: E402
 
@@ -133,6 +134,7 @@ def generate_ai_intervention_for_uid(
     end_date: Optional[str] = None,
     retry_delay: float = 0.5,
     max_records: Optional[int] = None,
+    resume: bool = False,
 ) -> List[dict]:
     """为单个用户批量生成每日 AI 干预重写结果。
 
@@ -156,29 +158,32 @@ def generate_ai_intervention_for_uid(
 
     dates = apply_max_records(dates, max_records)
 
-    results: List[dict] = []
-    for i, rd in enumerate(dates):
-        print(f"  [{i + 1}/{len(dates)}] uid={uid} date={rd} …", end=" ", flush=True)
+    out_path = os.path.join(output_dir, f"{uid}_sleep_ai_intervention.json")
+
+    def _one(rd: str) -> Optional[dict]:
         res = generate_ai_intervention_for_date(
             record_date=rd,
             health_row=health_by_date[rd],
             events=events_index.get(rd, []),
         )
         if res is None:
-            print("失败（已跳过）")
-        else:
-            event_count = len(res.get("sleep_events") or [])
-            print(f"完成（干预事件组 {event_count} 条）")
-            results.append({
-                "uid": uid,
-                "record_date": rd,
-                "sleep_time_points": res["sleep_time_points"],
-                "sleep_events": res["sleep_events"],
-            })
-        if i < len(dates) - 1:
-            time.sleep(retry_delay)
+            return None
+        return {
+            "uid": uid,
+            "record_date": rd,
+            "sleep_time_points": res["sleep_time_points"],
+            "sleep_events": res["sleep_events"],
+        }
 
-    return results
+    return run_llm_date_batch(
+        uid=uid,
+        output_path=out_path,
+        resume=resume,
+        dates=dates,
+        process_date=_one,
+        retry_delay=retry_delay,
+        is_complete=lambda r: "sleep_time_points" in r,
+    )
 
 
 # ---------------------------------------------------------------------------

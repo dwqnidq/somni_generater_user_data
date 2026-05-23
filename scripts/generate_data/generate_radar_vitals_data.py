@@ -38,19 +38,9 @@ def to_collected_at_utc_z(local_dt: datetime) -> str:
 
 
 def random_metrics() -> dict:
-    systolic = random.randint(95, 135)
-    diastolic = random.randint(58, 90)
-    if systolic <= diastolic:
-        systolic = diastolic + random.randint(10, 25)
-
     return {
         "respiration_rate": random.randint(8, 32),
-        "heart_rate": round(random.uniform(40, 120), 6),
-        "body_motion_level": random.randint(0, 25),
-        "blood_oxygen": random.randint(92, 100),
-        "blood_pressure_systolic": systolic,
-        "blood_pressure_diastolic": diastolic,
-        "hrv": round(random.uniform(1.0, 3.5), 3),
+        "heart_rate": random.randint(40, 120),
     }
 
 

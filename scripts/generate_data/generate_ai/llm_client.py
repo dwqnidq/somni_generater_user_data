@@ -18,7 +18,7 @@ PROMPT_DIR = os.path.join(PROJECT_ROOT, "prompt")
 sleep_report_llm_enabled = False
 
 _QWEN_MAX_CONCURRENCY = max(
-    1, int(os.getenv("QWEN_MAX_CONCURRENCY", os.getenv("DOUBAO_MAX_CONCURRENCY", "12")))
+    1, int(os.getenv("QWEN_MAX_CONCURRENCY", os.getenv("DOUBAO_MAX_CONCURRENCY", "3")))
 )
 _QWEN_RETRIES = max(1, int(os.getenv("QWEN_RETRIES", os.getenv("DOUBAO_RETRIES", "3"))))
 _QWEN_TIMEOUT = max(
@@ -26,6 +26,54 @@ _QWEN_TIMEOUT = max(
 )
 _QWEN_MAX_TOKENS = 10000
 _QWEN_SEM = threading.BoundedSemaphore(_QWEN_MAX_CONCURRENCY)
+_LLM_LOG_HTTP_STATUS = False
+
+
+def enable_http_status_logging(enabled: bool = True) -> None:
+    """开启后每次 call_qwen_api 在控制台打印 HTTP status_code（由 main.py --with-llm 启用）。"""
+    global _LLM_LOG_HTTP_STATUS
+    _LLM_LOG_HTTP_STATUS = bool(enabled)
+
+
+def _print_llm_http_status(status_code: int | None, attempt: int, *, note: str = "") -> None:
+    if not _LLM_LOG_HTTP_STATUS:
+        return
+    sc = status_code if status_code is not None else "—"
+    suffix = f" {note}" if note else ""
+    print(
+        f"  [LLM HTTP] 第{attempt + 1}/{_QWEN_RETRIES}次 status_code={sc} "
+        f"model={_qwen_model_name()}{suffix}",
+        flush=True,
+    )
+
+_QUOTA_HINTS = (
+    "quota",
+    "rate limit",
+    "rate_limit",
+    "ratelimit",
+    "throttl",
+    "insufficient",
+    "exhausted",
+    "limit exceeded",
+    "resourceexhausted",
+    "余额",
+    "配额",
+    "用量",
+    "欠费",
+    "billing",
+    "too many requests",
+)
+
+
+class LlmQuotaExhausted(RuntimeError):
+    """API 配额或限流耗尽；output 中已完成的日期可续跑，无需全量重生成。"""
+
+
+def is_quota_or_rate_limit(status_code: int | None, error_message: str = "") -> bool:
+    if status_code in (402, 429):
+        return True
+    msg = (error_message or "").lower()
+    return any(h in msg for h in _QUOTA_HINTS)
 
 
 def set_model_switch(enabled: bool) -> None:
@@ -205,6 +253,7 @@ def call_qwen_api(
         req_json["top_p"] = max(0.0, min(1.0, float(top_p)))
 
     last_error = None
+    last_status: int | None = None
     response_data = {}
     for attempt in range(_QWEN_RETRIES):
         try:
@@ -218,31 +267,60 @@ def call_qwen_api(
                     json=req_json,
                     timeout=_QWEN_TIMEOUT,
                 )
-            response_data = response.json()
-            if response.status_code == 429 or response.status_code >= 500:
-                last_error = f"HTTP {response.status_code}"
+            last_status = response.status_code
+            _print_llm_http_status(last_status, attempt)
+            try:
+                response_data = response.json()
+            except Exception:
+                response_data = {}
+            err_msg = ""
+            if isinstance(response_data.get("error"), dict):
+                err_msg = str(response_data["error"].get("message") or "")
+            if is_quota_or_rate_limit(last_status, err_msg):
+                last_error = err_msg or f"HTTP {last_status}"
+                if attempt < _QWEN_RETRIES - 1:
+                    time.sleep((2**attempt) * 0.8 + random.uniform(0, 0.3))
+                    continue
+                print(f"API 配额/限流: {last_error}")
+                raise LlmQuotaExhausted(last_error)
+            if last_status == 429 or last_status >= 500:
+                last_error = err_msg or f"HTTP {last_status}"
                 if attempt < _QWEN_RETRIES - 1:
                     time.sleep((2**attempt) * 0.8 + random.uniform(0, 0.3))
                     continue
             else:
                 break
+        except LlmQuotaExhausted:
+            raise
         except Exception as e:
             last_error = str(e)
+            _print_llm_http_status(last_status, attempt, note=f"异常: {e}")
             if attempt < _QWEN_RETRIES - 1:
                 time.sleep((2**attempt) * 0.8 + random.uniform(0, 0.3))
                 continue
             print(f"通义千问 API 请求出错: {last_error}")
             return ""
     else:
+        _print_llm_http_status(last_status, _QWEN_RETRIES - 1, note=f"重试耗尽: {last_error}")
+        if is_quota_or_rate_limit(last_status, str(last_error or "")):
+            print(f"API 配额/限流: {last_error}")
+            raise LlmQuotaExhausted(str(last_error or "quota exhausted"))
         print(f"通义千问 API 请求失败: {last_error}")
         return ""
 
     if "error" in response_data:
-        print(f"API错误: {response_data['error'].get('message', '未知错误')}")
+        err_msg = str(response_data["error"].get("message", "未知错误"))
+        _print_llm_http_status(last_status, _QWEN_RETRIES - 1, note=f"body.error: {err_msg[:120]}")
+        if is_quota_or_rate_limit(None, err_msg):
+            print(f"API 配额/限流: {err_msg}")
+            raise LlmQuotaExhausted(err_msg)
+        print(f"API错误: {err_msg}")
         return ""
     if "choices" not in response_data or not response_data["choices"]:
+        _print_llm_http_status(last_status, _QWEN_RETRIES - 1, note="响应无 choices")
         print("错误：响应中没有'choices'字段")
         return ""
+    _print_llm_http_status(last_status, _QWEN_RETRIES - 1, note="成功")
     return response_data["choices"][0]["message"]["content"].strip()
 
 

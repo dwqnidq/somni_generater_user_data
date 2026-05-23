@@ -13,28 +13,30 @@ load_dotenv()
 # 固定用户ID列表（不再从配置文件读取）
 user_ids = [
     # "69aea593af5e6cbf08027964",
-    # "69aea63eaf5e6cbf08027965",
-    # "69aea6d8af5e6cbf08027966",
-    # "69aea6e3af5e6cbf08027967",
-    # "69aea6e8af5e6cbf08027968",
-    # "69aea6eeaf5e6cbf08027969",
+    "69aea63eaf5e6cbf08027965",
+    "69aea6d8af5e6cbf08027966",
+    "69aea6e3af5e6cbf08027967",
+    "69aea6e8af5e6cbf08027968",
+    "69aea6eeaf5e6cbf08027969",
     "69aea6f3af5e6cbf0802796a",
-    # "69aea6f8af5e6cbf0802796b",
+    "69aea6f8af5e6cbf0802796b",
 ]
 print(f"Using fixed {len(user_ids)} user IDs: {user_ids}")
 
 # 需要删除数据的集合列表
 collections = [
-    # "somni_reports",
+    "somni_reports",
     # "somni_physiological_data",
     # "somni_events",
     # "somni_environment_data",
     # "somni_records",
     # "somni_schedules",
-    "somni_ai_insights",
+    # "somni_ai_insights",
     # "somni_dream_universe_assets",
     # "somni_sleep_analysis",
-    # "somni_fusion"
+    # "somni_fusion",
+    # "somni_sleep_analysis",
+    # "somni_sleep_district"
 ]
 
 # MongoDB连接信息

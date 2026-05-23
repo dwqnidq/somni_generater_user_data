@@ -1,12 +1,21 @@
 #!/usr/bin/env python3
-"""单条预览：14 天趋势 AI 分析（system = prompt/sleep_trend_14d_analysis.md）。
+"""单条预览：14 天趋势 AI 分析（title / sleep_insight / schedule_insight）。
+
+默认 system 提示词：prompt/sleep_trend_14d_analysis.md（与 main.py / generate_ai_analysis_14d 一致）。
+可选其它模板：--prompt-md <文件名>。
 
 会从 output 目录读取同用户的：
   {user_id}_health_data.json（睡眠，14 天窗口由 generate_ai_analysis 内部取）
   {user_id}_calendar_events.json（日程；仅注入 anchor_record_date 当天）
   {user_id}_daily_emotion_steps.json（步数 + 情绪分数；仅注入 anchor 当天）
-  qweather_today_snapshot.json（今日天气快照，路径可通过 --weather-json 覆盖）
+  qweather_monthly_data.json（多日预报，按锚点日取当日；路径可通过 --weather-json 覆盖）
 缺失侧车文件时对应字段以空对象/数组注入，不中断运行。
+
+示例：
+  python scripts/preview_llm_one_shot/preview_ai_analysis_14d.py \\
+    --user-id 69aea6f3af5e6cbf0802796a --record-date 2026-05-01
+
+结果默认写入 preview_llm_output/preview_ai_analysis_14d_one.json。
 """
 
 from __future__ import annotations
@@ -68,16 +77,15 @@ def _load_emotion_steps_for_date(user_id: str, output_dir: str, target_date: str
     return {"steps": None, "emotion_score": None}
 
 
-def _load_weather_snapshot(path: str) -> dict:
-    """读取气象快照 JSON；只保留 sleep_trend_14d_analysis 模板涉及的字段。"""
+def _load_weather_snapshot(path: str, target_date: str) -> dict:
+    """按锚点日从多日预报 JSON 取扁平天气字段。"""
     if not os.path.isfile(path):
         return {}
     with open(path, "r", encoding="utf-8") as f:
         data = json.load(f)
-    if not isinstance(data, dict):
-        return {}
-    keys = ("sunrise", "sunset", "uvIndex", "humidity", "aqiDisplay")
-    return {k: data.get(k) for k in keys if data.get(k) is not None}
+    from utils import qweather_weather_for_date
+
+    return qweather_weather_for_date(data, target_date)
 
 
 def _load_text_prompt(path: str) -> str:
@@ -85,12 +93,26 @@ def _load_text_prompt(path: str) -> str:
         return f.read().strip()
 
 
+def _resolve_prompt_basename(prompt_md: str) -> str:
+    """解析 --prompt-md，返回 prompt/ 目录下的文件名。"""
+    if not prompt_md.strip():
+        return "sleep_trend_14d_analysis.md"
+    if os.path.isabs(prompt_md):
+        return os.path.basename(prompt_md)
+    return os.path.basename(prompt_md.replace("\\", "/"))
+
+
 def main():
     ap = base_arg_parser(__doc__ or "")
     ap.add_argument(
+        "--prompt-md",
+        default="sleep_trend_14d_analysis.md",
+        help="系统提示词文件名或路径（默认 sleep_trend_14d_analysis.md）",
+    )
+    ap.add_argument(
         "--weather-json",
-        default=os.path.join(PROJECT_ROOT, "output", "qweather_today_snapshot.json"),
-        help="今日天气快照 JSON（默认 output/qweather_today_snapshot.json）",
+        default=os.path.join(PROJECT_ROOT, "output", "qweather_monthly_data.json"),
+        help="多日天气预报 JSON（默认 output/qweather_monthly_data.json）",
     )
     ap.add_argument(
         "--persona-system-prompt",
@@ -98,6 +120,8 @@ def main():
         help="补充系统提示词文件（会追加到原 system_prompt 后，不替换原提示词）",
     )
     args = ap.parse_args()
+    prompt_basename = _resolve_prompt_basename(args.prompt_md)
+    os.environ["SLEEP_TREND_14D_PROMPT"] = prompt_basename
     gh.set_model_switch(True)
     persona_prompt_text = _load_text_prompt(args.persona_system_prompt)
 
@@ -105,7 +129,7 @@ def main():
 
     calendar_events = _load_calendar_events_for_date(args.user_id, args.output_dir, rd)
     today_health = _load_emotion_steps_for_date(args.user_id, args.output_dir, rd)
-    today_weather = _load_weather_snapshot(args.weather_json)
+    today_weather = _load_weather_snapshot(args.weather_json, rd)
 
     injected_schedule_records = [
         {
@@ -224,8 +248,21 @@ def main():
     )
     if not rows:
         raise SystemExit("未生成任何记录（请检查日期是否在 health 内、DASHSCOPE_API_KEY、USE_MODEL）")
-    out = args.out.strip() or default_out_path("preview_ai_analysis_14d_one")
+    default_stem = (
+        "preview_ai_analysis_14d2_one"
+        if "analysis2" in prompt_basename
+        else "preview_ai_analysis_14d_one"
+    )
+    out = args.out.strip() or default_out_path(default_stem)
     write_result(out, rows[0])
+    print(f"\n已写入: {out}")
+    row = rows[0]
+    print(
+        "\n--- 文案预览 ---\n"
+        f"title: {row.get('title', '')}\n\n"
+        f"sleep_insight:\n{row.get('sleep_insight', '')}\n\n"
+        f"schedule_insight:\n{row.get('schedule_insight', '')}\n"
+    )
 
 
 if __name__ == "__main__":

@@ -36,20 +36,20 @@ OUTPUT_DIR = os.path.join(PROJECT_ROOT, "output")
 EXTRA_SLEEP_LATENCY_RULES: dict = {
     "M": {  # 晨型
         "good": [
-            {"ratio": 0.10, "extra_range": (60, 90)},
-            {"ratio": 0.30, "extra_range": (20, 60)},
+            {"ratio": 0, "extra_range": (60, 90)},
+            {"ratio": 0, "extra_range": (20, 60)},
         ],
         "bad": [
-            {"ratio": 0.10, "extra_range": (90, 120)},
+            {"ratio": 0, "extra_range": (90, 120)},
         ],
     },
     "E": {  # 夜型
         "good": [
-            {"ratio": 0.20, "extra_range": (90, 120)},
-            {"ratio": 0.20, "extra_range": (40, 80)},
+            {"ratio": 0, "extra_range": (90, 120)},
+            {"ratio": 0, "extra_range": (40, 80)},
         ],
         "bad": [
-            {"ratio": 0.10, "extra_range": (120, 180)},
+            {"ratio": 0, "extra_range": (120, 180)},
         ],
     },
 }
@@ -437,6 +437,54 @@ def _timeline_to_idf(timeline: list, start_dt: datetime) -> list:
     return segs
 
 
+def _redistribute_short_sleep_segments(idf_data: list, min_dur: int = 10) -> list:
+    """将 < min_dur 分钟的非 awake 碎片阶段的分钟数补给同阶段的其他段，
+    并平移中间段的时间点，保持时间线连续且各阶段总分钟数不变。"""
+
+    def _parse(time_str: str) -> int:
+        h, m = time_str.split(":")
+        return int(h) * 60 + int(m)
+
+    def _fmt(minutes: int) -> str:
+        minutes = minutes % 1440
+        return f"{minutes // 60:02d}:{minutes % 60:02d}"
+
+    changed = True
+    while changed:
+        changed = False
+        for i, seg in enumerate(idf_data):
+            if seg["stage"] == "awake":
+                continue
+            dur = _parse(seg["end"]) - _parse(seg["start"])
+            if dur < 0:
+                dur += 1440
+            if dur >= min_dur:
+                continue
+
+            # 只找前面的同阶段段（目标在后面会导致时间线断裂）
+            target = None
+            for j in range(i - 1, -1, -1):
+                if idf_data[j]["stage"] == seg["stage"]:
+                    target = j
+                    break
+            if target is None:
+                continue
+
+            delta = dur
+            idf_data[target]["end"] = _fmt((_parse(idf_data[target]["end"]) + delta) % 1440)
+
+            # 平移目标和短片段之间的所有段
+            for k in range(target + 1, i):
+                idf_data[k]["start"] = _fmt((_parse(idf_data[k]["start"]) + delta) % 1440)
+                idf_data[k]["end"] = _fmt((_parse(idf_data[k]["end"]) + delta) % 1440)
+
+            idf_data.pop(i)
+            changed = True
+            break
+
+    return idf_data
+
+
 def build_idf_data(bed_time_local: datetime, sleep_latency: int,
                    total_sleep_min: int, deep_min: int, light_min: int,
                    rem_min: int, wake_after_sleep: int,
@@ -449,7 +497,8 @@ def build_idf_data(bed_time_local: datetime, sleep_latency: int,
         stage_tl = _insert_night_awakenings(stage_tl, awakening_durations)
     timeline.extend(stage_tl)
     timeline.extend(["awake"] * max(1, wake_after_sleep))
-    return _timeline_to_idf(timeline, bed_time_local)
+    idf = _timeline_to_idf(timeline, bed_time_local)
+    return _redistribute_short_sleep_segments(idf)
 
 
 # ──────────────────────────────────────────────
@@ -472,6 +521,17 @@ def compute_sleep_score(efficiency: int, deep_ratio: int,
 # ──────────────────────────────────────────────
 # 单日数据生成
 # ──────────────────────────────────────────────
+
+def _generate_apnea_count(cfg_range: list) -> int:
+    """生成呼吸暂停次数：绝大多数记录在 0~4 之间，仅极少数使用配置原范围。"""
+    lo, hi = int(cfg_range[0]), int(cfg_range[1])
+    lo, hi = min(lo, hi), max(lo, hi)
+    # 85% 的概率限制在 [0, 4]，15% 使用配置原范围
+    if random.random() < 0.85:
+        cap_hi = min(4, hi)
+        return random.randint(min(lo, cap_hi), cap_hi)
+    return random.randint(lo, hi)
+
 
 def _randint_range(rng: list) -> int:
     lo, hi = int(rng[0]), int(rng[1])
@@ -693,7 +753,7 @@ def _try_generate_day_record_impl(
     # ── 其他体征指标 ──
     avg_heartbeat = _randint_range(state_cfg["average_heartbeat"])
     avg_respiration = _randint_range(state_cfg["average_respiration"])
-    apnea_count = _randint_range(state_cfg["apnea_count"])
+    apnea_count = _generate_apnea_count(state_cfg["apnea_count"])
     turnover_count = _randint_range(state_cfg["turnover_count"])
 
     # ── UTC 时间 ──
@@ -794,7 +854,7 @@ def _augment_record_with_extra_sleep_latency(rec: dict, extra_minutes: int) -> N
     )
 
     bed_local_dt = bed_dt + timedelta(hours=TIMEZONE_OFFSET)
-    rec["idf_data"] = _timeline_to_idf(new_timeline, bed_local_dt)
+    rec["idf_data"] = _redistribute_short_sleep_segments(_timeline_to_idf(new_timeline, bed_local_dt))
 
     new_tst = sum(1 for st in new_timeline if st != "awake")
     last_non_awake_end_idx = max(

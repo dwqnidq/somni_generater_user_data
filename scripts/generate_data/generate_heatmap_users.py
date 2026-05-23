@@ -1,11 +1,9 @@
 """为睡眠热力图模拟批量生成虚拟用户的 N 天数据 + 睡眠地图分数。
 
-每个虚拟用户的输出文件（与现有 8 个真实用户共用 output/ 目录，按 user_id 区分）：
-  - {uid}_health_data.json
-  - {uid}_environment_data.json
-  - {uid}_vitals_data.json
-  - {uid}_sleep_events.json
-  - {uid}_sleep_map_score.json
+生成流程（与 8 人格主流程解耦）：
+  - 仅在内存/临时步骤中生成 health / environment / vitals / sleep_events 用于算分
+  - 持久化：output/virtual_heatmap/{uid}_sleep_map_score.json
+  - 不会在 output/ 根目录留下虚拟用户的 health_data 等文件（避免与 8 人格混淆）
 
 最后写出汇总索引：output/heatmap_users_index.json
 
@@ -43,12 +41,27 @@ from utils import atomic_write_json, calculate_sleep_map_score_window  # noqa: E
 
 CONFIG_PATH = os.path.join(PROJECT_ROOT, "config", "health_data_personas_config.json")
 OUTPUT_DIR = os.path.join(PROJECT_ROOT, "output")
+HEATMAP_SCORE_DIR = os.path.join(OUTPUT_DIR, "virtual_heatmap")
 INDEX_FILE = os.path.join(OUTPUT_DIR, "heatmap_users_index.json")
+_INTERMEDIATE_SUFFIXES = (
+    "health_data",
+    "environment_data",
+    "vitals_data",
+    "sleep_events",
+)
 
 DEFAULT_COUNT = 100
 DEFAULT_DAYS = 14
 DEFAULT_START_DATE = "2026-03-01"
 GOOD_RATIO_RANGE = (0.2, 0.8)
+
+
+def _remove_intermediate_pipeline_files(uid: str, output_dir: str = OUTPUT_DIR) -> None:
+    """算分后删除 output 根目录下该虚拟用户的 health/env/vitals/events（不保留完整流水线产物）。"""
+    for suffix in _INTERMEDIATE_SUFFIXES:
+        path = os.path.join(output_dir, f"{uid}_{suffix}.json")
+        if os.path.isfile(path):
+            os.remove(path)
 
 
 def _new_user_id(taken: set[str]) -> str:
@@ -132,8 +145,11 @@ def generate_one_virtual_user(
         output_dir=OUTPUT_DIR,
     )
     score_result = _round_floats_to_int(score_result)
-    score_path = os.path.join(OUTPUT_DIR, f"{uid}_sleep_map_score.json")
+    os.makedirs(HEATMAP_SCORE_DIR, exist_ok=True)
+    score_rel = os.path.join("virtual_heatmap", f"{uid}_sleep_map_score.json")
+    score_path = os.path.join(OUTPUT_DIR, score_rel)
     atomic_write_json(score_path, score_result)
+    _remove_intermediate_pipeline_files(uid, OUTPUT_DIR)
 
     composite = (score_result.get("scores") or {}).get("composite_score")
     return {
@@ -143,11 +159,7 @@ def generate_one_virtual_user(
         "good_ratio": round(good_ratio, 2),
         "composite_score": composite,
         "files": {
-            "health_data": f"{uid}_health_data.json",
-            "environment_data": f"{uid}_environment_data.json",
-            "vitals_data": f"{uid}_vitals_data.json",
-            "sleep_events": f"{uid}_sleep_events.json",
-            "sleep_map_score": f"{uid}_sleep_map_score.json",
+            "sleep_map_score": score_rel,
         },
     }
 
@@ -232,10 +244,13 @@ def main():
         "users": summary,
     }
     os.makedirs(OUTPUT_DIR, exist_ok=True)
+    os.makedirs(HEATMAP_SCORE_DIR, exist_ok=True)
     atomic_write_json(INDEX_FILE, index_payload)
 
     print(
         f"\n完成：成功 {len(summary)}/{total_target} 个虚拟用户；"
+        f"得分文件目录 → {HEATMAP_SCORE_DIR}/\n"
+        f"（未在 output/ 根目录保留虚拟用户 health_data；8 人格请用 main.py 主流程）\n"
         f"汇总索引 → {INDEX_FILE}"
     )
 

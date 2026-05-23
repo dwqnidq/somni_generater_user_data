@@ -31,6 +31,8 @@ if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 os.chdir(PROJECT_ROOT)
 
+from utils import format_sleep_map_pool_user_name  # noqa: E402
+
 # ─── 北京市行政区划 ───────────────────────────────────────────────────────────
 
 PROVINCE_CODE = "110000"
@@ -71,33 +73,42 @@ WEIGHTS = {
 # 分层比例：高分 8%、中分 27%、低分 65%（对应产品要求的分布态势）
 
 TIERS = {
-    "high": {
-        "prob":        0.08,
+    "very_high": {
+        "prob":        0.008,
         "score_range": (82, 98),
         # 底层参数范围（用于 gen_params_for_tier）
-        "sleep_sec":   (25200, 32400),   # 7-9h 满分区间
-        "deep_ratio":  (0.18, 0.28),     # ≥18%，几乎都能得 80-100
-        "onset_sec":   (300, 1500),      # 5-25min，快速入睡
-        "abn_weights": [45, 30, 15, 7, 2, 1, 0, 0, 0],   # 事件次数 0-8
-        "fluctuation": (5, 55),          # 波动小，规律性好
+        "sleep_sec":   (27000, 32400),   # 7.5-9h 满分区间
+        "deep_ratio":  (0.22, 0.30),     # ≥22%，高深睡
+        "onset_sec":   (300, 900),       # 5-15min，快速入睡
+        "abn_weights": [55, 28, 10, 4, 2, 1, 0, 0, 0],   # 事件次数 0-8
+        "fluctuation": (5, 30),          # 波动小，规律性好
+    },
+    "high": {
+        "prob":        0.014,
+        "score_range": (70, 81),
+        "sleep_sec":   (23400, 28800),   # 6.5-8h
+        "deep_ratio":  (0.14, 0.20),     # 14-20%
+        "onset_sec":   (900, 2400),      # 15-40min
+        "abn_weights": [18, 22, 22, 16, 10, 7, 3, 2, 0],
+        "fluctuation": (30, 90),
     },
     "medium": {
-        "prob":        0.27,
-        "score_range": (63, 81),
-        "sleep_sec":   (21600, 32400),   # 6-9h
-        "deep_ratio":  (0.12, 0.22),     # 10-22%
-        "onset_sec":   (800, 2800),      # 13-47min
-        "abn_weights": [15, 20, 20, 18, 12, 8, 5, 2, 0],
-        "fluctuation": (25, 110),
+        "prob":        0.010,
+        "score_range": (60, 69),
+        "sleep_sec":   (21600, 27000),   # 6-7.5h
+        "deep_ratio":  (0.10, 0.16),     # 10-16%
+        "onset_sec":   (1500, 3300),     # 25-55min
+        "abn_weights": [10, 15, 20, 18, 15, 12, 6, 3, 1],
+        "fluctuation": (50, 130),
     },
     "low": {
-        "prob":        0.65,
-        "score_range": (40, 62),
-        "sleep_sec":   (18000, 27000),   # 5-7.5h，偏短
-        "deep_ratio":  (0.05, 0.14),     # 深睡不足
-        "onset_sec":   (1800, 5000),     # 30-83min，入睡慢
-        "abn_weights": [8, 10, 12, 15, 15, 15, 12, 8, 5],
-        "fluctuation": (75, 170),        # 作息不规律
+        "prob":        0.965,
+        "score_range": (30, 59),
+        "sleep_sec":   (14400, 27000),   # 4-7.5h，偏短
+        "deep_ratio":  (0.03, 0.14),     # 深睡不足
+        "onset_sec":   (1800, 5400),     # 30-90min，入睡慢
+        "abn_weights": [5, 8, 12, 15, 18, 16, 13, 8, 5],
+        "fluctuation": (80, 200),        # 作息不规律
     },
 }
 
@@ -261,12 +272,13 @@ def create_user_profiles(district, n_users, reg_ts_base):
     """
     tiers = random.choices(TIER_NAMES, weights=TIER_PROBS, k=n_users)
     profiles = []
-    for tier in tiers:
+    for idx, tier in enumerate(tiers, start=1):
         uid = make_object_id(ts=reg_ts_base + random.randint(0, 86400 * 30))
         profiles.append({
-            "uid":      uid,
-            "tier":     tier,
-            "district": district,
+            "uid":       uid,
+            "tier":      tier,
+            "district":  district,
+            "user_name": format_sleep_map_pool_user_name(idx),
         })
     return profiles
 
@@ -288,7 +300,7 @@ def make_daily_record(profile, stats_date_str, now_iso):
             "city_code":     CITY_CODE,
             "district_code": district["district_code"],
         },
-        "user_name":          "sleep_map_user_{}".format(profile["uid"][:8]),
+        "user_name":          profile["user_name"],
         "score":              total,
         "sleep_seconds":      sleep_sec,
         "deep_sleep_seconds": deep_sec,
@@ -342,35 +354,35 @@ def attach_city_fields(records):
             doc["dimensions"] = {
                 "deep_sleep": {
                     "score":      ds["deep_sleep"],
-                    "weight":     25,
+                    "weight":     WEIGHTS["deep_sleep"],
                     "value":      r["deep_sleep_ratio"],
                     "city_avg":   round(city_avg["deep_ratio"]),
                     "city_score": city_sc["deep_sleep"],
                 },
                 "sleep_duration": {
                     "score":      ds["sleep_duration"],
-                    "weight":     25,
+                    "weight":     WEIGHTS["sleep_duration"],
                     "value":      r["sleep_seconds"],
                     "city_avg":   city_avg["sleep_sec"],
                     "city_score": city_sc["sleep_duration"],
                 },
                 "sleep_efficiency": {
                     "score":      ds["sleep_efficiency"],
-                    "weight":     15,
+                    "weight":     WEIGHTS["sleep_efficiency"],
                     "value":      round(raw["onset_sec"] / 60),
                     "city_avg":   round(city_avg["onset_sec"] / 60),
                     "city_score": city_sc["sleep_efficiency"],
                 },
                 "abnormal_events": {
                     "score":      ds["abnormal_events"],
-                    "weight":     20,
+                    "weight":     WEIGHTS["abnormal_events"],
                     "value":      raw["abn_count"],
                     "city_avg":   city_avg["abn_count"],
                     "city_score": city_sc["abnormal_events"],
                 },
                 "routine_regularity": {
                     "score":      ds["routine_regularity"],
-                    "weight":     15,
+                    "weight":     WEIGHTS["routine_regularity"],
                     "value":      routine_text(ds["routine_regularity"]),
                     "city_avg":   routine_text(city_avg["routine_sc"]),
                     "city_score": city_sc["routine_regularity"],

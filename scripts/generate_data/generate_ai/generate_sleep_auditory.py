@@ -22,6 +22,7 @@ for _p in (PROJECT_ROOT, GEN_DATA_DIR):
     if _p not in sys.path:
         sys.path.insert(0, _p)
 
+from generate_ai.llm_resume import run_llm_date_batch  # noqa: E402
 from generate_ai.multi_day_llm_helpers import apply_max_records  # noqa: E402
 from generate_ai.runtime import PROJECT_ROOT, bootstrap_llm, iter_uids, load_health_rows  # noqa: E402
 
@@ -37,6 +38,20 @@ from sleep_report.auditory import (  # noqa: E402
 )
 from sleep_report.sleep_helpers import build_sleep_events_index  # noqa: E402
 
+_EMPTY_AUDITORY_MODULE = [{"target": "", "description": ""}]
+
+
+def _should_return_empty_auditory_module(
+    data_points: List[dict], apnea_count: Any
+) -> bool:
+    """仅当无鼾声 data_points 且 apnea_count < 5 时返回空 module（逻辑与）。"""
+    no_snoring = not data_points
+    try:
+        apnea = int(apnea_count if apnea_count is not None else 0)
+    except (TypeError, ValueError):
+        apnea = 0
+    return no_snoring and apnea < 5
+
 
 def _build_auditory_context(
     uid: str,
@@ -51,14 +66,12 @@ def _build_auditory_context(
         sleep_events_index=events_index,
         output_dir=output_dir,
     )
-    env_rows_by_date = index_environment_noise_rows_by_record_date(uid, output_dir=output_dir)
     all_events = [event for events in events_index.values() for event in events]
     audios, data_points = rebuild_auditory_audios_and_snoring_data_points(
         record_date,
         uid,
         all_events,
         sleep_data,
-        env_rows_by_date.get(record_date, []),
     )
     auditory["audios"] = audios
     auditory["snoring_analysis"] = {"data_points": data_points}
@@ -107,9 +120,14 @@ def _generate_auditory_module_llm(
             if isinstance(a, dict)
         ],
     }
+    data_points = payload["data_points"]
+    if _should_return_empty_auditory_module(data_points, payload.get("apnea_count")):
+        return list(_EMPTY_AUDITORY_MODULE)
     prompt = (
         "以下为本晚真实输入数据（JSON）。请仅依据这些数据进行分析，"
-        "返回仅包含 1 条元素的 JSON 数组（字段仅限 `target`、`description`），不要附加任何解释。\n\n"
+        "返回仅包含 1 条元素的 JSON 数组（字段仅限 `target`、`description`）。"
+        "仅当 data_points 为空且 apnea_count 同时小于 5 时，target 与 description 才均为空字符串；"
+        "有鼾声或 apnea_count≥5 时须输出非空分析。不要附加任何解释。\n\n"
         + json.dumps(payload, ensure_ascii=False)
     )
     eff_temperature = 0.35 if temperature is None else temperature
@@ -162,6 +180,7 @@ def generate_auditory_for_uid(
     *,
     temperature: Optional[float] = None,
     top_p: Optional[float] = None,
+    resume: bool = False,
 ) -> List[dict]:
     try:
         health_rows = load_health_rows(uid, output_dir)
@@ -181,23 +200,30 @@ def generate_auditory_for_uid(
         rows = [r for r in rows if str(r.get("record_date") or "") <= end_date]
     rows = apply_max_records(rows, max_records)
 
-    results: List[dict] = []
-    for i, row in enumerate(rows):
-        rd = str(row.get("record_date") or "")
-        print(f"  [{i + 1}/{len(rows)}] uid={uid} date={rd} …", end=" ", flush=True)
+    by_rd = {str(r.get("record_date") or ""): r for r in rows if r.get("record_date")}
+    out_path = os.path.join(output_dir, f"{uid}_sleep_auditory.json")
+
+    def _one(rd: str) -> Optional[dict]:
         mod = generate_auditory_for_date(
-            uid, row, output_dir,
+            uid,
+            by_rd[rd],
+            output_dir,
             events_index=events_index,
-            temperature=temperature, top_p=top_p,
+            temperature=temperature,
+            top_p=top_p,
         )
         if mod is None:
-            print("失败（已跳过）")
-        else:
-            print("完成")
-            results.append({"uid": uid, "record_date": rd, "auditory_module": mod})
-        if i < len(rows) - 1:
-            time.sleep(retry_delay)
-    return results
+            return None
+        return {"uid": uid, "record_date": rd, "auditory_module": mod}
+
+    return run_llm_date_batch(
+        uid=uid,
+        output_path=out_path,
+        resume=resume,
+        dates=sorted(by_rd.keys()),
+        process_date=_one,
+        retry_delay=retry_delay,
+    )
 
 
 def main() -> None:

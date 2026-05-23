@@ -1,0 +1,1738 @@
+[
+  {
+    "_id": "6a0e91d9ebe43409e62bf816",
+    "uid": "69aea593af5e6cbf08027964",
+    "stats_date": "2026-05-01",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "完美主义百灵鸟",
+    "score": 76,
+    "sleep_seconds": 23760,
+    "deep_sleep_seconds": 3194,
+    "deep_sleep_ratio": 0.11,
+    "evaluation": "你的作息特别规律，入睡也很顺滑，这俩优势帮你在同城排名里很出彩；不过深睡质量稍显不足，夜里偶尔会醒，稍微拖了点后腿，其他方面和大部分同城人差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 60,
+        "weight": 0.25,
+        "value": 11,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 90,
+        "weight": 0.25,
+        "value": 23760,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 45,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:17.000Z",
+    "update_time": "2026-05-21T05:02:17.000Z"
+  },
+  {
+    "_id": "6a0e91d93a5aa4c543010561",
+    "uid": "69aea593af5e6cbf08027964",
+    "stats_date": "2026-05-02",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "完美主义百灵鸟",
+    "score": 80,
+    "sleep_seconds": 26160,
+    "deep_sleep_seconds": 4455,
+    "deep_sleep_ratio": 0.15,
+    "evaluation": "你的作息特别稳，深睡扎实，入睡也不折腾，睡眠时长给得挺足，不过夜里容易醒稍拖后腿，其他方面和同城大伙差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 80,
+        "weight": 0.25,
+        "value": 15,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 24960,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 38,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 55,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:17.000Z",
+    "update_time": "2026-05-21T05:02:17.000Z"
+  },
+  {
+    "_id": "6a0e91d927bd4ceced4673fb",
+    "uid": "69aea593af5e6cbf08027964",
+    "stats_date": "2026-05-03",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "完美主义百灵鸟",
+    "score": 76,
+    "sleep_seconds": 24300,
+    "deep_sleep_seconds": 3175,
+    "deep_sleep_ratio": 0.11,
+    "evaluation": "你的睡眠排名在同城里挺靠前的，主要靠超稳的作息和顺滑的入睡体验托着，不过深睡稍浅、夜里偶尔醒的小问题稍微拖了点后腿，其余方面和大家差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 60,
+        "weight": 0.25,
+        "value": 11,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 90,
+        "weight": 0.25,
+        "value": 24740,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 37,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:17.000Z",
+    "update_time": "2026-05-21T05:02:17.000Z"
+  },
+  {
+    "_id": "6a0e91d967511e6d173cfbc2",
+    "uid": "69aea593af5e6cbf08027964",
+    "stats_date": "2026-05-04",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "完美主义百灵鸟",
+    "score": 80,
+    "sleep_seconds": 25920,
+    "deep_sleep_seconds": 4410,
+    "deep_sleep_ratio": 0.15,
+    "evaluation": "你的生物钟特别稳，深睡质量和入睡效率都很不错，睡眠时长也够，不过夜里容易醒的情况稍微拖了后腿，其他方面和多数同城人差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 80,
+        "weight": 0.25,
+        "value": 15,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 25035,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 36,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 55,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:17.000Z",
+    "update_time": "2026-05-21T05:02:17.000Z"
+  },
+  {
+    "_id": "6a0e91d94061cd8571229d12",
+    "uid": "69aea593af5e6cbf08027964",
+    "stats_date": "2026-05-05",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "完美主义百灵鸟",
+    "score": 76,
+    "sleep_seconds": 25140,
+    "deep_sleep_seconds": 4007,
+    "deep_sleep_ratio": 0.14,
+    "evaluation": "你的作息特别稳，入睡也很顺滑，都是支撑你排名靠前的关键；不过深睡质量稍显不足，夜间安稳度也略拖后腿，其他方面和同城多数人差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 60,
+        "weight": 0.25,
+        "value": 14,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 90,
+        "weight": 0.25,
+        "value": 25056,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 35,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:17.000Z",
+    "update_time": "2026-05-21T05:02:17.000Z"
+  },
+  {
+    "_id": "6a0e91d9cd1ef4a8612ce9a4",
+    "uid": "69aea593af5e6cbf08027964",
+    "stats_date": "2026-05-06",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "完美主义百灵鸟",
+    "score": 86,
+    "sleep_seconds": 25320,
+    "deep_sleep_seconds": 4896,
+    "deep_sleep_ratio": 0.17,
+    "evaluation": "你这作息真的特别规律，生物钟稳得很，这可是帮你在同城睡眠排名里拉满优势的关键；同时深睡扎实、入睡顺滑，睡眠时长也够，夜里也睡得稳，整体表现相当出色。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 80,
+        "weight": 0.25,
+        "value": 17,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 25100,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 35,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 85,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:17.000Z",
+    "update_time": "2026-05-21T05:02:17.000Z"
+  },
+  {
+    "_id": "6a0e91d9a148dd76d8fe057f",
+    "uid": "69aea593af5e6cbf08027964",
+    "stats_date": "2026-05-07",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "完美主义百灵鸟",
+    "score": 76,
+    "sleep_seconds": 23040,
+    "deep_sleep_seconds": 2280,
+    "deep_sleep_ratio": 0.08,
+    "evaluation": "你的作息特别规律，入睡顺滑还夜里睡得稳，稳稳托住了你的排名；不过深睡偏浅、睡眠时间稍显不足，稍微拖了点后腿，其他方面和同城大部分人差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 40,
+        "weight": 0.25,
+        "value": 8,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 80,
+        "weight": 0.25,
+        "value": 24806,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 34,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 95,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:17.000Z",
+    "update_time": "2026-05-21T05:02:17.000Z"
+  },
+  {
+    "_id": "6a0e91d925e9b8fbdf9596b6",
+    "uid": "69aea593af5e6cbf08027964",
+    "stats_date": "2026-05-08",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "完美主义百灵鸟",
+    "score": 83,
+    "sleep_seconds": 25380,
+    "deep_sleep_seconds": 4618,
+    "deep_sleep_ratio": 0.16,
+    "evaluation": "你入睡特别顺滑、作息稳得很，深睡和睡眠时长也都在线，不过夜里容易醒的情况稍微拖了后腿，整体在同城里表现相当亮眼。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 80,
+        "weight": 0.25,
+        "value": 16,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 24878,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 33,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 55,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:17.000Z",
+    "update_time": "2026-05-21T05:02:17.000Z"
+  },
+  {
+    "_id": "6a0e91d9688c5c1cc699e568",
+    "uid": "69aea593af5e6cbf08027964",
+    "stats_date": "2026-05-09",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "完美主义百灵鸟",
+    "score": 78,
+    "sleep_seconds": 25560,
+    "deep_sleep_seconds": 4066,
+    "deep_sleep_ratio": 0.14,
+    "evaluation": "你的作息特别稳当，入睡也很顺滑，睡眠时长也够给力，夜里也睡得踏实，不过深睡质量稍显不足，整体在同城里的表现相当亮眼。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 60,
+        "weight": 0.25,
+        "value": 14,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 24953,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 33,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:17.000Z",
+    "update_time": "2026-05-21T05:02:17.000Z"
+  },
+  {
+    "_id": "6a0e91d997734b913105fb0b",
+    "uid": "69aea593af5e6cbf08027964",
+    "stats_date": "2026-05-10",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "完美主义百灵鸟",
+    "score": 80,
+    "sleep_seconds": 26760,
+    "deep_sleep_seconds": 5059,
+    "deep_sleep_ratio": 0.17,
+    "evaluation": "你作息特别规律，入睡也顺滑，深睡质量和睡眠时长都在线，不过夜里容易醒拖了点后腿，整体在同城的表现挺靠前的。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 80,
+        "weight": 0.25,
+        "value": 17,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 25134,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 33,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 55,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:17.000Z",
+    "update_time": "2026-05-21T05:02:17.000Z"
+  },
+  {
+    "_id": "6a0e91d91f16f24fdb827993",
+    "uid": "69aea593af5e6cbf08027964",
+    "stats_date": "2026-05-11",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "完美主义百灵鸟",
+    "score": 74,
+    "sleep_seconds": 23520,
+    "deep_sleep_seconds": 2581,
+    "deep_sleep_ratio": 0.09,
+    "evaluation": "你作息特别规律，入睡也很顺滑，这俩优势稳稳托住了你的排名；不过深睡质量稍显不足拖了点后腿，其他方面和同城多数人差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 40,
+        "weight": 0.25,
+        "value": 9,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 90,
+        "weight": 0.25,
+        "value": 24987,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 33,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:17.000Z",
+    "update_time": "2026-05-21T05:02:17.000Z"
+  },
+  {
+    "_id": "6a0e91d97e5ebe1370b810b4",
+    "uid": "69aea593af5e6cbf08027964",
+    "stats_date": "2026-05-12",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "完美主义百灵鸟",
+    "score": 68,
+    "sleep_seconds": 22920,
+    "deep_sleep_seconds": 2614,
+    "deep_sleep_ratio": 0.09,
+    "evaluation": "你的作息特别规律，入睡很顺滑，夜里也睡得稳；不过深睡偏浅、睡眠时间稍显不足，稍微拖了点后腿，整体和同城平均水平差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 40,
+        "weight": 0.25,
+        "value": 9,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 80,
+        "weight": 0.25,
+        "value": 24815,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 32,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:17.000Z",
+    "update_time": "2026-05-21T05:02:17.000Z"
+  },
+  {
+    "_id": "6a0e91d94f8f5c5f9cff240b",
+    "uid": "69aea593af5e6cbf08027964",
+    "stats_date": "2026-05-13",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "完美主义百灵鸟",
+    "score": 76,
+    "sleep_seconds": 23520,
+    "deep_sleep_seconds": 2832,
+    "deep_sleep_ratio": 0.1,
+    "evaluation": "你的作息特别稳，入睡也顺滑不折腾，这两点让你在同城的睡眠表现里挺亮眼的；不过深睡质量稍显不足，其他方面和大部分同城人差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 60,
+        "weight": 0.25,
+        "value": 10,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 90,
+        "weight": 0.25,
+        "value": 24715,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 33,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:17.000Z",
+    "update_time": "2026-05-21T05:02:17.000Z"
+  },
+  {
+    "_id": "6a0e91d9e75f62a193facb3a",
+    "uid": "69aea593af5e6cbf08027964",
+    "stats_date": "2026-05-14",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "完美主义百灵鸟",
+    "score": 84,
+    "sleep_seconds": 25140,
+    "deep_sleep_seconds": 4007,
+    "deep_sleep_ratio": 0.14,
+    "evaluation": "你的作息特别规律，入睡顺滑还很少夜里醒，这些都让你在同城的睡眠排名里靠前；不过深睡质量稍显不足，整体睡眠时间和大家差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 60,
+        "weight": 0.25,
+        "value": 14,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 90,
+        "weight": 0.25,
+        "value": 24746,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 32,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 95,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:17.000Z",
+    "update_time": "2026-05-21T05:02:17.000Z"
+  },
+  {
+    "_id": "6a0e91d9a21857b29863358c",
+    "uid": "69aea593af5e6cbf08027964",
+    "stats_date": "2026-05-15",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "完美主义百灵鸟",
+    "score": 72,
+    "sleep_seconds": 23640,
+    "deep_sleep_seconds": 3168,
+    "deep_sleep_ratio": 0.11,
+    "evaluation": "你的作息特别稳，入睡也很顺滑，睡眠时长也和大伙差不多，这几点帮你在同城排名里靠前了不少；不过夜里容易醒、深睡稍浅的情况稍微拖了点后腿。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 60,
+        "weight": 0.25,
+        "value": 11,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 90,
+        "weight": 0.25,
+        "value": 24737,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 32,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 55,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:17.000Z",
+    "update_time": "2026-05-21T05:02:17.000Z"
+  },
+  {
+    "_id": "6a0e91d93b849a2efde8f87b",
+    "uid": "69aea593af5e6cbf08027964",
+    "stats_date": "2026-05-16",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "完美主义百灵鸟",
+    "score": 83,
+    "sleep_seconds": 25560,
+    "deep_sleep_seconds": 4356,
+    "deep_sleep_ratio": 0.15,
+    "evaluation": "你的作息稳得离谱，深睡质量扎实，入睡顺滑不折腾，睡眠时长也够，不过夜里偶尔醒的情况比多数同城人稍多一点，其他方面和大家差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 80,
+        "weight": 0.25,
+        "value": 15,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 24694,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 32,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:17.000Z",
+    "update_time": "2026-05-21T05:02:17.000Z"
+  },
+  {
+    "_id": "6a0e91d99f1ba92be31dc51f",
+    "uid": "69aea593af5e6cbf08027964",
+    "stats_date": "2026-05-17",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "完美主义百灵鸟",
+    "score": 84,
+    "sleep_seconds": 25080,
+    "deep_sleep_seconds": 4275,
+    "deep_sleep_ratio": 0.15,
+    "evaluation": "你的作息特别规律，入睡顺滑还睡得扎实，这两点让你在同城的睡眠表现里很有优势；不过夜里偶尔醒的情况比多数人稍多，睡眠时长也稍微差一点，其他方面和大伙差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 80,
+        "weight": 0.25,
+        "value": 15,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 90,
+        "weight": 0.25,
+        "value": 24750,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 31,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:17.000Z",
+    "update_time": "2026-05-21T05:02:17.000Z"
+  },
+  {
+    "_id": "6a0e91d968580b4b39b04ebe",
+    "uid": "69aea593af5e6cbf08027964",
+    "stats_date": "2026-05-18",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "完美主义百灵鸟",
+    "score": 76,
+    "sleep_seconds": 23460,
+    "deep_sleep_seconds": 2570,
+    "deep_sleep_ratio": 0.09,
+    "evaluation": "你这作息比同城大伙稳得多，夜里睡得踏实，入睡也不折腾，就是深睡质量稍显不足拖了后腿，其他方面和大家差不太多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 40,
+        "weight": 0.25,
+        "value": 9,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 90,
+        "weight": 0.25,
+        "value": 24574,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 32,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 95,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:17.000Z",
+    "update_time": "2026-05-21T05:02:17.000Z"
+  },
+  {
+    "_id": "6a0e91d944bf8b9e9afb0cae",
+    "uid": "69aea593af5e6cbf08027964",
+    "stats_date": "2026-05-19",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "完美主义百灵鸟",
+    "score": 88,
+    "sleep_seconds": 25500,
+    "deep_sleep_seconds": 4927,
+    "deep_sleep_ratio": 0.17,
+    "evaluation": "你这睡眠在同城里相当亮眼，作息特别规律，夜里睡得稳当，深睡也扎实，入睡顺滑还不缺时长，整体表现比大部分同城朋友都出色。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 80,
+        "weight": 0.25,
+        "value": 17,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 24600,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 32,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 95,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:17.000Z",
+    "update_time": "2026-05-21T05:02:17.000Z"
+  },
+  {
+    "_id": "6a0e91d98e6bb9b934136348",
+    "uid": "69aea593af5e6cbf08027964",
+    "stats_date": "2026-05-20",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "完美主义百灵鸟",
+    "score": 91,
+    "sleep_seconds": 26400,
+    "deep_sleep_seconds": 4947,
+    "deep_sleep_ratio": 0.17,
+    "evaluation": "你入睡特别顺滑，作息也格外规律，夜里睡得安稳，睡眠时长也够，深睡质量也扎实，整体表现比同城多数人亮眼，其他方面也都跟大伙差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 80,
+        "weight": 0.25,
+        "value": 17,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 24677,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 31,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 95,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:17.000Z",
+    "update_time": "2026-05-21T05:02:17.000Z"
+  },
+  {
+    "_id": "6a0e91d978078c87364bbc26",
+    "uid": "69aea593af5e6cbf08027964",
+    "stats_date": "2026-05-21",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "完美主义百灵鸟",
+    "score": 80,
+    "sleep_seconds": 23640,
+    "deep_sleep_seconds": 3247,
+    "deep_sleep_ratio": 0.11,
+    "evaluation": "你作息特别规律，入睡顺滑还夜里睡得踏实，这几项在同城里都很出彩；不过深睡质量稍显不足，其他方面和大伙差不多，整体排名在同城里挺靠前的。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 60,
+        "weight": 0.25,
+        "value": 11,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 90,
+        "weight": 0.25,
+        "value": 24720,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 32,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 95,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:17.000Z",
+    "update_time": "2026-05-21T05:02:17.000Z"
+  },
+  {
+    "_id": "6a0e91d9754fef0f6cf049a7",
+    "uid": "69aea593af5e6cbf08027964",
+    "stats_date": "2026-05-22",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "完美主义百灵鸟",
+    "score": 78,
+    "sleep_seconds": 24960,
+    "deep_sleep_seconds": 3973,
+    "deep_sleep_ratio": 0.14,
+    "evaluation": "你的生物钟特别稳，入睡也顺滑得很，这俩给你的排名加了不少分；不过深睡稍浅、夜里偶尔会醒拖了点后腿，其他方面和同城多数人差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 60,
+        "weight": 0.25,
+        "value": 14,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 90,
+        "weight": 0.25,
+        "value": 24690,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 32,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 1,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:17.000Z",
+    "update_time": "2026-05-21T05:02:17.000Z"
+  },
+  {
+    "_id": "6a0e91d989c75a4f8c1b013a",
+    "uid": "69aea593af5e6cbf08027964",
+    "stats_date": "2026-05-23",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "完美主义百灵鸟",
+    "score": 70,
+    "sleep_seconds": 23580,
+    "deep_sleep_seconds": 2246,
+    "deep_sleep_ratio": 0.08,
+    "evaluation": "你入睡特别顺滑，生物钟也格外稳，这俩点帮你在同城排名里表现不错；不过深睡偏浅、夜里容易醒拖了后腿，其他方面和大伙差不太多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 40,
+        "weight": 0.25,
+        "value": 8,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 90,
+        "weight": 0.25,
+        "value": 24549,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 32,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 55,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:17.000Z",
+    "update_time": "2026-05-21T05:02:17.000Z"
+  },
+  {
+    "_id": "6a0e91d981b033ffd368e4a0",
+    "uid": "69aea593af5e6cbf08027964",
+    "stats_date": "2026-05-24",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "完美主义百灵鸟",
+    "score": 78,
+    "sleep_seconds": 22920,
+    "deep_sleep_seconds": 2904,
+    "deep_sleep_ratio": 0.1,
+    "evaluation": "你的作息特别稳，入睡顺滑还很少夜里醒，这些都帮你在同城睡眠排名里挺靠前；不过睡眠时长和深睡质量稍显不足，稍微拖了点后腿。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 60,
+        "weight": 0.25,
+        "value": 10,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 80,
+        "weight": 0.25,
+        "value": 24274,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 32,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 95,
+        "weight": 0.2,
+        "value": 1,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:17.000Z",
+    "update_time": "2026-05-21T05:02:17.000Z"
+  },
+  {
+    "_id": "6a0e91d94c63cc99b3f2ce19",
+    "uid": "69aea593af5e6cbf08027964",
+    "stats_date": "2026-05-25",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "完美主义百灵鸟",
+    "score": 84,
+    "sleep_seconds": 23640,
+    "deep_sleep_seconds": 3384,
+    "deep_sleep_ratio": 0.12,
+    "evaluation": "你的作息特别稳当，夜里睡得踏实不折腾，入睡也很顺滑，这些都稳稳托住了你的同城排名；不过深睡质量稍显不足，整体睡眠底子还有提升空间，其他方面和大部分同城人差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 60,
+        "weight": 0.25,
+        "value": 12,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 90,
+        "weight": 0.25,
+        "value": 24283,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 32,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 95,
+        "weight": 0.2,
+        "value": 1,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:17.000Z",
+    "update_time": "2026-05-21T05:02:17.000Z"
+  },
+  {
+    "_id": "6a0e91d98dcaa4f796a2e489",
+    "uid": "69aea593af5e6cbf08027964",
+    "stats_date": "2026-05-26",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "完美主义百灵鸟",
+    "score": 75,
+    "sleep_seconds": 25740,
+    "deep_sleep_seconds": 4099,
+    "deep_sleep_ratio": 0.14,
+    "evaluation": "你的作息特别规律，入睡也很顺滑，睡眠时长也很充足，这几点帮你在同城排名里表现不错；不过夜里容易醒、深睡稍浅拖了后腿，其他方面和大部分同城人差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 60,
+        "weight": 0.25,
+        "value": 14,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 24484,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 32,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 55,
+        "weight": 0.2,
+        "value": 1,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:17.000Z",
+    "update_time": "2026-05-21T05:02:17.000Z"
+  },
+  {
+    "_id": "6a0e91d90c2aa38b827e07be",
+    "uid": "69aea593af5e6cbf08027964",
+    "stats_date": "2026-05-27",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "完美主义百灵鸟",
+    "score": 84,
+    "sleep_seconds": 24720,
+    "deep_sleep_seconds": 4221,
+    "deep_sleep_ratio": 0.15,
+    "evaluation": "你靠规律的作息和顺滑的入睡表现稳稳托住了同城排名，深睡质量也扎实，不过夜间偶尔的小波动稍微拖了点后腿，其他方面和大伙差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 80,
+        "weight": 0.25,
+        "value": 15,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 90,
+        "weight": 0.25,
+        "value": 24570,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 31,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 1,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:17.000Z",
+    "update_time": "2026-05-21T05:02:17.000Z"
+  },
+  {
+    "_id": "6a0e91d9ead683383cd3e2c7",
+    "uid": "69aea593af5e6cbf08027964",
+    "stats_date": "2026-05-28",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "完美主义百灵鸟",
+    "score": 91,
+    "sleep_seconds": 26040,
+    "deep_sleep_seconds": 4627,
+    "deep_sleep_ratio": 0.16,
+    "evaluation": "你入睡顺滑、作息稳当，夜里睡得踏实，深睡质量也在线，睡眠时长也够，整体在同城的睡眠排名里挺靠前，其他方面也和大部分人差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 80,
+        "weight": 0.25,
+        "value": 16,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 24634,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 31,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 95,
+        "weight": 0.2,
+        "value": 1,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:17.000Z",
+    "update_time": "2026-05-21T05:02:17.000Z"
+  },
+  {
+    "_id": "6a0e91d98af66955ac73eda3",
+    "uid": "69aea593af5e6cbf08027964",
+    "stats_date": "2026-05-29",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "完美主义百灵鸟",
+    "score": 76,
+    "sleep_seconds": 23460,
+    "deep_sleep_seconds": 2256,
+    "deep_sleep_ratio": 0.08,
+    "evaluation": "你的生物钟特别稳，夜里睡得踏实，入睡也不折腾，这几点帮你在同城睡眠排名里靠前，不过深睡偏浅了些，其他方面和大家差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 40,
+        "weight": 0.25,
+        "value": 8,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 90,
+        "weight": 0.25,
+        "value": 24621,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 31,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 95,
+        "weight": 0.2,
+        "value": 1,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:17.000Z",
+    "update_time": "2026-05-21T05:02:17.000Z"
+  },
+  {
+    "_id": "6a0e91d9df0787bfc8b0b87b",
+    "uid": "69aea593af5e6cbf08027964",
+    "stats_date": "2026-05-30",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "完美主义百灵鸟",
+    "score": 83,
+    "sleep_seconds": 26160,
+    "deep_sleep_seconds": 4704,
+    "deep_sleep_ratio": 0.16,
+    "evaluation": "你的睡眠在同城排名挺靠前的，入睡顺滑、作息规律，深睡扎实、时长也够，不过夜里容易醒的情况还是拖了点后腿。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 80,
+        "weight": 0.25,
+        "value": 16,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 24664,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 30,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 55,
+        "weight": 0.2,
+        "value": 1,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:17.000Z",
+    "update_time": "2026-05-21T05:02:17.000Z"
+  },
+  {
+    "_id": "6a0e91d9c816634b76289220",
+    "uid": "69aea593af5e6cbf08027964",
+    "stats_date": "2026-05-31",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "完美主义百灵鸟",
+    "score": 73,
+    "sleep_seconds": 23040,
+    "deep_sleep_seconds": 2844,
+    "deep_sleep_ratio": 0.1,
+    "evaluation": "你的睡眠排名在同城里挺靠前的，作息超规律帮了大忙，入睡也很顺滑，不过睡眠时间稍微有点不足，其他方面和大伙差不多",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 60,
+        "weight": 0.25,
+        "value": 10,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 80,
+        "weight": 0.25,
+        "value": 24519,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 31,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 1,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-21T05:02:17.000Z",
+    "update_time": "2026-05-21T05:02:17.000Z"
+  }
+]

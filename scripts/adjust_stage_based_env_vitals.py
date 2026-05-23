@@ -21,11 +21,6 @@ STAGE_RULES = {
         "vitals": {
             "respiration_rate": (14, 18),
             "heart_rate": (58, 74),
-            "body_motion_level": (20, 45),
-            "blood_oxygen": (95, 99),
-            "blood_pressure_systolic": (112, 126),
-            "blood_pressure_diastolic": (72, 82),
-            "hrv": (1.55, 1.85),
         },
     },
     "light": {
@@ -38,11 +33,6 @@ STAGE_RULES = {
         "vitals": {
             "respiration_rate": (12, 16),
             "heart_rate": (50, 65),
-            "body_motion_level": (8, 20),
-            "blood_oxygen": (95, 99),
-            "blood_pressure_systolic": (102, 116),
-            "blood_pressure_diastolic": (62, 74),
-            "hrv": (1.75, 2.05),
         },
     },
     "deep": {
@@ -55,11 +45,6 @@ STAGE_RULES = {
         "vitals": {
             "respiration_rate": (10, 14),
             "heart_rate": (40, 55),
-            "body_motion_level": (1, 8),
-            "blood_oxygen": (96, 99),
-            "blood_pressure_systolic": (96, 110),
-            "blood_pressure_diastolic": (58, 68),
-            "hrv": (1.95, 2.35),
         },
     },
     "rem": {
@@ -72,11 +57,6 @@ STAGE_RULES = {
         "vitals": {
             "respiration_rate": (12, 20),
             "heart_rate": (50, 75),
-            "body_motion_level": (0, 5),
-            "blood_oxygen": (95, 98),
-            "blood_pressure_systolic": (108, 124),
-            "blood_pressure_diastolic": (68, 82),
-            "hrv": (1.50, 2.20),
         },
     },
 }
@@ -187,11 +167,66 @@ def apply_vitals_rules(row: dict, stage: str):
     for k, bounds in vitals_rule.items():
         metrics[k] = stable_value(f"vitals|{stage}|{ts}|{k}", bounds[0], bounds[1])
 
-    # 一点弱生理约束：舒张压始终小于收缩压
-    sbp = int(metrics.get("blood_pressure_systolic", 110))
-    dbp = int(metrics.get("blood_pressure_diastolic", 70))
-    if dbp >= sbp:
-        metrics["blood_pressure_diastolic"] = sbp - 8
+
+# 阶段切换平滑参数：过渡持续 4 个采样点
+_SMOOTH_BLEND_STEPS = 4
+_SMOOTH_BLEND_FACTORS = [0.25, 0.50, 0.75, 1.0]
+
+
+def apply_vitals_rules_smooth(
+    row: dict,
+    stage: str,
+    prev_stage: Optional[str],
+    prev_metrics: dict,
+    transition_counter: int,
+) -> tuple[dict, int]:
+    """带阶段间插值的体征规则应用。
+
+    当阶段发生变化时，不立即跳到新阶段的 stable_value，而是从前一个值
+    按 25%→50%→75%→100% 的比例逐步过渡到新阶段目标值。
+    """
+    vitals_rule = STAGE_RULES[stage]["vitals"]
+    ts = str(row.get("collected_at") or "")
+    metrics = row.get("metrics")
+    if not isinstance(metrics, dict):
+        metrics = {}
+        row["metrics"] = metrics
+
+    # 生成当前阶段的稳定目标值
+    targets = {}
+    for k, bounds in vitals_rule.items():
+        targets[k] = stable_value(f"vitals|{stage}|{ts}|{k}", bounds[0], bounds[1])
+
+    stage_changed = prev_stage is not None and stage != prev_stage
+
+    if stage_changed or transition_counter > 0:
+        # 阶段刚切换：启动过渡序列
+        if stage_changed:
+            transition_counter = _SMOOTH_BLEND_STEPS
+
+        blend_idx = _SMOOTH_BLEND_STEPS - transition_counter
+        alpha = _SMOOTH_BLEND_FACTORS[min(blend_idx, len(_SMOOTH_BLEND_FACTORS) - 1)]
+
+        for k in targets:
+            prev_val = prev_metrics.get(k)
+            target_val = targets[k]
+            if prev_val is not None and isinstance(prev_val, (int, float)) and isinstance(target_val, (int, float)):
+                # 从旧值向新目标插值
+                blended = prev_val + alpha * (target_val - prev_val)
+                if isinstance(target_val, int):
+                    metrics[k] = int(round(blended))
+                else:
+                    metrics[k] = round(blended, 3)
+            else:
+                metrics[k] = target_val
+
+        transition_counter -= 1
+    else:
+        # 同阶段内：直接赋值
+        for k in targets:
+            metrics[k] = targets[k]
+
+    return metrics, transition_counter
 
 
 def build_record_date_stage_windows(health_rows: List[dict]) -> Dict[str, List[Tuple[datetime, datetime, str]]]:
@@ -233,16 +268,29 @@ def process_user_files(user_id: str) -> Tuple[int, int]:
         env_updates += 1
 
     vitals_updates = 0
+    prev_vitals_stage: Optional[str] = None
+    prev_vitals_metrics: dict = {}
+    vitals_transition_counter: int = 0
     for row in vitals_rows:
         record_date = row.get("record_date")
         windows = stage_windows_map.get(record_date) or []
         dt_local = parse_collected_at(str(row.get("collected_at") or ""))
         if not windows or dt_local is None:
+            prev_vitals_stage = None
+            prev_vitals_metrics = {}
+            vitals_transition_counter = 0
             continue
         stage = pick_stage(dt_local, windows)
         if not stage:
+            prev_vitals_stage = None
+            prev_vitals_metrics = {}
+            vitals_transition_counter = 0
             continue
-        apply_vitals_rules(row, stage)
+        new_metrics, vitals_transition_counter = apply_vitals_rules_smooth(
+            row, stage, prev_vitals_stage, prev_vitals_metrics, vitals_transition_counter,
+        )
+        prev_vitals_stage = stage
+        prev_vitals_metrics = dict(new_metrics)
         vitals_updates += 1
 
     if env_updates > 0:

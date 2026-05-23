@@ -309,76 +309,9 @@ AI干预事件必须满足以下约束：
 
 ---
 
-## 10. 示例（仅用于理解，不可复用）
+## 10. 数字禁令
 
-### 10.1 输入格式示例
-
-```json
-{
-  "sleep_time_points": {
-    "bed_time": "22:30",
-    "sleep_onset": "23:05",
-    "wake_after_sleep": "04:20",
-    "out_of_bed": "06:45"
-  },
-  "events": [...]
-}
-```
-
-### 10.2 `detail` 字段重写示例
-
-**示例一：异常事件（`abnormal`）**
-
-输入：
-```json
-{
-  "trigger_cause": "检测到心率异常上升",
-  "action_taken": "触发心脏状态分析",
-  "result_summary": "判定为心率干扰影响"
-}
-```
-
-输出：
-```json
-{
-  "trigger_cause": "检测到心跳持续加快，睡眠出现波动",
-  "action_taken": "触发心率波动分析，开始监测状态变化",
-  "result_summary": "判定为心率调节异常"
-}
-```
-
-**示例二：AI干预事件（`intervention`），事件发生在睡眠中期（01:30，位于 sleep_onset 23:05 ～ wake_after_sleep 04:20 之间）**
-
-输入：
-```json
-{
-  "trigger_cause": "...",
-  "action_taken": "调低灯光亮度，播放舒缓白噪音",
-  "result_summary": "..."
-}
-```
-
-输出（睡眠中期，禁用光照，仅可用声音或气味）：
-```json
-{
-  "trigger_cause": "...",
-  "action_taken": "播放轻柔白噪音帮助维持睡眠平稳，避免环境声响造成干扰",
-  "result_summary": "..."
-}
-```
-
-> ⚠️ 注意：原 `action_taken` 中的"调低灯光亮度"属于光照描述，事件发生在睡眠过程中，**必须去除光照内容**，仅保留声音维度。
-
-**示例三：AI干预事件（`intervention`），事件发生在入睡前期（22:45，位于 bed_time 22:30 ～ sleep_onset 23:05 之间）**
-
-输出（入睡前期，声光味三者均可）：
-```json
-{
-  "trigger_cause": "...",
-  "action_taken": "调低环境灯光亮度，同步播放轻柔助眠音乐，帮助身体逐渐进入放松状态",
-  "result_summary": "..."
-}
-```
+输出的 `detail` 字段中（`trigger_cause`、`action_taken`、`result_summary`）**禁止出现任何阿拉伯数字**（包括时间点、分贝数等）。所有描述用定性表述（如「检测到心跳加快」「播放轻柔白噪音」）。
 
 ---
 

@@ -211,7 +211,7 @@ def main():
 
     prompt = (
         "以下为真实输入数据（JSON），请严格按系统提示词仅输出 JSON 对象，"
-        "且必须使用 items 数组承载一条或多条共性（每项含 highlight、analysis、list）；"
+        "且必须使用 items 数组承载一条或多条共性（每项含 highlight、analysis、type、list）；"
         "list 与 sleep_records_14d 同序、等长。仅一条时 items 长度为 1。不要 markdown 围栏和解释。\n\n"
         + json.dumps(payload, ensure_ascii=False)
     )

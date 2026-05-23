@@ -1,7 +1,7 @@
 """根据 health_data_personas_config.json 与 output/{uid}_health_data.json 生成体征数据。
 
 在每条睡眠记录的 bed_time～wake_up_time（本地）内按 generation.sample_interval_sec（默认 60 秒）
-等间隔生成采样点；心率/呼吸/HRV/体动随 idf 分期与昼夜形态变化，逻辑对齐 generate_health_data.HealthDataGenerator.generate_vital_signs。
+等间隔生成采样点；心率/呼吸随 idf 分期与昼夜形态变化。
 
 用法：
   python scripts/generate_data/generate_vitals_data_by_persona.py
@@ -27,12 +27,10 @@ os.chdir(PROJECT_ROOT)
 
 import generate_health_data as gh
 from persona_generation_config import merge_generation
-from personality_profile import get_hrv_adjustment, parse_personality_code
 from utils import atomic_write_json
 
 CONFIG_PATH = os.path.join(PROJECT_ROOT, "config", "health_data_personas_config.json")
 OUTPUT_DIR = os.path.join(PROJECT_ROOT, "output")
-
 
 def _dense_local_dts_bed_to_wake(raw_data: dict, interval_sec: int) -> list[datetime]:
     bed, wake = gh._extract_local_sleep_window(
@@ -49,40 +47,73 @@ def _dense_local_dts_bed_to_wake(raw_data: dict, interval_sec: int) -> list[date
     return out
 
 
-def _base_body_motion(turnover_count: int, personality_type: str) -> int:
-    dims = parse_personality_code(personality_type)
-    is_sensitive = dims.get("sensitivity") == "H"
-    # 连续线性映射：turnover 6-80 → body_motion 15-85
-    tc = max(6, min(80, turnover_count))
-    base_level = 15 + (tc - 6) * (85 - 15) / max(1, 80 - 6)
-    base_level = max(10, min(90, base_level))
-    if is_sensitive:
-        base_level = min(90, base_level + 8)
-    return int(round(base_level))
+def _stage_to_sleep_state(stage: str | None) -> int:
+    """实时睡眠状态：1 清醒；2 REM；3 浅睡；4 深睡；7 离床。"""
+    return {"awake": 1, "rem": 2, "light": 3, "deep": 4}.get(stage or "", 1)
 
 
-def _hrv_scalar_base(sleep_record: dict, personality_type: str) -> float:
-    raw_data = sleep_record.get("raw_data", {}) or {}
-    average_heartbeat = float(raw_data.get("average_heartbeat", 70))
-    sleep_score = float(raw_data.get("sleep_score", 70))
-    deep_sleep_ratio = float(raw_data.get("deep_sleep_ratio", 20))
-    awake_ratio = float(raw_data.get("awake_ratio", 10))
-    hrv_lo, hrv_hi = 1.5, 2.0
-    base_hrv = (hrv_lo + hrv_hi) / 2.0
-    heart_rate_factor = (70.0 - average_heartbeat) * 0.003
-    sleep_score_factor = (sleep_score - 75.0) * 0.0015
-    deep_sleep_factor = (deep_sleep_ratio - 20.0) * 0.004
-    awake_factor = (8.0 - awake_ratio) * 0.004
-    hrv_adj = float(get_hrv_adjustment(personality_type)) * 0.004
-    hrv = (
-        base_hrv
-        + heart_rate_factor
-        + sleep_score_factor
-        + deep_sleep_factor
-        + awake_factor
-        + hrv_adj
-    )
-    return max(hrv_lo, min(hrv_hi, hrv))
+def _stage_to_activity_state(stage: str | None) -> int:
+    """人体活动状态：0 无人；1 静息；2 安静；3 动作；4 持续动作。"""
+    if stage == "deep":
+        return 1
+    if stage == "light":
+        return 2
+    if stage == "rem":
+        return 3
+    if stage == "awake":
+        return 4 if random.random() < 0.4 else 3
+    return 2
+
+
+def _vital_signs_state(row_rr: float, rr_lo: int, rr_hi: int, presence_state: int) -> int:
+    """生命体征异常：0 正常；5 未检测到；12 呼吸过高；13 呼吸过低。"""
+    if presence_state == 2:
+        return 5
+    if row_rr >= rr_hi:
+        return 12
+    if row_rr <= rr_lo:
+        return 13
+    return 0
+
+
+def _extended_radar_metrics(
+    *,
+    stage: str | None,
+    row_rr: float,
+    rr_lo: int,
+    rr_hi: int,
+    collected_at_local: datetime,
+    bed_time: datetime | None,
+    hr_env_spike: float,
+) -> dict[str, int | float]:
+    presence_state = 1
+    if hr_env_spike > 6.0 or random.random() < 0.01:
+        presence_state = 2
+
+    signal_strength = round(random.uniform(-72.0, -38.0), 2)
+    if presence_state == 2:
+        signal_strength = round(random.uniform(-92.0, -62.0), 2)
+
+    activity_state = _stage_to_activity_state(stage)
+    if presence_state == 2 and activity_state == 1:
+        activity_state = 2
+
+    in_bed_duration = 0
+    if bed_time and collected_at_local >= bed_time:
+        in_bed_duration = max(
+            0, int((collected_at_local - bed_time).total_seconds() // 60)
+        )
+
+    return {
+        "presence_state": presence_state,
+        "activity_state": activity_state,
+        "nearest_target_distance": random.randint(40, 180),
+        "vital_signs_state": _vital_signs_state(row_rr, rr_lo, rr_hi, presence_state),
+        "signal_strength": signal_strength,
+        "in_bed_duration": in_bed_duration,
+        "out_bed_duration": 0,
+        "sleep_state": _stage_to_sleep_state(stage),
+    }
 
 
 def _bounds_from_raw(raw_data: dict) -> dict:
@@ -93,19 +124,8 @@ def _bounds_from_raw(raw_data: dict) -> dict:
         "hr_hi": min(118, int(ah + 22)),
         "rr_lo": max(10, int(ar - 4)),
         "rr_hi": min(26, int(ar + 5)),
-        "sys_lo": 98,
-        "sys_hi": 132,
-        "dia_lo": 62,
-        "dia_hi": 90,
-        "bo_lo": 92,
-        "bo_hi": 99,
-        "mot_lo": 1,
-        "mot_hi": 100,
         "heart_rate": max(50, min(105, int(ah))),
         "respiration_rate": max(11, min(24, float(ar))),
-        "blood_oxygen": max(93, min(99, int(raw_data.get("blood_oxygen", 96) or 96))),
-        "blood_pressure_systolic": int(raw_data.get("blood_pressure_systolic", 118) or 118),
-        "blood_pressure_diastolic": int(raw_data.get("blood_pressure_diastolic", 78) or 78),
     }
 
 
@@ -116,6 +136,7 @@ def _vitals_rows_one_day(
     personality_type: str,
     gen: dict,
 ) -> list[dict]:
+    del personality_type  # 保留参数以兼容调用方
     raw_data = sleep_record.get("raw_data") or {}
     collected_local_dts = _dense_local_dts_bed_to_wake(
         raw_data, int(gen.get("sample_interval_sec") or 60)
@@ -126,32 +147,11 @@ def _vitals_rows_one_day(
     b = _bounds_from_raw(raw_data)
     hr_lo, hr_hi = b["hr_lo"], b["hr_hi"]
     rr_lo, rr_hi = b["rr_lo"], b["rr_hi"]
-    sys_lo, sys_hi = b["sys_lo"], b["sys_hi"]
-    dia_lo, dia_hi = b["dia_lo"], b["dia_hi"]
-    bo_lo, bo_hi = b["bo_lo"], b["bo_hi"]
-    mot_lo, mot_hi = b["mot_lo"], b["mot_hi"]
-
     heart_rate = b["heart_rate"]
     respiration_rate = b["respiration_rate"]
-    blood_oxygen = b["blood_oxygen"]
-    blood_pressure_systolic = b["blood_pressure_systolic"]
-    blood_pressure_diastolic = b["blood_pressure_diastolic"]
-
-    turnover_count = int(raw_data.get("turnover_count", 0) or 0)
-    base_motion = _base_body_motion(turnover_count, personality_type)
 
     apnea_count = int(raw_data.get("apnea_count", 0) or 0)
-    if apnea_count >= 20:
-        apnea_bo_offset = -3
-    elif apnea_count >= 10:
-        apnea_bo_offset = -2
-    elif apnea_count >= 5:
-        apnea_bo_offset = -1
-    else:
-        apnea_bo_offset = 0
-
-    hrv_lo, hrv_hi = 1.5, 2.0
-    hrv_base = _hrv_scalar_base(sleep_record, personality_type)
+    turnover_count = int(raw_data.get("turnover_count", 0) or 0)
 
     sleep_window_start, sleep_window_end = gh._extract_local_sleep_window(
         raw_data, start_key="bed_time", end_key="wake_up_time"
@@ -174,7 +174,6 @@ def _vitals_rows_one_day(
             idf_for_align, sleep_window_start, sleep_window_end
         )
 
-    # 用“缓慢爬升-回落包络”模拟异常影响（替代瞬时尖峰）
     n_collect = len(collected_local_dts)
     hr_env = [0.0] * n_collect
     rr_env = [0.0] * n_collect
@@ -222,13 +221,8 @@ def _vitals_rows_one_day(
 
         hr_stage_adj = {"deep": -22, "light": -8, "rem": 6, "awake": 18}
         rr_stage_adj = {"deep": -2.0, "light": -0.35, "rem": 1.8, "awake": 2.2}
-        hrv_stage_adj = {"deep": 0.11, "light": 0.025, "rem": 0.0, "awake": -0.11}
-        mot_stage_adj = {"deep": -12, "light": -2, "rem": 2, "awake": 20}
-
         hr_adj = hr_stage_adj.get(stage, -6)
         rr_adj = rr_stage_adj.get(stage, -0.25)
-        hrv_adj = hrv_stage_adj.get(stage, 0.01)
-        mot_adj = mot_stage_adj.get(stage, -2)
 
         circ_t = gh._circadian_progress_t_rel(
             collected_at_local,
@@ -243,74 +237,25 @@ def _vitals_rows_one_day(
 
         hr_noise = random.randint(-2, 2)
         rr_noise = random.uniform(-0.75, 0.75)
-        hrv_noise = random.uniform(-0.03, 0.03)
         if stage == "rem":
             hr_noise += int(round(random.uniform(-8, 10)))
             rr_noise += random.uniform(-3.2, 3.8)
-            hrv_noise += random.uniform(-0.09, 0.11)
         elif stage == "deep":
             hr_noise = int(round(random.uniform(-1.5, 1.5)))
             rr_noise *= 0.45
-            hrv_noise *= 0.35
         elif stage == "light":
             hr_noise = int(round(random.uniform(-2, 2)))
         elif stage == "awake":
             hr_noise += int(round(random.uniform(-3, 5)))
-            hrv_noise += random.uniform(-0.025, 0.025)
 
         target_hr = max(
             hr_lo,
             min(
                 hr_hi,
-                heart_rate
-                + hr_adj
-                + hr_noise
-                + circ["hr"]
-                + pre["hr"],
+                heart_rate + hr_adj + hr_noise + circ["hr"] + pre["hr"],
             ),
         )
         target_hr = max(hr_lo, min(hr_hi, target_hr + hr_env[idx]))
-
-        spo2_noise = random.randint(-2, 2)
-        if apnea_count >= 5:
-            spo2_noise += random.randint(-2, 0)  # 呼吸暂停时 SpO2 更容易下降
-        row_bo = max(
-            bo_lo, min(bo_hi, blood_oxygen + apnea_bo_offset + spo2_noise)
-        )
-        sys_stage_adj = {"deep": -10, "light": -6, "rem": 5, "awake": 8}
-        dia_stage_adj = {"deep": -6, "light": -4, "rem": 4, "awake": 5}
-        s_adj = sys_stage_adj.get(stage, -4)
-        d_adj = dia_stage_adj.get(stage, -3)
-        row_sys = max(
-            sys_lo,
-            min(
-                sys_hi,
-                int(
-                    round(
-                        blood_pressure_systolic
-                        + s_adj
-                        + random.randint(-2, 2)
-                        + circ["sys"]
-                    )
-                ),
-            ),
-        )
-        row_dia = max(
-            dia_lo,
-            min(
-                dia_hi,
-                int(
-                    round(
-                        blood_pressure_diastolic
-                        + d_adj
-                        + random.randint(-2, 2)
-                        + circ["dia"]
-                    )
-                ),
-            ),
-        )
-        if row_sys <= row_dia:
-            row_sys = min(sys_hi, row_dia + random.randint(20, 35))
 
         target_rr = max(
             rr_lo,
@@ -318,18 +263,13 @@ def _vitals_rows_one_day(
                 rr_hi,
                 int(
                     round(
-                        respiration_rate
-                        + rr_adj
-                        + rr_noise
-                        + circ["rr"]
-                        + pre["rr"]
+                        respiration_rate + rr_adj + rr_noise + circ["rr"] + pre["rr"]
                     )
                 ),
             ),
         )
         target_rr = max(rr_lo, min(rr_hi, target_rr + rr_env[idx]))
 
-        # 平滑：限制单分钟变化，避免“突然抬高”
         if prev_hr is None:
             row_hr = float(target_hr)
         else:
@@ -351,35 +291,26 @@ def _vitals_rows_one_day(
         prev_rr = row_rr
         prev_stage = stage
 
-        row_hrv = round(
-            max(
-                hrv_lo,
-                min(
-                    hrv_hi,
-                    hrv_base
-                    + hrv_adj
-                    + hrv_noise
-                    + circ["hrv"]
-                    + pre["hrv"],
-                ),
-            ),
-            3,
-        )
-        mot_noise = random.randint(-5, 5)
-        if stage == "rem":
-            mot_noise = random.randint(0, 10)
-        row_motion = max(
-            mot_lo,
-            min(
-                mot_hi,
-                base_motion + mot_adj + mot_noise + circ["motion"] + pre["motion"],
-            ),
-        )
-
         create_time = collected_at_local + timedelta(seconds=1)
         collected_at_utc_z = gh.local_naive_dt_to_utc_iso_z(collected_at_local)
         if idf_end_utc and n_collect > 0 and idx == n_collect - 1:
             collected_at_utc_z = idf_end_utc
+
+        metrics = {
+            "respiration_rate": int(round(row_rr)),
+            "heart_rate": int(round(row_hr)),
+        }
+        metrics.update(
+            _extended_radar_metrics(
+                stage=stage,
+                row_rr=row_rr,
+                rr_lo=rr_lo,
+                rr_hi=rr_hi,
+                collected_at_local=collected_at_local,
+                bed_time=bed_for_session,
+                hr_env_spike=hr_env[idx],
+            )
+        )
 
         rows.append(
             {
@@ -387,15 +318,7 @@ def _vitals_rows_one_day(
                 "record_date": record_date,
                 "collected_at": collected_at_utc_z,
                 "data_source": "radar",
-                "metrics": {
-                    "respiration_rate": int(round(row_rr)),
-                    "heart_rate": int(round(row_hr)),
-                    "body_motion_level": int(round(row_motion)),
-                    "blood_oxygen": int(round(row_bo)),
-                    "blood_pressure_systolic": int(round(row_sys)),
-                    "blood_pressure_diastolic": int(round(row_dia)),
-                    "hrv": row_hrv,
-                },
+                "metrics": metrics,
                 "device_id": "",
                 "session_id": "",
                 "create_time": create_time.strftime("%Y-%m-%d %H:%M:%S"),

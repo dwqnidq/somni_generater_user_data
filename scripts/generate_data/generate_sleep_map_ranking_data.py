@@ -23,6 +23,8 @@ if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 os.chdir(PROJECT_ROOT)
 
+from utils import format_sleep_map_pool_user_name  # noqa: E402
+
 OUTPUT_DIR = os.path.join(PROJECT_ROOT, "output")
 
 # ─── 北京市行政区划 ────────────────────────────────────────────────────────────
@@ -272,7 +274,7 @@ def make_one_record(district, uid, user_idx):
             "city_code":     CITY_CODE,
             "district_code": district["district_code"],
         },
-        "user_name":          "sleep_map_user_{:06d}".format(user_idx),
+        "user_name":          format_sleep_map_pool_user_name(user_idx),
         "score":              total,
         "sleep_seconds":      sleep_sec,
         "deep_sleep_seconds": deep_sec,
@@ -292,10 +294,9 @@ def make_one_record(district, uid, user_idx):
 
 # ─── 按区批量生成 ─────────────────────────────────────────────────────────────
 
-def generate_district_records(district, count, start_idx):
+def generate_district_records(district, count, _start_idx=1):
     records = []
     uid_pool = set()
-    user_idx = start_idx
     retry_count = 0
 
     while len(records) < count:
@@ -304,14 +305,13 @@ def generate_district_records(district, count, start_idx):
             uid = hex_id()
         uid_pool.add(uid)
 
-        rec = make_one_record(district, uid, user_idx)
+        rec = make_one_record(district, uid, len(records) + 1)
         if rec is None:
             retry_count += 1
             uid_pool.discard(uid)
             continue
 
         records.append(rec)
-        user_idx += 1
 
     return records, retry_count
 
@@ -441,15 +441,13 @@ def main():
     print("=" * 60)
 
     all_records = []
-    start_idx = 1
 
     for district in DISTRICTS:
-        raw_recs, retries = generate_district_records(district, args.count, start_idx)
+        raw_recs, retries = generate_district_records(district, args.count)
         final_recs = attach_city_fields(raw_recs, args.date, now_iso)
         # 区内按综合分降序排列
         final_recs.sort(key=lambda r: r["score"], reverse=True)
         all_records.extend(final_recs)
-        start_idx += args.count
 
         scores = [r["score"] for r in final_recs]
         print("  [{:4s}] {:5s}  {:>3d} 条  得分 {:2d}-{:2d}  均值 {:.1f}  重试 {}".format(

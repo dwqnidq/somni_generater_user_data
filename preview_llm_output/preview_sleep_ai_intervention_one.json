@@ -36,7 +36,7 @@
         "code": "sleeping",
         "detail": {
           "trigger_cause": "识别到用户入睡困难的异常信号",
-          "action_taken": "释放薰衣草香氛，间隔5秒循环一次，播放轻柔的白噪音，节奏匹配呼吸频率",
+          "action_taken": "释放薰衣草香氛，循环释放，播放轻柔的白噪音，节奏匹配呼吸频率",
           "result_summary": "有效帮助用户稳定入睡，进入深度睡眠阶段"
         },
         "related_event_id": "6a06ec247641f90c8cfeb824",
@@ -76,7 +76,7 @@
         "code": "voice_doorbell",
         "detail": {
           "trigger_cause": "感知到突发性的环境声响信号",
-          "action_taken": "播放轻柔的短时白噪音，音量比突发声响更低，约30秒后慢慢停止",
+          "action_taken": "播放轻柔的短时白噪音，音量比突发声响更低，片刻后慢慢停止",
           "result_summary": "成功掩盖了突发声响，睡眠状态保持稳定"
         },
         "related_event_id": "6a06ec247641f90c8cfeb825",

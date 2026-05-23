@@ -2,10 +2,14 @@
 """
 从 aaa.md（睡眠人格干预方案 Markdown）抽取各人格 U/S/M/W 四阶段干预，
 生成与消费者约定一致的结构（根级 type=init；phases.scene.config 占位为空对象 {}）。
-每条场景的 description 会做简短归一化（如全黑、香氛关闭、静音）。
+
+aaa.md 单元格约定（与文档「字段说明」一致，解析时见 AAA_MD_CELL_RULES）：
+- 光：色温/颜色/亮度/模式（渐暗变化|渐进增强|常亮）；关光为「0lux …」，不用「无/全黑/绝对黑」前缀
+- 味：香型+浓度+释放；关闭为「0 …」→ JSON description「香氛关闭」
+- 声：音频+音量 dB+特性；0dB 等 → JSON「静音」
 
 映射：U→relax 放松，S→fall_asleep 入睡，M→guard 守护，W→wake 唤醒。
-光/声/味列分别对应 scenes 中 type=light/sound/scent；空调列忽略。
+光/声/味列分别对应 scenes 中 type=light/sound/scent；空调列写入 type=temp。
 
 文档里的人格形如 M-H-R-U 时：前三维 + 文末干预表相同，
 自动再生成 M-H-R-S / M-H-R-M / M-H-R-W（及原文末位那条），共四条；仅 mhr_codes 末位不同。
@@ -39,6 +43,13 @@ USMW_PHASE = {
 
 SECTION_HEADER_RE = re.compile(r"^##\s+([A-Z]-[A-Z]-[A-Z]-[A-Z])\s*[｜|]\s*(.+?)\s*$")
 
+# 与仓库根 aaa.md 表格列写法对齐（改 md 时请同步本说明与 _normalize_scene_description）
+AAA_MD_CELL_RULES = {
+    "light": "保留原文；关光写作「0lux …」，不含无/全黑/绝对黑前缀",
+    "scent": "以「0」开头表示关闭 → 输出「香氛关闭」",
+    "sound": "保留原文；0dB 或音量为 0 → 输出「静音」",
+}
+
 def _scene_name(text: str, max_chars: int = 80) -> str:
     """与 description 同源，仅按需截断；不含「光干预｜」等 type 前缀。"""
     stripped = text.strip()
@@ -51,25 +62,19 @@ def _scene_name(text: str, max_chars: int = 80) -> str:
 
 def _normalize_scene_description(kind: str, cell: str) -> str:
     """
-    生成用文案归一化：全黑类光仅保留「全黑」；香氛未开→「香氛关闭」；
-    音量为 0 / 0dB 等→「静音」。
+    与 aaa.md（AAA_MD_CELL_RULES）对齐的简短归一化。
+    光干预保留原文；味「0 …」→ 香氛关闭；声 0dB/音量为 0 → 静音。
     """
     s = cell.strip()
     if not s:
         return s
     if kind == "light":
-        if "全黑" in s:
-            return "全黑"
-        if re.match(r"无\s*绝对黑\s*0lux", s):
-            return "全黑"
         return s
     if kind == "scent":
-        if re.match(r"无\s*0(\s|$)", s):
+        if re.match(r"0(\s|$)", s):
             return "香氛关闭"
         return s
     if kind == "sound":
-        if re.match(r"无\s*0(\s|$)", s):
-            return "静音"
         if re.search(r"(?:^|[^\d])0\s*dB(?:[^\d]|$)", s, re.I):
             return "静音"
         if re.search(r"(?:音量|音频)\s*为?\s*0(?:\D|$)", s):

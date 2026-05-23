@@ -92,8 +92,9 @@ python scripts/generate_data/<脚本相对路径>.py [参数]
 | 文件 | 作用 | 调用方式 |
 |------|------|----------|
 | `generate_sleep_map_ranking_data.py` | 生成**北京市各区睡眠地图排行**用的 `somni_sleep_analysis` 形态数据（含五维权重与公式、区级批量与同城均值等）。 | `python scripts/generate_data/generate_sleep_map_ranking_data.py`；可选：`--count`、`--date`（`stats_date`）、`--seed`、`--output`。 |
+| `generate_sleep_map_pool.py` | **推荐**：按**指定日期范围**一键生成 `somni_sleep_analysis.json` + `somni_sleep_district.json`（内部依次调用 multi_user → aggregated）。 | `python scripts/generate_data/generate_sleep_map_pool.py --start-date 2026-04-01 --end-date 2026-05-31`；可选：`--users-per-district`、`--seed`、`--aggregated-only`（仅重聚合）。 |
 | `generate_sleep_map_multi_user.py` | 生成**多用户、多日期**睡眠地图数据（随机 ObjectId、按区分层用户质量、日期范围可配），用于 `beijing_sleep_map_multi_user.json` 一类场景。 | `python scripts/generate_data/generate_sleep_map_multi_user.py`；可选：`--users-per-district`、`--start`、`--end`、`--seed`、`--output`。 |
-| `generate_sleep_map_aggregated.py` | 从 `beijing_sleep_map_multi_user.json` **聚合**出：`somni_sleep_analysis.json`（个人×日，含 `is_env_sensitive` 等修正）与 `somni_sleep_district.json`（区×日聚合）。 | `python scripts/generate_data/generate_sleep_map_aggregated.py`；可选：`--input`、`--out-analysis`、`--out-district`、`--seed`。 |
+| `generate_sleep_map_aggregated.py` | 从 `beijing_sleep_map_multi_user.json` **聚合**出：`somni_sleep_analysis.json`（个人×日，含 `is_env_sensitive` 等修正）与 `somni_sleep_district.json`（区×日聚合）。 | `python scripts/generate_data/generate_sleep_map_aggregated.py`；可选：`--input`、`--out-analysis`、`--out-district`、`--start`、`--end`、`--seed`。 |
 | `generate_heatmap_users.py` | 为睡眠**热力图**批量生成**虚拟用户**的 N 天数据：health / environment / vitals / sleep_events / sleep_map_score，并写 `output/heatmap_users_index.json` 索引。 | `python scripts/generate_data/generate_heatmap_users.py`；可选：`--count`、`--days`、`--start-date`、`--config`、`--seed`。 |
 
 ---

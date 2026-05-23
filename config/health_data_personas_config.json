@@ -186,7 +186,7 @@
       "identity_type": "策划者",
       "user_id": "69aea593af5e6cbf08027964",
       "date_range": {
-        "start": "2026-04-18",
+        "start": "2026-05-01",
         "end": "2026-05-31"
       },
       "sleep_metric_states": {
@@ -388,7 +388,7 @@
       "identity_type": "调音师",
       "user_id": "69aea63eaf5e6cbf08027965",
       "date_range": {
-        "start": "2026-04-18",
+        "start": "2026-05-01",
         "end": "2026-05-31"
       },
       "sleep_metric_states": {
@@ -590,7 +590,7 @@
       "identity_type": "执行师",
       "user_id": "69aea6d8af5e6cbf08027966",
       "date_range": {
-         "start": "2026-04-18",
+         "start": "2026-05-01",
         "end": "2026-05-31"
       },
       "sleep_metric_states": {
@@ -803,7 +803,7 @@
       "identity_type": "漫步者",
       "user_id": "69aea6e3af5e6cbf08027967",
       "date_range": {
-         "start": "2026-04-18",
+         "start": "2026-05-01",
         "end": "2026-05-31"
       },
       "sleep_metric_states": {
@@ -1017,7 +1017,7 @@
       "identity_type": "创作家",
       "user_id": "69aea6e8af5e6cbf08027968",
       "date_range": {
-         "start": "2026-04-18",
+         "start": "2026-05-01",
         "end": "2026-05-31"
       },
       "sleep_metric_states": {
@@ -1219,7 +1219,7 @@
       "identity_type": "独奏家",
       "user_id": "69aea6eeaf5e6cbf08027969",
       "date_range": {
-        "start": "2026-04-18",
+        "start": "2026-05-01",
         "end": "2026-05-31"
       },
       "sleep_metric_states": {
@@ -1421,7 +1421,7 @@
       "identity_type": "探险家",
       "user_id": "69aea6f3af5e6cbf0802796a",
       "date_range": {
-        "start": "2026-04-18",
+        "start": "2026-05-01",
         "end": "2026-05-31"
       },
       "sleep_metric_states": {
@@ -1634,7 +1634,7 @@
       "identity_type": "享乐家",
       "user_id": "69aea6f8af5e6cbf0802796b",
       "date_range": {
-         "start": "2026-04-18",
+         "start": "2026-05-01",
         "end": "2026-05-31"
       },
       "sleep_metric_states": {

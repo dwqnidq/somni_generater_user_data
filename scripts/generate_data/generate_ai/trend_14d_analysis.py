@@ -321,8 +321,10 @@ def generate_ai_analysis(
             title, sleep_insight, schedule_insight = _build_local_ai_analysis(
                 record_date_str, sleep_seg, sched_seg
             )
-            template_path = os.path.join(PROJECT_ROOT, "prompt", "sleep_trend_14d_analysis.md")
-            instruction = llm_client.load_prompt_instruction("sleep_trend_14d_analysis.md")
+            _prompt_name = os.getenv("SLEEP_TREND_14D_PROMPT", "sleep_trend_14d_analysis.md")
+            _prompt_name = os.path.basename(_prompt_name)
+            template_path = os.path.join(PROJECT_ROOT, "prompt", _prompt_name)
+            instruction = llm_client.load_prompt_instruction(_prompt_name)
             if instruction and llm_client.has_api_key():
                 payload = {
                     "anchor_record_date": record_date_str,

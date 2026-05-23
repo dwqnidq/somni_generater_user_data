@@ -548,10 +548,6 @@ def pipeline_step_report_audios(ctx: UserGenContext) -> None:
         print(f"  用户 {ctx.user_id} 的 report_audios 已完成且源文件未变化，跳过")
         return
 
-    env_rows_by_date: Dict[str, list[Tuple[datetime, int]]] = (
-        g.index_environment_noise_rows_by_record_date(ctx.user_id)
-    )
-
     sleep_events_file = _ctx_user_data_json(ctx, "sleep_events.json")
     sleep_events = []
     if os.path.exists(sleep_events_file):
@@ -587,7 +583,6 @@ def pipeline_step_report_audios(ctx: UserGenContext) -> None:
             ctx.user_id,
             sleep_events,
             sleep_day,
-            env_rows_by_date.get(record_date, []),
         )
         auditory["audios"] = audios
         sleep_events_duration_updates += g.backfill_auditory_event_durations_from_report_audios(

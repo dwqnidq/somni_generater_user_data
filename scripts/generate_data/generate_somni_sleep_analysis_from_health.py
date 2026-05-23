@@ -9,11 +9,13 @@
     缺失时回退为 total_sleep_minutes ÷ max(0.01, 1 − awake_ratio/100)（与 SPT 口径一致）
   - evaluation：默认空串
 
-dimensions：
-  - deep_sleep / sleep_efficiency / abnormal_events 的 score 按「当日」数据计算；
-  - sleep_duration 的 score 按当日总睡眠计算；
-  - routine_regularity 的 score 按以 stats_date 为结束日的连续 14 个日历日窗口内
-    入睡/起床时刻的分钟数标准差（与 utils.calculate_sleep_map_score_window 一致：(σ睡+σ起)/2）；
+dimensions（产品公式，score 均为 0~100 整数）：
+  - sleep_duration：当日；7~9h 满分 100；不足 7h 每少 30 分钟扣 10 分且 ≤4h 为 0；超过 9h 每多 30 分钟扣 5 分且 ≥11h 为 0；
+  - sleep_efficiency（入睡耗时）：当日 sleep_latency；≤15→100，16~30→80，31~45→60，46~60→40，>60→0；
+  - deep_sleep：当日深睡占比；≥20%→100，15%~19%→80，10%~14%→60，<10%→40；深睡时长<30 分钟→0；
+  - routine_regularity：以 stats_date 为结束日连续 14 日 F=(σ睡+σ起)/2；F≤30→100，30<F≤120→floor(100×(120−F)/90)，>120→0；
+  - abnormal_events：当日，见 utils.score_no_abnormal_events；
+  - 综合分 = 睡眠时长×25% + 入睡效率×15% + 深睡×25% + 作息规律×15% + 异常事件×20%（四舍五入取整）；
   - sleep_duration.value、sleep_efficiency.value、abnormal_events.value 为该 14 日窗口内
     有数据日的算术平均（分钟或秒、次数按文档约定）；
   - deep_sleep.value 为当日深睡占比整数（不除以 100）；
@@ -34,6 +36,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import os
 import random
 import statistics
@@ -69,8 +72,7 @@ from utils import (  # noqa: E402
     _parse_iso_datetime,
     _safe_float,
     score_no_abnormal_events,
-    score_sleep_latency,
-    score_sleep_regularity,
+    score_sleep_duration,
 )
 
 WEIGHTS_FRAC = {
@@ -121,42 +123,52 @@ def _tib_minutes_fallback_spt(raw: dict, total_sleep_minutes: float) -> float:
     return max(float(total_sleep_minutes), 0.0) / denom
 
 
-def score_sleep_duration_seconds(sleep_sec: float) -> int:
-    """7~9h 满分；不足 7h 每少 30 分钟扣 10（低于 4h 0 分）；超过 9h 每多 30 分钟扣 5。"""
-    s4, s7, s9 = 14400, 25200, 32400
-    if sleep_sec < s4:
-        return 0
-    if sleep_sec <= s7:
-        deficit = (s7 - sleep_sec) / 1800.0
-        return max(0, round(100 - deficit * 10))
-    if sleep_sec <= s9:
-        return 100
-    excess = (sleep_sec - s9) / 1800.0
-    return max(0, round(100 - excess * 5))
-
-
-def score_deep_sleep_by_ratio(deep_sleep_minutes: float, ratio_decimal: float) -> int:
-    """占比分档 + 深睡 <30 分钟则 0 分。"""
+def score_deep_sleep_product(deep_sleep_minutes: float, ratio_decimal: float) -> int:
+    """深睡充足度：深睡<30min→0；占比≥20%→100，15%~19%→80，10%~14%→60，<10%→40。"""
     if deep_sleep_minutes < 30:
         return 0
-    r = ratio_decimal
-    if r >= 0.20:
+    pct = ratio_decimal * 100.0
+    if pct >= 20:
         return 100
-    if r >= 0.15:
+    if pct >= 15:
         return 80
-    if r >= 0.10:
+    if pct >= 10:
         return 60
     return 40
 
 
+def score_sleep_latency_product(latency_minutes: float) -> int:
+    """入睡效率：≤15→100，16~30→80，31~45→60，46~60→40，>60→0。"""
+    m = max(0.0, float(latency_minutes))
+    if m <= 15:
+        return 100
+    if m <= 30:
+        return 80
+    if m <= 45:
+        return 60
+    if m <= 60:
+        return 40
+    return 0
+
+
+def score_routine_regularity_product(fluctuation_min: float) -> int:
+    """作息规律：F≤30→100；30<F≤120→floor(100×(120−F)/90)；>120→0。"""
+    f = max(0.0, float(fluctuation_min))
+    if f <= 30:
+        return 100
+    if f <= 120:
+        return math.floor(100 * (120 - f) / 90)
+    return 0
+
+
 def routine_text(score: int) -> str:
-    if score >= 90:
+    if score >= 80:
         return "Excellent"
-    if score >= 70:
+    if score >= 60:
         return "Great"
-    if score >= 50:
+    if score >= 40:
         return "Good"
-    if score >= 30:
+    if score >= 20:
         return "Fair"
     return "Poor"
 
@@ -368,12 +380,12 @@ def build_one_record(
         health_by_date, abnormal_by_date, window_dates
     )
 
-    dim_deep = score_deep_sleep_by_ratio(deep_sleep_min, ratio_dec)
-    dim_dur = score_sleep_duration_seconds(float(sleep_sec))
-    dim_eff = int(round(score_sleep_latency(latency_min)))
+    dim_deep = score_deep_sleep_product(deep_sleep_min, ratio_dec)
+    dim_dur = int(round(score_sleep_duration(total_sleep_min)))
+    dim_eff = score_sleep_latency_product(latency_min)
     dim_abn, _, _ = score_no_abnormal_events(total_sleep_min, abn_dur_sec, float(abn_count))
     dim_abn_i = int(round(float(dim_abn)))
-    dim_routine = int(round(score_sleep_regularity(fluctuation)))
+    dim_routine = score_routine_regularity_product(fluctuation)
 
     dim_scores = {
         "deep_sleep": dim_deep,
@@ -400,35 +412,35 @@ def build_one_record(
         "dimensions": {
             "deep_sleep": {
                 "score": dim_deep,
-                "weight": 25,
+                "weight": WEIGHTS_FRAC["deep_sleep"],
                 "value": deep_ratio_int,
                 "city_avg": cd["deep_sleep"]["city_avg"],
                 "city_score": cd["deep_sleep"]["city_score"],
             },
             "sleep_duration": {
                 "score": dim_dur,
-                "weight": 25,
+                "weight": WEIGHTS_FRAC["sleep_duration"],
                 "value": int(round(avg_sleep_min * 60.0)),
                 "city_avg": cd["sleep_duration"]["city_avg"],
                 "city_score": cd["sleep_duration"]["city_score"],
             },
             "sleep_efficiency": {
                 "score": dim_eff,
-                "weight": 15,
+                "weight": WEIGHTS_FRAC["sleep_efficiency"],
                 "value": int(round(avg_latency_min)),
                 "city_avg": cd["sleep_efficiency"]["city_avg"],
                 "city_score": cd["sleep_efficiency"]["city_score"],
             },
             "abnormal_events": {
                 "score": dim_abn_i,
-                "weight": 20,
+                "weight": WEIGHTS_FRAC["abnormal_events"],
                 "value": int(round(avg_abn_count)),
                 "city_avg": cd["abnormal_events"]["city_avg"],
                 "city_score": cd["abnormal_events"]["city_score"],
             },
             "routine_regularity": {
                 "score": dim_routine,
-                "weight": 15,
+                "weight": WEIGHTS_FRAC["routine_regularity"],
                 "value": routine_text(dim_routine),
                 "city_avg": cd["routine_regularity"]["city_avg"],
                 "city_score": cd["routine_regularity"]["city_score"],

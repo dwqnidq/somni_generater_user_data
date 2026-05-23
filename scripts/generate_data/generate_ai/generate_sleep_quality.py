@@ -19,6 +19,7 @@ for _p in (PROJECT_ROOT, GEN_DATA_DIR):
     if _p not in sys.path:
         sys.path.insert(0, _p)
 
+from generate_ai.llm_resume import run_llm_date_batch  # noqa: E402
 from generate_ai.multi_day_llm_helpers import apply_max_records  # noqa: E402
 from generate_ai.runtime import PROJECT_ROOT, bootstrap_llm, iter_uids, load_health_rows  # noqa: E402
 
@@ -106,6 +107,7 @@ def generate_quality_for_uid(
     *,
     temperature: Optional[float] = None,
     top_p: Optional[float] = None,
+    resume: bool = False,
 ) -> List[dict]:
     try:
         health_rows = load_health_rows(uid, output_dir)
@@ -123,19 +125,25 @@ def generate_quality_for_uid(
         rows = [r for r in rows if str(r.get("record_date") or "") <= end_date]
     rows = apply_max_records(rows, max_records)
 
-    results: List[dict] = []
-    for i, row in enumerate(rows):
-        rd = str(row.get("record_date") or "")
-        print(f"  [{i + 1}/{len(rows)}] uid={uid} date={rd} …", end=" ", flush=True)
-        mod = generate_quality_for_date(row, temperature=temperature, top_p=top_p)
+    by_rd = {str(r.get("record_date") or ""): r for r in rows if r.get("record_date")}
+    out_path = os.path.join(output_dir, f"{uid}_sleep_quality.json")
+
+    def _one(rd: str) -> Optional[dict]:
+        mod = generate_quality_for_date(
+            by_rd[rd], temperature=temperature, top_p=top_p
+        )
         if mod is None:
-            print("失败（已跳过）")
-        else:
-            print("完成")
-            results.append({"uid": uid, "record_date": rd, "quality_analysis_module": mod})
-        if i < len(rows) - 1:
-            time.sleep(retry_delay)
-    return results
+            return None
+        return {"uid": uid, "record_date": rd, "quality_analysis_module": mod}
+
+    return run_llm_date_batch(
+        uid=uid,
+        output_path=out_path,
+        resume=resume,
+        dates=sorted(by_rd.keys()),
+        process_date=_one,
+        retry_delay=retry_delay,
+    )
 
 
 def main() -> None:

@@ -3,7 +3,7 @@
 
 读取 output 目录下每个用户的健康、环境、日历、情绪步数数据，
 以每个 record_date 为锚点向前取 14 天窗口，调用大模型生成
-共性条目列表（每项为 { highlight, analysis, list }），汇总写入输出文件。
+共性条目列表（每项为 { highlight, analysis, type, list }），汇总写入输出文件。
 
 输出格式（列表，每元素对应一个 uid × record_date）：
 [
@@ -11,7 +11,7 @@
     "uid": "...",
     "record_date": "YYYY-MM-DD",
     "sleep_pattern_commonality": [
-      { "highlight": "...", "analysis": "...", "list": [ ... ] },
+      { "highlight": "...", "analysis": "...", "type": "sleep_latency", "list": [ ... ] },
       ...
     ]
   },
@@ -62,7 +62,12 @@ for _p in (PROJECT_ROOT, GEN_DATA_DIR):
     if _p not in sys.path:
         sys.path.insert(0, _p)
 
-from generate_ai.multi_day_llm_helpers import apply_max_records, merge_last_skipped  # noqa: E402
+from generate_ai.llm_resume import run_llm_date_batch  # noqa: E402
+from generate_ai.multi_day_llm_helpers import (  # noqa: E402
+    apply_max_records,
+    backward_14_health_complete,
+    merge_last_skipped,
+)
 from generate_ai.runtime import bootstrap_llm  # noqa: E402
 
 DEFAULT_SYSTEM_PROMPT_PATH = os.path.join(
@@ -102,11 +107,12 @@ def _coerce_commonality_metric_list(val) -> List[Optional[float]]:
 
 
 def normalize_sleep_pattern_commonality_llm_dict(parsed: dict) -> List[dict]:
-    """将模型返回的 JSON 对象规范为 [{highlight, analysis, list}, ...]（持久化字段始终为数组）。
+    """将模型返回的 JSON 对象规范为 [{highlight, analysis, type, list}, ...]（持久化字段始终为数组）。
 
     优先使用 ``items`` 数组；若 ``items`` 为显式空列表 ``[]``，返回 ``[]``（无稳健共性）。
     若无 ``items`` 键或非列表，或 ``items`` 内无有效元素，则回退顶层 ``highlight`` / ``analysis``（兼容旧模型输出，归一为单元素数组）。
     ``list`` 为与 ``sleep_records_14d`` 同序的指标数值；缺失或非数组时得到空列表。
+    ``type`` 为 list 中数据类型的枚举标识；缺失时为空字符串。
     """
     if not isinstance(parsed, dict):
         return []
@@ -121,6 +127,7 @@ def normalize_sleep_pattern_commonality_llm_dict(parsed: dict) -> List[dict]:
             out.append({
                 "highlight": str(it.get("highlight", "")),
                 "analysis": str(it.get("analysis", "")),
+                "type": str(it.get("type", "")),
                 "list": _coerce_commonality_metric_list(it.get("list")),
             })
         if out:
@@ -128,6 +135,7 @@ def normalize_sleep_pattern_commonality_llm_dict(parsed: dict) -> List[dict]:
     return [{
         "highlight": str(parsed.get("highlight", "")),
         "analysis": str(parsed.get("analysis", "")),
+        "type": str(parsed.get("type", "")),
         "list": _coerce_commonality_metric_list(parsed.get("list")),
     }]
 
@@ -351,6 +359,7 @@ def generate_for_uid(
     system_prompt_path: Optional[str] = None,
     retry_delay: float = 0.5,
     max_records: Optional[int] = None,
+    resume: bool = False,
 ) -> Tuple[List[dict], Optional[str]]:
     """为单个用户的所有（或过滤后的）日期批量生成 sleep_pattern_commonality。
 
@@ -386,9 +395,41 @@ def generate_for_uid(
 
     dates = apply_max_records(dates, max_records)
 
-    results: List[dict] = []
+    health_dates = {str(r.get("record_date")) for r in health_rows if r.get("record_date")}
+    skipped_14: list[str] = []
+    eligible: list[str] = []
+    for d in dates:
+        if backward_14_health_complete(d, health_dates):
+            eligible.append(d)
+        else:
+            skipped_14.append(d)
+    if skipped_14:
+        print(
+            f"  [共性] 跳过 {len(skipped_14)} 日（锚点及向前 14 个自然日 health 不齐）: "
+            f"{skipped_14[0]} … {skipped_14[-1]}",
+            flush=True,
+        )
+    dates = eligible
+
+    if not dates:
+        print(
+            f"  [跳过] uid={uid} 过滤后无可用锚点日"
+            f"（start={start_date or '—'} end={end_date or '—'}；"
+            f"或全部因 14 日窗口不足被跳过）",
+            flush=True,
+        )
+        return [], None
+
+    out_path = os.path.join(output_dir, f"{uid}_sleep_pattern_commonality.json")
     last_skipped: Optional[str] = None
-    for i, anchor_date in enumerate(dates):
+    if skipped_14:
+        last_skipped = skipped_14[-1]
+
+    def _on_soft_fail(d: str) -> None:
+        nonlocal last_skipped
+        last_skipped = merge_last_skipped(last_skipped, d)
+
+    def _one(anchor_date: str) -> Optional[dict]:
         try:
             commonality = generate_commonality_for_date(
                 uid=uid,
@@ -397,26 +438,27 @@ def generate_for_uid(
                 system_prompt_path=system_prompt_path,
                 health_rows=health_rows,
             )
-        except ValueError as e:
-            print(f"  [跳过] {anchor_date}: {e}")
-            last_skipped = merge_last_skipped(last_skipped, anchor_date)
-            continue
-
-        label = f"[{i + 1}/{len(dates)}] uid={uid} date={anchor_date}"
+        except ValueError:
+            return None
         if commonality is None:
-            print(f"  {label} LLM 调用失败（已跳过）")
-            last_skipped = merge_last_skipped(last_skipped, anchor_date)
-        else:
-            print(f"  {label} 完成")
-            results.append({
-                "uid": uid,
-                "record_date": anchor_date,
-                "sleep_pattern_commonality": commonality,
-            })
+            return None
+        return {
+            "uid": uid,
+            "record_date": anchor_date,
+            "sleep_pattern_commonality": commonality,
+        }
 
-        if i < len(dates) - 1:
-            time.sleep(retry_delay)
-
+    results = run_llm_date_batch(
+        uid=uid,
+        output_path=out_path,
+        resume=resume,
+        dates=dates,
+        process_date=_one,
+        retry_delay=retry_delay,
+        on_soft_fail=_on_soft_fail,
+        is_complete=lambda r: isinstance(r.get("sleep_pattern_commonality"), list)
+        and len(r.get("sleep_pattern_commonality")) > 0,
+    )
     return results, last_skipped
 
 

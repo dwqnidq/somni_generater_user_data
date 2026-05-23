@@ -3,11 +3,11 @@
 
 使用 output/{uid}_calendar_events.json 作为日程数据（替代已废弃的 schedule_data）。
 使用 output/{uid}_daily_emotion_steps.json 提供锚点日的 steps 与 score（情绪）；
-任一缺失则跳过该日不调 LLM。天气取自 output/qweather_today_snapshot.json（可用 --weather-json 覆盖），
-注入到 prompt 内 JSON 的 today_weather；系统提示词仍由 generate_health_data 读取
-prompt/sleep_trend_14d_analysis.md，本脚本不追加其它 system 文本。
+任一缺失则跳过该锚点日并继续下一日。天气取自 output/qweather_monthly_data.json（可用 --weather-json 覆盖），
+按锚定日注入当日预报（如 5/20 分析用 5/20 天气，5/21 用 5/21 天气）。
 
-对每条 record_date 调用 trend_14d_analysis.generate_ai_analysis()，注入当日日历事件作为日程。
+锚点日列表 = 天气预报 JSON 中的 date（再按 --start-date/--end-date 过滤）；对每个锚点日各调一次 LLM，
+产出一条 ai_analysis_14d（含锚定日前连续 14 天睡眠窗口）。系统提示词默认 sleep_trend_14d_analysis.md。
 
 作为独立脚本运行：
   python scripts/generate_data/generate_ai/generate_ai_analysis_14d.py --uid <uid>
@@ -36,6 +36,8 @@ for _p in (PROJECT_ROOT, GEN_DATA_DIR):
         sys.path.insert(0, _p)
 
 from generate_ai import llm_client  # noqa: E402
+from generate_ai.llm_client import LlmQuotaExhausted  # noqa: E402
+from generate_ai.llm_resume import bootstrap_resume, checkpoint_save, upsert_row  # noqa: E402
 from generate_ai.multi_day_llm_helpers import (  # noqa: E402
     apply_max_records,
     backward_14_health_complete,
@@ -101,16 +103,15 @@ def _today_health_for_date(emotion_rows: List[dict], target_date: str) -> Option
     return None
 
 
-def _load_weather_snapshot(path: str) -> dict:
-    """读取气象快照；只保留 sleep_trend_14d 侧常用字段。"""
+def _load_weather_by_date(path: str) -> dict[str, dict]:
+    """读取多日天气预报，返回 {YYYY-MM-DD: 扁平天气字段}。"""
     if not os.path.isfile(path):
         return {}
     with open(path, "r", encoding="utf-8") as f:
         data = json.load(f)
-    if not isinstance(data, dict):
-        return {}
-    keys = ("sunrise", "sunset", "uvIndex", "humidity", "aqiDisplay")
-    return {k: data.get(k) for k in keys if data.get(k) is not None}
+    from utils import qweather_records_by_date
+
+    return qweather_records_by_date(data)
 
 
 def _wrap_qwen_inject_today_health_weather(
@@ -149,28 +150,37 @@ def generate_ai_analysis_14d_for_uid(
     retry_delay: float = 0.5,
     weather_json: Optional[str] = None,
     max_records: Optional[int] = None,
+    resume: bool = False,
 ) -> Tuple[List[dict], Optional[str]]:
-    """为单个用户批量生成每日 14 天趋势 AI 分析。
+    """为单个用户按天气预报日期批量生成 14 天趋势 AI 分析。
 
     使用 calendar_events 替代 schedule_data 作为日程来源。
+    遍历 qweather 多日预报中的每个 date（在 start/end 范围内）；缺数据则跳过并继续下一日。
 
-    若锚点日及向前连续 14 个自然日缺少任一日的 health 记录，则该日跳过不调 LLM。
-    若锚点日在 daily_emotion_steps 中缺少 steps 或 score，则该日跳过不调 LLM。
+    若锚点日及向前连续 14 个自然日缺少任一日的 health 记录，则跳过。
+    若锚点日在 daily_emotion_steps 中缺少 steps 或 score，则跳过。
 
     Returns:
         (rows, last_skipped_date)：rows 为 generate_ai_analysis 返回的记录列表；
         last_skipped_date 为本次处理日期范围内「因数据不足等原因跳过」的最晚一日
         （YYYY-MM-DD），若全日成功生成则为 ``None``。
     """
+    os.environ.setdefault("SLEEP_TREND_14D_PROMPT", "sleep_trend_14d_analysis.md")
+
     calendar_events = _load_calendar_events(uid, output_dir)
     emotion_rows = _load_daily_emotion_steps_rows(uid, output_dir)
-    weather_path = weather_json or os.path.join(PROJECT_ROOT, "output", "qweather_today_snapshot.json")
-    today_weather = _load_weather_snapshot(weather_path)
+    weather_path = weather_json or os.path.join(PROJECT_ROOT, "output", "qweather_monthly_data.json")
+    weather_by_date = _load_weather_by_date(weather_path)
+    if not weather_by_date:
+        print(f"  [跳过] 天气预报为空或缺失: {weather_path}")
+        return [], None
     original_compact = compact_schedule_records_for_trend_14d_prompt
 
-    all_results: List[dict] = []
+    out_path = os.path.join(output_dir, f"{uid}_ai_analysis_14d.json")
+    all_results, done, by_date = bootstrap_resume(out_path, resume)
+    if resume and done:
+        print(f"  [续跑] 已从 {os.path.basename(out_path)} 加载 {len(done)} 个已完成日期")
 
-    # 确定需要处理的日期列表
     health_path = os.path.join(output_dir, f"{uid}_health_data.json")
     if not os.path.isfile(health_path):
         print(f"  [跳过] uid={uid} 无 health 文件")
@@ -184,7 +194,9 @@ def generate_ai_analysis_14d_for_uid(
         for r in health_rows
         if isinstance(r, dict) and r.get("record_date")
     }
-    dates = sorted(health_dates)
+
+    # 以天气预报中的 date 为锚点日（5/20、5/21…各用当日天气）；缺项则 continue
+    dates = sorted(weather_by_date.keys())
     if start_date:
         dates = [d for d in dates if d >= start_date]
     if end_date:
@@ -195,6 +207,9 @@ def generate_ai_analysis_14d_for_uid(
     last_skipped: Optional[str] = None
 
     for i, target_date in enumerate(dates):
+        if target_date in done:
+            print(f"  [{i + 1}/{len(dates)}] uid={uid} date={target_date} … 续跑跳过（已有记录）")
+            continue
         print(f"  [{i + 1}/{len(dates)}] uid={uid} date={target_date} …", end=" ", flush=True)
 
         if not backward_14_health_complete(target_date, health_dates):
@@ -205,6 +220,12 @@ def generate_ai_analysis_14d_for_uid(
         today_health = _today_health_for_date(emotion_rows, target_date)
         if today_health is None:
             print("跳过（无当日 steps/score：daily_emotion_steps）")
+            last_skipped = merge_last_skipped(last_skipped, target_date)
+            continue
+
+        today_weather = weather_by_date.get(target_date) or {}
+        if not today_weather:
+            print("跳过（天气预报无该日）")
             last_skipped = merge_last_skipped(last_skipped, target_date)
             continue
 
@@ -233,6 +254,10 @@ def generate_ai_analysis_14d_for_uid(
                 start_date=target_date,
                 end_date=target_date,
             )
+        except LlmQuotaExhausted:
+            checkpoint_save(out_path, all_results)
+            print("配额/限流耗尽，已保存进度")
+            raise
         finally:
             trend_mod.compact_schedule_records_for_trend_14d_prompt = original_compact
             llm_client.call_qwen_api = original_qwen
@@ -243,7 +268,11 @@ def generate_ai_analysis_14d_for_uid(
             last_skipped = merge_last_skipped(last_skipped, target_date)
         else:
             print("完成")
-            all_results.extend(rows)
+            for row in rows:
+                if isinstance(row, dict) and row.get("record_date"):
+                    all_results = upsert_row(by_date, row)
+                    done.add(str(row.get("record_date")))
+            checkpoint_save(out_path, all_results)
 
         if i < len(dates) - 1:
             time.sleep(retry_delay)
@@ -266,7 +295,7 @@ def _parse_args() -> argparse.Namespace:
     p.add_argument(
         "--weather-json",
         default="",
-        help="天气快照 JSON（默认 <项目>/output/qweather_today_snapshot.json）",
+        help="天气预报 JSON（默认 <项目>/output/qweather_monthly_data.json）",
     )
     p.add_argument(
         "--max-records",

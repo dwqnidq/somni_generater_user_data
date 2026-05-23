@@ -60,6 +60,13 @@ def _generation_options_payload(gen: dict, persona: dict) -> dict:
     }
 
 
+SLEEP_EVENT_LANGUAGE = "zh"
+
+
+def _ensure_event_language(event: dict) -> None:
+    event["language"] = SLEEP_EVENT_LANGUAGE
+
+
 def _time_to_minutes(hhmm: str) -> int | None:
     try:
         h, m = hhmm.split(":")
@@ -73,26 +80,55 @@ def _minutes_to_hhmm(mins: int) -> str:
     return f"{v // 60:02d}:{v % 60:02d}"
 
 
-# 事件-阶段约束：只允许在对应阶段放置事件
-_EVENT_STAGE_ALLOWED = {
-    "入睡困难": {"awake"},
+# 异常事件 — idf_data 阶段约束（见 docs/睡眠事件与idf_data阶段约束.md）
+_ABNORMAL_EVENT_STAGE_ALLOWED = {
+    "入睡困难": {"awake"},  # 仅首段清醒，见 _pick_minute_in_first_onset_awake
     "噩梦应激": {"rem"},
     "心率上升": {"rem"},
+    "异常体动": {"light", "deep", "rem"},
+    "噪声事件": {"light", "rem"},
+    "家电持续声": {"light", "deep", "rem"},
+    "环境持续声": {"light", "deep", "rem"},
+    "邻里持续声": {"light", "deep", "rem"},
+    "自然持续声": {"light", "deep", "rem"},
+    "突发撞击声": {"light", "rem"},
+    "突发交通声": {"light", "rem"},
+    "人声/门铃声": {"light", "rem"},
+    "自然突发声": {"light", "rem"},
+    "物品突发声": {"light", "rem"},
+}
+
+# 正常事件补位用（本文件仅调整异常事件时勿改）
+_EVENT_STAGE_ALLOWED = {
+    **_ABNORMAL_EVENT_STAGE_ALLOWED,
     "打鼾": {"light", "deep", "rem"},
     "梦话": {"light", "rem"},
     "AI主动干预": {"light", "awake"},
-    "异常体动": {"light", "awake"},
-    "噪声事件": {"light", "awake"},
-    "家电持续声": {"light", "deep", "awake"},
-    "环境持续声": {"light", "deep", "awake"},
-    "邻里持续声": {"light", "deep", "awake"},
-    "自然持续声": {"light", "deep", "awake"},
-    "突发撞击声": {"light", "awake"},
-    "突发交通声": {"light", "awake"},
-    "人声/门铃声": {"light", "awake"},
-    "自然突发声": {"light", "awake"},
-    "物品突发声": {"light", "awake"},
 }
+
+
+def _idf_seg_minute_window(seg: dict) -> tuple[int, int] | None:
+    sm = _time_to_minutes(str(seg.get("start") or seg.get("start_time") or ""))
+    em = _time_to_minutes(str(seg.get("end") or seg.get("end_time") or ""))
+    if sm is None or em is None:
+        return None
+    if em < sm:
+        em += 1440
+    return sm, em
+
+
+def _pick_minute_in_first_onset_awake(idf_data: list, rng: random.Random) -> int | None:
+    """入睡困难：仅 idf_data[0] 且 stage=awake，锚点偏向首段前 35% 或前 8 分钟。"""
+    if not idf_data or (idf_data[0] or {}).get("stage") != "awake":
+        return None
+    win = _idf_seg_minute_window(idf_data[0])
+    if not win:
+        return None
+    sm, em = win
+    span = max(1, em - sm)
+    early_limit = sm + min(int(span * 0.35), 8, span - 1)
+    pick_hi = max(sm, early_limit)
+    return rng.randint(sm, pick_hi) % 1440
 
 
 def _pick_minute_in_stage_windows(
@@ -101,27 +137,23 @@ def _pick_minute_in_stage_windows(
     rng: random.Random,
     base_min: int | None = None,
     search_range_min: int = 320,
+    segments: list | None = None,
 ) -> int | None:
-    """从 idf_data 中找一个落在 allowed_stages 内的随机分钟。
-    若 base_min 给定，优先在 base_min 附近搜索。"""
-    if not idf_data:
+    """从 idf_data（或指定 segments）中找一个落在 allowed_stages 内的随机分钟。"""
+    segs = segments if segments is not None else idf_data
+    if not segs:
         return None
     windows: list[tuple[int, int]] = []
-    for seg in idf_data:
+    for seg in segs:
         stage = (seg or {}).get("stage")
         if stage not in allowed_stages:
             continue
-        sm = _time_to_minutes(str(seg.get("start_time", "")))
-        em = _time_to_minutes(str(seg.get("end_time", "")))
-        if sm is None or em is None:
-            continue
-        if em < sm:
-            em += 1440
-        windows.append((sm, em))
+        win = _idf_seg_minute_window(seg)
+        if win:
+            windows.append(win)
     if not windows:
         return None
     if base_min is not None:
-        # 优先选 base_min 附近的窗口
         near = []
         for sm, em in windows:
             dist = min(abs(base_min - sm), abs(base_min - em))
@@ -562,10 +594,18 @@ def _rebalance_one_night_events(
     )
     if "入睡困难" in blocked:
         onset_prob = 0.0
-    if onset_should_trigger and (not has_onset) and rng.random() < onset_prob:
-        # 入睡困难必须落在 awake 阶段（使用 idf_data 的首个 awake 段）
+    # 潜伏期>30 与 health_data 门控一致，必生成；其余 OR 条件仍按人格概率抽样
+    add_onset = (
+        onset_should_trigger
+        and (not has_onset)
+        and (
+            cond_latency
+            or (onset_prob > 0 and rng.random() < onset_prob)
+        )
+    )
+    if add_onset:
         idf_data = sleep_rec.get("idf_data") or []
-        stage_min = _pick_minute_in_stage_windows(idf_data, {"awake"}, rng)
+        stage_min = _pick_minute_in_first_onset_awake(idf_data, rng)
         if stage_min is None:
             # 回退：使用 sleep_time + latency 偏移
             sleep_t = str(raw.get("sleep_time") or "")
@@ -598,7 +638,7 @@ def _rebalance_one_night_events(
         if already:
             continue
         idf_data = sleep_rec.get("idf_data") or []
-        allowed = _EVENT_STAGE_ALLOWED.get(et_name, {"light", "awake"})
+        allowed = _ABNORMAL_EVENT_STAGE_ALLOWED.get(et_name, {"light", "rem"})
         stage_min = _pick_minute_in_stage_windows(idf_data, allowed, rng)
         if stage_min is None:
             sleep_t = str(raw.get("sleep_time") or "")
@@ -736,10 +776,13 @@ def _rebalance_one_night_events(
         last_nm = t
 
     # --- 打鼾多段连续事件生成（独立于 normal 保险丝） ---
+    # 与睡眠报告一致：仅当呼吸暂停次数 ≥5 时生成打鼾事件
+    _APNEA_SNORING_THRESHOLD = 5
     snoring_cfg = _snoring_config_for_persona(persona, gen or {})
     snoring_events = []
     if "打鼾" not in blocked:
-        if rng.random() < snoring_cfg["occurrence_ratio"]:
+        apnea_count = int(raw.get("apnea_count", 0) or 0)
+        if apnea_count >= _APNEA_SNORING_THRESHOLD:
             n_segments = rng.randint(
                 snoring_cfg["segment_count_range"][0],
                 snoring_cfg["segment_count_range"][1],
@@ -870,8 +913,11 @@ def _rebalance_one_night_events(
             "duration_sec": rng.randint(10, 45),
             "_id": gh.generate_object_id(),
         }
+        _ensure_event_language(ai_event)
         new_interventions.append(ai_event)
     out.extend(new_interventions)
+    for ev in out:
+        _ensure_event_language(ev)
     return out
 
 
@@ -993,6 +1039,10 @@ def generate_sleep_events_for_persona(
             return (rd, gh.session_anchor_event_local_dt(ev, st, we))
 
         all_events.sort(key=_sort_key_evt)
+
+    for ev in all_events:
+        if isinstance(ev, dict):
+            _ensure_event_language(ev)
 
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     atomic_write_json(out_path, all_events)

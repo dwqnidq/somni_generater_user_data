@@ -2764,41 +2764,11 @@ def resolve_auditory_audio_local_dt(
     return c0
 
 
-def build_snoring_analysis_data_points(
-    audios,
-    env_rows_for_date,
-    record_date,
-    sleep_start,
-    window_end,
-    apnea_count,
-):
-    """
-    由 audios 中 type 为 Snore 且含 time 的条目生成 data_points：{time, value}。
-    value 优先取环境噪音时间上最近的一条；否则在 60–85（呼吸暂停多时可至 95）随机。
-    """
-    assigned = []
-    env_rows_for_date = env_rows_for_date or []
-    for audio in audios or []:
-        if (audio.get("type") or "") != "Snore" or not audio.get("time"):
-            continue
-        snore_value = None
-        if env_rows_for_date:
-            audio_dt = resolve_auditory_audio_local_dt(
-                record_date, audio["time"], sleep_start, window_end
-            )
-            if audio_dt is not None:
-                _, nearest_noise = min(
-                    env_rows_for_date,
-                    key=lambda item: abs((item[0] - audio_dt).total_seconds()),
-                )
-                snore_value = int(nearest_noise)
-        if snore_value is None:
-            base_lo, base_hi = 60, 85
-            if int(apnea_count or 0) >= 5:
-                base_hi = min(95, base_hi + 5)
-            snore_value = random.randint(base_lo, base_hi)
-        assigned.append({"time": audio["time"], "value": snore_value})
-    return assigned
+def build_snoring_analysis_data_points(audios, snoring_events=None, *, apnea_count=0):
+    """委托 sleep_report.auditory：value 取自打鼾事件 noise_db。"""
+    from sleep_report.auditory import build_snoring_analysis_data_points as _impl
+
+    return _impl(audios, snoring_events, apnea_count=apnea_count)
 
 
 def index_environment_noise_rows_by_record_date(user_id, output_dir="output"):
@@ -2842,36 +2812,12 @@ def rebuild_auditory_audios_and_snoring_data_points(
     user_id,
     sleep_events,
     sleep_day,
-    env_rows_for_date,
+    env_rows_for_date=None,
 ):
-    """
-    按睡眠窗从 sleep_events 重建 audios，并生成 snoring data_points（不写回文件）。
-    与 user_gen_pipeline.report_audios 中 audios + data_points 计算一致；不含 sleep_events duration 回填。
-    返回 (audios, data_points 列表)。
-    """
-    apnea_count = int((sleep_day.get("raw_data") or {}).get("apnea_count", 0) or 0) if sleep_day else 0
-    st, we = sleep_local_window_bounds_from_sleep_data(sleep_day or {})
-    sel = (
-        collect_auditory_sleep_events_in_window(
-            sleep_events, user_id, st, we, session_record_date=record_date
-        )
-        if (st and we)
-        else []
-    )
-    audios = build_audios_from_auditory_sleep_events(sel, record_date)
-    if st and we:
-        backfill_auditory_audio_times_from_window_events(
-            audios, sleep_events, user_id, st, we, record_date
-        )
-    dps = build_snoring_analysis_data_points(
-        audios,
-        env_rows_for_date or [],
-        record_date,
-        st,
-        we,
-        apnea_count,
-    )
-    return audios, dps
+    """委托 sleep_report.auditory；env_rows_for_date 已废弃，保留仅为兼容。"""
+    from sleep_report.auditory import rebuild_auditory_audios_and_snoring_data_points as _impl
+
+    return _impl(record_date, user_id, sleep_events, sleep_day, env_rows_for_date)
 
 
 def _audio_time_to_session_dt(audio_time, record_date, sleep_time=None, window_end=None):
@@ -2986,11 +2932,11 @@ _SLEEP_EVENT_SIGNAL_RULES = {
     # vitals
     "heart_rate_increase": ("vitals", ("metrics", "heart_rate"), 95, 120),
     "nightmare": ("vitals", ("metrics", "heart_rate"), 90, 112),
-    "movement": ("vitals", ("metrics", "body_motion_level"), 40, 85),
-    "once_movement": ("vitals", ("metrics", "body_motion_level"), 25, 60),
-    "natural_movement": ("vitals", ("metrics", "body_motion_level"), 15, 35),
-    "posture_switch": ("vitals", ("metrics", "body_motion_level"), 28, 65),
-    "limb_movements": ("vitals", ("metrics", "body_motion_level"), 30, 75),
+    "movement": ("vitals", ("metrics", "activity_status"), 3, 4),
+    "once_movement": ("vitals", ("metrics", "activity_status"), 2, 3),
+    "natural_movement": ("vitals", ("metrics", "activity_status"), 1, 2),
+    "posture_switch": ("vitals", ("metrics", "activity_status"), 2, 3),
+    "limb_movements": ("vitals", ("metrics", "activity_status"), 3, 4),
     "cough_clearing": ("environment", ("noise",), 46, 66),
     "swallow": ("vitals", ("metrics", "respiration_rate"), 14, 20),
     "breathing": ("vitals", ("metrics", "respiration_rate"), 12, 20),
@@ -3002,7 +2948,7 @@ _EVENT_FEEDBACK_DAILY_FIELD_UPDATE_CAPS = {
     ("environment", "noise"): max(1, int(os.getenv("SLEEP_EVENTS_FEEDBACK_NOISE_CAP", "60"))),
     ("environment", "temperature"): 1,
     ("vitals", "metrics.heart_rate"): max(1, int(os.getenv("SLEEP_EVENTS_FEEDBACK_HR_CAP", "30"))),
-    ("vitals", "metrics.body_motion_level"): max(1, int(os.getenv("SLEEP_EVENTS_FEEDBACK_MOTION_CAP", "15"))),
+    ("vitals", "metrics.activity_status"): max(1, int(os.getenv("SLEEP_EVENTS_FEEDBACK_ACTIVITY_CAP", "15"))),
     ("vitals", "metrics.respiration_rate"): max(1, int(os.getenv("SLEEP_EVENTS_FEEDBACK_RESP_CAP", "8"))),
 }
 # 回填时搜索现有行的窗口宽度（事件时刻 ± 此值分钟），避免因采样间隔错开而找不到匹配行
@@ -3220,11 +3166,6 @@ def apply_sleep_event_feedback_to_fitness_and_environment(user_id):
             metrics_fb = {
                 "respiration_rate": 14,
                 "heart_rate": 68,
-                "body_motion_level": 10,
-                "blood_oxygen": 97,
-                "blood_pressure_systolic": 116,
-                "blood_pressure_diastolic": 78,
-                "hrv": 72,
             }
             row = {
                 "uid": user_id,
@@ -3361,11 +3302,6 @@ def apply_sleep_event_feedback_to_fitness_and_environment(user_id):
                 "metrics": {
                     "respiration_rate": 14,
                     "heart_rate": 68,
-                    "body_motion_level": 10,
-                    "blood_oxygen": 97,
-                    "blood_pressure_systolic": 116,
-                    "blood_pressure_diastolic": 78,
-                    "hrv": 72,
                 },
                 "device_id": "",
                 "session_id": "",
@@ -4942,7 +4878,7 @@ def generate_sleep_report(
 
     # 听觉 audios：优先与已生成的睡眠事件（同睡眠窗内打鼾/梦话/咳嗽）一一对应
     auditory = generate_auditory(sleep_data, user_id=user_id, sleep_events_index=sleep_events_index)
-    # 不在此阶段调用听觉大模型：snoring_analysis.data_points 依赖环境近邻等逻辑，
+    # 不在此阶段调用听觉大模型：snoring_analysis.data_points 依赖睡眠事件 noise_db，
     # 仅在流水线 report_audios 中在 audios/time 与 data_points 全部就绪后再生成 module。
     auditory_snore_module = build_auditory_snore_module(auditory.get("audios", []), record_date)
 
@@ -5725,7 +5661,8 @@ def generate_ai_analysis(
             title, sleep_insight, schedule_insight = _build_local_ai_analysis(
                 record_date_str, sleep_seg, sched_seg
             )
-            template_path = os.path.join(PROMPT_DIR, "sleep_trend_14d_analysis.md")
+            _prompt_name = os.getenv("SLEEP_TREND_14D_PROMPT", "sleep_trend_14d_analysis.md")
+            template_path = os.path.join(PROMPT_DIR, os.path.basename(_prompt_name))
             if os.path.exists(template_path) and _qwen_api_key():
                 try:
                     with open(template_path, "r", encoding="utf-8") as f:
@@ -10233,28 +10170,12 @@ class HealthDataGenerator:
 
         hr_lo = fitness_config.get('heartRate', {'min': [60], 'max': [100]})['min'][0]
         hr_hi = fitness_config.get('heartRate', {'min': [60], 'max': [100]})['max'][0]
-        sys_lo = fitness_config.get('systolicPressure', {'min': [90], 'max': [140]})['min'][0]
-        sys_hi = fitness_config.get('systolicPressure', {'min': [90], 'max': [140]})['max'][0]
-        dia_lo = fitness_config.get('diastolicPressure', {'min': [60], 'max': [90]})['min'][0]
-        dia_hi = fitness_config.get('diastolicPressure', {'min': [60], 'max': [90]})['max'][0]
-        bo_lo = fitness_config.get('bloodOxygen', {'min': [90], 'max': [100]})['min'][0]
-        bo_hi = fitness_config.get('bloodOxygen', {'min': [90], 'max': [100]})['max'][0]
         rr_lo = fitness_config.get('breathingRate', {'min': [12], 'max': [20]})['min'][0]
         rr_hi = fitness_config.get('breathingRate', {'min': [12], 'max': [20]})['max'][0]
-        mot_lo = fitness_config.get('bodyMovement', {'min': [1], 'max': [100]})['min'][0]
-        mot_hi = fitness_config.get('bodyMovement', {'min': [1], 'max': [100]})['max'][0]
         if hr_hi < hr_lo:
             hr_lo, hr_hi = hr_hi, hr_lo
-        if sys_hi < sys_lo:
-            sys_lo, sys_hi = sys_hi, sys_lo
-        if dia_hi < dia_lo:
-            dia_lo, dia_hi = dia_hi, dia_lo
-        if bo_hi < bo_lo:
-            bo_lo, bo_hi = bo_hi, bo_lo
         if rr_hi < rr_lo:
             rr_lo, rr_hi = rr_hi, rr_lo
-        if mot_hi < mot_lo:
-            mot_lo, mot_hi = mot_hi, mot_lo
 
         # 加载体征数据
         fitness_data = self.load_fitness_data(user_id)
@@ -10324,7 +10245,7 @@ class HealthDataGenerator:
             respiration_rate = raw_data.get('average_respiration', (rr_lo + rr_hi) / 2.0)
             respiration_rate = max(rr_lo, min(rr_hi, float(respiration_rate)))
             
-            # 从体征数据中获取心率、血氧、血压
+            # 从体征数据中获取心率基线
             fitness_record = fitness_data_by_date.get(record_date, {})
             
             # 如果没有找到对应日期的体征数据，按规则生成体征数据
@@ -10339,29 +10260,6 @@ class HealthDataGenerator:
                     fitness_record = {}
             
             heart_rate = max(hr_lo, min(hr_hi, fitness_record.get('heart_rate', 70)))
-            blood_oxygen = max(bo_lo, min(bo_hi, fitness_record.get('bloodOxygen', 95)))
-            blood_pressure_systolic = max(sys_lo, min(sys_hi, fitness_record.get('systolic_pressure', 120)))
-            blood_pressure_diastolic = max(dia_lo, min(dia_hi, fitness_record.get('diastolicPressure', 80)))
-            
-            # 生成体动幅度（当夜基线；每条采样再轻微抖动）
-            turnover_count = raw_data.get('turnover_count', 0)
-            base_motion = self.calculate_body_motion_level(turnover_count, personality_type)
-
-            # 呼吸暂停次数：≥5次时夜间血氧整体下移、心率脉冲更频繁
-            apnea_count = int(raw_data.get('apnea_count', 0) or 0)
-            # 血氧基线偏移：轻度(5-9次) -1，中度(10-19次) -2，重度(≥20次) -3
-            if apnea_count >= 20:
-                apnea_bo_offset = -3
-            elif apnea_count >= 10:
-                apnea_bo_offset = -2
-            elif apnea_count >= 5:
-                apnea_bo_offset = -1
-            else:
-                apnea_bo_offset = 0
-
-            # 按当晚睡眠生成 5 分钟短程 HRV（避免整条时间轴都用第一晚）
-            hrv_lo, hrv_hi = 1.5, 2.0
-            hrv_base = self.generate_hrv([sleep_record], personality_type)
 
             stage_windows = {}
             if sleep_window_start and sleep_window_end:
@@ -10383,22 +10281,18 @@ class HealthDataGenerator:
             sleep_onset_local = _sleep_onset_local_naive(raw_data, bed_for_session)
             wake_end_local = sleep_window_end
 
-            # 为每个时间点生成一条记录（分期驱动心率/呼吸/HRV/体动形态，并夹在配置范围内）
+            # 为每个时间点生成一条记录（分期驱动心率/呼吸形态，并夹在配置范围内）
+            prev_pa_hr = None
+            prev_pa_rr = None
+            prev_pa_stage = None
             for idx, collected_at_local in enumerate(collected_local_dts):
                 stage = _sleep_stage_at_local_dt(collected_at_local, stage_windows)
                 if not stage and awake_windows and _is_in_awake_window(collected_at_local, awake_windows):
                     stage = "awake"
-                # 参见 docs/睡眠阶段对体征影响的指导性文档.md：清醒高 HR 低 HRV；入睡过渡降 HR 升 HRV；
-                # 浅睡稳定基线；深睡最低 HR/RR、高 HRV；REM 心率与 HRV 高波动。
                 hr_stage_adj = {"deep": -22, "light": -8, "rem": 6, "awake": 18}
                 rr_stage_adj = {"deep": -2.0, "light": -0.35, "rem": 1.8, "awake": 2.2}
-                hrv_stage_adj = {"deep": 0.11, "light": 0.025, "rem": 0.0, "awake": -0.11}
-                mot_stage_adj = {"deep": -12, "light": -2, "rem": 2, "awake": 20}
-
                 hr_adj = hr_stage_adj.get(stage, -6)
                 rr_adj = rr_stage_adj.get(stage, -0.25)
-                hrv_adj = hrv_stage_adj.get(stage, 0.01)
-                mot_adj = mot_stage_adj.get(stage, -2)
 
                 circ_t = _circadian_progress_t_rel(
                     collected_at_local,
@@ -10413,20 +10307,16 @@ class HealthDataGenerator:
 
                 hr_noise = random.randint(-2, 2)
                 rr_noise = random.uniform(-0.75, 0.75)
-                hrv_noise = random.uniform(-0.03, 0.03)
                 if stage == "rem":
                     hr_noise += int(round(random.uniform(-8, 10)))
                     rr_noise += random.uniform(-3.2, 3.8)
-                    hrv_noise += random.uniform(-0.09, 0.11)
                 elif stage == "deep":
                     hr_noise = int(round(random.uniform(-1.5, 1.5)))
                     rr_noise *= 0.45
-                    hrv_noise *= 0.35
                 elif stage == "light":
                     hr_noise = int(round(random.uniform(-2, 2)))
                 elif stage == "awake":
                     hr_noise += int(round(random.uniform(-3, 5)))
-                    hrv_noise += random.uniform(-0.025, 0.025)
 
                 row_hr = max(
                     hr_lo,
@@ -10445,42 +10335,6 @@ class HealthDataGenerator:
                         min(hr_hi, row_hr + random.randint(14, 30)),
                     )
 
-                row_bo = max(bo_lo, min(bo_hi, blood_oxygen + apnea_bo_offset + random.randint(-1, 1)))
-                sys_stage_adj = {"deep": -10, "light": -6, "rem": 5, "awake": 8}
-                dia_stage_adj = {"deep": -6, "light": -4, "rem": 4, "awake": 5}
-                s_adj = sys_stage_adj.get(stage, -4)
-                d_adj = dia_stage_adj.get(stage, -3)
-                row_sys = max(
-                    sys_lo,
-                    min(
-                        sys_hi,
-                        int(
-                            round(
-                                blood_pressure_systolic
-                                + s_adj
-                                + random.randint(-2, 2)
-                                + circ["sys"]
-                            )
-                        ),
-                    ),
-                )
-                row_dia = max(
-                    dia_lo,
-                    min(
-                        dia_hi,
-                        int(
-                            round(
-                                blood_pressure_diastolic
-                                + d_adj
-                                + random.randint(-2, 2)
-                                + circ["dia"]
-                            )
-                        ),
-                    ),
-                )
-                if row_sys <= row_dia:
-                    row_sys = min(sys_hi, row_dia + random.randint(20, 35))
-
                 row_rr = max(
                     rr_lo,
                     min(
@@ -10496,34 +10350,22 @@ class HealthDataGenerator:
                         ),
                     ),
                 )
-                row_hrv = round(
-                    max(
-                        hrv_lo,
-                        min(
-                            hrv_hi,
-                            hrv_base
-                            + hrv_adj
-                            + hrv_noise
-                            + circ["hrv"]
-                            + pre["hrv"],
-                        ),
-                    ),
-                    3,
-                )
-                mot_noise = random.randint(-5, 5)
-                if stage == "rem":
-                    mot_noise = random.randint(0, 10)
-                row_motion = max(
-                    mot_lo,
-                    min(
-                        mot_hi,
-                        base_motion
-                        + mot_adj
-                        + mot_noise
-                        + circ["motion"]
-                        + pre["motion"],
-                    ),
-                )
+
+                # EMA 平滑：限制单步心率/呼吸率跳变，避免图表上出现断崖式变化
+                if prev_pa_hr is not None:
+                    alpha_hr = 0.30 if stage == prev_pa_stage else 0.18
+                    blended_hr = prev_pa_hr + alpha_hr * (float(row_hr) - prev_pa_hr)
+                    delta_hr = max(-6.0, min(6.0, blended_hr - prev_pa_hr))
+                    row_hr = max(hr_lo, min(hr_hi, prev_pa_hr + delta_hr))
+                prev_pa_hr = float(row_hr)
+
+                if prev_pa_rr is not None:
+                    alpha_rr = 0.35 if stage == prev_pa_stage else 0.22
+                    blended_rr = prev_pa_rr + alpha_rr * (float(row_rr) - prev_pa_rr)
+                    delta_rr = max(-1.5, min(1.5, blended_rr - prev_pa_rr))
+                    row_rr = max(rr_lo, min(rr_hi, int(round(prev_pa_rr + delta_rr))))
+                prev_pa_rr = float(row_rr)
+                prev_pa_stage = stage
 
                 create_time = collected_at_local + timedelta(seconds=1)
                 update_time = create_time
@@ -10532,13 +10374,8 @@ class HealthDataGenerator:
                     collected_at_utc_z = idf_end_utc
 
                 metrics_core = {
-                    "respiration_rate": row_rr,
-                    "heart_rate": row_hr,
-                    "body_motion_level": row_motion,
-                    "blood_oxygen": row_bo,
-                    "blood_pressure_systolic": row_sys,
-                    "blood_pressure_diastolic": row_dia,
-                    "hrv": row_hrv,
+                    "respiration_rate": int(row_rr),
+                    "heart_rate": int(round(row_hr)),
                 }
 
                 vital_sign = {
@@ -11180,7 +11017,7 @@ _SLEEP_EVENT_STAGE_PREFERENCES = {
     "object_sudden": ("light", "rem", "deep"),
     "sleeping": ("awake",),
     "nightmare": ("rem",),
-    "movement": ("light", "awake"),
+    "movement": ("light", "deep", "rem"),
     "heart_rate_increase": ("rem",),
     # normal
     "snoring": ("light", "deep", "rem"),
@@ -11765,11 +11602,11 @@ def eligible_sleeping_windows(
     sleep_end,
     sleep_latency_minutes=None,
     bed_time_local=None,
-    latency_exclusive_min: int = 20,
+    latency_exclusive_min: int = 30,
 ):
     """
     入睡困难只允许落在 idf_data[0]（第一个阶段）内；且该段须为 awake，否则不生成入睡困难。
-    另须 raw 入睡潜伏期 sleep_latency_minutes > latency_exclusive_min（默认 20），否则返回空。
+    另须 raw 入睡潜伏期 sleep_latency_minutes > latency_exclusive_min（默认 30），否则返回空。
     窗口为 idf 首段对齐睡眠窗后的区间 ∩ [sleep_start, sleep_end]（入睡后至起床前）；
     若首段清醒完全落在入睡之前则返回空（不再用上床时间扩展下界）。
     """
@@ -12037,7 +11874,7 @@ def stage_aware_sleep_event_time(
     preferred_dt=None,
     sleep_latency_minutes=None,
     bed_time_local=None,
-    latency_exclusive_min: int = 20,
+    latency_exclusive_min: int = 30,
 ):
     """
     基于 aaa.md 的阶段映射 + 当天 idf_data 阶段区间选点；
@@ -12554,7 +12391,7 @@ def generate_sleep_events(
     
     入睡困难（sleeping）由环境数据触发时：需「环境压力」（室温≥27℃ 或 噪音≥60dB）且「入睡时刻」落在
     config 中 sleepTime 窗口下对人格不利的一侧（晨型偏晚、夜型偏早）；时刻落在入睡后 50 分钟内，且每天最多一条。
-    入睡困难仅当 raw_data.sleep_latency > 20（分钟）时才可出现；且仅落在 idf 第一个阶段（须为 awake），
+    入睡困难仅当 raw_data.sleep_latency > 30（分钟）时才可出现；且仅落在 idf 第一个阶段（须为 awake），
     事件锚点分期须为 awake。
     无环境/体征锚点时，若干异常类型按「墙钟时段 × 权重」在入睡～起床窗内取偏好时刻，再与 idf 分期投影结合
     （突发交通声/家电持续声/邻里持续声/自然持续声/人声门铃等；突发撞击/自然突发另有低概率门控）。
@@ -12826,12 +12663,12 @@ def generate_sleep_events(
 
     _go = generation_options if isinstance(generation_options, dict) else {}
     _sod = (_go.get("event_triggers") or {}).get("sleep_onset_difficulty") or {}
-    _sleep_latency_exclusive_min = 20
+    _sleep_latency_exclusive_min = 30
     if "sleep_latency_minutes_min" in _sod:
         try:
             _sleep_latency_exclusive_min = int(_sod["sleep_latency_minutes_min"])
         except (TypeError, ValueError):
-            _sleep_latency_exclusive_min = 20
+            _sleep_latency_exclusive_min = 30
     _env_gen = _go.get("environment") or {}
     try:
         _sleep_pressure_temp_c = float(_env_gen.get("sleep_onset_hot_temp_c", 27))

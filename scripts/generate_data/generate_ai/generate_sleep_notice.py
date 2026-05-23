@@ -31,6 +31,7 @@ for _p in (PROJECT_ROOT, GEN_DATA_DIR):
     if _p not in sys.path:
         sys.path.insert(0, _p)
 
+from generate_ai.llm_resume import run_llm_date_batch  # noqa: E402
 from generate_ai.multi_day_llm_helpers import apply_max_records  # noqa: E402
 from generate_ai.runtime import PROJECT_ROOT, bootstrap_llm, iter_uids, load_health_rows  # noqa: E402
 
@@ -152,6 +153,7 @@ def generate_notice_for_uid(
     personality_type: Optional[str] = None,
     retry_delay: float = 0.5,
     max_records: Optional[int] = None,
+    resume: bool = False,
 ) -> List[dict]:
     """为单个用户批量生成每日 notice。
 
@@ -184,27 +186,30 @@ def generate_notice_for_uid(
         str(r.get("record_date")): r for r in health_rows if r.get("record_date")
     }
 
-    results: List[dict] = []
-    for i, row in enumerate(rows):
-        rd = str(row.get("record_date") or "")
-        print(f"  [{i + 1}/{len(rows)}] uid={uid} date={rd} …", end=" ", flush=True)
+    by_rd = {str(r.get("record_date") or ""): r for r in rows if r.get("record_date")}
+    out_path = os.path.join(output_dir, f"{uid}_sleep_notice.json")
+
+    def _one(rd: str) -> Optional[dict]:
         notice = generate_notice_for_date(
             uid=uid,
-            sleep_data=row,
+            sleep_data=by_rd[rd],
             sleep_events_index=sleep_events_index,
             output_dir=output_dir,
             personality_type=p_type,
             health_rows_by_date=health_rows_by_date,
         )
         if notice is None:
-            print("跳过（无前一日数据或生成失败）")
-        else:
-            print("完成")
-            results.append({"uid": uid, "record_date": rd, "notice": notice})
-        if i < len(rows) - 1:
-            time.sleep(retry_delay)
+            return None
+        return {"uid": uid, "record_date": rd, "notice": notice}
 
-    return results
+    return run_llm_date_batch(
+        uid=uid,
+        output_path=out_path,
+        resume=resume,
+        dates=sorted(by_rd.keys()),
+        process_date=_one,
+        retry_delay=retry_delay,
+    )
 
 
 # ---------------------------------------------------------------------------

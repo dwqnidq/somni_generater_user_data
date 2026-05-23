@@ -43,10 +43,17 @@ def _build_hidden_discovery(common_row: dict, insight_row: dict) -> Optional[dic
             continue
         title = str(b.get("highlight") or "")
         content = str(b.get("analysis") or "")
+        metric_type = str(b.get("type") or "").strip()
         raw_list = b.get("list")
         lst: list[Any] = list(raw_list) if isinstance(raw_list, list) else []
         discover.append(
-            {"title": title, "content": content, "confidence": "", "type": "", "list": lst}
+            {
+                "title": title,
+                "content": content,
+                "confidence": "",
+                "type": metric_type,
+                "list": lst,
+            }
         )
     return {"module": [{"target": tgt, "description": desc, "tips": tips}], "discover": discover}
 

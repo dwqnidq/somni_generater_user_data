@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 """
 仅更新睡眠报告中的打鼾曲线：扫描 output 下 *_sleep_report.json，
-结合同用户的 health_data、sleep_events、environment_data 在内存中重算 data_points，
-只写回 quality_analysis.auditory.snoring_analysis.data_points，不修改 audios、module 等其余字段。
+结合同用户的 health_data、sleep_events 在内存中重算 data_points，
+写回 quality_analysis.auditory.snoring_analysis.data_points（按分钟聚合，sleep_events.noise_db）。
 
-计算方式与 generate_health_data.build_snoring_analysis_data_points 一致
-（由重建的 audios 推导，不落盘 audios）。
+同时重建 audios 与按分钟 data_points（与 main.py 步骤 7 补全一致）。
 """
 
 from __future__ import annotations
@@ -21,12 +20,15 @@ PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 _SCRIPTS_GEN = os.path.join(PROJECT_ROOT, "scripts", "generate_data")
-if _SCRIPTS_GEN not in sys.path:
-    sys.path.insert(0, _SCRIPTS_GEN)
+_WRITE_BACK = os.path.join(_SCRIPTS_GEN, "write_back")
+for _p in (_SCRIPTS_GEN, _WRITE_BACK):
+    if _p not in sys.path:
+        sys.path.insert(0, _p)
 os.chdir(PROJECT_ROOT)
 
-import generate_health_data as gh  # noqa: E402
-from utils import atomic_write_json  # noqa: E402
+from write_back.refresh_sleep_report_auditory_snoring import (  # noqa: E402
+    refresh_sleep_report_auditory_snoring_for_uid,
+)
 
 
 def _user_id_from_sleep_report_path(path: str) -> str:
@@ -40,63 +42,21 @@ def refresh_one_sleep_report_file(
     output_dir: str = "output",
     dry_run: bool = False,
 ) -> tuple[bool, int]:
-    """
-    仅更新每个报告日下的 snoring_analysis.data_points，其余 JSON 字段保持不变。
-    返回 (是否写盘或 dry_run 下本会写盘, 处理的报告条数)。
-    """
+    """返回 (是否处理, 更新的报告日数)。"""
     user_id = _user_id_from_sleep_report_path(report_path)
-    with open(report_path, "r", encoding="utf-8") as f:
-        sleep_reports = json.load(f)
-    if not isinstance(sleep_reports, list):
-        return False, 0
-
-    sleep_events_path = os.path.join(output_dir, f"{user_id}_sleep_events.json")
-    if not os.path.exists(sleep_events_path):
-        print(f"  [跳过] 无睡眠事件文件: {sleep_events_path}")
-        return False, 0
-    with open(sleep_events_path, "r", encoding="utf-8") as f:
-        sleep_events = json.load(f)
-    if not isinstance(sleep_events, list):
-        print(f"  [跳过] sleep_events 非数组: {sleep_events_path}")
-        return False, 0
-
-    health_by_date = gh._health_data_by_record_date(user_id, output_dir=output_dir)
-    env_rows_by_date = gh.index_environment_noise_rows_by_record_date(
-        user_id, output_dir=output_dir
-    )
-
-    updated_n = 0
-    for report in sleep_reports:
-        if not isinstance(report, dict):
-            continue
-        record_date = report.get("record_date")
-        if not record_date:
-            continue
-        sleep_day = health_by_date.get(record_date) or {}
-        _audios, dps = gh.rebuild_auditory_audios_and_snoring_data_points(
-            str(record_date),
-            user_id,
-            sleep_events,
-            sleep_day,
-            env_rows_by_date.get(str(record_date), []),
-        )
-        qa = report.setdefault("quality_analysis", {})
-        aud = qa.setdefault("auditory", {})
-        sa = aud.setdefault("snoring_analysis", {})
-        if not isinstance(sa, dict):
-            sa = {}
-            aud["snoring_analysis"] = sa
-        sa["data_points"] = dps
-        updated_n += 1
-
-    if updated_n == 0:
-        return False, 0
     if dry_run:
-        print(f"  [dry-run] 将写回 {report_path}（共 {updated_n} 条报告日）")
-        return True, updated_n
-    atomic_write_json(report_path, sleep_reports)
-    print(f"  已写回 {report_path}（{updated_n} 条 record_date）")
-    return True, updated_n
+        with open(report_path, "r", encoding="utf-8") as f:
+            sleep_reports = json.load(f)
+        n = sum(1 for r in sleep_reports if isinstance(r, dict) and r.get("record_date"))
+        print(f"  [dry-run] 将刷新 {report_path}（约 {n} 条报告日）")
+        return n > 0, n
+    stats = refresh_sleep_report_auditory_snoring_for_uid(
+        user_id, output_dir, refresh_audios=True
+    )
+    updated_n = int(stats.get("days_updated") or 0)
+    if updated_n:
+        print(f"  已写回 {report_path}（{updated_n} 条 record_date）")
+    return updated_n > 0, updated_n
 
 
 def main() -> None:

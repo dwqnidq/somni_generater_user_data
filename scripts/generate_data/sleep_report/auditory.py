@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import os
 import random
+import re
 from collections import deque
 from datetime import datetime, timedelta
 
@@ -228,6 +229,8 @@ def _normalize_auditory_module_list(items):
         desc = str(it.get("description") or "").strip()
         if tgt and desc:
             out.append({"target": tgt, "description": desc})
+        elif not tgt and not desc:
+            out.append({"target": "", "description": ""})
     return out
 
 
@@ -307,7 +310,7 @@ def generate_auditory(sleep_data, user_id=None, sleep_events_index=None, output_
         )
         audios = build_audios_from_auditory_sleep_events(sel, rd)
 
-    # snoring_analysis.data_points 在流水线 report_audios 步补全
+    # snoring_analysis.data_points 在 report_audios 步由睡眠事件 noise_db 补全
     return {
         "target": target,
         "risk_alert": risk_alert,
@@ -606,34 +609,68 @@ def resolve_auditory_audio_local_dt(
     return c0
 
 
+_HHMM_RE = re.compile(r"^(\d{1,2}):(\d{2})(?::\d{2})?$")
+
+
+def _normalize_snoring_hhmm(raw) -> str | None:
+    if raw is None:
+        return None
+    s = str(raw).strip()
+    if not s:
+        return None
+    m = _HHMM_RE.match(s)
+    if not m:
+        return None
+    hh, mm = int(m.group(1)), int(m.group(2))
+    if not (0 <= hh <= 23 and 0 <= mm <= 59):
+        return None
+    return f"{hh:02d}:{mm:02d}"
+
+
+def _is_snoring_sleep_event(event: dict) -> bool:
+    if not isinstance(event, dict):
+        return False
+    if str(event.get("code") or "").strip().lower() == "snoring":
+        return True
+    return str(event.get("event_type") or "").strip() == "打鼾"
+
+
+def _snoring_noise_db_by_hhmm(snoring_events) -> dict[str, int]:
+    """打鼾事件按 HH:MM 索引 noise_db（同分钟内生成器保证相同）。"""
+    lookup: dict[str, int] = {}
+    for ev in snoring_events or []:
+        if not _is_snoring_sleep_event(ev):
+            continue
+        hhmm = _normalize_snoring_hhmm(ev.get("event_timestamp"))
+        if not hhmm:
+            continue
+        noise = ev.get("noise_db")
+        if noise is None:
+            continue
+        try:
+            lookup[hhmm] = int(round(float(noise)))
+        except (TypeError, ValueError):
+            continue
+    return lookup
+
+
 def build_snoring_analysis_data_points(
     audios,
-    env_rows_for_date,
-    record_date,
-    sleep_start,
-    window_end,
-    apnea_count,
+    snoring_events=None,
+    *,
+    apnea_count=0,
 ):
     """
     由 audios 中 type 为 Snore 且含 time 的条目生成 data_points：{time, value}。
-    value 优先取环境噪音时间上最近的一条；否则在 60–85（呼吸暂停多时可至 95）随机。
+    value 取自同分钟打鼾睡眠事件的 noise_db；缺失时在 60–85（呼吸暂停多时可至 95）随机。
     """
+    lookup = _snoring_noise_db_by_hhmm(snoring_events)
     assigned = []
-    env_rows_for_date = env_rows_for_date or []
     for audio in audios or []:
         if (audio.get("type") or "") != "Snore" or not audio.get("time"):
             continue
-        snore_value = None
-        if env_rows_for_date:
-            audio_dt = resolve_auditory_audio_local_dt(
-                record_date, audio["time"], sleep_start, window_end
-            )
-            if audio_dt is not None:
-                _, nearest_noise = min(
-                    env_rows_for_date,
-                    key=lambda item: abs((item[0] - audio_dt).total_seconds()),
-                )
-                snore_value = int(nearest_noise)
+        hhmm = _normalize_snoring_hhmm(audio.get("time"))
+        snore_value = lookup.get(hhmm) if hhmm else None
         if snore_value is None:
             base_lo, base_hi = 60, 85
             if int(apnea_count or 0) >= 5:
@@ -684,13 +721,15 @@ def rebuild_auditory_audios_and_snoring_data_points(
     user_id,
     sleep_events,
     sleep_day,
-    env_rows_for_date,
+    env_rows_for_date=None,
 ):
     """
     按睡眠窗从 sleep_events 重建 audios，并生成 snoring data_points（不写回文件）。
     与 user_gen_pipeline.report_audios 中 audios + data_points 计算一致；不含 sleep_events duration 回填。
+    env_rows_for_date 已废弃，保留参数仅为兼容旧调用方。
     返回 (audios, data_points 列表)。
     """
+    _ = env_rows_for_date
     apnea_count = int((sleep_day.get("raw_data") or {}).get("apnea_count", 0) or 0) if sleep_day else 0
     st, we = sleep_local_window_bounds_from_sleep_data(sleep_day or {})
     sel = (
@@ -705,15 +744,51 @@ def rebuild_auditory_audios_and_snoring_data_points(
         backfill_auditory_audio_times_from_window_events(
             audios, sleep_events, user_id, st, we, record_date
         )
-    dps = build_snoring_analysis_data_points(
-        audios,
-        env_rows_for_date or [],
-        record_date,
-        st,
-        we,
-        apnea_count,
+    snoring_events = [e for e in sel if _is_snoring_sleep_event(e)]
+    dps = build_snoring_data_points_per_minute(
+        snoring_events,
+        sleep_day=sleep_day,
     )
     return audios, dps
+
+
+def build_snoring_data_points_per_minute(
+    snoring_events,
+    *,
+    sleep_day=None,
+    bedtime_min=None,
+):
+    """按分钟聚合 sleep_events.noise_db，生成 snoring_analysis.data_points。"""
+    if bedtime_min is None and sleep_day:
+        bedtime_min = _bedtime_minutes_from_sleep_day(sleep_day)
+    from write_back.merge_snoring_data_points import build_snoring_data_points_from_events
+
+    return build_snoring_data_points_from_events(
+        snoring_events or [], bedtime_min=bedtime_min
+    )
+
+
+def _bedtime_minutes_from_sleep_day(sleep_day: dict) -> int | None:
+    """从 health 日记录的 bed_time 解析本地 HH:MM 分钟数（用于跨午夜排序）。"""
+    raw = (sleep_day or {}).get("raw_data") or {}
+    bed_iso = raw.get("bed_time") or raw.get("sleep_time")
+    if not bed_iso:
+        return None
+    try:
+        from .shared import format_time_to_hhmm, utc_to_local
+
+        hm = format_time_to_hhmm(utc_to_local(str(bed_iso)))
+    except Exception:
+        return None
+    return _hhmm_to_minutes(hm)
+
+
+def _hhmm_to_minutes(hhmm: str) -> int | None:
+    norm = _normalize_snoring_hhmm(hhmm)
+    if not norm:
+        return None
+    hh, mm = norm.split(":")
+    return int(hh) * 60 + int(mm)
 
 
 def _audio_time_to_session_dt(audio_time, record_date, sleep_time=None, window_end=None):

@@ -17,10 +17,13 @@
 | `insert_vitals_file_to_mongo.py` | 将指定单个 vitals JSON 文件批量 `insert_many` 到生理数据集合（默认可改集合名）。 |
 | `insert_sleep_intervention_schemes.py` | 将睡眠干预方案 JSON（默认 `output/sleep_intervention_schemes.json`）按 `mhr_codes` 整组 upsert 到 `somni_temp_plans`（可改集合）。 |
 | `insert_sleep_intervention_schemes_interv.py` | 将干预专用 JSON（默认 `output/sleep_intervention_schemes_interv.json`）按 `mhr_codes` upsert 到 `somni_temp_plans`；`create_time` / `update_time` 转 BSON 日期。 |
+| `insert_sleep_intervention_schemes_en.py` | 将英文 init 方案（默认 `output/sleep_intervention_schemes_en.json`）按 `mhr_codes` + `language` + `type` upsert 到 `somni_temp_plans`。 |
+| `insert_sleep_intervention_schemes_interv_en.py` | 将英文 interv 方案（默认 `output/sleep_intervention_schemes_interv_en.json`）按 `mhr_codes` + `language` + `type` upsert 到 `somni_temp_plans`。 |
 | `insert_quiz_surveys.py` | 从固定两个英文问卷 JSON upsert 到 `quiz_surveys`（按 `code` + `language`）。 |
 | `insert_quiz_questions.py` | 将 `output/quiz_questions_translated_by_id_pairs.json` 插入 `quiz_questions`（保留 `_id` 为 ObjectId）。 |
 | `insert_quiz_personalities_lang.py` | 将中/英人格 JSON 插入 `quiz_personalities`（去掉 `_id`，可选只插 zh/en）。 |
 | `insert_personality_profiles.py` | 将 `output/all_personality_profiles.json` 插入 `quiz_personalities`（去掉 `_id`）。 |
+| `rename_somni_sleep_analysis_pool_users.py` | 将 `somni_sleep_analysis` 中非八人格用户的 `user_name` 按查询顺序改为「用户一、用户二…」（`UpdateMany`，仅改 `user_name`）。 |
 
 以下分文件说明输入、目标集合与调用方式。
 
@@ -59,6 +62,19 @@ python scripts/insert_data/insert_somni_records.py all
 ```
 
 第二个参数为上面某一 `data_type`，或 `all` 依次处理所有类型。
+
+---
+
+### `rename_somni_sleep_analysis_pool_users.py`
+
+**作用**：连接 MongoDB，查询 `somni_sleep_analysis` 中 `uid` 不在八人格列表的文档；按游标返回顺序为每个 `uid` 首次出现分配全市统一的 `用户一`、`用户二`…，仅 `$set: { user_name }`；八人格不修改。
+
+**调用**（在项目根目录）：
+
+```bash
+python scripts/insert_data/rename_somni_sleep_analysis_pool_users.py --dry-run
+python scripts/insert_data/rename_somni_sleep_analysis_pool_users.py --apply
+```
 
 ---
 
@@ -109,6 +125,34 @@ python scripts/insert_data/insert_sleep_intervention_schemes_interv.py --dry-run
 ```
 
 **说明**：过滤键仍为 `mhr_codes` 单字段；若库中已有同 `mhr_codes` 的 `init` 方案，执行本脚本会用 **interv** 文档覆盖该键对应文档。
+
+---
+
+### `insert_sleep_intervention_schemes_en.py`
+
+**作用**：与 `insert_sleep_intervention_schemes.py` 相同写入策略，默认读取 **`output/sleep_intervention_schemes_en.json`**（`language` 为 `en`、`type` 为 `init`）。按 **`mhr_codes` + `language` + `type`** upsert，避免覆盖中文方案。
+
+**调用**：
+
+```bash
+python scripts/insert_data/insert_sleep_intervention_schemes_en.py
+python scripts/insert_data/insert_sleep_intervention_schemes_en.py --file output/sleep_intervention_schemes_en.json
+python scripts/insert_data/insert_sleep_intervention_schemes_en.py --dry-run
+```
+
+---
+
+### `insert_sleep_intervention_schemes_interv_en.py`
+
+**作用**：与 `insert_sleep_intervention_schemes_interv.py` 相同，默认读取 **`output/sleep_intervention_schemes_interv_en.json`**。按 **`mhr_codes` + `language` + `type`** upsert 到 **`somni_temp_plans`**。
+
+**调用**：
+
+```bash
+python scripts/insert_data/insert_sleep_intervention_schemes_interv_en.py
+python scripts/insert_data/insert_sleep_intervention_schemes_interv_en.py --file output/sleep_intervention_schemes_interv_en.json
+python scripts/insert_data/insert_sleep_intervention_schemes_interv_en.py --dry-run
+```
 
 ---
 

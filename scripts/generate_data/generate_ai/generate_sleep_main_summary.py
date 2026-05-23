@@ -39,6 +39,7 @@ for _p in (PROJECT_ROOT, GEN_DATA_DIR):
     if _p not in sys.path:
         sys.path.insert(0, _p)
 
+from generate_ai.llm_resume import run_llm_date_batch  # noqa: E402
 from generate_ai.multi_day_llm_helpers import apply_max_records  # noqa: E402
 from generate_ai.runtime import PROJECT_ROOT, bootstrap_llm, iter_uids, load_health_rows  # noqa: E402
 
@@ -191,6 +192,7 @@ def generate_main_summary_for_uid(
     main_title_by_record_date: Optional[Dict[str, str]] = None,
     retry_delay: float = 0.5,
     max_records: Optional[int] = None,
+    resume: bool = False,
 ) -> List[dict]:
     """为单个用户批量生成每日 main summary。
 
@@ -222,10 +224,11 @@ def generate_main_summary_for_uid(
 
     rows = apply_max_records(rows, max_records)
 
-    results: List[dict] = []
-    for i, row in enumerate(rows):
-        rd = str(row.get("record_date") or "")
-        print(f"  [{i + 1}/{len(rows)}] uid={uid} date={rd} …", end=" ", flush=True)
+    by_rd = {str(r.get("record_date") or ""): r for r in rows if r.get("record_date")}
+    out_path = os.path.join(output_dir, f"{uid}_sleep_main_summary.json")
+
+    def _one(rd: str) -> Optional[dict]:
+        row = by_rd[rd]
         passed_title = str(report_titles.get(rd) or "").strip()
         if not passed_title:
             passed_title = str(titles_map.get(rd) or "").strip()
@@ -235,14 +238,17 @@ def generate_main_summary_for_uid(
             uid, row, sleep_events_index, main_title=passed_title or None
         )
         if main is None:
-            print("失败（已跳过）")
-        else:
-            print("完成")
-            results.append({"uid": uid, "record_date": rd, "main": main})
-        if i < len(rows) - 1:
-            time.sleep(retry_delay)
+            return None
+        return {"uid": uid, "record_date": rd, "main": main}
 
-    return results
+    return run_llm_date_batch(
+        uid=uid,
+        output_path=out_path,
+        resume=resume,
+        dates=sorted(by_rd.keys()),
+        process_date=_one,
+        retry_delay=retry_delay,
+    )
 
 
 # ---------------------------------------------------------------------------

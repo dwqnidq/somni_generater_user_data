@@ -40,7 +40,6 @@ import argparse
 import json
 import os
 import sys
-import time
 from typing import List, Optional, Tuple
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -51,11 +50,8 @@ for _p in (PROJECT_ROOT, GEN_DATA_DIR):
     if _p not in sys.path:
         sys.path.insert(0, _p)
 
-from generate_ai.multi_day_llm_helpers import (  # noqa: E402
-    apply_max_records,
-    backward_14_health_complete,
-    merge_last_skipped,
-)
+from generate_ai.llm_resume import run_llm_date_batch  # noqa: E402
+from generate_ai.multi_day_llm_helpers import apply_max_records, merge_last_skipped  # noqa: E402
 from generate_ai.runtime import bootstrap_llm  # noqa: E402
 
 DEFAULT_SYSTEM_PROMPT_PATH = os.path.join(
@@ -169,13 +165,15 @@ def generate_insight_for_uid(
     system_prompt_path: Optional[str] = None,
     retry_delay: float = 0.5,
     max_records: Optional[int] = None,
+    resume: bool = False,
 ) -> Tuple[List[dict], Optional[str]]:
     """按 health 的逐日 record_date 生成 insight。
 
-    须该日及向前连续 14 个自然日均有 health；且该日已有非空的 sleep_pattern_commonality 行。
+    在 start/end 范围内对每个锚点日调用 LLM；无共性行或共性为空时仍调用（空数组输入）。
+    仅 LLM/API 失败时记为跳过日。
 
     Returns:
-        (rows, last_skipped_date)：last_skipped_date 为范围内跳过的最晚 record_date。
+        (rows, last_skipped_date)：last_skipped_date 为 LLM 失败的最晚 record_date。
     """
     try:
         health_rows = _load_health_rows_insight(uid, output_dir)
@@ -183,8 +181,7 @@ def generate_insight_for_uid(
         print(f"  [跳过] uid={uid} 无 health 文件")
         return [], None
 
-    health_dates = {str(r.get("record_date")) for r in health_rows if r.get("record_date")}
-    dates = sorted(health_dates)
+    dates = sorted({str(r.get("record_date")) for r in health_rows if r.get("record_date")})
     if start_date:
         dates = [d for d in dates if d >= start_date]
     if end_date:
@@ -195,61 +192,45 @@ def generate_insight_for_uid(
     try:
         by_rd = _load_commonality_by_record_date(uid, output_dir)
     except FileNotFoundError:
-        print(f"  [跳过] uid={uid} 无 sleep_pattern_commonality 文件（请先运行 commonality 生成步骤）")
-        return [], None
+        print(f"  警告: 无 sleep_pattern_commonality 文件，将按空共性逐日调用 LLM")
+        by_rd = {}
 
-    results: List[dict] = []
+    out_path = os.path.join(output_dir, f"{uid}_sleep_pattern_commonality_insight.json")
     last_skipped: Optional[str] = None
-    for i, rd in enumerate(dates):
-        print(f"  [{i + 1}/{len(dates)}] uid={uid} date={rd} …", end=" ", flush=True)
-        if not backward_14_health_complete(rd, health_dates):
-            print("跳过（向前 14 天 health 不齐）")
-            last_skipped = merge_last_skipped(last_skipped, rd)
-            if i < len(dates) - 1:
-                time.sleep(retry_delay)
-            continue
 
-        row = by_rd.get(rd)
-        if not row:
-            print("跳过（无 sleep_pattern_commonality 行）")
-            last_skipped = merge_last_skipped(last_skipped, rd)
-            if i < len(dates) - 1:
-                time.sleep(retry_delay)
-            continue
+    def _on_soft_fail(rd: str) -> None:
+        nonlocal last_skipped
+        last_skipped = merge_last_skipped(last_skipped, rd)
 
+    def _one(rd: str) -> Optional[dict]:
+        row = by_rd.get(rd) or {}
         commonality = row.get("sleep_pattern_commonality", [])
         blocks = _coerce_commonality_to_list(commonality)
         print(f"commonality条数={len(blocks)} …", end=" ", flush=True)
-        if not blocks:
-            print("跳过（共性条目为空）")
-            last_skipped = merge_last_skipped(last_skipped, rd)
-            if i < len(dates) - 1:
-                time.sleep(retry_delay)
-            continue
-
         try:
             insight = generate_insight_for_commonality(commonality, system_prompt_path)
-        except (FileNotFoundError, ValueError) as e:
-            print(f"失败（{e}）")
-            last_skipped = merge_last_skipped(last_skipped, rd)
-            if i < len(dates) - 1:
-                time.sleep(retry_delay)
-            continue
-
+        except (FileNotFoundError, ValueError):
+            return None
         if insight is None:
-            print("LLM 调用失败（已跳过）")
-            last_skipped = merge_last_skipped(last_skipped, rd)
-        else:
-            print("完成")
-            results.append({
-                "uid": uid,
-                "record_date": rd,
-                "sleep_pattern_commonality_insight": insight,
-            })
+            return None
+        return {
+            "uid": uid,
+            "record_date": rd,
+            "sleep_pattern_commonality_insight": insight,
+        }
 
-        if i < len(dates) - 1:
-            time.sleep(retry_delay)
-
+    results = run_llm_date_batch(
+        uid=uid,
+        output_path=out_path,
+        resume=resume,
+        dates=dates,
+        process_date=_one,
+        retry_delay=retry_delay,
+        on_soft_fail=_on_soft_fail,
+        is_complete=lambda r: isinstance(r.get("sleep_pattern_commonality_insight"), dict)
+        and bool(str(r.get("sleep_pattern_commonality_insight", {}).get("target") or "").strip()
+                 or str(r.get("sleep_pattern_commonality_insight", {}).get("description") or "").strip()),
+    )
     return results, last_skipped
 
 

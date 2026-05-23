@@ -81,6 +81,25 @@ def build_analysis_record(raw: dict, now_iso: str) -> dict:
 
 # ─── somni_sleep_district 输出 ────────────────────────────────────────────────
 
+def filter_records_by_stats_date(
+    records: list,
+    start_date: str | None = None,
+    end_date: str | None = None,
+) -> list:
+    """按 stats_date 闭区间过滤；start/end 为空则不限制该侧。"""
+    if not start_date and not end_date:
+        return records
+    out: list = []
+    for r in records:
+        d = str(r.get("stats_date") or "")
+        if start_date and d < start_date:
+            continue
+        if end_date and d > end_date:
+            continue
+        out.append(r)
+    return out
+
+
 def build_district_records(raw_list: list, now_iso: str) -> list:
     groups = defaultdict(list)
     for r in raw_list:
@@ -129,6 +148,16 @@ def parse_args():
     p.add_argument("--out-analysis",  default="output/somni_sleep_analysis.json")
     p.add_argument("--out-district",  default="output/somni_sleep_district.json")
     p.add_argument("--seed", type=int, default=42)
+    p.add_argument(
+        "--start",
+        default="",
+        help="仅保留 stats_date >= 该日期的记录（YYYY-MM-DD，空表示不限制）",
+    )
+    p.add_argument(
+        "--end",
+        default="",
+        help="仅保留 stats_date <= 该日期的记录（YYYY-MM-DD，空表示不限制）",
+    )
     return p.parse_args()
 
 
@@ -144,7 +173,24 @@ def main():
     print("读取源数据：{}".format(args.input))
     with open(os.path.join(PROJECT_ROOT, args.input), encoding="utf-8") as f:
         raw_data = json.load(f)
-    print("  共 {:,} 条记录".format(len(raw_data)))
+    n_before = len(raw_data)
+    start_s = (args.start or "").strip()
+    end_s = (args.end or "").strip()
+    if start_s or end_s:
+        raw_data = filter_records_by_stats_date(raw_data, start_s or None, end_s or None)
+        print(
+            "  日期过滤 {} ~ {}：{:,} → {:,} 条".format(
+                start_s or "(不限)",
+                end_s or "(不限)",
+                n_before,
+                len(raw_data),
+            )
+        )
+        if not raw_data:
+            print("错误：过滤后无记录", file=sys.stderr)
+            sys.exit(1)
+    else:
+        print("  共 {:,} 条记录".format(n_before))
 
     # ── 文件一：somni_sleep_analysis ──────────────────────────────────────────
     print("\n生成 somni_sleep_analysis ...")

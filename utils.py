@@ -18,6 +18,31 @@ def format_time(dt, format='%H:%M'):
     """格式化 datetime 对象为时间字符串"""
     return dt.strftime(format)
 
+
+def format_sleep_map_pool_user_name(index: int) -> str:
+    """睡眠地图虚拟用户展示名（区内序号，从 1 起）。例：1→用户一，13→用户十三。"""
+    if index < 1:
+        raise ValueError("index must be >= 1")
+    return "用户" + _index_to_chinese_numeral(index)
+
+
+def _index_to_chinese_numeral(n: int) -> str:
+    digits = "零一二三四五六七八九"
+    if n < 10:
+        return digits[n]
+    if n == 10:
+        return "十"
+    if n < 20:
+        return "十" + (digits[n % 10] if n % 10 else "")
+    if n < 100:
+        tens, ones = divmod(n, 10)
+        part = "十" if tens == 1 else digits[tens] + "十"
+        if ones:
+            part += digits[ones]
+        return part
+    return str(n)
+
+
 def calculate_duration(start_time, end_time):
     """计算两个时间之间的分钟数"""
     if isinstance(start_time, str):
@@ -207,6 +232,11 @@ def get_open_meteo_weather(latitude, longitude, query_date=None, timezone="auto"
 _CN_OFFSET = timedelta(hours=8)
 _CN_TZ = timezone(_CN_OFFSET, name="CST")
 _QWEATHER_HOST = "https://nv63yxq3rp.re.qweatherapi.com"
+# 和风 GeoAPI LocationID：北京（101010100），坐标为北京市中心附近
+_QWEATHER_BEIJING_LOCATION_ID = "101010100"
+_QWEATHER_BEIJING_NAME = "北京"
+_QWEATHER_BEIJING_LATITUDE = 39.9042
+_QWEATHER_BEIJING_LONGITUDE = 116.4074
 
 
 def cn_aqi_six_level_from_display(aqi_display):
@@ -266,26 +296,151 @@ def uv_index_to_light_level_label(uv_index):
     return "强光"
 
 
+def _qweather_aqi_map_by_cn_date(air_data):
+    """空气质量日预报 → {YYYY-MM-DD: aqiDisplay}（中国时区自然日）。"""
+    out = {}
+    if not isinstance(air_data, dict):
+        return out
+    for day in air_data.get("days") or []:
+        start_str = str(day.get("forecastStartTime", ""))
+        if not start_str:
+            continue
+        try:
+            start_dt = datetime.fromisoformat(start_str.replace("Z", "+00:00"))
+        except ValueError:
+            continue
+        date_iso = start_dt.astimezone(_CN_TZ).date().isoformat()
+        indexes = day.get("indexes") or []
+        aqi_display = None
+        for idx in indexes:
+            if idx.get("code") == "cn-mee":
+                aqi_display = idx.get("aqiDisplay")
+                break
+        if aqi_display is None and indexes:
+            aqi_display = indexes[0].get("aqiDisplay")
+        if aqi_display is not None:
+            out[date_iso] = aqi_display
+    return out
+
+
+def _qweather_daily_row_to_record(daily_row, *, aqi_display=None):
+    """将和风 daily 单行转为统一日记录 dict。"""
+    fx_date = str(daily_row.get("fxDate", ""))
+    aqi_lv = cn_aqi_six_level_from_display(aqi_display)
+    raw_uv = daily_row.get("uvIndex")
+    return {
+        "date": fx_date,
+        "sunrise": daily_row.get("sunrise"),
+        "sunset": daily_row.get("sunset"),
+        "textDay": daily_row.get("textDay"),
+        "textNight": daily_row.get("textNight"),
+        "tempMax": daily_row.get("tempMax"),
+        "tempMin": daily_row.get("tempMin"),
+        "humidity": daily_row.get("humidity"),
+        "pressure": daily_row.get("pressure"),
+        "uvIndex": uv_index_to_light_level_label(raw_uv),
+        "uvIndexRaw": raw_uv,
+        "windScaleDay": daily_row.get("windScaleDay"),
+        "windDirDay": daily_row.get("windDirDay"),
+        "precip": daily_row.get("precip"),
+        "aqiDisplay": aqi_lv["aqi_six_level_label"],
+        "aqiDisplayRaw": aqi_display,
+    }
+
+
+_QWEATHER_FORECAST_TIERS = (3, 7, 10, 15, 30)
+# 今日快照 JSON 仅保留 LLM 注入用字段（与 output/qweather_today_snapshot.json 历史格式一致）
+_QWEATHER_SNAPSHOT_FIELDS = (
+    "sunrise",
+    "sunset",
+    "tempMax",
+    "tempMin",
+    "uvIndex",
+    "humidity",
+    "aqiDisplay",
+)
+
+
+def _qweather_forecast_api_tier(requested_days):
+    """将请求天数映射到和风支持的 /v7/weather/{n}d 档位（3/7/10/15/30）。"""
+    n = max(1, int(requested_days))
+    for tier in _QWEATHER_FORECAST_TIERS:
+        if n <= tier:
+            return tier
+    return 30
+
+
+def _qweather_flat_snapshot(record):
+    """从完整日记录提取今日快照扁平字段。"""
+    if not isinstance(record, dict):
+        return {}
+    return {k: record[k] for k in _QWEATHER_SNAPSHOT_FIELDS if record.get(k) is not None}
+
+
+def qweather_today_record_from_saved(data):
+    """从已写入的 JSON（今日扁平 dict / 多日数组）中取出今日快照字段。"""
+    if isinstance(data, list):
+        today_iso = datetime.now(_CN_TZ).date().isoformat()
+        for row in data:
+            if isinstance(row, dict) and str(row.get("date")) == today_iso:
+                return _qweather_flat_snapshot(row) if row.get("date") else row
+        if data and isinstance(data[0], dict):
+            row = data[0]
+            return _qweather_flat_snapshot(row) if row.get("date") else row
+        return {}
+    if isinstance(data, dict):
+        return _qweather_flat_snapshot(data) if "date" in data else data
+    return {}
+
+
+def qweather_records_by_date(data) -> dict[str, dict]:
+    """将已保存的多日预报（数组）或单日 dict 转为 {YYYY-MM-DD: 扁平天气字段}。"""
+    out: dict[str, dict] = {}
+    if isinstance(data, list):
+        rows = data
+    elif isinstance(data, dict) and data.get("date"):
+        rows = [data]
+    else:
+        return out
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        d = str(row.get("date") or "").strip()
+        if not d:
+            continue
+        flat = _qweather_flat_snapshot(row)
+        if flat:
+            out[d] = flat
+    return out
+
+
+def qweather_weather_for_date(data, target_date: str) -> dict:
+    """按自然日取扁平天气字段（供 LLM today_weather 注入）。"""
+    return dict(qweather_records_by_date(data).get(str(target_date).strip(), {}))
+
+
 def fetch_qweather_today_snapshot(
     *,
-    location="101010100",
-    latitude=39.9042,
-    longitude=116.4074,
+    location=_QWEATHER_BEIJING_LOCATION_ID,
+    city_name=_QWEATHER_BEIJING_NAME,
+    latitude=_QWEATHER_BEIJING_LATITUDE,
+    longitude=_QWEATHER_BEIJING_LONGITUDE,
+    forecast_days=1,
     api_key=None,
     output_dir="output",
     output_filename="qweather_today_snapshot.json",
+    also_write_today_snapshot=False,
+    today_snapshot_filename="qweather_today_snapshot.json",
     timeout=15,
 ):
     """
-    调用和风天气（自定义域名）3 日预报与空气质量日预报，仅取「今日」（按中国标准时间日历日）
-    的日出/日落/紫外线/湿度，以及空气质量 indexes 中优先 CN AQI 的 aqiDisplay，并原子写入 output 下 JSON。
+    调用和风天气预报 GET /v7/weather/{days}d，拉取北京从今天起的多日预报。
 
-    api_key: 和风 API Key；为空时读取环境变量 QWEATHER_API_KEY。当前自定义 Host 使用查询参数
-    ``key`` 鉴权（与 devapi 一致）；未配置时接口可能返回 401。
+    - forecast_days=1：写入/返回今日扁平 dict（含 sunrise/sunset/tempMax/tempMin/uvIndex/humidity/aqiDisplay）
+    - forecast_days>1：写入/返回数组，每项含 date + 上述字段
+    - also_write_today_snapshot=True 且 forecast_days>1：从同一次 API 结果额外写入今日扁平快照
 
-    返回并写入的 dict 含键：sunrise、sunset、uvIndex、humidity、aqiDisplay。
-    uvIndex 为紫外线档位文案（0~2 暗光，3~4 弱光，5~6 亮光，7+ 强光），非数值。
-    aqiDisplay 为中国 AQI 六档中文等级（优/良/轻度污染/…），非原始指数。
+    默认北京 locationId=101010100。空气质量日预报通常仅覆盖近 3 天。
     """
     try:
         from dotenv import load_dotenv
@@ -295,91 +450,87 @@ def fetch_qweather_today_snapshot(
     except ImportError:
         pass
 
-    today = datetime.now(_CN_TZ).date()
-    today_str = today.isoformat()
-
+    want_days = max(1, int(forecast_days))
+    api_tier = _qweather_forecast_api_tier(want_days)
     key = api_key or os.getenv("QWEATHER_API_KEY")
-    weather_params = {"location": location}
+
+    weather_params = {"location": location, "lang": "zh"}
     if key:
         weather_params["key"] = key
 
-    weather_url = f"{_QWEATHER_HOST}/v7/weather/3d"
-    w_resp = requests.get(
-        weather_url,
-        params=weather_params,
-        timeout=timeout,
-    )
+    weather_url = f"{_QWEATHER_HOST}/v7/weather/{api_tier}d"
+    w_resp = requests.get(weather_url, params=weather_params, timeout=timeout)
     w_resp.raise_for_status()
     w_data = w_resp.json()
     if str(w_data.get("code")) != "200":
-        raise RuntimeError(f"和风天气 3d 接口异常: code={w_data.get('code')!r}")
+        raise RuntimeError(
+            f"和风 {api_tier} 日预报失败: code={w_data.get('code')!r}, "
+            f"location={location} ({city_name})"
+        )
 
-    daily_list = w_data.get("daily") or []
-    today_weather = next(
-        (d for d in daily_list if str(d.get("fxDate", "")) == today_str),
-        daily_list[0] if daily_list else None,
-    )
-    if not today_weather:
-        raise RuntimeError("和风天气 3d 返回中无 daily 数据")
+    daily_rows = w_data.get("daily") or []
+    if not daily_rows:
+        raise RuntimeError(
+            f"和风 {api_tier} 日预报无 daily 数据, location={location} ({city_name})"
+        )
 
+    aqi_by_date = {}
     air_url = f"{_QWEATHER_HOST}/airquality/v1/daily/{latitude}/{longitude}"
     air_params = {"key": key} if key else None
-    a_resp = requests.get(air_url, params=air_params, timeout=timeout)
-    a_resp.raise_for_status()
-    a_data = a_resp.json()
-    if not isinstance(a_data, dict):
-        raise RuntimeError("空气质量接口返回非 JSON 对象")
-    days = a_data.get("days") or []
+    try:
+        a_resp = requests.get(air_url, params=air_params, timeout=timeout)
+        a_resp.raise_for_status()
+        aqi_by_date = _qweather_aqi_map_by_cn_date(a_resp.json())
+    except Exception as exc:
+        print(f"  [warn] 空气质量日预报请求失败: {exc}")
 
-    def _parse_air_utc(value):
-        if not value:
-            return None
-        s = str(value).strip()
-        if s.endswith("Z"):
-            s = s[:-1] + "+00:00"
-        try:
-            dt = datetime.fromisoformat(s)
-        except ValueError:
-            return None
-        if dt.tzinfo is None:
-            dt = dt.replace(tzinfo=timezone.utc)
-        return dt.astimezone(timezone.utc)
-
-    def _day_covers_now_utc(day):
-        start = _parse_air_utc(day.get("forecastStartTime"))
-        end = _parse_air_utc(day.get("forecastEndTime"))
-        if start is None or end is None:
-            return False
-        now_utc = datetime.now(timezone.utc)
-        return start <= now_utc < end
-
-    today_air = next((d for d in days if _day_covers_now_utc(d)), None)
-    if today_air is None and days:
-        today_air = days[0]
-
-    aqi_display = None
-    if today_air:
-        indexes = today_air.get("indexes") or []
-        for idx in indexes:
-            if idx.get("code") == "cn-mee":
-                aqi_display = idx.get("aqiDisplay")
-                break
-        if aqi_display is None and indexes:
-            aqi_display = indexes[0].get("aqiDisplay")
-
-    raw_uv = today_weather.get("uvIndex")
-    aqi_lv = cn_aqi_six_level_from_display(aqi_display)
-    out = {
-        "sunrise": today_weather.get("sunrise"),
-        "sunset": today_weather.get("sunset"),
-        "uvIndex": uv_index_to_light_level_label(raw_uv),
-        "humidity": today_weather.get("humidity"),
-        "aqiDisplay": aqi_lv["aqi_six_level_label"],
+    location_meta = {
+        "city": city_name,
+        "locationId": location,
+        "latitude": latitude,
+        "longitude": longitude,
     }
 
-    out_path = os.path.join(os.path.abspath(output_dir), output_filename)
-    atomic_write_json(out_path, out, ensure_ascii=False, indent=2)
-    return out
+    records = []
+    for row in daily_rows[:want_days]:
+        fx = str(row.get("fxDate", ""))
+        records.append(_qweather_daily_row_to_record(row, aqi_display=aqi_by_date.get(fx)))
+
+    if want_days <= 1:
+        out_data = _qweather_flat_snapshot(records[0] if records else {})
+        print(
+            f"  和风今日快照: {city_name} (locationId={location}), "
+            f"date={records[0].get('date') if records else '?'}"
+        )
+    else:
+        out_data = []
+        for rec in records:
+            item = _qweather_flat_snapshot(rec)
+            if rec.get("date"):
+                item = {"date": rec["date"], **item}
+            out_data.append(item)
+        print(
+            f"  和风预报: {city_name} (locationId={location}), "
+            f"请求 {want_days} 天, 写入 {len(out_data)} 条 "
+            f"({records[0].get('date')} ~ {records[-1].get('date')})"
+        )
+
+    out_dir = os.path.abspath(output_dir)
+    out_path = os.path.join(out_dir, output_filename)
+    atomic_write_json(out_path, out_data, ensure_ascii=False, indent=2)
+    if want_days > 1 and also_write_today_snapshot:
+        today_flat = qweather_today_record_from_saved(out_data)
+        today_path = os.path.join(out_dir, today_snapshot_filename)
+        atomic_write_json(today_path, today_flat, ensure_ascii=False, indent=2)
+        print(f"  和风今日快照（由 {forecast_days} 日预报派生）→ {today_path}")
+    return out_data
+
+
+def fetch_qweather_monthly_data(**kwargs):
+    """兼容别名：等价于 forecast_days=30。"""
+    kwargs.setdefault("forecast_days", 30)
+    kwargs.setdefault("output_filename", "qweather_monthly_data.json")
+    return fetch_qweather_today_snapshot(**kwargs)
 
 
 def _amap_geocode(address, api_key, city=None, timeout=10):
@@ -506,9 +657,9 @@ def get_amap_route_info(
     }
 
 
-def _clamp_score(value):
-    """将分值限制在 0~100。"""
-    return max(0.0, min(100.0, float(value)))
+def _clamp_score(v, lo=0.0, hi=100.0):
+    """将分值限制在 lo~hi。"""
+    return max(lo, min(hi, float(v)))
 
 
 def _safe_float(value, default=0.0):
@@ -559,17 +710,32 @@ def score_sleep_duration(total_sleep_minutes):
     return _clamp_score(100 - deduction_steps * 5)
 
 
+def _lerp(x: float, x0: float, y0: float, x1: float, y1: float) -> float:
+    """线性插值。"""
+    if x1 == x0:
+        return (y0 + y1) / 2.0
+    return y0 + (y1 - y0) * (x - x0) / (x1 - x0)
+
+
 def score_sleep_latency(latency_minutes):
-    """入睡快慢得分。"""
-    minutes = _safe_float(latency_minutes)
-    if minutes <= 15:
-        return 100.0
-    if minutes <= 30:
-        return 80.0
-    if minutes <= 45:
-        return 60.0
-    if minutes <= 60:
-        return 40.0
+    """连续评分：3min→95, 8min→85, 15min→72, 20min→62, 30min→48, 45min→30, 60min→15, 90min→0。"""
+    m = _safe_float(latency_minutes)
+    if m < 3:
+        return 95.0
+    if m < 8:
+        return _clamp_score(_lerp(m, 3, 95, 8, 85))
+    if m < 15:
+        return _clamp_score(_lerp(m, 8, 85, 15, 72))
+    if m < 20:
+        return _clamp_score(_lerp(m, 15, 72, 20, 62))
+    if m < 30:
+        return _clamp_score(_lerp(m, 20, 62, 30, 48))
+    if m < 45:
+        return _clamp_score(_lerp(m, 30, 48, 45, 30))
+    if m < 60:
+        return _clamp_score(_lerp(m, 45, 30, 60, 15))
+    if m < 90:
+        return _clamp_score(_lerp(m, 60, 15, 90, 0))
     return 0.0
 
 
@@ -588,25 +754,31 @@ def score_night_stability(stability_ratio):
 
 
 def score_sleep_regularity(fluctuation_minutes):
-    """作息规律度得分（综合波动分钟数 -> 分档）。"""
-    minutes = _safe_float(fluctuation_minutes)
-    if minutes <= 30:
-        return 100.0
-    if minutes <= 60:
-        return 80.0
-    if minutes <= 90:
-        return 60.0
-    if minutes <= 120:
-        return 40.0
+    """连续评分：15min→95, 25min→75, 40min→58, 55min→45, 70min→32, 100min→18, 150min→0。"""
+    m = _safe_float(fluctuation_minutes)
+    if m < 15:
+        return 95.0
+    if m < 25:
+        return _clamp_score(_lerp(m, 15, 95, 25, 75))
+    if m < 40:
+        return _clamp_score(_lerp(m, 25, 75, 40, 58))
+    if m < 55:
+        return _clamp_score(_lerp(m, 40, 58, 55, 45))
+    if m < 70:
+        return _clamp_score(_lerp(m, 55, 45, 70, 32))
+    if m < 100:
+        return _clamp_score(_lerp(m, 70, 32, 100, 18))
+    if m < 150:
+        return _clamp_score(_lerp(m, 100, 18, 150, 0))
     return 0.0
 
 
 def score_no_abnormal_events(total_sleep_minutes, abnormal_total_duration_sec, abnormal_count):
     """
-    异常事件得分（时长占比 + 次数修正）：
+    异常事件得分（时长占比 + 次数修正，连续重映射）：
     1) 基础占比 = (总睡眠时长 - 异常总时长) / 总睡眠时长
     2) 次数修正：<=2 不变，3~5 *0.8，>=6 *0.6
-    3) 最终占比<30% 则 0 分，否则 最终占比*100
+    3) 最终占比<30% 则 0 分，否则按连续曲线映射到 0-90
     """
     total_sleep_sec = _safe_float(total_sleep_minutes) * 60.0
     abnormal_sec = max(0.0, _safe_float(abnormal_total_duration_sec))
@@ -628,7 +800,24 @@ def score_no_abnormal_events(total_sleep_minutes, abnormal_total_duration_sec, a
     ratio_after_count = max(0.0, min(1.0, ratio_after_count))
     if ratio_after_count < 0.3:
         return 0.0, base_ratio, ratio_after_count
-    return _clamp_score(ratio_after_count * 100.0), base_ratio, ratio_after_count
+    # 基于事件次数的评分（短事件时长占比几乎为1，无法区分）
+    # count 0→95, 1→85, 2→70, 3→55, 5→25, 8→0
+    c = count
+    if c <= 0:
+        count_score = 95.0
+    elif c <= 1:
+        count_score = _lerp(c, 0, 95, 1, 85)
+    elif c <= 2:
+        count_score = _lerp(c, 1, 85, 2, 70)
+    elif c <= 3:
+        count_score = _lerp(c, 2, 70, 3, 55)
+    elif c <= 5:
+        count_score = _lerp(c, 3, 55, 5, 25)
+    elif c <= 8:
+        count_score = _lerp(c, 5, 25, 8, 0)
+    else:
+        count_score = 0.0
+    return _clamp_score(count_score), base_ratio, ratio_after_count
 
 
 def _iter_user_ids_from_output_dir(output_dir):

@@ -91,19 +91,20 @@ def _default_tomorrow_from_record_date(record_date: str) -> str:
 def _resolve_calendar_events(
     user_id: str, schedules_dir: str, output_dir: str
 ) -> tuple[list[dict], str]:
-    """优先 schedules_dir，否则回退到 output_dir 下同文件名。"""
+    """优先 schedules_dir 下非空列表；否则回退 output_dir。均无则 []（仍会调 LLM）。"""
     primary = os.path.join(PROJECT_ROOT, schedules_dir, f"{user_id}_calendar_events.json")
+    fallback = os.path.join(os.path.abspath(output_dir), f"{user_id}_calendar_events.json")
     events = _load_json_events_list(primary)
     if events:
         return events, primary
-    fallback = os.path.join(PROJECT_ROOT, output_dir, f"{user_id}_calendar_events.json")
     fb = _load_json_events_list(fallback)
     if fb:
-        print(
-            f"提示: 未在 {primary} 读到有效日程列表，已回退使用: {fallback}"
-        )
+        if os.path.isfile(primary):
+            print(f"提示: {primary} 无日程条目，已回退: {fallback}")
+        else:
+            print(f"提示: 未找到 {primary}，已使用: {fallback}")
         return fb, fallback
-    return [], primary
+    return [], primary if os.path.isfile(primary) else fallback
 
 
 def main():

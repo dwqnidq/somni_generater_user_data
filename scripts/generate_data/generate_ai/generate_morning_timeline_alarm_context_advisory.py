@@ -33,6 +33,7 @@ for _p in (PROJECT_ROOT, GEN_DATA_DIR):
     if _p not in sys.path:
         sys.path.insert(0, _p)
 
+from generate_ai.llm_resume import run_llm_date_batch  # noqa: E402
 from generate_ai.multi_day_llm_helpers import apply_max_records, merge_last_skipped  # noqa: E402
 from generate_ai.runtime import PROJECT_ROOT, bootstrap_llm, load_health_rows  # noqa: E402
 
@@ -95,17 +96,20 @@ def _build_schedule_for_tomorrow(events: List[dict], tomorrow: str) -> dict:
 def _resolve_calendar_events(
     uid: str, schedules_dir: str, output_dir: str
 ) -> Tuple[List[dict], str]:
-    """优先 schedules_dir，否则回退到 output_dir 下同文件名。"""
+    """优先 schedules_dir 下**非空**日程列表；否则回退 output_dir。均无则 []（仍会对每日调 LLM）。"""
     primary = os.path.join(PROJECT_ROOT, schedules_dir, f"{uid}_calendar_events.json")
+    fallback = os.path.join(os.path.abspath(output_dir), f"{uid}_calendar_events.json")
     events = _load_json_events_list(primary)
     if events:
         return events, primary
-    fallback = os.path.join(output_dir, f"{uid}_calendar_events.json")
     fb = _load_json_events_list(fallback)
     if fb:
-        print(f"  提示: 未在 {primary} 读到有效日程，已回退: {fallback}")
+        if os.path.isfile(primary):
+            print(f"  提示: {primary} 无日程条目，已回退: {fallback}")
+        else:
+            print(f"  提示: 未找到 {primary}，已使用: {fallback}")
         return fb, fallback
-    return [], primary
+    return [], primary if os.path.isfile(primary) else fallback
 
 
 def _resolve_system_prompt(system_prompt_path: Optional[str]) -> str:
@@ -176,6 +180,13 @@ def generate_alarm_insight_for_date(
     instruction = _resolve_system_prompt(system_prompt_path)
     user_payload = _build_user_payload(tomorrow, weather, traffic, calendar_events)
     user_msg = _build_user_msg(user_payload)
+    if not llm_client.sleep_report_llm_enabled:
+        print(
+            "  [错误] sleep_report_llm 未启用（需先 bootstrap_llm / main.py --with-llm），"
+            "未发起 API 请求"
+        )
+        return None
+
     raw = llm_client.call_qwen_api(
         user_msg,
         system_prompt=instruction,
@@ -185,12 +196,16 @@ def generate_alarm_insight_for_date(
         sleep_report_llm=True,
     )
     if not raw or not raw.strip():
+        print("  [错误] LLM 返回为空（鉴权、限流或 API 错误，见上方日志）")
         return None
     try:
         parsed = llm_client.parse_json_from_response(raw)
-    except Exception:
+    except Exception as e:
+        preview = raw.strip().replace("\n", " ")[:240]
+        print(f"  [错误] JSON 解析失败: {e}；响应摘要: {preview!r}")
         return None
     if not isinstance(parsed, dict):
+        print("  [错误] 模型返回非 JSON 对象")
         return None
     return parsed.get("alarm_insight", "")
 
@@ -204,14 +219,27 @@ def generate_alarm_insight_for_uid(
     schedules_dir: str = DEFAULT_SCHEDULES_DIR,
     retry_delay: float = 0.5,
     max_records: Optional[int] = None,
+    resume: bool = False,
 ) -> Tuple[List[dict], Optional[str]]:
     """为单个用户批量生成每日 alarm_insight。
 
-    无明日日程时仍生成；天气/路况为空时仍调用模型（与 preview 一致），由提示词约束不臆造。
+    无论明日是否有日程、日程文件是否为空，均对范围内每个 health 日调用 LLM；
+    无日程时 payload 中 has_tomorrow_events=false，由提示词仅结合天气/路况。
+    天气/路况为空时仍调用模型（与 preview 一致）。
 
     Returns:
-        (rows, last_skipped_date)：last_skipped_date 为范围内 LLM 失败而跳过的最晚一日。
+        (rows, last_skipped_date)：last_skipped_date 为范围内 LLM 失败而跳过的最晚一日（与日程无关）。
     """
+    from generate_ai import llm_client
+
+    if not llm_client.sleep_report_llm_enabled:
+        if not bootstrap_llm(strict=False):
+            print(
+                "  [错误] 豆包 LLM 未就绪；晨间洞察需 sleep_report_llm 开关。"
+                "请用 main.py --with-llm 或先执行本脚本 CLI（会 bootstrap_llm）。"
+            )
+            return [], None
+
     try:
         health_rows = load_health_rows(uid, output_dir)
     except FileNotFoundError:
@@ -243,19 +271,16 @@ def generate_alarm_insight_for_uid(
 
     rows = apply_max_records(rows, max_records)
 
-    results: List[dict] = []
+    dates = [str(r.get("record_date") or "") for r in rows if r.get("record_date")]
+    out_path = os.path.join(output_dir, f"{uid}_morning_alarm_insight.json")
     last_skipped: Optional[str] = None
-    for i, row in enumerate(rows):
-        rd = str(row.get("record_date") or "")
+
+    def _on_soft_fail(rd: str) -> None:
+        nonlocal last_skipped
+        last_skipped = merge_last_skipped(last_skipped, rd)
+
+    def _one(rd: str) -> Optional[dict]:
         tomorrow = _tomorrow_of(rd)
-        print(f"  [{i + 1}/{len(rows)}] uid={uid} date={rd} tomorrow={tomorrow} …", end=" ", flush=True)
-        schedule = _build_schedule_for_tomorrow(calendar_events, tomorrow)
-        if calendar_events and not schedule.get("events_tomorrow_ordered"):
-            print(
-                f"\n  提示: 无 event_date == {tomorrow} 的日程，schedule 明日列表为空",
-                end=" ",
-                flush=True,
-            )
         insight = generate_alarm_insight_for_date(
             record_date=rd,
             tomorrow=tomorrow,
@@ -265,19 +290,24 @@ def generate_alarm_insight_for_uid(
             system_prompt_path=system_prompt_path,
         )
         if insight is None:
-            print("失败（已跳过）")
-            last_skipped = merge_last_skipped(last_skipped, rd)
-        else:
-            print("完成")
-            results.append({
-                "uid": uid,
-                "record_date": rd,
-                "tomorrow_date": tomorrow,
-                "alarm_insight": insight,
-            })
-        if i < len(rows) - 1:
-            time.sleep(retry_delay)
+            return None
+        return {
+            "uid": uid,
+            "record_date": rd,
+            "tomorrow_date": tomorrow,
+            "alarm_insight": insight,
+        }
 
+    results = run_llm_date_batch(
+        uid=uid,
+        output_path=out_path,
+        resume=resume,
+        dates=dates,
+        process_date=_one,
+        retry_delay=retry_delay,
+        on_soft_fail=_on_soft_fail,
+        is_complete=lambda r: bool(str(r.get("alarm_insight") or "").strip()),
+    )
     return results, last_skipped
 
 

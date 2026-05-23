@@ -1,8 +1,8 @@
 {
-  "record_date": "2026-05-01",
-  "tomorrow_date": "2026-05-02",
+  "record_date": "2026-05-15",
+  "tomorrow_date": "2026-05-16",
   "weather_path": "/Users/edy/Downloads/somni_generater_user_data/output/69aea6f3af5e6cbf0802796a_weather.json",
   "traffic_path": "/Users/edy/Downloads/somni_generater_user_data/output/69aea6f3af5e6cbf0802796a_traffic_link_realtime.json",
   "calendar_path": "/Users/edy/Downloads/somni_generater_user_data/output/69aea6f3af5e6cbf0802796a_calendar_events.json",
-  "alarm_insight": "明天早上没有日程安排。明早将有小雨，气温约27℃，空气湿度较低，体感偏干燥。再结合路况来看，相关路段处于缓行状态，可能会导致你的通行时间有所延长。"
+  "alarm_insight": "了解到你明日10:00有一个工作相关的日程。明早将有小雨，路面湿滑，当日气温区间在18至31摄氏度，空气湿度较低。综合路况来看，该路段处于拥堵状态，通行车速较慢，降水与拥堵预计将使通勤额外增加约10-20分钟。"
 }

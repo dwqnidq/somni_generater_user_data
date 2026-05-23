@@ -1,0 +1,18 @@
+{
+  "uid": "69aea6f3af5e6cbf0802796a",
+  "stats_date": "2026-05-25",
+  "user_payload": {
+    "deep_sleep": 100,
+    "city_deep_sleep": 68,
+    "sleep_duration": 100,
+    "city_sleep_duration": 91,
+    "sleep_efficiency": 80,
+    "city_sleep_efficiency": 48,
+    "abnormal_events": 99,
+    "city_abnormal_events": 78,
+    "routine_regularity": 80,
+    "city_routine_regularity": 45,
+    "city_avg_score": 69
+  },
+  "ranking_reason": "你这深睡特别扎实，入睡顺滑还睡得稳，作息也规律，睡眠时长也够给力，整体在同城的表现挺亮眼，其他小细节和大伙差不多。"
+}

@@ -1,0 +1,66 @@
+========================================
+atomic_swap_insert.py 脚本说明
+========================================
+
+文件位置: scripts/insert_data/atomic_swap_insert.py
+
+----------------------------------------
+作用
+----------------------------------------
+将 output/ 目录下的 JSON 数据插入 MongoDB，使用原子替换模式，保证数据安全。
+
+----------------------------------------
+原子替换流程（以 somni_records 为例）
+----------------------------------------
+1. 读取 output/ 下所有 *_health_data.json 文件
+2. 插入到一个临时集合 somni_records_a3f8b2（6位随机hex后缀）
+3. drop 删除旧集合 somni_records
+4. rename 临时集合 somni_records_a3f8b2 → somni_records
+
+这样做的好处：如果插入中途失败，旧数据不受影响。
+只有全部插入成功后才会替换旧集合。
+
+----------------------------------------
+用法
+----------------------------------------
+# 处理所有数据类型
+python scripts/insert_data/atomic_swap_insert.py all
+
+# 只处理某个类型
+python scripts/insert_data/atomic_swap_insert.py health_data
+
+# 处理多个类型
+python scripts/insert_data/atomic_swap_insert.py health_data vitals_data
+
+----------------------------------------
+包含的 11 个集合映射
+----------------------------------------
+数据类型                    → MongoDB 集合名
+----------------------------------------
+health_data                 → somni_records
+calendar_events             → somni_schedules
+vitals_data                 → somni_physiological_data
+daily_emotion_steps         → somni_fusion
+sleep_art_data              → somni_dream_universe_assets
+sleep_district              → somni_sleep_district
+sleep_analysis              → somni_sleep_analysis
+sleep_events                → somni_events
+sleep_report                → somni_reports
+environment_data            → somni_environment_data
+ai_analysis_14d             → somni_ai_insights
+
+注意：somni_temp_plans 不包含在内（你说不需要管）。
+
+----------------------------------------
+与原有 insert_somni_records.py 的区别
+----------------------------------------
+1. 原脚本直接插入旧集合，如果集合不存在就跳过
+2. 新脚本用原子替换模式，先插临时集合再 swap
+3. 新脚本合并了所有类型到一个文件，不用分开调用
+4. 日期字段转换和 ObjectId 处理逻辑沿用原脚本
+
+----------------------------------------
+后续计划
+----------------------------------------
+这个脚本未来会接入 main.py，在数据生成完成后自动运行。
+但目前还没有接入，需要手动执行。

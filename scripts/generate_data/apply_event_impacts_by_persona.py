@@ -307,23 +307,34 @@ def _apply_vitals_impacts(events_day: list[dict], vitals_day: list[dict]) -> Non
         m = _event_local_min(ev)
         if m is None:
             continue
-        for off, hr_add, rr_add in [
-            (-3, 1, 0),
-            (-2, 2, 1),
-            (-1, 3, 1),
-            (0, 5, 2),
-            (1, 4, 2),
-            (2, 3, 1),
-            (3, 2, 1),
-            (4, 1, 0),
-        ]:
+        # 事件影响分三段：渐起 → 核心峰值 → 渐降回落
+        # 渐起（offset -3 ~ -1）：逐步加码
+        # 核心（offset 0 ~ +2）：维持 min_hr_threshold 下限
+        # 渐降（offset +3 ~ +6）：下限逐步降低，最终回到自然基线
+        event_steps = [
+            # (offset, hr_add, rr_add, hr_floor)
+            (-3, 1, 0, 0),
+            (-2, 2, 1, 0),
+            (-1, 3, 1, 0),
+            (0, 5, 2, min_hr_threshold),
+            (1, 4, 2, min_hr_threshold),
+            (2, 3, 1, min_hr_threshold),
+            # 渐降回落：逐步降低下限，避免断崖式下降
+            (3, 2, 1, int(min_hr_threshold * 0.85)),
+            (4, 1, 0, int(min_hr_threshold * 0.65)),
+            (5, 0, 0, int(min_hr_threshold * 0.40)),
+            (6, 0, 0, 0),
+        ]
+        for off, hr_add, rr_add, hr_floor in event_steps:
             mm = (m + off) % 1440
             for idx in idx_by_min.get(mm, []):
                 metrics = vitals_day[idx].get("metrics") or {}
                 hr = _vitals_int(metrics, "heart_rate", 65)
                 rr = _vitals_int(metrics, "respiration_rate", 15)
-                # 事件影响窗口内：噩梦应激>=100，其它异常体动>=80
-                metrics["heart_rate"] = min(130, max(min_hr_threshold, hr + hr_add))
+                new_hr = hr + hr_add
+                if hr_floor > 0:
+                    new_hr = max(hr_floor, new_hr)
+                metrics["heart_rate"] = min(130, new_hr)
                 metrics["respiration_rate"] = min(30, max(8, rr + rr_add))
                 vitals_day[idx]["metrics"] = metrics
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-按固定顺序依次调用各独立写回脚本（不调用模型）。
+按固定顺序依次调用各独立写回脚本（不调用模型）；最后合并 sleep_report 中同分钟 Snore audios。
 
 参数
   uid, output_dir：必填路径上下文。
@@ -31,6 +31,9 @@ from merge_notice import merge_notice_to_report  # noqa: E402
 from merge_sleep_events_intervention import merge_sleep_events_details_from_intervention  # noqa: E402
 from merge_sleep_auditory import merge_sleep_auditory_to_report  # noqa: E402
 from merge_sleep_quality import merge_sleep_quality_to_report  # noqa: E402
+from merge_snore_audios import merge_snore_audios_to_report  # noqa: E402
+from merge_snoring_data_points import merge_snoring_data_points_to_report  # noqa: E402
+from merge_ranking_reason import merge_ranking_reason_to_analysis  # noqa: E402
 
 from _common import default_output_dir  # noqa: E402
 
@@ -91,6 +94,23 @@ def run_write_back_for_uid(
     te, me = merge_env_intervention_to_report(uid, output_dir, start_date=start_date, end_date=end_date)
     stats["env_intervention_appended"] = te
     stats["env_intervention_skipped"] = me
+
+    tr, mr = merge_ranking_reason_to_analysis(uid, output_dir, start_date=start_date, end_date=end_date)
+    stats["ranking_reason_updated"] = tr
+    stats["ranking_reason_skipped"] = mr
+
+    sm, skm, removed = merge_snore_audios_to_report(
+        uid, output_dir, start_date=start_date, end_date=end_date
+    )
+    stats["snore_audios_merged_days"] = sm
+    stats["snore_audios_merge_skipped"] = skm
+    stats["snore_entries_removed"] = removed
+
+    sdp, sdp_skip = merge_snoring_data_points_to_report(
+        uid, output_dir, start_date=start_date, end_date=end_date
+    )
+    stats["snoring_data_points_updated_days"] = sdp
+    stats["snoring_data_points_skipped"] = sdp_skip
 
     return stats
 
