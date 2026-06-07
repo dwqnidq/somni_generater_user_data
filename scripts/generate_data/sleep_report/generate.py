@@ -57,6 +57,7 @@ def generate_sleep_report(
     personality_type="M-L-C",
     sleep_events_index=None,
     recent_titles=None,
+    output_dir="output",
 ):
     """根据睡眠数据生成单条睡眠报告（纯数据，不调用 LLM）。"""
     raw_data = sleep_data["raw_data"]
@@ -112,11 +113,16 @@ def generate_sleep_report(
                 date_sleep_events = []
 
     # 6. 听觉模块
-    auditory = generate_auditory(sleep_data, user_id=user_id, sleep_events_index=sleep_events_index)
+    auditory = generate_auditory(
+        sleep_data,
+        user_id=user_id,
+        sleep_events_index=sleep_events_index,
+        output_dir=output_dir,
+    )
     auditory_snore_module = build_auditory_snore_module(auditory.get("audios", []), record_date)
 
     # 7. 环境摘要
-    environment_summary = generate_environment_summary(user_id, record_date)
+    environment_summary = generate_environment_summary(user_id, record_date, output_dir=output_dir)
 
     # 8. LLM 步骤跳过 → 空模块
     final_pain_module = []

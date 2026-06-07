@@ -22,14 +22,14 @@ def _map_str(value: str, mapping: dict[str, str]) -> str:
 # --- ai_analysis_14d ---
 def extract_ai_analysis_14d(doc: dict[str, Any]) -> list[str]:
     out: list[str] = []
-    for key in ("title", "sleep_insight", "schedule_insight"):
+    for key in ("title", "sleep_insight", "schedule_insight", "fusion_insight"):
         _append_if_chinese(out, doc.get(key))
     return out
 
 
 def apply_ai_analysis_14d(doc: dict[str, Any], mapping: dict[str, str]) -> dict[str, Any]:
     result = dict(doc)
-    for key in ("title", "sleep_insight", "schedule_insight"):
+    for key in ("title", "sleep_insight", "schedule_insight", "fusion_insight"):
         if isinstance(result.get(key), str):
             result[key] = _map_str(result[key], mapping)
     result["language"] = "en"
@@ -165,12 +165,57 @@ def _append_env_summary_status(out: list[str], env: Any) -> None:
             _append_if_chinese(out, block.get("status"))
 
 
+def _append_sleep_structure_status(out: list[str], structure: Any) -> None:
+    if not isinstance(structure, dict):
+        return
+    for block in structure.values():
+        if isinstance(block, dict):
+            _append_if_chinese(out, block.get("status"))
+
+
+def _append_auditory_fields(out: list[str], auditory: Any) -> None:
+    if not isinstance(auditory, dict):
+        return
+    _append_if_chinese(out, auditory.get("target"))
+    _append_if_chinese(out, auditory.get("risk_alert"))
+    modules = auditory.get("module")
+    if isinstance(modules, list):
+        for item in modules:
+            if not isinstance(item, dict):
+                continue
+            for key in ("target", "description"):
+                _append_if_chinese(out, item.get(key))
+
+
+def _append_hidden_discovery_fields(out: list[str], hd: Any) -> None:
+    if not isinstance(hd, dict):
+        return
+    modules = hd.get("module")
+    if isinstance(modules, list):
+        for item in modules:
+            if not isinstance(item, dict):
+                continue
+            for key in ("target", "description"):
+                _append_if_chinese(out, item.get(key))
+    discover = hd.get("discover")
+    if isinstance(discover, list):
+        for item in discover:
+            if not isinstance(item, dict):
+                continue
+            for key in ("title", "content"):
+                _append_if_chinese(out, item.get(key))
+
+
 def extract_sleep_report(doc: dict[str, Any]) -> list[str]:
     out: list[str] = []
     main = doc.get("main")
     if isinstance(main, dict):
         for key in ("title", "summary"):
             _append_if_chinese(out, main.get(key))
+    notice = doc.get("notice")
+    if isinstance(notice, dict):
+        for key in ("title", "content"):
+            _append_if_chinese(out, notice.get(key))
     summary = doc.get("sleep_summary")
     if isinstance(summary, dict):
         _append_if_chinese(out, summary.get("body_battery_status"))
@@ -193,6 +238,9 @@ def extract_sleep_report(doc: dict[str, Any]) -> list[str]:
                     continue
                 for key in ("target", "description"):
                     _append_if_chinese(out, item.get(key))
+        _append_sleep_structure_status(out, quality.get("sleep_structure"))
+        _append_auditory_fields(out, quality.get("auditory"))
+        _append_hidden_discovery_fields(out, quality.get("hidden_discovery"))
     return out
 
 
@@ -205,6 +253,13 @@ def apply_sleep_report(doc: dict[str, Any], mapping: dict[str, str]) -> dict[str
             if isinstance(patched.get(key), str):
                 patched[key] = _map_str(patched[key], mapping)
         result["main"] = patched
+    notice = result.get("notice")
+    if isinstance(notice, dict):
+        patched_notice = dict(notice)
+        for key in ("title", "content"):
+            if isinstance(patched_notice.get(key), str):
+                patched_notice[key] = _map_str(patched_notice[key], mapping)
+        result["notice"] = patched_notice
     summary = result.get("sleep_summary")
     if isinstance(summary, dict):
         patched = dict(summary)
@@ -258,6 +313,68 @@ def apply_sleep_report(doc: dict[str, Any], mapping: dict[str, str]) -> dict[str
                         row[key] = _map_str(row[key], mapping)
                 new_modules.append(row)
             patched_q["module"] = new_modules
+        structure = patched_q.get("sleep_structure")
+        if isinstance(structure, dict):
+            new_structure: dict[str, Any] = {}
+            for name, block in structure.items():
+                if not isinstance(block, dict):
+                    new_structure[name] = block
+                    continue
+                row = dict(block)
+                if isinstance(row.get("status"), str):
+                    row["status"] = _map_str(row["status"], mapping)
+                new_structure[name] = row
+            patched_q["sleep_structure"] = new_structure
+        auditory = patched_q.get("auditory")
+        if isinstance(auditory, dict):
+            patched_aud = dict(auditory)
+            for key in ("target", "risk_alert"):
+                if isinstance(patched_aud.get(key), str) and patched_aud[key]:
+                    patched_aud[key] = _map_str(patched_aud[key], mapping)
+            aud_modules = patched_aud.get("module")
+            if isinstance(aud_modules, list):
+                new_aud_modules: list[Any] = []
+                for item in aud_modules:
+                    if not isinstance(item, dict):
+                        new_aud_modules.append(item)
+                        continue
+                    row = dict(item)
+                    for key in ("target", "description"):
+                        if isinstance(row.get(key), str):
+                            row[key] = _map_str(row[key], mapping)
+                    new_aud_modules.append(row)
+                patched_aud["module"] = new_aud_modules
+            patched_q["auditory"] = patched_aud
+        hd = patched_q.get("hidden_discovery")
+        if isinstance(hd, dict):
+            patched_hd = dict(hd)
+            hd_modules = patched_hd.get("module")
+            if isinstance(hd_modules, list):
+                new_hd_modules: list[Any] = []
+                for item in hd_modules:
+                    if not isinstance(item, dict):
+                        new_hd_modules.append(item)
+                        continue
+                    row = dict(item)
+                    for key in ("target", "description"):
+                        if isinstance(row.get(key), str):
+                            row[key] = _map_str(row[key], mapping)
+                    new_hd_modules.append(row)
+                patched_hd["module"] = new_hd_modules
+            discover = patched_hd.get("discover")
+            if isinstance(discover, list):
+                new_discover: list[Any] = []
+                for item in discover:
+                    if not isinstance(item, dict):
+                        new_discover.append(item)
+                        continue
+                    row = dict(item)
+                    for key in ("title", "content"):
+                        if isinstance(row.get(key), str):
+                            row[key] = _map_str(row[key], mapping)
+                    new_discover.append(row)
+                patched_hd["discover"] = new_discover
+            patched_q["hidden_discovery"] = patched_hd
         result["quality_analysis"] = patched_q
     result["language"] = "en"
     return result
@@ -308,7 +425,7 @@ FIELD_HANDLERS: dict[str, tuple[ExtractFn, ApplyFn]] = {
 
 # 各类型可翻译字段说明（供日志 / dry-run 展示）
 FIELD_LABELS: dict[str, tuple[str, ...]] = {
-    "ai_analysis_14d": ("title", "sleep_insight", "schedule_insight"),
+    "ai_analysis_14d": ("title", "sleep_insight", "schedule_insight", "fusion_insight"),
     "morning_alarm_insight": ("alarm_insight",),
     "calendar_events": ("event_name",),
     "sleep_art_data": ("title", "description"),
@@ -331,12 +448,23 @@ FIELD_LABELS: dict[str, tuple[str, ...]] = {
     "sleep_report": (
         "main.title",
         "main.summary",
+        "notice.title",
+        "notice.content",
         "sleep_summary.body_battery_status",
         "pain_point_analysis.module[].title",
         "pain_point_analysis.module[].description",
         "pain_point_analysis.environment_summary.*.status",
         "quality_analysis.module[].target",
         "quality_analysis.module[].description",
+        "quality_analysis.sleep_structure.*.status",
+        "quality_analysis.auditory.module[].target",
+        "quality_analysis.auditory.module[].description",
+        "quality_analysis.auditory.target",
+        "quality_analysis.auditory.risk_alert",
+        "quality_analysis.hidden_discovery.module[].target",
+        "quality_analysis.hidden_discovery.module[].description",
+        "quality_analysis.hidden_discovery.discover[].title",
+        "quality_analysis.hidden_discovery.discover[].content",
     ),
 }
 
