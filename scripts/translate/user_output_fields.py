@@ -156,6 +156,113 @@ def apply_somni_sleep_analysis(doc: dict[str, Any], mapping: dict[str, str]) -> 
     return result
 
 
+# --- sleep_report (somni_reports) ---
+def _append_env_summary_status(out: list[str], env: Any) -> None:
+    if not isinstance(env, dict):
+        return
+    for block in env.values():
+        if isinstance(block, dict):
+            _append_if_chinese(out, block.get("status"))
+
+
+def extract_sleep_report(doc: dict[str, Any]) -> list[str]:
+    out: list[str] = []
+    main = doc.get("main")
+    if isinstance(main, dict):
+        for key in ("title", "summary"):
+            _append_if_chinese(out, main.get(key))
+    summary = doc.get("sleep_summary")
+    if isinstance(summary, dict):
+        _append_if_chinese(out, summary.get("body_battery_status"))
+    pain = doc.get("pain_point_analysis")
+    if isinstance(pain, dict):
+        modules = pain.get("module")
+        if isinstance(modules, list):
+            for item in modules:
+                if not isinstance(item, dict):
+                    continue
+                for key in ("title", "description"):
+                    _append_if_chinese(out, item.get(key))
+        _append_env_summary_status(out, pain.get("environment_summary"))
+    quality = doc.get("quality_analysis")
+    if isinstance(quality, dict):
+        modules = quality.get("module")
+        if isinstance(modules, list):
+            for item in modules:
+                if not isinstance(item, dict):
+                    continue
+                for key in ("target", "description"):
+                    _append_if_chinese(out, item.get(key))
+    return out
+
+
+def apply_sleep_report(doc: dict[str, Any], mapping: dict[str, str]) -> dict[str, Any]:
+    result = dict(doc)
+    main = result.get("main")
+    if isinstance(main, dict):
+        patched = dict(main)
+        for key in ("title", "summary"):
+            if isinstance(patched.get(key), str):
+                patched[key] = _map_str(patched[key], mapping)
+        result["main"] = patched
+    summary = result.get("sleep_summary")
+    if isinstance(summary, dict):
+        patched = dict(summary)
+        if isinstance(patched.get("body_battery_status"), str):
+            patched["body_battery_status"] = _map_str(
+                patched["body_battery_status"], mapping
+            )
+        result["sleep_summary"] = patched
+    pain = result.get("pain_point_analysis")
+    if isinstance(pain, dict):
+        patched_pain = dict(pain)
+        modules = patched_pain.get("module")
+        if isinstance(modules, list):
+            new_modules: list[Any] = []
+            for item in modules:
+                if not isinstance(item, dict):
+                    new_modules.append(item)
+                    continue
+                row = dict(item)
+                for key in ("title", "description"):
+                    if isinstance(row.get(key), str):
+                        row[key] = _map_str(row[key], mapping)
+                new_modules.append(row)
+            patched_pain["module"] = new_modules
+        env = patched_pain.get("environment_summary")
+        if isinstance(env, dict):
+            new_env: dict[str, Any] = {}
+            for name, block in env.items():
+                if not isinstance(block, dict):
+                    new_env[name] = block
+                    continue
+                row = dict(block)
+                if isinstance(row.get("status"), str):
+                    row["status"] = _map_str(row["status"], mapping)
+                new_env[name] = row
+            patched_pain["environment_summary"] = new_env
+        result["pain_point_analysis"] = patched_pain
+    quality = result.get("quality_analysis")
+    if isinstance(quality, dict):
+        patched_q = dict(quality)
+        modules = patched_q.get("module")
+        if isinstance(modules, list):
+            new_modules = []
+            for item in modules:
+                if not isinstance(item, dict):
+                    new_modules.append(item)
+                    continue
+                row = dict(item)
+                for key in ("target", "description"):
+                    if isinstance(row.get(key), str):
+                        row[key] = _map_str(row[key], mapping)
+                new_modules.append(row)
+            patched_q["module"] = new_modules
+        result["quality_analysis"] = patched_q
+    result["language"] = "en"
+    return result
+
+
 # --- sleep_events ---
 def extract_sleep_events(doc: dict[str, Any]) -> list[str]:
     out: list[str] = []
@@ -196,6 +303,7 @@ FIELD_HANDLERS: dict[str, tuple[ExtractFn, ApplyFn]] = {
     ),
     "somni_sleep_analysis": (extract_somni_sleep_analysis, apply_somni_sleep_analysis),
     "sleep_events": (extract_sleep_events, apply_sleep_events),
+    "sleep_report": (extract_sleep_report, apply_sleep_report),
 }
 
 # 各类型可翻译字段说明（供日志 / dry-run 展示）
@@ -219,6 +327,16 @@ FIELD_LABELS: dict[str, tuple[str, ...]] = {
         "detail.trigger_cause",
         "detail.action_taken",
         "detail.result_summary",
+    ),
+    "sleep_report": (
+        "main.title",
+        "main.summary",
+        "sleep_summary.body_battery_status",
+        "pain_point_analysis.module[].title",
+        "pain_point_analysis.module[].description",
+        "pain_point_analysis.environment_summary.*.status",
+        "quality_analysis.module[].target",
+        "quality_analysis.module[].description",
     ),
 }
 

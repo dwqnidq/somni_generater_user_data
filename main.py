@@ -9,7 +9,7 @@
   人格主流程（步骤 1～7 等）仅针对 config 中 8 个人格的 user_id，不会对虚拟池/热力图用户跑 health。
   0. （非 --llm-only）和风今日天气快照（output/qweather_today_snapshot.json）→ 各用户天气结构（{uid}_weather.json，
      generate_user_weather_snapshot_json）→ 北京 Link 路况（{uid}_traffic_link_realtime.json）
-     → 日历事件（{uid}_calendar_events.json，日期=人格 date_range ∩ --start-date/--end-date）
+     → 日历事件（{uid}_calendar_events.json，模板来自 output/schedules_report.md 两天交替；日期=人格 date_range ∩ --start-date/--end-date）
      → 每日情绪与步数（{uid}_daily_emotion_steps.json）
   1. 睡眠健康数据（health_data）
   2. 环境数据（environment_data）
@@ -21,6 +21,10 @@
      随后写睡眠艺术（{uid}_sleep_art_data.json，依赖 health_data；--with-llm 时位于 LLM 链之前）
   7. 睡眠报告（{uid}_sleep_report.json，非 LLM，依赖 health_data / sleep_events / environment_data；
      写盘后补全 auditory（重建 audios → 同分钟合并 → 相邻分钟再合并并累加 duration_sec；data_points 仍按分钟独立生成））
+  非 --llm-only 时：步骤 0～7 与前置日历/情绪的起始日比人格 date_range 再向前 14 天（缓冲 health 等）；
+      LLM 步骤 8～19（需 --with-llm）仅覆盖人格正式 date_range；--with-llm 写回完成后自动删除
+      早于正式起始日的缓冲日记录。仅跑 python main.py 也会生成缓冲日，待后续 --with-llm 再裁剪。
+
   8～18. 以下均需 --with-llm（每用户各整批一次，写入 output/{uid}_*.json）：
       8. 近14天趋势 AI 分析（ai_analysis_14d，向前 14 日 health 不齐则跳过该日）
       9. 晨间闹钟上下文洞察（morning_alarm_insight；无明日日程/无日程文件仍调用 LLM，仅结合天气与路况）
@@ -104,10 +108,10 @@ from generate_sleep_notice import generate_notice_for_uid  # noqa: E402
 from generate_sleep_event_environment_intervention import generate_intervention_for_uid  # noqa: E402
 from generate_sleep_map_ranking_reason import generate_ranking_reason_for_uid  # noqa: E402
 from generate_morning_timeline_alarm_context_advisory import generate_alarm_insight_for_uid  # noqa: E402
-from multi_day_llm_helpers import effective_start_after_skips  # noqa: E402
 from prune_output_by_llm_skip_boundary import (  # noqa: E402
     compute_keep_from_date,
     prune_uid_output_files,
+    prune_uid_warmup_days,
 )
 from generate_somni_sleep_analysis_from_health import write_somni_sleep_analysis_for_uid  # noqa: E402
 from utils import fetch_qweather_monthly_data  # noqa: E402
@@ -129,12 +133,41 @@ _DEFAULT_MAP_POOL_START = "2026-01-01"
 _DEFAULT_MAP_POOL_END = "2026-03-31"
 _DEFAULT_HEATMAP_START = "2026-03-01"
 _DEFAULT_HEATMAP_DAYS = 14
+# 非 --llm-only 时非 AI 步骤向前多生成的天数（供近 14 日趋势等）；--with-llm 完成后裁剪删除
+WARMUP_DAYS = 14
 
 
 def _parse_date(s: str | None) -> date | None:
     if not s:
         return None
     return datetime.strptime(s, "%Y-%m-%d").date()
+
+
+def _resolve_persona_date_range(
+    persona: dict,
+    start_override: date | None,
+    end_override: date | None,
+) -> tuple[date, date] | None:
+    """人格 date_range 与 CLI 覆盖求交；无效则 None。"""
+    dr = persona.get("date_range") or {}
+    start_s, end_s = dr.get("start"), dr.get("end")
+    if not start_s or not end_s:
+        return None
+    start_dt = datetime.strptime(str(start_s), "%Y-%m-%d").date()
+    end_dt = datetime.strptime(str(end_s), "%Y-%m-%d").date()
+    if start_override:
+        start_dt = max(start_dt, start_override)
+    if end_override:
+        end_dt = min(end_dt, end_override)
+    if start_dt > end_dt:
+        return None
+    return start_dt, end_dt
+
+
+def _data_gen_start(official_start: date, *, warmup_enabled: bool) -> date:
+    if warmup_enabled:
+        return official_start - timedelta(days=WARMUP_DAYS)
+    return official_start
 
 
 def _resolve_map_pool_dates(
@@ -224,8 +257,8 @@ def run_for_persona(
     *,
     state_mode: str,
     good_ratio: float,
-    start_date: date | None,
-    end_date: date | None,
+    start_date_override: date | None,
+    end_date_override: date | None,
     overwrite: bool,
     with_llm: bool = False,
     llm_only: bool = False,
@@ -239,14 +272,35 @@ def run_for_persona(
     total_steps = 19 if with_llm else 7
     print(f"\n========== {name} ({uid}) ==========")
 
+    official_bounds = _resolve_persona_date_range(
+        persona, start_date_override, end_date_override
+    )
+    if not official_bounds:
+        print("  跳过：date_range 无效或与 CLI 日期无交集。")
+        return
+    official_start, official_end = official_bounds
+    warmup_enabled = not llm_only
+    data_start = _data_gen_start(official_start, warmup_enabled=warmup_enabled)
+    data_end = official_end
+    if warmup_enabled:
+        print(
+            f"  数据生成区间：{data_start.isoformat()}～{data_end.isoformat()} "
+            f"（含向前 {WARMUP_DAYS} 天缓冲）"
+            + (
+                f"；LLM 区间：{official_start.isoformat()}～{official_end.isoformat()}"
+                if with_llm
+                else f"；正式区间：{official_start.isoformat()}～{official_end.isoformat()}（缓冲日待 --with-llm 后裁剪）"
+            )
+        )
+
     if not llm_only:
         print(f"[1/{total_steps}] 睡眠健康数据 (health_data) …")
         health_path = generate_persona_health_data(
             persona,
             state_mode=state_mode,
             good_ratio=good_ratio,
-            start_date_override=start_date,
-            end_date_override=end_date,
+            start_date_override=data_start,
+            end_date_override=data_end,
             overwrite=overwrite,
         )
         if not health_path:
@@ -255,24 +309,24 @@ def run_for_persona(
 
         print(f"[2/{total_steps}] 环境数据 (environment_data) …")
         generate_environment_for_persona(
-            persona, cfg, start_date=start_date, end_date=end_date, overwrite=overwrite
+            persona, cfg, start_date=data_start, end_date=data_end, overwrite=overwrite
         )
 
         print(f"[3/{total_steps}] 体征数据 (vitals_data) …")
         generate_vitals_for_persona(
-            persona, cfg, start_date=start_date, end_date=end_date, overwrite=overwrite
+            persona, cfg, start_date=data_start, end_date=data_end, overwrite=overwrite
         )
 
         print(f"[4/{total_steps}] 睡眠事件 (sleep_events) …")
         generate_sleep_events_for_persona(
-            persona, cfg, start_date=start_date, end_date=end_date, overwrite=overwrite
+            persona, cfg, start_date=data_start, end_date=data_end, overwrite=overwrite
         )
 
         print(f"[5/{total_steps}] 事件影响回写 (events -> environment/vitals) …")
         apply_event_impacts_for_persona(
             persona,
-            start_date.isoformat() if start_date else None,
-            end_date.isoformat() if end_date else None,
+            data_start.isoformat(),
+            data_end.isoformat(),
             overwrite=overwrite,
             output_dir=output_dir,
         )
@@ -326,8 +380,8 @@ def run_for_persona(
             with open(_report_file, "w", encoding="utf-8") as f:
                 json.dump(_reports, f, ensure_ascii=False, indent=2)
             print(f"  已写入 {len(_reports)} 条 → {_report_file}")
-            _start_s = start_date.isoformat() if start_date else None
-            _end_s = end_date.isoformat() if end_date else None
+            _start_s = official_start.isoformat()
+            _end_s = official_end.isoformat()
             print("  补全听觉 audios 与打鼾曲线 (data_points，按分钟) …")
             from write_back.refresh_sleep_report_auditory_snoring import (  # noqa: E402
                 refresh_sleep_report_auditory_snoring_for_uid,
@@ -374,8 +428,8 @@ def run_for_persona(
             print("  睡眠艺术数据 (sleep_art_data) …")
             write_sleep_art_data_for_persona(persona, output_dir, overwrite=overwrite)
 
-        start_s = start_date.isoformat() if start_date else None
-        end_s = end_date.isoformat() if end_date else None
+        start_s = official_start.isoformat()
+        end_s = official_end.isoformat()
         if llm_max_records is not None and llm_max_records > 0:
             print(f"  [LLM] 各逐日步骤最多处理锚点数: {llm_max_records}（在日期过滤之后截断）")
 
@@ -448,7 +502,6 @@ def run_for_persona(
                 start_date=start_s,
                 end_date=end_s,
                 max_records=_llm_max(),
-                schedules_dir="output",
                 resume=resume_llm,
             )
         except LlmQuotaExhausted as e:
@@ -661,6 +714,17 @@ def run_for_persona(
                 print("  [裁剪] 无 LLM 跳过边界且未指定 --start-date，跳过 LLM 侧车日期裁剪")
         else:
             print("  [裁剪] 已跳过（默认保留全部 LLM 侧车记录；需裁剪请加 --prune-after-llm-skips）")
+
+        keep_from = official_start.isoformat()
+        print(f"  [warmup] 删除早于 {keep_from} 的 {WARMUP_DAYS} 天缓冲数据 …")
+        warmup_stats = prune_uid_warmup_days(uid, output_dir, keep_from)
+        n_warmup_removed = warmup_stats.get("total_removed", 0)
+        if n_warmup_removed:
+            for suffix, st in warmup_stats.get("files", {}).items():
+                print(f"    {suffix}: 删除 {st['removed']} 条（{st['before']} → {st['after']}）")
+            print(f"  [warmup] 共删除 {n_warmup_removed} 条缓冲日记录")
+        else:
+            print("  [warmup] 无需删除（无早于正式起始日的记录）")
 
 
 def main() -> None:
@@ -990,12 +1054,19 @@ def main() -> None:
         generate_traffic_link_realtime_for_personas(
             personas, output_dir, ts=traffic_ts, overwrite=args.overwrite
         )
+        prefix_start_override = start_date
+        prefix_end_override = end_date
+        if personas:
+            first_bounds = _resolve_persona_date_range(personas[0], start_date, end_date)
+            if first_bounds:
+                prefix_start_override = _data_gen_start(first_bounds[0], warmup_enabled=True)
+                prefix_end_override = first_bounds[1]
         print("[前置] 日历事件 (calendar_events) …")
         generate_calendar_events_for_personas(
             personas,
             output_dir,
-            start_date_override=start_date,
-            end_date_override=end_date,
+            start_date_override=prefix_start_override,
+            end_date_override=prefix_end_override,
             overwrite=args.overwrite,
         )
         mix = (cfg.get("generation") or {}).get("day_state_mix") or {}
@@ -1006,8 +1077,8 @@ def main() -> None:
             state_mode=args.state,
             good_ratio=args.good_ratio,
             max_bad_days_per_week=max_bad,
-            start_date_override=start_date,
-            end_date_override=end_date,
+            start_date_override=prefix_start_override,
+            end_date_override=prefix_end_override,
             overwrite=args.overwrite,
         )
 
@@ -1015,8 +1086,8 @@ def main() -> None:
         cfg=cfg,
         state_mode=args.state,
         good_ratio=args.good_ratio,
-        start_date=start_date,
-        end_date=end_date,
+        start_date_override=start_date,
+        end_date_override=end_date,
         overwrite=args.overwrite,
         with_llm=args.with_llm,
         llm_only=llm_only,

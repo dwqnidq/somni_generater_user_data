@@ -2,8 +2,7 @@
 批量生成晨间日程·天气·路况闹钟上下文洞察（alarm_insight）。
 
 读取 output/{uid}_health_data.json、{uid}_weather.json、
-{uid}_traffic_link_realtime.json；日程优先 users_schedules/{uid}_calendar_events.json，
-无则回退 output/{uid}_calendar_events.json。
+{uid}_traffic_link_realtime.json、{uid}_calendar_events.json。
 以每条 record_date 的次日为「明日」生成 alarm_insight。无明日日程时仍生成，仅结合天气与路况。
 
 作为独立脚本运行：
@@ -38,7 +37,6 @@ from generate_ai.multi_day_llm_helpers import apply_max_records, merge_last_skip
 from generate_ai.runtime import PROJECT_ROOT, bootstrap_llm, load_health_rows  # noqa: E402
 
 DEFAULT_SYSTEM_PROMPT = os.path.join(PROJECT_ROOT, "prompt", "morning_timeline_alarm_context_advisory.md")
-DEFAULT_SCHEDULES_DIR = "users_schedules"
 LLM_TEMPERATURE = 0.7
 LLM_TOP_P = 0.5
 
@@ -93,23 +91,10 @@ def _build_schedule_for_tomorrow(events: List[dict], tomorrow: str) -> dict:
     }
 
 
-def _resolve_calendar_events(
-    uid: str, schedules_dir: str, output_dir: str
-) -> Tuple[List[dict], str]:
-    """优先 schedules_dir 下**非空**日程列表；否则回退 output_dir。均无则 []（仍会对每日调 LLM）。"""
-    primary = os.path.join(PROJECT_ROOT, schedules_dir, f"{uid}_calendar_events.json")
-    fallback = os.path.join(os.path.abspath(output_dir), f"{uid}_calendar_events.json")
-    events = _load_json_events_list(primary)
-    if events:
-        return events, primary
-    fb = _load_json_events_list(fallback)
-    if fb:
-        if os.path.isfile(primary):
-            print(f"  提示: {primary} 无日程条目，已回退: {fallback}")
-        else:
-            print(f"  提示: 未找到 {primary}，已使用: {fallback}")
-        return fb, fallback
-    return [], primary if os.path.isfile(primary) else fallback
+def _load_calendar_events(uid: str, output_dir: str) -> Tuple[List[dict], str]:
+    """从 output_dir 读取 {uid}_calendar_events.json；缺失或空则 []（仍会对每日调 LLM）。"""
+    path = os.path.join(os.path.abspath(output_dir), f"{uid}_calendar_events.json")
+    return _load_json_events_list(path), path
 
 
 def _resolve_system_prompt(system_prompt_path: Optional[str]) -> str:
@@ -216,7 +201,6 @@ def generate_alarm_insight_for_uid(
     start_date: Optional[str] = None,
     end_date: Optional[str] = None,
     system_prompt_path: Optional[str] = None,
-    schedules_dir: str = DEFAULT_SCHEDULES_DIR,
     retry_delay: float = 0.5,
     max_records: Optional[int] = None,
     resume: bool = False,
@@ -250,16 +234,14 @@ def generate_alarm_insight_for_uid(
     traffic_path = os.path.join(output_dir, f"{uid}_traffic_link_realtime.json")
     weather = _load_json_object(weather_path)
     traffic = _load_json_object(traffic_path)
-    calendar_events, calendar_path = _resolve_calendar_events(uid, schedules_dir, output_dir)
+    calendar_events, calendar_path = _load_calendar_events(uid, output_dir)
 
     if not weather:
         print(f"  警告: 天气文件为空或缺失: {weather_path}")
     if not traffic:
         print(f"  警告: 路况文件为空或缺失: {traffic_path}")
     if not calendar_events:
-        p1 = os.path.join(PROJECT_ROOT, schedules_dir, f"{uid}_calendar_events.json")
-        p2 = os.path.join(output_dir, f"{uid}_calendar_events.json")
-        print(f"  警告: 日程列表为空，已尝试: {p1} 与 {p2}")
+        print(f"  警告: 日程列表为空或缺失: {calendar_path}")
     else:
         print(f"  日程来源: {calendar_path}（共 {len(calendar_events)} 条）")
 
@@ -323,11 +305,6 @@ def _parse_args() -> argparse.Namespace:
     p.add_argument("--start-date", default="")
     p.add_argument("--end-date", default="")
     p.add_argument("--system-prompt", default=DEFAULT_SYSTEM_PROMPT)
-    p.add_argument(
-        "--schedules-dir",
-        default=DEFAULT_SCHEDULES_DIR,
-        help="相对工程根，内含 {uid}_calendar_events.json，默认 users_schedules",
-    )
     p.add_argument("--retry-delay", type=float, default=0.5)
     p.add_argument(
         "--max-records",
@@ -362,7 +339,6 @@ def main() -> None:
             start_date=args.start_date.strip() or None,
             end_date=args.end_date.strip() or None,
             system_prompt_path=args.system_prompt or None,
-            schedules_dir=args.schedules_dir.strip() or DEFAULT_SCHEDULES_DIR,
             retry_delay=args.retry_delay,
             max_records=mr,
         )

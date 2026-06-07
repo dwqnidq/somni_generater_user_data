@@ -6,7 +6,7 @@
     "day_state_mix": {
       "mode": "mixed",
       "good_ratio": 0.5,
-      "max_bad_days_per_week": 3
+      "max_bad_days_per_week": 4
     },
     "environment": {
       "continuous_noise_db_min": 35,
@@ -186,8 +186,8 @@
       "identity_type": "策划者",
       "user_id": "69aea593af5e6cbf08027964",
       "date_range": {
-        "start": "2026-05-01",
-        "end": "2026-05-31"
+        "start": "2026-06-01",
+        "end": "2026-06-30"
       },
       "sleep_metric_states": {
         "good": {
@@ -301,8 +301,8 @@
             7
           ],
           "sleep_latency": [
-            30,
-            46
+            32,
+            48
           ],
           "sleep_efficiency": [
             81,
@@ -388,8 +388,8 @@
       "identity_type": "调音师",
       "user_id": "69aea63eaf5e6cbf08027965",
       "date_range": {
-        "start": "2026-05-01",
-        "end": "2026-05-31"
+        "start": "2026-06-01",
+        "end": "2026-06-30"
       },
       "sleep_metric_states": {
         "good": {
@@ -503,8 +503,8 @@
             8
           ],
           "sleep_latency": [
-            18,
-            30
+            32,
+            46
           ],
           "sleep_efficiency": [
             82,
@@ -590,8 +590,8 @@
       "identity_type": "执行师",
       "user_id": "69aea6d8af5e6cbf08027966",
       "date_range": {
-         "start": "2026-05-01",
-        "end": "2026-05-31"
+         "start": "2026-06-01",
+        "end": "2026-06-30"
       },
       "sleep_metric_states": {
         "good": {
@@ -705,8 +705,8 @@
             4
           ],
           "sleep_latency": [
-            15,
-            30
+            31,
+            42
           ],
           "sleep_efficiency": [
             83,
@@ -803,8 +803,8 @@
       "identity_type": "漫步者",
       "user_id": "69aea6e3af5e6cbf08027967",
       "date_range": {
-         "start": "2026-05-01",
-        "end": "2026-05-31"
+         "start": "2026-06-01",
+        "end": "2026-06-30"
       },
       "sleep_metric_states": {
         "good": {
@@ -918,8 +918,8 @@
             6
           ],
           "sleep_latency": [
-            12,
-            24
+            26,
+            38
           ],
           "sleep_efficiency": [
             84,
@@ -985,7 +985,6 @@
           "吞咽": 0.2
         },
         "blocked_events": [
-          "入睡困难",
           "噩梦应激",
           "家电持续声",
           "环境持续声",
@@ -1017,8 +1016,8 @@
       "identity_type": "创作家",
       "user_id": "69aea6e8af5e6cbf08027968",
       "date_range": {
-         "start": "2026-05-01",
-        "end": "2026-05-31"
+         "start": "2026-06-01",
+        "end": "2026-06-30"
       },
       "sleep_metric_states": {
         "good": {
@@ -1219,8 +1218,8 @@
       "identity_type": "独奏家",
       "user_id": "69aea6eeaf5e6cbf08027969",
       "date_range": {
-        "start": "2026-05-01",
-        "end": "2026-05-31"
+        "start": "2026-06-01",
+        "end": "2026-06-30"
       },
       "sleep_metric_states": {
         "good": {
@@ -1334,8 +1333,8 @@
             8
           ],
           "sleep_latency": [
-            18,
-            32
+            32,
+            50
           ],
           "sleep_efficiency": [
             81,
@@ -1421,8 +1420,8 @@
       "identity_type": "探险家",
       "user_id": "69aea6f3af5e6cbf0802796a",
       "date_range": {
-        "start": "2026-05-01",
-        "end": "2026-05-31"
+        "start": "2026-06-01",
+        "end": "2026-06-30"
       },
       "sleep_metric_states": {
         "good": {
@@ -1536,8 +1535,8 @@
             4
           ],
           "sleep_latency": [
-            22,
-            36
+            31,
+            40
           ],
           "sleep_efficiency": [
             82,
@@ -1634,8 +1633,8 @@
       "identity_type": "享乐家",
       "user_id": "69aea6f8af5e6cbf0802796b",
       "date_range": {
-         "start": "2026-05-01",
-        "end": "2026-05-31"
+         "start": "2026-06-01",
+        "end": "2026-06-30"
       },
       "sleep_metric_states": {
         "good": {
@@ -1749,8 +1748,8 @@
             5
           ],
           "sleep_latency": [
-            14,
-            28
+            31,
+            40
           ],
           "sleep_efficiency": [
             84,
@@ -1816,7 +1815,6 @@
           "吞咽": 0.2
         },
         "blocked_events": [
-          "入睡困难",
           "噩梦应激",
           "家电持续声",
           "环境持续声",

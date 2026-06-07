@@ -125,17 +125,17 @@ def generate_persona_file(
     date_range = persona.get("date_range", {})
     start_str = date_range["start"]
     end_str = date_range["end"]
-    start_dt = datetime.strptime(start_str, "%Y-%m-%d").date()
-    end_dt = datetime.strptime(end_str, "%Y-%m-%d").date()
+    config_start = datetime.strptime(start_str, "%Y-%m-%d").date()
+    config_end = datetime.strptime(end_str, "%Y-%m-%d").date()
+    from date_range_helpers import apply_date_range_overrides  # noqa: WPS433
 
-    if start_date_override:
-        start_dt = max(start_dt, start_date_override)
-    if end_date_override:
-        end_dt = min(end_dt, end_date_override)
-
-    if start_dt > end_dt:
+    merged = apply_date_range_overrides(
+        config_start, config_end, start_date_override, end_date_override
+    )
+    if not merged:
         print(f"[{name}] 日期范围无效，跳过")
         return ""
+    start_dt, end_dt = merged
 
     out_file = os.path.join(OUTPUT_DIR, f"{uid}_daily_emotion_steps.json")
     if not overwrite and os.path.exists(out_file):

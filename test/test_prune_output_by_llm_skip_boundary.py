@@ -15,6 +15,7 @@ from prune_output_by_llm_skip_boundary import (  # noqa: E402
     compute_keep_from_date,
     keep_from_qweather_monthly_first_date,
     prune_uid_output_files,
+    prune_uid_warmup_days,
 )
 
 
@@ -75,6 +76,29 @@ class TestPruneOutputByLlmSkipBoundary(unittest.TestCase):
             self.assertEqual(stats["total_removed"], 0)
             with open(path, encoding="utf-8") as f:
                 self.assertEqual(json.load(f), rows)
+
+    def test_prune_warmup_days_removes_health_and_llm(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            uid = "testuid"
+            health_path = os.path.join(tmp, f"{uid}_health_data.json")
+            llm_path = os.path.join(tmp, f"{uid}_ai_analysis_14d.json")
+            health_rows = [
+                {"record_date": "2026-05-18"},
+                {"record_date": "2026-05-31"},
+                {"record_date": "2026-06-01"},
+            ]
+            llm_rows = [{"record_date": "2026-06-01"}]
+            with open(health_path, "w", encoding="utf-8") as f:
+                json.dump(health_rows, f)
+            with open(llm_path, "w", encoding="utf-8") as f:
+                json.dump(llm_rows, f)
+            stats = prune_uid_warmup_days(uid, tmp, "2026-06-01")
+            self.assertEqual(stats["total_removed"], 2)
+            with open(health_path, encoding="utf-8") as f:
+                self.assertEqual(
+                    [r["record_date"] for r in json.load(f)],
+                    ["2026-06-01"],
+                )
 
 
 if __name__ == "__main__":

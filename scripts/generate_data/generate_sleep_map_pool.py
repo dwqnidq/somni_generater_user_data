@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """按指定日期范围一键生成睡眠地图大表与区级聚合表。
 
-流程（与 README 一致，合并为一条命令）：
+流程：
   1. generate_sleep_map_multi_user.py  → 中间文件（默认 beijing_sleep_map_multi_user.json）
-  2. generate_sleep_map_aggregated.py → somni_sleep_analysis.json + somni_sleep_district.json
+  2. generate_sleep_map_aggregated.py → somni_sleep_analysis.json（仅虚拟）+ somni_sleep_district.json
+  3. adjust_ranking_for_personas.py   → 读人格文件算榜，仅压低虚拟并写回大池（不修改人格 JSON）
 
 用法：
   python scripts/generate_data/generate_sleep_map_pool.py \\
@@ -28,6 +29,7 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(os.path.dirname(SCRIPT_DIR))
 MULTI_USER_SCRIPT = os.path.join(SCRIPT_DIR, "generate_sleep_map_multi_user.py")
 AGGREGATED_SCRIPT = os.path.join(SCRIPT_DIR, "generate_sleep_map_aggregated.py")
+ADJUST_RANKING_SCRIPT = os.path.join(SCRIPT_DIR, "adjust_ranking_for_personas.py")
 
 
 def _parse_args() -> argparse.Namespace:
@@ -76,6 +78,16 @@ def _parse_args() -> argparse.Namespace:
         "--aggregated-only",
         action="store_true",
         help="跳过 multi_user，仅从已有中间文件聚合（建议同时指定与中间文件一致的日期范围）",
+    )
+    p.add_argument(
+        "--merge-personas",
+        action="store_true",
+        help="聚合时将八人格写入 somni_sleep_analysis.json（默认不合并）",
+    )
+    p.add_argument(
+        "--skip-ranking-adjust",
+        action="store_true",
+        help="跳过 adjust_ranking_for_personas（默认执行，确保人格每日前 10）",
     )
     return p.parse_args()
 
@@ -138,7 +150,17 @@ def main() -> None:
         "--end",
         args.end_date,
     ]
-    _run_step("步骤 2/2：聚合 somni_sleep_analysis + somni_sleep_district", agg_cmd)
+    if args.merge_personas:
+        agg_cmd.append("--merge-personas")
+    _run_step("步骤 2/3：聚合 somni_sleep_analysis + somni_sleep_district", agg_cmd)
+
+    if not args.skip_ranking_adjust:
+        _run_step(
+            "步骤 3/3：调整排名（人格用户每日前 10）",
+            [py, ADJUST_RANKING_SCRIPT],
+        )
+    else:
+        print("\n跳过排名调整（--skip-ranking-adjust）")
 
     print("\n完成。日期范围: {} ~ {}".format(args.start_date, args.end_date))
     print("  → {}".format(os.path.join(PROJECT_ROOT, args.out_analysis)))

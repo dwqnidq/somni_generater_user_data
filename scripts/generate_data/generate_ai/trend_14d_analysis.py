@@ -9,6 +9,12 @@ from typing import List, Optional
 
 from generate_ai import llm_client
 from generate_ai.runtime import PROJECT_ROOT
+from generate_ai.trend_14d_prompt_helpers import (
+    build_trend_14d_payload,
+    build_trend_14d_user_prompt,
+    schedule_insight_uses_today_health,
+    schedule_validation_retries,
+)
 from sleep_report.shared import _variant_pick
 from utils import atomic_write_json
 
@@ -223,6 +229,8 @@ def generate_ai_analysis(
     start_date: Optional[str] = None,
     end_date: Optional[str] = None,
     stream_output_file: Optional[str] = None,
+    today_health: Optional[dict] = None,
+    today_weather: Optional[dict] = None,
 ) -> List[dict]:
     def _append_stream_row(row: dict) -> None:
         if not stream_output_file:
@@ -326,38 +334,56 @@ def generate_ai_analysis(
             template_path = os.path.join(PROJECT_ROOT, "prompt", _prompt_name)
             instruction = llm_client.load_prompt_instruction(_prompt_name)
             if instruction and llm_client.has_api_key():
-                payload = {
-                    "anchor_record_date": record_date_str,
-                    "analysis_period": {"start": period_start, "end": record_date_str},
-                    "sleep_records_14d": compact_sleep_records_for_trend_14d_prompt(sleep_seg),
-                    "schedule_records_14d": compact_schedule_records_for_trend_14d_prompt(sched_seg),
-                }
-                prompt = (
-                    "以下为真实输入数据（JSON）。请仅依据这些数据输出 JSON 对象，"
-                    "字段必须为 `title`、`sleep_insight`、`schedule_insight`，不要附加解释文本。"
-                    "不要照抄文档中的示例数值与文案。\n\n"
-                    + json.dumps(payload, ensure_ascii=False)
+                payload = build_trend_14d_payload(
+                    record_date_str,
+                    period_start,
+                    compact_sleep_records_for_trend_14d_prompt(sleep_seg),
+                    compact_schedule_records_for_trend_14d_prompt(sched_seg),
+                    today_health=today_health,
+                    today_weather=today_weather,
                 )
                 insight_temp = float(
                     os.getenv("QWEN_AI_ANALYSIS_TEMPERATURE", os.getenv("DOUBAO_AI_ANALYSIS_TEMPERATURE", "0.82"))
                 )
-                api_result = llm_client.call_qwen_api(
-                    prompt,
-                    system_prompt=instruction,
-                    max_tokens=2048,
-                    temperature=min(1.0, max(0.0, insight_temp)),
-                )
-                if api_result:
+                max_attempts = 1 + schedule_validation_retries() if today_health else 1
+                for attempt in range(max_attempts):
+                    prompt = build_trend_14d_user_prompt(
+                        payload,
+                        strict_health=attempt > 0,
+                    )
+                    api_result = llm_client.call_qwen_api(
+                        prompt,
+                        system_prompt=instruction,
+                        max_tokens=2048,
+                        temperature=min(1.0, max(0.0, insight_temp)),
+                    )
+                    if not api_result:
+                        break
                     try:
                         parsed = llm_client.parse_json_from_response(api_result)
-                        if isinstance(parsed, dict):
-                            title = str(parsed.get("title", title) or title).strip() or title
-                            sleep_insight = str(parsed.get("sleep_insight", sleep_insight) or sleep_insight).strip() or sleep_insight
-                            schedule_insight = str(
-                                parsed.get("schedule_insight", schedule_insight) or schedule_insight
-                            ).strip() or schedule_insight
+                        if not isinstance(parsed, dict):
+                            break
+                        title = str(parsed.get("title", title) or title).strip() or title
+                        sleep_insight = str(
+                            parsed.get("sleep_insight", sleep_insight) or sleep_insight
+                        ).strip() or sleep_insight
+                        schedule_insight = str(
+                            parsed.get("schedule_insight", schedule_insight) or schedule_insight
+                        ).strip() or schedule_insight
                     except Exception as e:
                         print(f"  解析模型返回内容失败: {e}，使用本地 AI 分析结果")
+                        break
+                    if today_health and not schedule_insight_uses_today_health(
+                        schedule_insight, today_health
+                    ):
+                        if attempt < max_attempts - 1:
+                            print(
+                                "  [重试] schedule_insight 情绪/步数与 today_health 不符，"
+                                f"第 {attempt + 2}/{max_attempts} 次调用"
+                            )
+                            continue
+                        print("  [警告] schedule_insight 数值与 today_health 仍不符，保留 LLM 输出")
+                    break
         else:
             title, sleep_insight, schedule_insight = _build_local_ai_analysis(
                 record_date_str, sleep_seg, sched_seg

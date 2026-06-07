@@ -105,7 +105,6 @@ def generate_main_summary_for_date(
     raw = sleep_data.get("raw_data") or {}
     (
         _a, _d, _l, _r,
-        _pie_aw, _pie_d, _pie_l, _pie_r,
         _awake_percent, deep_percent, light_percent, rem_percent,
     ) = sleep_report_structure_minutes_and_percents(sleep_data)
 

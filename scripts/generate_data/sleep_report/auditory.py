@@ -161,11 +161,9 @@ def sleep_data_shallow_from_report_for_auditory(report):
     sq = report.get("quality_analysis", {}).get("sleep_quality") or {}
     st = report.get("quality_analysis", {}).get("sleep_structure") or {}
 
-    def _health_ratio_from_structure(block_key, net_key="percent_of_net_sleep"):
+    def _health_ratio_from_structure(block_key):
         blk = st.get(block_key) or {}
-        if block_key == "awake":
-            return blk.get("percent_of_time_in_bed", blk.get("percent"))
-        return blk.get(net_key, blk.get("percent"))
+        return blk.get("percent")
 
     raw_like = {
         "apnea_count": int(report.get("apnea_count", 0) or 0),

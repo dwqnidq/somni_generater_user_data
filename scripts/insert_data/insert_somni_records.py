@@ -69,13 +69,6 @@ aaa = {
             "update_time": True,
         }
     },
-    "intervention_schemes_interv": {
-        "collection": "somni_temp_plans",
-        "isDate": {
-            "create_time": True,
-            "update_time": True,
-        }
-    },
     "vitals_data": {
         "collection": "somni_physiological_data",
         "isDate": {
@@ -91,7 +84,7 @@ aaa = {
             "update_time": True,
         }
     },
-    "sleep_art_data": {
+    "sleep_art": {
         "collection": "somni_dream_universe_assets",
         "isDate": {
             "create_time": True,

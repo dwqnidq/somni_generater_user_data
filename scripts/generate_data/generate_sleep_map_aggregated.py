@@ -1,7 +1,7 @@
 """
 从 beijing_sleep_map_multi_user.json 聚合生成两份输出文件：
 
-  1. somni_sleep_analysis（个人 × 日）
+  1. somni_sleep_analysis（虚拟用户 × 日；八人格默认仅存 output/{uid}_ 文件）
      output/somni_sleep_analysis.json
      - 严格对齐表结构
      - deep_sleep_ratio 修正为 0~1 小数
@@ -33,6 +33,13 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(SCRIPT_DIR))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 os.chdir(PROJECT_ROOT)
+
+from sleep_map_persona_merge import (  # noqa: E402
+    load_persona_analysis_records,
+    merge_persona_into_analysis,
+)
+
+OUTPUT_DIR = os.path.join(PROJECT_ROOT, "output")
 
 # ─── 环境敏感判定（方案 B） ────────────────────────────────────────────────────
 # 低分(40-62): 70%  中分(63-81): 30%  高分(82-98): 10%
@@ -158,6 +165,11 @@ def parse_args():
         default="",
         help="仅保留 stats_date <= 该日期的记录（YYYY-MM-DD，空表示不限制）",
     )
+    p.add_argument(
+        "--merge-personas",
+        action="store_true",
+        help="将八人格合并进 somni_sleep_analysis.json（默认不合并，人格仅存 output/{uid}_ 文件）",
+    )
     return p.parse_args()
 
 
@@ -195,11 +207,37 @@ def main():
     # ── 文件一：somni_sleep_analysis ──────────────────────────────────────────
     print("\n生成 somni_sleep_analysis ...")
     analysis_records = [build_analysis_record(r, now_iso) for r in raw_data]
-    analysis_records.sort(key=lambda r: (
-        r["stats_date"],
-        r["region"]["district_code"],
-        -r["score"],
-    ))
+    n_virtual = len(analysis_records)
+
+    if args.merge_personas:
+        persona_rows, missing_uids = load_persona_analysis_records(
+            OUTPUT_DIR,
+            start_date=start_s or None,
+            end_date=end_s or None,
+        )
+        if missing_uids:
+            print(
+                "  [WARN] 未找到人格 somni_sleep_analysis，已跳过: "
+                + ", ".join(u[:12] for u in missing_uids)
+            )
+        if persona_rows:
+            analysis_records = merge_persona_into_analysis(analysis_records, persona_rows)
+            print(
+                "  合并八人格: +{:,} 条（虚拟 {:,} → 合计 {:,}）".format(
+                    len(persona_rows),
+                    n_virtual,
+                    len(analysis_records),
+                )
+            )
+        elif not missing_uids:
+            print("  [WARN] 人格列表为空，未合并")
+    else:
+        print("  排行池仅虚拟用户（八人格见 output/{uid}_somni_sleep_analysis.json）")
+        analysis_records.sort(key=lambda r: (
+            r["stats_date"],
+            r["region"]["district_code"],
+            -r["score"],
+        ))
 
     out_analysis = os.path.join(PROJECT_ROOT, args.out_analysis)
     os.makedirs(os.path.dirname(out_analysis), exist_ok=True)
@@ -207,9 +245,9 @@ def main():
         json.dump(analysis_records, f, ensure_ascii=False, indent=2)
     print("  {:,} 条 → {}".format(len(analysis_records), out_analysis))
 
-    # ── 文件二：somni_sleep_district ──────────────────────────────────────────
+    # ── 文件二：somni_sleep_district（含已合并的人格用户）────────────────────
     print("\n生成 somni_sleep_district ...")
-    district_records = build_district_records(raw_data, now_iso)
+    district_records = build_district_records(analysis_records, now_iso)
 
     out_district = os.path.join(PROJECT_ROOT, args.out_district)
     with open(out_district, "w", encoding="utf-8") as f:

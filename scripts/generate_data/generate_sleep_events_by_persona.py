@@ -61,6 +61,12 @@ def _generation_options_payload(gen: dict, persona: dict) -> dict:
 
 
 SLEEP_EVENT_LANGUAGE = "zh"
+# 与 generate_health_data.eligible_sleeping_windows 一致：严格大于该值优先视为入睡困难
+SLEEP_ONSET_DIFFICULTY_LATENCY_MIN = 30
+# 编码第 2 维 H/L = 活跃度（见 docs/reference/睡眠人格编码说明.md）
+ONSET_ACTIVITY_HIGH_MIN_NIGHTS = 15
+ONSET_ACTIVITY_LOW_MIN_NIGHTS = 7
+ONSET_ACTIVITY_LOW_MAX_NIGHTS = 10
 
 
 def _ensure_event_language(event: dict) -> None:
@@ -457,6 +463,82 @@ def _resp_high_5min(vitals_day: list[dict], threshold: int = 15) -> bool:
     return False
 
 
+def _activity_level_from_code(code: str) -> str:
+    """编码第 2 维：H=高活跃，L=低活跃。"""
+    parts = (code or "").split("-")
+    return parts[1] if len(parts) > 1 else "L"
+
+
+def _compute_onset_difficulty_dates(
+    uid: str,
+    persona: dict,
+    health_rows: list[dict],
+) -> set[str]:
+    """按活跃度 H/L 从 sleep_latency>30 的夜里抽样：H≥15 天，L 为 7–10 天。"""
+    blocked = set(
+        (persona.get("sleep_event_probabilities") or {}).get("blocked_events") or []
+    )
+    if "入睡困难" in blocked:
+        return set()
+
+    is_high = _activity_level_from_code(persona.get("code") or "") == "H"
+
+    dated: list[tuple[str, int]] = []
+    for rec in health_rows:
+        if not isinstance(rec, dict) or not rec.get("record_date"):
+            continue
+        raw = rec.get("raw_data") or {}
+        dated.append((str(rec["record_date"]), int(raw.get("sleep_latency") or 0)))
+
+    eligible = [
+        d for d, lat in dated if lat > SLEEP_ONSET_DIFFICULTY_LATENCY_MIN
+    ]
+    if not eligible:
+        return set()
+
+    if is_high:
+        target = min(len(eligible), ONSET_ACTIVITY_HIGH_MIN_NIGHTS)
+    else:
+        rng_target = random.Random(
+            int(hashlib.md5(f"{uid}:onset-l-count".encode()).hexdigest(), 16)
+        )
+        lo = min(ONSET_ACTIVITY_LOW_MIN_NIGHTS, len(eligible))
+        hi = min(ONSET_ACTIVITY_LOW_MAX_NIGHTS, len(eligible))
+        target = rng_target.randint(lo, hi) if hi >= lo else lo
+
+    rng = random.Random(
+        int(hashlib.md5(f"{uid}:onset-schedule".encode()).hexdigest(), 16)
+    )
+    pool = list(eligible)
+    rng.shuffle(pool)
+    return set(pool[:target])
+
+
+def _pick_onset_difficulty_minute(sleep_rec: dict, rng: random.Random) -> int:
+    """入睡困难锚点：优先 idf_data[0] 的 awake 段内。"""
+    idf_data = sleep_rec.get("idf_data") or []
+    stage_min = _pick_minute_in_first_onset_awake(idf_data, rng)
+    if stage_min is not None:
+        return stage_min
+    if idf_data:
+        seg = idf_data[0]
+        sm = _time_to_minutes(str(seg.get("start") or seg.get("start_time") or ""))
+        em = _time_to_minutes(str(seg.get("end") or seg.get("end_time") or ""))
+        if sm is not None and em is not None:
+            if em < sm:
+                em += 1440
+            return rng.randint(sm, max(sm, em)) % 1440
+    raw = (sleep_rec.get("raw_data") or {})
+    sleep_t = str(raw.get("sleep_time") or "")
+    if "T" in sleep_t:
+        hm_local = _utc_iso_to_local_hm(sleep_t, tz_offset_hours=8)
+        if hm_local:
+            m = _time_to_minutes(hm_local)
+            if m is not None:
+                return (m - rng.randint(5, 15)) % 1440
+    return 30
+
+
 def _make_sleeping_event(uid: str, record_date: str, event_hhmm: str) -> dict:
     ts = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S.%fZ")
     return {
@@ -529,8 +611,10 @@ def _rebalance_one_night_events(
     env_day: list[dict],
     duration_cfg: dict | None = None,
     gen: dict | None = None,
+    onset_schedule_dates: set[str] | None = None,
 ) -> list[dict]:
     rng = random.Random(f"{uid}:{record_date}:sleep-events")
+    raw = (sleep_rec.get("raw_data") or {})
     abnormal_probs = _abnormal_prob_map(persona)
     normal_probs = _normal_prob_map(persona)
     hp_events_cfg = (persona.get("sleep_event_probabilities") or {}).get("high_probability_events") or []
@@ -579,49 +663,12 @@ def _rebalance_one_night_events(
 
     kept = [e for i, e in enumerate(events) if i not in drop_indices]
 
-    # OR 规则：入睡困难（潜伏期>30 或 连续5分钟呼吸率>15 或 翻身次数>5）
-    raw = (sleep_rec.get("raw_data") or {})
-    latency = int(raw.get("sleep_latency") or 0)
-    turnover = int(raw.get("turnover_count") or 0)
-    cond_latency = latency > 30
-    cond_resp = _resp_high_5min(vitals_day, threshold=15)
-    cond_turnover = turnover > 5
-    onset_should_trigger = cond_latency or cond_resp or cond_turnover
-    onset_prob = float(abnormal_probs.get("入睡困难", 0.0))
-    has_onset = any(
-        e.get("type") == "abnormal" and str(e.get("event_type")) == "入睡困难"
-        for e in kept
-    )
-    if "入睡困难" in blocked:
-        onset_prob = 0.0
-    # 潜伏期>30 与 health_data 门控一致，必生成；其余 OR 条件仍按人格概率抽样
-    add_onset = (
-        onset_should_trigger
-        and (not has_onset)
-        and (
-            cond_latency
-            or (onset_prob > 0 and rng.random() < onset_prob)
-        )
-    )
-    if add_onset:
-        idf_data = sleep_rec.get("idf_data") or []
-        stage_min = _pick_minute_in_first_onset_awake(idf_data, rng)
-        if stage_min is None:
-            # 回退：使用 sleep_time + latency 偏移
-            sleep_t = str(raw.get("sleep_time") or "")
-            stage_min = 30
-            if "T" in sleep_t:
-                try:
-                    hm_local = _utc_iso_to_local_hm(sleep_t, tz_offset_hours=8)
-                    start_min = _time_to_minutes(hm_local) if hm_local else None
-                    if start_min is not None:
-                        stage_min = (start_min + min(45, max(5, latency))) % 1440
-                except Exception:
-                    pass
-        kept.append(_make_sleeping_event(uid, record_date, _minutes_to_hhmm(stage_min)))
-
     # --- 高概率事件注入（force_allowed 绕过 blocked 过滤） ---
     for hp in hp_events_cfg:
+        hp_label = hp.get("label", "")
+        # 入睡困难由 onset_schedule_dates + 活跃度调度，跳过高概率路径
+        if hp_label == "入睡困难":
+            continue
         prob = float(hp.get("probability", 0.9))
         if not _should_high_prob_occur(prob, rng):
             continue
@@ -721,7 +768,6 @@ def _rebalance_one_night_events(
 
     # 对计划中但缺失的类型补位，避免高概率 normal 长期为 0
     existing_normal_types = {str(e.get("event_type") or "") for e in normal_kept}
-    raw = (sleep_rec.get("raw_data") or {})
     sleep_t = str(raw.get("sleep_time") or "")
     base_min = 30
     if "T" in sleep_t:
@@ -793,7 +839,6 @@ def _rebalance_one_night_events(
             )
             total_sec = total_minutes * 60
 
-            raw = (sleep_rec.get("raw_data") or {})
             sleep_t = str(raw.get("sleep_time") or "")
             wake_t = str(raw.get("wake_time") or raw.get("wake_up_time") or "")
             bed_min = _time_to_minutes(_utc_iso_to_local_hm(sleep_t, tz_offset_hours=8)) or 0
@@ -853,7 +898,21 @@ def _rebalance_one_night_events(
         if not rid or rid in valid_ids:
             filtered_others.append(e)
 
-    out = selected + normal_selected + snoring_events + filtered_others
+    # --- 入睡困难：仅 schedule 内且 sleep_latency>30 的日期，绕过 zero_abnormal 和 fuse ---
+    selected = [
+        e for e in selected if str(e.get("event_type") or "") != "入睡困难"
+    ]
+    onset_events: list[dict] = []
+    if (
+        onset_schedule_dates is not None
+        and record_date in onset_schedule_dates
+    ):
+        stage_min = _pick_onset_difficulty_minute(sleep_rec, rng)
+        onset_events.append(
+            _make_sleeping_event(uid, record_date, _minutes_to_hhmm(stage_min))
+        )
+
+    out = selected + normal_selected + snoring_events + filtered_others + onset_events
     for ev in out:
         detail = dict(ev.get("detail") or {})
         detail.pop("duration_sec", None)
@@ -990,6 +1049,19 @@ def generate_sleep_events_for_persona(
         if isinstance(r, dict) and r.get("record_date")
     }
 
+    scoped_health: list[dict] = []
+    for rec in health_rows:
+        if not isinstance(rec, dict) or not rec.get("record_date"):
+            continue
+        rds = str(rec["record_date"])
+        if start_date and rds < start_date.isoformat():
+            continue
+        if end_date and rds > end_date.isoformat():
+            continue
+        scoped_health.append(rec)
+
+    onset_schedule = _compute_onset_difficulty_dates(uid, persona, scoped_health)
+
     for rec in health_rows:
         if not isinstance(rec, dict):
             continue
@@ -1025,6 +1097,7 @@ def generate_sleep_events_for_persona(
             env_by_date.get(rds, []),
             duration_cfg=duration_cfg,
             gen=gen,
+            onset_schedule_dates=onset_schedule,
         )
         all_events.extend(tuned)
 

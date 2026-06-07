@@ -26,6 +26,8 @@ BASE_URL = os.getenv("BASE_URL", "https://ark.cn-beijing.volces.com/api/v3")
 MODEL_NAME = os.getenv("MODEL_NAME", "doubao-seed-2-0-mini-260215")
 TRANSLATE_PASSES = int(os.getenv("TRANSLATE_PASSES", "2"))
 MAX_VERIFY_ROUNDS = int(os.getenv("TRANSLATE_MAX_VERIFY_ROUNDS", "3"))
+VERIFY_SAFETY_MAX_ROUNDS = int(os.getenv("TRANSLATE_VERIFY_SAFETY_MAX_ROUNDS", "15"))
+DEFAULT_OUTPUT_REPAIR_PASSES = int(os.getenv("TRANSLATE_OUTPUT_REPAIR_PASSES", "5"))
 TIMEOUT_SEC = int(os.getenv("TRANSLATE_TIMEOUT_SEC", "120"))
 RETRY_TIMES = int(os.getenv("TRANSLATE_RETRY_TIMES", "3"))
 RETRY_BASE_DELAY_SEC = float(os.getenv("TRANSLATE_RETRY_BASE_DELAY_SEC", "2"))
@@ -172,6 +174,13 @@ def verify_candidates(source: str, candidates: list[str]) -> VerifyResult:
     return _parse_verify_response(content)
 
 
+def _effective_verify_round_cap(max_verify_rounds: int) -> int:
+    """max_verify_rounds<=0 表示持续重试直至通过，但受 VERIFY_SAFETY_MAX_ROUNDS 上限保护。"""
+    if max_verify_rounds <= 0:
+        return max(1, VERIFY_SAFETY_MAX_ROUNDS)
+    return max(1, max_verify_rounds)
+
+
 def translate_string_with_verification(
     source: str,
     *,
@@ -181,12 +190,17 @@ def translate_string_with_verification(
 ) -> str:
     """
     对单条中文：独立翻译 translate_passes 次，再调用模型校验；
-    未通过则重新翻译，直至通过或超过 max_verify_rounds。
+    校验未通过则重新翻译并再校验，直至通过或达到轮数上限。
+    max_verify_rounds<=0 时持续重试（上限 VERIFY_SAFETY_MAX_ROUNDS）。
     """
     passes = max(2, translate_passes)
-    rounds = max(1, max_verify_rounds)
+    round_cap = _effective_verify_round_cap(max_verify_rounds)
+    unlimited = max_verify_rounds <= 0
 
-    for round_idx in range(1, rounds + 1):
+    round_idx = 0
+    verdict = VerifyResult(ok=False, reason="未开始")
+    while round_idx < round_cap:
+        round_idx += 1
         candidates: list[str] = []
         for pass_idx in range(1, passes + 1):
             print(f"    第 {round_idx} 轮 · 翻译 {pass_idx}/{passes}")
@@ -195,14 +209,33 @@ def translate_string_with_verification(
         print(f"    第 {round_idx} 轮 · 校验")
         verdict = verify_candidates(source, candidates)
         if verdict.ok:
-            print(f"    ✓ 校验通过")
+            print("    ✓ 校验通过")
             return verdict.final
 
         print(f"    ✗ 校验未通过: {verdict.reason}")
+        if not unlimited and round_idx >= round_cap:
+            break
 
-    raise RuntimeError(
-        f"超过最大校验轮数 ({rounds})，仍未通过: {source[:80]}{'…' if len(source) > 80 else ''}"
+    if not candidates:
+        raise RuntimeError(f"翻译未产生候选译文: {source[:80]}")
+
+    last_reason = verdict.reason if verdict else "未说明"
+    fallback = _pick_fallback_translation(candidates)
+    preview = source if len(source) <= 48 else source[:48] + "…"
+    print(
+        f"    ⚠ 校验 {round_cap} 轮未通过，采用降级译文: {preview} "
+        f"（原因: {last_reason}）"
     )
+    return fallback
+
+
+def _pick_fallback_translation(candidates: list[str]) -> str:
+    """校验耗尽时优先选用无中文的候选，否则取最后一次翻译结果。"""
+    for candidate in candidates:
+        normalized = _normalize_translation(candidate)
+        if not has_chinese(normalized):
+            return normalized
+    return _normalize_translation(candidates[-1])
 
 
 def load_translation_cache(path: Path) -> dict[str, str]:
@@ -252,6 +285,66 @@ def build_verified_translation_map(
         cache[source] = final
 
     return translation_map
+
+
+def collect_unique_chinese_strings(obj: Any) -> list[str]:
+    found: list[str] = []
+    collect_chinese_strings(obj, found)
+    return list(dict.fromkeys(found))
+
+
+def assert_no_chinese_in_docs(docs: list[dict[str, Any]], *, label: str = "输出") -> None:
+    remaining = collect_unique_chinese_strings(docs)
+    if remaining:
+        preview = remaining[0][:60] + ("…" if len(remaining[0]) > 60 else "")
+        raise RuntimeError(
+            f"{label}校验未通过：仍含 {len(remaining)} 条中文，示例: {preview}"
+        )
+
+
+def repair_remaining_chinese(
+    docs: list[dict[str, Any]],
+    cache: dict[str, str],
+    *,
+    target_language: str = "en",
+    translate_passes: int = TRANSLATE_PASSES,
+    max_verify_rounds: int = MAX_VERIFY_ROUNDS,
+    max_repair_passes: int = DEFAULT_OUTPUT_REPAIR_PASSES,
+    use_cache: bool = True,
+    translate_template: str = "translate_single__translate.md",
+) -> list[dict[str, Any]]:
+    """
+    终检：若文档中仍有中文，清除对应缓存条目后重新翻译+校验，再写回。
+    """
+    result = docs
+    repairs = max(1, max_repair_passes)
+
+    for pass_idx in range(1, repairs + 1):
+        remaining = collect_unique_chinese_strings(result)
+        if not remaining:
+            return set_language_on_docs(result, target_language)
+
+        print(
+            f"\n=== 终检补翻 第 {pass_idx}/{repairs} 轮："
+            f"仍有 {len(remaining)} 条中文 ==="
+        )
+        for source in remaining:
+            cache.pop(source, None)
+
+        translation_map = build_verified_translation_map(
+            remaining,
+            cache,
+            translate_passes=translate_passes,
+            max_verify_rounds=max_verify_rounds,
+            use_cache=use_cache,
+            translate_template=translate_template,
+        )
+        result = replace_strings(result, translation_map)
+        if not isinstance(result, list):
+            raise TypeError("补翻结果应为列表")
+
+    assert_no_chinese_in_docs(result, label="终检")
+    return set_language_on_docs(result, target_language)
 
 
 def set_language_on_docs(docs: list[dict[str, Any]], language: str) -> list[dict[str, Any]]:

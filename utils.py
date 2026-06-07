@@ -526,6 +526,74 @@ def fetch_qweather_today_snapshot(
     return out_data
 
 
+def fetch_qweather_3day(
+    *,
+    location=_QWEATHER_BEIJING_LOCATION_ID,
+    city_name=_QWEATHER_BEIJING_NAME,
+    latitude=_QWEATHER_BEIJING_LATITUDE,
+    longitude=_QWEATHER_BEIJING_LONGITUDE,
+    api_key=None,
+    timeout=15,
+):
+    """
+    专门调用和风天气 /v7/weather/3d 接口，返回 3 日天气预报列表。
+
+    每条记录包含：date, sunrise, sunset, textDay, textNight, tempMax, tempMin,
+    humidity, pressure, uvIndex, uvIndexRaw, windScaleDay, windDirDay, precip,
+    aqiDisplay, aqiDisplayRaw。
+    """
+    try:
+        from dotenv import load_dotenv
+        _repo_root = os.path.dirname(os.path.abspath(__file__))
+        load_dotenv(os.path.join(_repo_root, ".env"))
+    except ImportError:
+        pass
+
+    key = api_key or os.getenv("QWEATHER_API_KEY")
+
+    weather_params = {"location": location, "lang": "zh"}
+    if key:
+        weather_params["key"] = key
+
+    weather_url = f"{_QWEATHER_HOST}/v7/weather/3d"
+    w_resp = requests.get(weather_url, params=weather_params, timeout=timeout)
+    w_resp.raise_for_status()
+    w_data = w_resp.json()
+    if str(w_data.get("code")) != "200":
+        raise RuntimeError(
+            f"和风 3 日预报失败: code={w_data.get('code')!r}, "
+            f"location={location} ({city_name})"
+        )
+
+    daily_rows = w_data.get("daily") or []
+    if not daily_rows:
+        raise RuntimeError(
+            f"和风 3 日预报无 daily 数据, location={location} ({city_name})"
+        )
+
+    # 拉取空气质量
+    aqi_by_date = {}
+    air_url = f"{_QWEATHER_HOST}/airquality/v1/daily/{latitude}/{longitude}"
+    air_params = {"key": key} if key else None
+    try:
+        a_resp = requests.get(air_url, params=air_params, timeout=timeout)
+        a_resp.raise_for_status()
+        aqi_by_date = _qweather_aqi_map_by_cn_date(a_resp.json())
+    except Exception as exc:
+        print(f"  [warn] 空气质量日预报请求失败: {exc}")
+
+    records = []
+    for row in daily_rows:
+        fx = str(row.get("fxDate", ""))
+        records.append(_qweather_daily_row_to_record(row, aqi_display=aqi_by_date.get(fx)))
+
+    print(
+        f"  和风 3 日预报: {city_name} (locationId={location}), "
+        f"{records[0].get('date')} ~ {records[-1].get('date')}"
+    )
+    return records
+
+
 def fetch_qweather_monthly_data(**kwargs):
     """兼容别名：等价于 forecast_days=30。"""
     kwargs.setdefault("forecast_days", 30)

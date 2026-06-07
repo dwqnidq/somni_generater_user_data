@@ -25,7 +25,7 @@ import json
 import os
 import sys
 import time
-from typing import Any, Callable, List, Optional, Tuple
+from typing import List, Optional, Tuple
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(SCRIPT_DIR)))
@@ -35,7 +35,6 @@ for _p in (PROJECT_ROOT, GEN_DATA_DIR):
     if _p not in sys.path:
         sys.path.insert(0, _p)
 
-from generate_ai import llm_client  # noqa: E402
 from generate_ai.llm_client import LlmQuotaExhausted  # noqa: E402
 from generate_ai.llm_resume import bootstrap_resume, checkpoint_save, upsert_row  # noqa: E402
 from generate_ai.multi_day_llm_helpers import (  # noqa: E402
@@ -112,30 +111,6 @@ def _load_weather_by_date(path: str) -> dict[str, dict]:
     from utils import qweather_records_by_date
 
     return qweather_records_by_date(data)
-
-
-def _wrap_qwen_inject_today_health_weather(
-    original: Callable[..., Any],
-    today_health: dict,
-    today_weather: dict,
-) -> Callable[..., Any]:
-    """在 user prompt 的 JSON payload 中写入 today_health、today_weather（不修改 system_prompt）。"""
-
-    def wrapped(prompt: object, *call_args: object, **call_kwargs: object):
-        prompt_text = str(prompt)
-        lb = prompt_text.find("{")
-        rb = prompt_text.rfind("}")
-        if lb != -1 and rb != -1 and rb > lb:
-            try:
-                payload = json.loads(prompt_text[lb : rb + 1])
-                payload["today_health"] = today_health
-                payload["today_weather"] = today_weather
-                prompt = prompt_text[:lb] + json.dumps(payload, ensure_ascii=False)
-            except Exception as e:
-                print(f"  [警告] 注入 today_health / today_weather 失败: {e}")
-        return original(prompt, *call_args, **call_kwargs)
-
-    return wrapped
 
 
 # ---------------------------------------------------------------------------
@@ -239,12 +214,6 @@ def generate_ai_analysis_14d_for_uid(
 
         import generate_ai.trend_14d_analysis as trend_mod
 
-        original_qwen = llm_client.call_qwen_api
-        wrapped_api = _wrap_qwen_inject_today_health_weather(
-            original_qwen, today_health, today_weather
-        )
-        llm_client.call_qwen_api = wrapped_api
-        llm_client.call_doubao_api = wrapped_api
         trend_mod.compact_schedule_records_for_trend_14d_prompt = _patched_compact
         try:
             rows = generate_ai_analysis(
@@ -253,6 +222,8 @@ def generate_ai_analysis_14d_for_uid(
                 output_dir=output_dir,
                 start_date=target_date,
                 end_date=target_date,
+                today_health=today_health,
+                today_weather=today_weather,
             )
         except LlmQuotaExhausted:
             checkpoint_save(out_path, all_results)
@@ -260,8 +231,6 @@ def generate_ai_analysis_14d_for_uid(
             raise
         finally:
             trend_mod.compact_schedule_records_for_trend_14d_prompt = original_compact
-            llm_client.call_qwen_api = original_qwen
-            llm_client.call_doubao_api = original_qwen
 
         if not rows:
             print("失败（已跳过）")

@@ -12814,12 +12814,7 @@ def generate_sleep_events(
             return dt
 
         if preferred_dt is not None:
-            dt = clamp_dt_for_sleeping_event(
-                _project_dt_to_windows(preferred_dt, early_wins),
-                bed_time_local,
-                sleep_time,
-                window_end,
-            )
+            dt = _project_dt_to_windows(preferred_dt, early_wins)
             committed = _try_commit_if_awake_anchor(dt)
             if committed is not None:
                 return committed
@@ -12828,9 +12823,6 @@ def generate_sleep_events(
             if span0 > 2.0:
                 for frac in (0.08, 0.16, 0.24, 0.32, 0.45):
                     alt = st0 + timedelta(seconds=max(1.0, (span0 - 1.5) * frac))
-                    alt = clamp_dt_for_sleeping_event(
-                        alt, bed_time_local, sleep_time, window_end
-                    )
                     committed = _try_commit_if_awake_anchor(alt)
                     if committed is not None:
                         return committed
@@ -12843,9 +12835,6 @@ def generate_sleep_events(
                 dt = st + timedelta(
                     seconds=random.uniform(1.0, max(2.0, span_sec - 0.5))
                 )
-            dt = clamp_dt_for_sleeping_event(
-                dt, bed_time_local, sleep_time, window_end
-            )
             committed = _try_commit_if_awake_anchor(dt)
             if committed is not None:
                 return committed

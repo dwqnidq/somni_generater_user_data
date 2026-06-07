@@ -1,6 +1,6 @@
 [
   {
-    "_id": "6a0e91e5bf4863c940a3b0fe",
+    "_id": "6a1421bd1ac1aea602315448",
     "uid": "69aea6d8af5e6cbf08027966",
     "stats_date": "2026-05-01",
     "region": {
@@ -10,8 +10,8 @@
     },
     "user_name": "效率至上考拉",
     "score": 96,
-    "sleep_seconds": 28740,
-    "deep_sleep_seconds": 7176,
+    "sleep_seconds": 27180,
+    "deep_sleep_seconds": 6803,
     "deep_sleep_ratio": 0.23,
     "evaluation": "你的作息特别规律，睡眠时长够，深睡质量扎实，入睡顺滑还夜里睡得稳，整体睡眠底子在同城里相当亮眼，其他方面也和大部分同城人差不了多少。",
     "dimensions": {
@@ -19,510 +19,6 @@
         "score": 100,
         "weight": 0.25,
         "value": 23,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 28740,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 80,
-        "weight": 0.15,
-        "value": 16,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 95,
-        "weight": 0.2,
-        "value": 0,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 100,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:29.000Z",
-    "update_time": "2026-05-21T05:02:29.000Z"
-  },
-  {
-    "_id": "6a0e91e5c83f9537a6718185",
-    "uid": "69aea6d8af5e6cbf08027966",
-    "stats_date": "2026-05-02",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "效率至上考拉",
-    "score": 94,
-    "sleep_seconds": 27120,
-    "deep_sleep_seconds": 6790,
-    "deep_sleep_ratio": 0.23,
-    "evaluation": "你的深睡特别扎实，睡眠时间充足，入睡顺滑且作息规律，这些都稳稳托住了你的排名；不过夜里偶尔醒的情况比多数同城人稍多一点，稍微拖了点后腿。",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 23,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 27930,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 100,
-        "weight": 0.15,
-        "value": 15,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 70,
-        "weight": 0.2,
-        "value": 1,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 100,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:29.000Z",
-    "update_time": "2026-05-21T05:02:29.000Z"
-  },
-  {
-    "_id": "6a0e91e5a2990c60c7f82712",
-    "uid": "69aea6d8af5e6cbf08027966",
-    "stats_date": "2026-05-03",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "效率至上考拉",
-    "score": 91,
-    "sleep_seconds": 25620,
-    "deep_sleep_seconds": 4419,
-    "deep_sleep_ratio": 0.15,
-    "evaluation": "你的睡眠整体表现远超同城平均，尤其是作息规律和入睡效率特别亮眼，夜里睡得稳、深睡扎实，睡眠时长也充足，其他方面也都很出色。",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 80,
-        "weight": 0.25,
-        "value": 15,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 27160,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 80,
-        "weight": 0.15,
-        "value": 15,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 95,
-        "weight": 0.2,
-        "value": 1,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 100,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:29.000Z",
-    "update_time": "2026-05-21T05:02:29.000Z"
-  },
-  {
-    "_id": "6a0e91e510231c33ca4adb64",
-    "uid": "69aea6d8af5e6cbf08027966",
-    "stats_date": "2026-05-04",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "效率至上考拉",
-    "score": 86,
-    "sleep_seconds": 25620,
-    "deep_sleep_seconds": 4714,
-    "deep_sleep_ratio": 0.16,
-    "evaluation": "得益于作息特别规律、入睡顺滑还深睡扎实，你的睡眠底子在同城里挺亮眼；不过夜里偶尔会醒的情况稍微拖了点后腿，其他方面和大家差不多。",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 80,
-        "weight": 0.25,
-        "value": 16,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 26775,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 80,
-        "weight": 0.15,
-        "value": 18,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 70,
-        "weight": 0.2,
-        "value": 1,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 100,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:29.000Z",
-    "update_time": "2026-05-21T05:02:29.000Z"
-  },
-  {
-    "_id": "6a0e91e5cae66fb6f8837915",
-    "uid": "69aea6d8af5e6cbf08027966",
-    "stats_date": "2026-05-05",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "效率至上考拉",
-    "score": 86,
-    "sleep_seconds": 25680,
-    "deep_sleep_seconds": 4320,
-    "deep_sleep_ratio": 0.15,
-    "evaluation": "入睡顺滑、作息稳得离谱，加上扎实的睡眠底子，帮你稳稳托住了同城的靠前排名，不过夜间偶尔醒的小情况稍微拖了点后腿。",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 80,
-        "weight": 0.25,
-        "value": 15,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 26556,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 80,
-        "weight": 0.15,
-        "value": 18,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 70,
-        "weight": 0.2,
-        "value": 1,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 100,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:29.000Z",
-    "update_time": "2026-05-21T05:02:29.000Z"
-  },
-  {
-    "_id": "6a0e91e5ecc1ae7bf9473f3c",
-    "uid": "69aea6d8af5e6cbf08027966",
-    "stats_date": "2026-05-06",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "效率至上考拉",
-    "score": 91,
-    "sleep_seconds": 28860,
-    "deep_sleep_seconds": 7217,
-    "deep_sleep_ratio": 0.23,
-    "evaluation": "你的睡眠底子很不错，作息很规律、入睡也顺滑，这些都让你在同城排名里很靠前。不过夜里偶尔醒的情况比同城稍多，稍微拖了点后腿，其他方面和大家差不多。",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 23,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 26940,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 80,
-        "weight": 0.15,
-        "value": 18,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 70,
-        "weight": 0.2,
-        "value": 1,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 100,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:29.000Z",
-    "update_time": "2026-05-21T05:02:29.000Z"
-  },
-  {
-    "_id": "6a0e91e5c9e0fc096c3de723",
-    "uid": "69aea6d8af5e6cbf08027966",
-    "stats_date": "2026-05-07",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "效率至上考拉",
-    "score": 96,
-    "sleep_seconds": 27060,
-    "deep_sleep_seconds": 6762,
-    "deep_sleep_ratio": 0.23,
-    "evaluation": "你的睡眠表现在同城里相当亮眼，作息特别规律，深睡特别扎实，入睡顺滑不折腾，夜里也睡得踏实，连睡眠时长都够给力，整体排名靠前不少。",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 23,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 26957,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 80,
-        "weight": 0.15,
-        "value": 18,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 95,
-        "weight": 0.2,
-        "value": 1,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 100,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:29.000Z",
-    "update_time": "2026-05-21T05:02:29.000Z"
-  },
-  {
-    "_id": "6a0e91e589ba69c5cc40f156",
-    "uid": "69aea6d8af5e6cbf08027966",
-    "stats_date": "2026-05-08",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "效率至上考拉",
-    "score": 96,
-    "sleep_seconds": 28440,
-    "deep_sleep_seconds": 7107,
-    "deep_sleep_ratio": 0.23,
-    "evaluation": "你的作息格外规律，深睡质量远超同城，夜里睡得安稳，入睡也顺滑，睡眠时长也给够了，整体在同城的睡眠表现相当亮眼。",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 23,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 27142,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 80,
-        "weight": 0.15,
-        "value": 19,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 95,
-        "weight": 0.2,
-        "value": 1,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 100,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:29.000Z",
-    "update_time": "2026-05-21T05:02:29.000Z"
-  },
-  {
-    "_id": "6a0e91e5f2124773c8abab1a",
-    "uid": "69aea6d8af5e6cbf08027966",
-    "stats_date": "2026-05-09",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "效率至上考拉",
-    "score": 96,
-    "sleep_seconds": 28560,
-    "deep_sleep_seconds": 7148,
-    "deep_sleep_ratio": 0.23,
-    "evaluation": "你的深睡特别扎实，睡眠时长充足，入睡顺滑还作息规律，夜里也睡得很稳，整体表现比大部分同城伙伴都出彩，排名自然靠前啦。",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 23,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 27300,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 80,
-        "weight": 0.15,
-        "value": 19,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 95,
-        "weight": 0.2,
-        "value": 1,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 100,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:29.000Z",
-    "update_time": "2026-05-21T05:02:29.000Z"
-  },
-  {
-    "_id": "6a0e91e5748853a6b77bc4aa",
-    "uid": "69aea6d8af5e6cbf08027966",
-    "stats_date": "2026-05-10",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "效率至上考拉",
-    "score": 91,
-    "sleep_seconds": 26100,
-    "deep_sleep_seconds": 4752,
-    "deep_sleep_ratio": 0.16,
-    "evaluation": "你入睡特别顺滑，作息稳得很，夜里也很少醒，睡眠底子在同城里相当亮眼，其他方面也和大伙差不太多。",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 80,
-        "weight": 0.25,
-        "value": 16,
         "city_avg": 15.0,
         "city_score": 68
       },
@@ -543,7 +39,7 @@
       "abnormal_events": {
         "score": 95,
         "weight": 0.2,
-        "value": 1,
+        "value": 0,
         "city_avg": 2.0,
         "city_score": 78
       },
@@ -556,24 +52,24 @@
       }
     },
     "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:29.000Z",
-    "update_time": "2026-05-21T05:02:29.000Z"
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
   },
   {
-    "_id": "6a0e91e5ac986a2ea71dc92a",
+    "_id": "6a1421bd4b889501ca10c162",
     "uid": "69aea6d8af5e6cbf08027966",
-    "stats_date": "2026-05-11",
+    "stats_date": "2026-05-02",
     "region": {
       "province_code": "110000",
       "city_code": "110100",
       "district_code": "110108"
     },
     "user_name": "效率至上考拉",
-    "score": 96,
-    "sleep_seconds": 28020,
-    "deep_sleep_seconds": 6997,
+    "score": 94,
+    "sleep_seconds": 27780,
+    "deep_sleep_seconds": 6941,
     "deep_sleep_ratio": 0.23,
-    "evaluation": "你的深睡特别扎实，作息格外规律，入睡顺滑又睡得稳，睡眠时长也给够了，这些让你在同城的睡眠排名相当靠前，其他方面和大家也差不多。",
+    "evaluation": "你的深睡特别扎实，睡眠时间充足，入睡顺滑且作息规律，这些都稳稳托住了你的排名；不过夜里偶尔醒的情况比多数同城人稍多一点，稍微拖了点后腿。",
     "dimensions": {
       "deep_sleep": {
         "score": 100,
@@ -585,21 +81,21 @@
       "sleep_duration": {
         "score": 100,
         "weight": 0.25,
-        "value": 27256,
+        "value": 27480,
         "city_avg": 26432.0,
         "city_score": 91
       },
       "sleep_efficiency": {
         "score": 80,
         "weight": 0.15,
-        "value": 19,
+        "value": 18,
         "city_avg": 43.0,
         "city_score": 48
       },
       "abnormal_events": {
-        "score": 95,
+        "score": 85,
         "weight": 0.2,
-        "value": 1,
+        "value": 0,
         "city_avg": 2.0,
         "city_score": 78
       },
@@ -612,99 +108,43 @@
       }
     },
     "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:29.000Z",
-    "update_time": "2026-05-21T05:02:29.000Z"
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
   },
   {
-    "_id": "6a0e91e53126b3dbd5200961",
+    "_id": "6a1421bd889cd77fc7e91e02",
     "uid": "69aea6d8af5e6cbf08027966",
-    "stats_date": "2026-05-12",
+    "stats_date": "2026-05-03",
     "region": {
       "province_code": "110000",
       "city_code": "110100",
       "district_code": "110108"
     },
     "user_name": "效率至上考拉",
-    "score": 96,
-    "sleep_seconds": 27180,
-    "deep_sleep_seconds": 6803,
-    "deep_sleep_ratio": 0.23,
-    "evaluation": "你的深睡特别扎实，作息规律又入睡顺滑，睡眠时长充足且夜里睡得安稳，整体睡眠在同城表现亮眼，其他方面也都和大家差不多。",
+    "score": 86,
+    "sleep_seconds": 26520,
+    "deep_sleep_seconds": 4572,
+    "deep_sleep_ratio": 0.15,
+    "evaluation": "你的睡眠整体表现远超同城平均，尤其是作息规律和入睡效率特别亮眼，夜里睡得稳、深睡扎实，睡眠时长也充足，其他方面也都很出色。",
     "dimensions": {
       "deep_sleep": {
-        "score": 100,
+        "score": 80,
         "weight": 0.25,
-        "value": 23,
+        "value": 15,
         "city_avg": 15.0,
         "city_score": 68
       },
       "sleep_duration": {
         "score": 100,
         "weight": 0.25,
-        "value": 27250,
+        "value": 27160,
         "city_avg": 26432.0,
         "city_score": 91
       },
       "sleep_efficiency": {
-        "score": 80,
+        "score": 60,
         "weight": 0.15,
-        "value": 19,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 95,
-        "weight": 0.2,
-        "value": 1,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 100,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:29.000Z",
-    "update_time": "2026-05-21T05:02:29.000Z"
-  },
-  {
-    "_id": "6a0e91e5ec6c1ce59121c622",
-    "uid": "69aea6d8af5e6cbf08027966",
-    "stats_date": "2026-05-13",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "效率至上考拉",
-    "score": 89,
-    "sleep_seconds": 25740,
-    "deep_sleep_seconds": 4685,
-    "deep_sleep_ratio": 0.16,
-    "evaluation": "你的作息特别规律，入睡也很顺滑，深睡质量扎实，睡眠时长也够，夜里睡得也稳，整体在同城里表现相当亮眼，其他方面也和大伙差不离。",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 80,
-        "weight": 0.25,
-        "value": 16,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 27134,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 80,
-        "weight": 0.15,
-        "value": 19,
+        "value": 25,
         "city_avg": 43.0,
         "city_score": 48
       },
@@ -724,24 +164,24 @@
       }
     },
     "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:29.000Z",
-    "update_time": "2026-05-21T05:02:29.000Z"
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
   },
   {
-    "_id": "6a0e91e56e7712dea2ebdc97",
+    "_id": "6a1421bd551f72f0e2617c43",
     "uid": "69aea6d8af5e6cbf08027966",
-    "stats_date": "2026-05-14",
+    "stats_date": "2026-05-04",
     "region": {
       "province_code": "110000",
       "city_code": "110100",
       "district_code": "110108"
     },
     "user_name": "效率至上考拉",
-    "score": 81,
-    "sleep_seconds": 25500,
-    "deep_sleep_seconds": 4057,
+    "score": 78,
+    "sleep_seconds": 25620,
+    "deep_sleep_seconds": 4116,
     "deep_sleep_ratio": 0.14,
-    "evaluation": "你的入睡特别顺滑，作息也格外规律，这两点在同城里都很亮眼，不过深睡质量和夜间睡眠连续性稍微拖了点后腿，其他方面和大部分同城人差不多。",
+    "evaluation": "得益于作息特别规律、入睡顺滑还深睡扎实，你的睡眠底子在同城里挺亮眼；不过夜里偶尔会醒的情况稍微拖了点后腿，其他方面和大家差不多。",
     "dimensions": {
       "deep_sleep": {
         "score": 60,
@@ -753,14 +193,14 @@
       "sleep_duration": {
         "score": 100,
         "weight": 0.25,
-        "value": 27017,
+        "value": 26775,
         "city_avg": 26432.0,
         "city_score": 91
       },
       "sleep_efficiency": {
-        "score": 80,
+        "score": 60,
         "weight": 0.15,
-        "value": 19,
+        "value": 29,
         "city_avg": 43.0,
         "city_score": 48
       },
@@ -780,43 +220,211 @@
       }
     },
     "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:29.000Z",
-    "update_time": "2026-05-21T05:02:29.000Z"
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
   },
   {
-    "_id": "6a0e91e51ac4f53af14fae1c",
+    "_id": "6a1421bd3c766e826aa7b2dc",
     "uid": "69aea6d8af5e6cbf08027966",
-    "stats_date": "2026-05-15",
+    "stats_date": "2026-05-05",
     "region": {
       "province_code": "110000",
       "city_code": "110100",
       "district_code": "110108"
     },
     "user_name": "效率至上考拉",
-    "score": 91,
-    "sleep_seconds": 25680,
-    "deep_sleep_seconds": 4723,
-    "deep_sleep_ratio": 0.16,
-    "evaluation": "你的睡眠整体表现远超同城平均，尤其是作息特别规律，入睡也顺滑不折腾，深睡扎实、睡眠时长够，夜里也睡得稳，这些都让你在同城排名里很靠前啦。",
+    "score": 94,
+    "sleep_seconds": 27600,
+    "deep_sleep_seconds": 6900,
+    "deep_sleep_ratio": 0.23,
+    "evaluation": "入睡顺滑、作息稳得离谱，加上扎实的睡眠底子，帮你稳稳托住了同城的靠前排名，不过夜间偶尔醒的小情况稍微拖了点后腿。",
     "dimensions": {
       "deep_sleep": {
-        "score": 80,
+        "score": 100,
         "weight": 0.25,
-        "value": 16,
+        "value": 23,
         "city_avg": 15.0,
         "city_score": 68
       },
       "sleep_duration": {
         "score": 100,
         "weight": 0.25,
-        "value": 26799,
+        "value": 26940,
         "city_avg": 26432.0,
         "city_score": 91
       },
       "sleep_efficiency": {
         "score": 80,
         "weight": 0.15,
-        "value": 19,
+        "value": 27,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 85,
+        "weight": 0.2,
+        "value": 1,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bd3b8860f04f940592",
+    "uid": "69aea6d8af5e6cbf08027966",
+    "stats_date": "2026-05-06",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "效率至上考拉",
+    "score": 83,
+    "sleep_seconds": 26040,
+    "deep_sleep_seconds": 5029,
+    "deep_sleep_ratio": 0.17,
+    "evaluation": "你的睡眠底子很不错，作息很规律、入睡也顺滑，这些都让你在同城排名里很靠前。不过夜里偶尔醒的情况比同城稍多，稍微拖了点后腿，其他方面和大家差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 80,
+        "weight": 0.25,
+        "value": 17,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 26790,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 29,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 1,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bd3a9bd15b986f4f6e",
+    "uid": "69aea6d8af5e6cbf08027966",
+    "stats_date": "2026-05-07",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "效率至上考拉",
+    "score": 86,
+    "sleep_seconds": 26340,
+    "deep_sleep_seconds": 5029,
+    "deep_sleep_ratio": 0.17,
+    "evaluation": "你的睡眠表现在同城里相当亮眼，作息特别规律，深睡特别扎实，入睡顺滑不折腾，夜里也睡得踏实，连睡眠时长都够给力，整体排名靠前不少。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 80,
+        "weight": 0.25,
+        "value": 17,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 26726,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 29,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 85,
+        "weight": 0.2,
+        "value": 1,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bdd39c104fcae9fe02",
+    "uid": "69aea6d8af5e6cbf08027966",
+    "stats_date": "2026-05-08",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "效率至上考拉",
+    "score": 99,
+    "sleep_seconds": 27600,
+    "deep_sleep_seconds": 6914,
+    "deep_sleep_ratio": 0.23,
+    "evaluation": "你的作息格外规律，深睡质量远超同城，夜里睡得安稳，入睡也顺滑，睡眠时长也给够了，整体在同城的睡眠表现相当亮眼。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 23,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 26835,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 100,
+        "weight": 0.15,
+        "value": 27,
         "city_avg": 43.0,
         "city_score": 48
       },
@@ -836,11 +444,403 @@
       }
     },
     "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:29.000Z",
-    "update_time": "2026-05-21T05:02:29.000Z"
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
   },
   {
-    "_id": "6a0e91e5c73f390b0cdb8fd3",
+    "_id": "6a1421bda4388e1434fa7882",
+    "uid": "69aea6d8af5e6cbf08027966",
+    "stats_date": "2026-05-09",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "效率至上考拉",
+    "score": 99,
+    "sleep_seconds": 28020,
+    "deep_sleep_seconds": 6997,
+    "deep_sleep_ratio": 0.23,
+    "evaluation": "你的深睡特别扎实，睡眠时长充足，入睡顺滑还作息规律，夜里也睡得很稳，整体表现比大部分同城伙伴都出彩，排名自然靠前啦。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 23,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 26967,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 100,
+        "weight": 0.15,
+        "value": 25,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 95,
+        "weight": 0.2,
+        "value": 1,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bdd5ab9902b7760f50",
+    "uid": "69aea6d8af5e6cbf08027966",
+    "stats_date": "2026-05-10",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "效率至上考拉",
+    "score": 88,
+    "sleep_seconds": 25560,
+    "deep_sleep_seconds": 4646,
+    "deep_sleep_ratio": 0.16,
+    "evaluation": "你入睡特别顺滑，作息稳得很，夜里也很少醒，睡眠底子在同城里相当亮眼，其他方面也和大伙差不太多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 80,
+        "weight": 0.25,
+        "value": 16,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 26826,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 26,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 95,
+        "weight": 0.2,
+        "value": 1,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bd318ea0337567da59",
+    "uid": "69aea6d8af5e6cbf08027966",
+    "stats_date": "2026-05-11",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "效率至上考拉",
+    "score": 81,
+    "sleep_seconds": 25800,
+    "deep_sleep_seconds": 3861,
+    "deep_sleep_ratio": 0.13,
+    "evaluation": "你的深睡特别扎实，作息格外规律，入睡顺滑又睡得稳，睡眠时长也给够了，这些让你在同城的睡眠排名相当靠前，其他方面和大家也差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 60,
+        "weight": 0.25,
+        "value": 13,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 26733,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 28,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 85,
+        "weight": 0.2,
+        "value": 1,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bd8fb7f085173b55b9",
+    "uid": "69aea6d8af5e6cbf08027966",
+    "stats_date": "2026-05-12",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "效率至上考拉",
+    "score": 96,
+    "sleep_seconds": 27780,
+    "deep_sleep_seconds": 6941,
+    "deep_sleep_ratio": 0.23,
+    "evaluation": "你的深睡特别扎实，作息规律又入睡顺滑，睡眠时长充足且夜里睡得安稳，整体睡眠在同城表现亮眼，其他方面也都和大家差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 23,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 26820,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 27,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 95,
+        "weight": 0.2,
+        "value": 1,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bda113c87b0abd8c46",
+    "uid": "69aea6d8af5e6cbf08027966",
+    "stats_date": "2026-05-13",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "效率至上考拉",
+    "score": 81,
+    "sleep_seconds": 25620,
+    "deep_sleep_seconds": 3822,
+    "deep_sleep_ratio": 0.13,
+    "evaluation": "你的作息特别规律，入睡也很顺滑，深睡质量扎实，睡眠时长也够，夜里睡得也稳，整体在同城里表现相当亮眼，其他方面也和大伙差不离。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 60,
+        "weight": 0.25,
+        "value": 13,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 26728,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 28,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 85,
+        "weight": 0.2,
+        "value": 1,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bd889d404cb22252f4",
+    "uid": "69aea6d8af5e6cbf08027966",
+    "stats_date": "2026-05-14",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "效率至上考拉",
+    "score": 86,
+    "sleep_seconds": 27600,
+    "deep_sleep_seconds": 5151,
+    "deep_sleep_ratio": 0.17,
+    "evaluation": "你的入睡特别顺滑，作息也格外规律，这两点在同城里都很亮眼，不过深睡质量和夜间睡眠连续性稍微拖了点后腿，其他方面和大部分同城人差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 80,
+        "weight": 0.25,
+        "value": 17,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 26790,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 29,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 85,
+        "weight": 0.2,
+        "value": 1,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bd9aaa036ac402a482",
+    "uid": "69aea6d8af5e6cbf08027966",
+    "stats_date": "2026-05-15",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "效率至上考拉",
+    "score": 99,
+    "sleep_seconds": 27540,
+    "deep_sleep_seconds": 6872,
+    "deep_sleep_ratio": 0.23,
+    "evaluation": "你的睡眠整体表现远超同城平均，尤其是作息特别规律，入睡也顺滑不折腾，深睡扎实、睡眠时长够，夜里也睡得稳，这些都让你在同城排名里很靠前啦。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 23,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 26816,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 100,
+        "weight": 0.15,
+        "value": 29,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 95,
+        "weight": 0.2,
+        "value": 1,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bd4dfbb9f72346db36",
     "uid": "69aea6d8af5e6cbf08027966",
     "stats_date": "2026-05-16",
     "region": {
@@ -849,9 +849,9 @@
       "district_code": "110108"
     },
     "user_name": "效率至上考拉",
-    "score": 86,
-    "sleep_seconds": 25560,
-    "deep_sleep_seconds": 4998,
+    "score": 83,
+    "sleep_seconds": 25800,
+    "deep_sleep_seconds": 5049,
     "deep_sleep_ratio": 0.17,
     "evaluation": "你作息特别稳，入睡顺滑还睡得扎实、时长也够，这几个优势帮你在同城排名里靠前；不过夜里偶尔会醒的小状况稍微拖了点后腿，其他方面和大部分同城人差不多。",
     "dimensions": {
@@ -865,14 +865,14 @@
       "sleep_duration": {
         "score": 100,
         "weight": 0.25,
-        "value": 26687,
+        "value": 26674,
         "city_avg": 26432.0,
         "city_score": 91
       },
       "sleep_efficiency": {
-        "score": 80,
+        "score": 60,
         "weight": 0.15,
-        "value": 20,
+        "value": 30,
         "city_avg": 43.0,
         "city_score": 48
       },
@@ -892,11 +892,11 @@
       }
     },
     "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:29.000Z",
-    "update_time": "2026-05-21T05:02:29.000Z"
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
   },
   {
-    "_id": "6a0e91e5e3bce9a2309eefe1",
+    "_id": "6a1421bd7be0d32a6f8b17cd",
     "uid": "69aea6d8af5e6cbf08027966",
     "stats_date": "2026-05-17",
     "region": {
@@ -905,347 +905,11 @@
       "district_code": "110108"
     },
     "user_name": "效率至上考拉",
-    "score": 88,
+    "score": 94,
     "sleep_seconds": 27840,
     "deep_sleep_seconds": 6969,
     "deep_sleep_ratio": 0.23,
     "evaluation": "你的睡眠底子很不错，入睡顺滑还作息特别稳，稳稳托住了排名；不过夜里容易醒的情况稍拖了点后腿，其他方面和同城多数人差不多。",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 23,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 26846,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 80,
-        "weight": 0.15,
-        "value": 21,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 55,
-        "weight": 0.2,
-        "value": 1,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 100,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:29.000Z",
-    "update_time": "2026-05-21T05:02:29.000Z"
-  },
-  {
-    "_id": "6a0e91e5fa8e6806489829bd",
-    "uid": "69aea6d8af5e6cbf08027966",
-    "stats_date": "2026-05-18",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "效率至上考拉",
-    "score": 86,
-    "sleep_seconds": 25800,
-    "deep_sleep_seconds": 4446,
-    "deep_sleep_ratio": 0.15,
-    "evaluation": "你的睡眠在同城里挺亮眼的，作息特别规律、入睡顺滑不折腾，深睡和时长也都不错，不过夜里醒的次数比多数人稍频繁些，其他方面和大家差不多。",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 80,
-        "weight": 0.25,
-        "value": 15,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 26859,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 80,
-        "weight": 0.15,
-        "value": 21,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 70,
-        "weight": 0.2,
-        "value": 1,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 100,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:29.000Z",
-    "update_time": "2026-05-21T05:02:29.000Z"
-  },
-  {
-    "_id": "6a0e91e56219fee8eacf9821",
-    "uid": "69aea6d8af5e6cbf08027966",
-    "stats_date": "2026-05-19",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "效率至上考拉",
-    "score": 96,
-    "sleep_seconds": 28740,
-    "deep_sleep_seconds": 7176,
-    "deep_sleep_ratio": 0.23,
-    "evaluation": "你的深睡特别扎实，睡眠时长也够，入睡顺滑不折腾，作息稳当夜里也睡得踏实，整体睡眠底子在同城相当亮眼，能拿到靠前的排名很合理。",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 23,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 27077,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 80,
-        "weight": 0.15,
-        "value": 21,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 95,
-        "weight": 0.2,
-        "value": 1,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 100,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:29.000Z",
-    "update_time": "2026-05-21T05:02:29.000Z"
-  },
-  {
-    "_id": "6a0e91e5410edbf7178c1266",
-    "uid": "69aea6d8af5e6cbf08027966",
-    "stats_date": "2026-05-20",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "效率至上考拉",
-    "score": 94,
-    "sleep_seconds": 27360,
-    "deep_sleep_seconds": 6845,
-    "deep_sleep_ratio": 0.23,
-    "evaluation": "你的深睡特别扎实，睡眠时长充足，入睡顺滑且作息规律，整体底子很不错，同城排名靠前，不过夜间偶尔醒的情况稍多，其他方面和大家差不多。",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 23,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 26970,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 100,
-        "weight": 0.15,
-        "value": 20,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 70,
-        "weight": 0.2,
-        "value": 1,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 100,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:29.000Z",
-    "update_time": "2026-05-21T05:02:29.000Z"
-  },
-  {
-    "_id": "6a0e91e561551d385ede4276",
-    "uid": "69aea6d8af5e6cbf08027966",
-    "stats_date": "2026-05-21",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "效率至上考拉",
-    "score": 96,
-    "sleep_seconds": 28140,
-    "deep_sleep_seconds": 7038,
-    "deep_sleep_ratio": 0.23,
-    "evaluation": "你的深睡特别扎实，生物钟很稳还能倒头就睡，夜里几乎不醒，睡眠时长也给得很足，整体睡眠表现比同城平均亮眼不少，其他方面和大部分同城人差不多。",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 23,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 27047,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 80,
-        "weight": 0.15,
-        "value": 20,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 95,
-        "weight": 0.2,
-        "value": 1,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 100,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:29.000Z",
-    "update_time": "2026-05-21T05:02:29.000Z"
-  },
-  {
-    "_id": "6a0e91e5d1318cc30a7785e0",
-    "uid": "69aea6d8af5e6cbf08027966",
-    "stats_date": "2026-05-22",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "效率至上考拉",
-    "score": 86,
-    "sleep_seconds": 25740,
-    "deep_sleep_seconds": 5029,
-    "deep_sleep_ratio": 0.17,
-    "evaluation": "你的睡眠底子在同城相当扎实，尤其是作息和入睡效率都比身边人强不少，不过夜里偶尔会醒几次，稍微拖了点后腿，其他方面和大家差不多。",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 80,
-        "weight": 0.25,
-        "value": 17,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 26854,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 80,
-        "weight": 0.15,
-        "value": 20,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 70,
-        "weight": 0.2,
-        "value": 1,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 100,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:29.000Z",
-    "update_time": "2026-05-21T05:02:29.000Z"
-  },
-  {
-    "_id": "6a0e91e51d20cd3810f4f569",
-    "uid": "69aea6d8af5e6cbf08027966",
-    "stats_date": "2026-05-23",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "效率至上考拉",
-    "score": 88,
-    "sleep_seconds": 27360,
-    "deep_sleep_seconds": 6831,
-    "deep_sleep_ratio": 0.23,
-    "evaluation": "你这睡眠在同城里算靠前的，深睡特别扎实，入睡顺滑还作息规律，睡眠时长也给够了，不过夜里容易醒稍拖了点后腿，其他方面和大伙差不多。",
     "dimensions": {
       "deep_sleep": {
         "score": 100,
@@ -1264,12 +928,12 @@
       "sleep_efficiency": {
         "score": 80,
         "weight": 0.15,
-        "value": 20,
+        "value": 29,
         "city_avg": 43.0,
         "city_score": 48
       },
       "abnormal_events": {
-        "score": 55,
+        "score": 85,
         "weight": 0.2,
         "value": 1,
         "city_avg": 2.0,
@@ -1284,24 +948,192 @@
       }
     },
     "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:29.000Z",
-    "update_time": "2026-05-21T05:02:29.000Z"
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
   },
   {
-    "_id": "6a0e91e534260746d67835dd",
+    "_id": "6a1421bd03a83a6ea77f8871",
     "uid": "69aea6d8af5e6cbf08027966",
-    "stats_date": "2026-05-24",
+    "stats_date": "2026-05-18",
     "region": {
       "province_code": "110000",
       "city_code": "110100",
       "district_code": "110108"
     },
     "user_name": "效率至上考拉",
-    "score": 86,
+    "score": 81,
     "sleep_seconds": 25680,
-    "deep_sleep_seconds": 3838,
+    "deep_sleep_seconds": 4082,
+    "deep_sleep_ratio": 0.14,
+    "evaluation": "你的睡眠在同城里挺亮眼的，作息特别规律、入睡顺滑不折腾，深睡和时长也都不错，不过夜里醒的次数比多数人稍频繁些，其他方面和大家差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 60,
+        "weight": 0.25,
+        "value": 14,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 26773,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 29,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 85,
+        "weight": 0.2,
+        "value": 1,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bdd007ebaa0f668ba1",
+    "uid": "69aea6d8af5e6cbf08027966",
+    "stats_date": "2026-05-19",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "效率至上考拉",
+    "score": 99,
+    "sleep_seconds": 27420,
+    "deep_sleep_seconds": 6859,
+    "deep_sleep_ratio": 0.23,
+    "evaluation": "你的深睡特别扎实，睡眠时长也够，入睡顺滑不折腾，作息稳当夜里也睡得踏实，整体睡眠底子在同城相当亮眼，能拿到靠前的排名很合理。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 23,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 26760,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 100,
+        "weight": 0.15,
+        "value": 28,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 95,
+        "weight": 0.2,
+        "value": 1,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bd2229cdd1c897335d",
+    "uid": "69aea6d8af5e6cbf08027966",
+    "stats_date": "2026-05-20",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "效率至上考拉",
+    "score": 81,
+    "sleep_seconds": 26580,
+    "deep_sleep_seconds": 4276,
+    "deep_sleep_ratio": 0.14,
+    "evaluation": "你的深睡特别扎实，睡眠时长充足，入睡顺滑且作息规律，整体底子很不错，同城排名靠前，不过夜间偶尔醒的情况稍多，其他方面和大家差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 60,
+        "weight": 0.25,
+        "value": 14,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 26799,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 28,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 85,
+        "weight": 0.2,
+        "value": 1,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bdf89e50d8252023d0",
+    "uid": "69aea6d8af5e6cbf08027966",
+    "stats_date": "2026-05-21",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "效率至上考拉",
+    "score": 81,
+    "sleep_seconds": 26280,
+    "deep_sleep_seconds": 3923,
     "deep_sleep_ratio": 0.13,
-    "evaluation": "你这睡眠里，生物钟稳到点就困、入睡顺滑不折腾，夜里睡得稳，睡眠时长也够，这些都帮你拿下不错的同城排名；不过深睡质量稍显不足，其他方面和多数同城人差不了太多",
+    "evaluation": "你的深睡特别扎实，生物钟很稳还能倒头就睡，夜里几乎不醒，睡眠时长也给得很足，整体睡眠表现比同城平均亮眼不少，其他方面和大部分同城人差不多。",
     "dimensions": {
       "deep_sleep": {
         "score": 60,
@@ -1313,19 +1145,19 @@
       "sleep_duration": {
         "score": 100,
         "weight": 0.25,
-        "value": 26739,
+        "value": 26794,
         "city_avg": 26432.0,
         "city_score": 91
       },
       "sleep_efficiency": {
-        "score": 80,
+        "score": 60,
         "weight": 0.15,
-        "value": 20,
+        "value": 29,
         "city_avg": 43.0,
         "city_score": 48
       },
       "abnormal_events": {
-        "score": 95,
+        "score": 85,
         "weight": 0.2,
         "value": 1,
         "city_avg": 2.0,
@@ -1340,13 +1172,13 @@
       }
     },
     "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:29.000Z",
-    "update_time": "2026-05-21T05:02:29.000Z"
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
   },
   {
-    "_id": "6a0e91e50989649f0d16fdd6",
+    "_id": "6a1421bd5e1b8d15708606bc",
     "uid": "69aea6d8af5e6cbf08027966",
-    "stats_date": "2026-05-25",
+    "stats_date": "2026-05-22",
     "region": {
       "province_code": "110000",
       "city_code": "110100",
@@ -1354,234 +1186,10 @@
     },
     "user_name": "效率至上考拉",
     "score": 86,
-    "sleep_seconds": 25860,
-    "deep_sleep_seconds": 4835,
-    "deep_sleep_ratio": 0.17,
-    "evaluation": "你的睡眠整体表现远超同城伙伴，尤其是作息特别规律、入睡顺滑不折腾，这可是你排名靠前的底气，不过夜里偶尔醒的小情况稍微拖了点后腿，其他方面和大家差不多。",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 80,
-        "weight": 0.25,
-        "value": 17,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 26584,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 80,
-        "weight": 0.15,
-        "value": 20,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 70,
-        "weight": 0.2,
-        "value": 1,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 100,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:29.000Z",
-    "update_time": "2026-05-21T05:02:29.000Z"
-  },
-  {
-    "_id": "6a0e91e5dd8ee83de4422e3a",
-    "uid": "69aea6d8af5e6cbf08027966",
-    "stats_date": "2026-05-26",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "效率至上考拉",
-    "score": 91,
-    "sleep_seconds": 28320,
-    "deep_sleep_seconds": 7093,
-    "deep_sleep_ratio": 0.23,
-    "evaluation": "你的深睡特别扎实，作息格外规律，入睡顺滑还睡够了时长，整体表现挺不错；不过夜里偶尔会醒的小情况稍微拖了点后腿，其他方面和同城多数人差不多。",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 23,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 26666,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 80,
-        "weight": 0.15,
-        "value": 20,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 70,
-        "weight": 0.2,
-        "value": 2,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 100,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:29.000Z",
-    "update_time": "2026-05-21T05:02:29.000Z"
-  },
-  {
-    "_id": "6a0e91e510314bf0091600b2",
-    "uid": "69aea6d8af5e6cbf08027966",
-    "stats_date": "2026-05-27",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "效率至上考拉",
-    "score": 99,
-    "sleep_seconds": 26940,
-    "deep_sleep_seconds": 6748,
-    "deep_sleep_ratio": 0.23,
-    "evaluation": "你的深睡特别扎实，入睡顺滑，作息很稳，夜里几乎不醒，睡眠时长也充足，整体在同城里表现相当亮眼。",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 23,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 26751,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 100,
-        "weight": 0.15,
-        "value": 20,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 95,
-        "weight": 0.2,
-        "value": 1,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 100,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:29.000Z",
-    "update_time": "2026-05-21T05:02:29.000Z"
-  },
-  {
-    "_id": "6a0e91e5b999c99e70251e48",
-    "uid": "69aea6d8af5e6cbf08027966",
-    "stats_date": "2026-05-28",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "效率至上考拉",
-    "score": 94,
-    "sleep_seconds": 27540,
-    "deep_sleep_seconds": 6872,
-    "deep_sleep_ratio": 0.23,
-    "evaluation": "你的深睡特别扎实，入睡顺滑还作息规律，睡眠时长也给够了，不过夜间偶尔醒的情况比多数同城人稍不稳一点，整体在同城的排名挺靠前的。",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 23,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 26897,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 100,
-        "weight": 0.15,
-        "value": 20,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 70,
-        "weight": 0.2,
-        "value": 1,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 100,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:29.000Z",
-    "update_time": "2026-05-21T05:02:29.000Z"
-  },
-  {
-    "_id": "6a0e91e561f02c708fd4b6d5",
-    "uid": "69aea6d8af5e6cbf08027966",
-    "stats_date": "2026-05-29",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "效率至上考拉",
-    "score": 86,
-    "sleep_seconds": 25560,
+    "sleep_seconds": 26160,
     "deep_sleep_seconds": 4704,
     "deep_sleep_ratio": 0.16,
-    "evaluation": "你作息特别规律，入睡也顺滑不折腾，深睡质量也不错，睡眠时长也够，虽然夜里偶尔醒得稍多，但整体睡眠底子扎实，同城排名挺靠前的。",
+    "evaluation": "你的睡眠底子在同城相当扎实，尤其是作息和入睡效率都比身边人强不少，不过夜里偶尔会醒几次，稍微拖了点后腿，其他方面和大家差不多。",
     "dimensions": {
       "deep_sleep": {
         "score": 80,
@@ -1593,21 +1201,21 @@
       "sleep_duration": {
         "score": 100,
         "weight": 0.25,
-        "value": 26889,
+        "value": 26691,
         "city_avg": 26432.0,
         "city_score": 91
       },
       "sleep_efficiency": {
-        "score": 80,
+        "score": 60,
         "weight": 0.15,
-        "value": 20,
+        "value": 30,
         "city_avg": 43.0,
         "city_score": 48
       },
       "abnormal_events": {
-        "score": 70,
+        "score": 85,
         "weight": 0.2,
-        "value": 2,
+        "value": 1,
         "city_avg": 2.0,
         "city_score": 78
       },
@@ -1620,13 +1228,13 @@
       }
     },
     "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:29.000Z",
-    "update_time": "2026-05-21T05:02:29.000Z"
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
   },
   {
-    "_id": "6a0e91e55201d364fcbdfbef",
+    "_id": "6a1421bd11352ed184661d10",
     "uid": "69aea6d8af5e6cbf08027966",
-    "stats_date": "2026-05-30",
+    "stats_date": "2026-05-23",
     "region": {
       "province_code": "110000",
       "city_code": "110100",
@@ -1634,10 +1242,10 @@
     },
     "user_name": "效率至上考拉",
     "score": 94,
-    "sleep_seconds": 27780,
-    "deep_sleep_seconds": 6941,
+    "sleep_seconds": 27600,
+    "deep_sleep_seconds": 6900,
     "deep_sleep_ratio": 0.23,
-    "evaluation": "你的生物钟特别稳，深睡修复很扎实，入睡顺滑还很少夜里醒，睡眠时长也足够，整体在同城里的表现相当亮眼，其他方面也和大伙差不多。",
+    "evaluation": "你这睡眠在同城里算靠前的，深睡特别扎实，入睡顺滑还作息规律，睡眠时长也给够了，不过夜里容易醒稍拖了点后腿，其他方面和大伙差不多。",
     "dimensions": {
       "deep_sleep": {
         "score": 100,
@@ -1649,21 +1257,21 @@
       "sleep_duration": {
         "score": 100,
         "weight": 0.25,
-        "value": 27047,
+        "value": 26661,
         "city_avg": 26432.0,
         "city_score": 91
       },
       "sleep_efficiency": {
         "score": 80,
         "weight": 0.15,
-        "value": 19,
+        "value": 31,
         "city_avg": 43.0,
         "city_score": 48
       },
       "abnormal_events": {
         "score": 85,
         "weight": 0.2,
-        "value": 2,
+        "value": 1,
         "city_avg": 2.0,
         "city_score": 78
       },
@@ -1676,13 +1284,69 @@
       }
     },
     "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:29.000Z",
-    "update_time": "2026-05-21T05:02:29.000Z"
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
   },
   {
-    "_id": "6a0e91e5e9f36f2afe64a7aa",
+    "_id": "6a1421bdf2e131ba40df737d",
     "uid": "69aea6d8af5e6cbf08027966",
-    "stats_date": "2026-05-31",
+    "stats_date": "2026-05-24",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "效率至上考拉",
+    "score": 99,
+    "sleep_seconds": 26940,
+    "deep_sleep_seconds": 6748,
+    "deep_sleep_ratio": 0.23,
+    "evaluation": "你这睡眠里，生物钟稳到点就困、入睡顺滑不折腾，夜里睡得稳，睡眠时长也够，这些都帮你拿下不错的同城排名；不过深睡质量稍显不足，其他方面和多数同城人差不了太多",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 23,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 26760,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 100,
+        "weight": 0.15,
+        "value": 30,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 95,
+        "weight": 0.2,
+        "value": 1,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bd8c7aa965dd699279",
+    "uid": "69aea6d8af5e6cbf08027966",
+    "stats_date": "2026-05-25",
     "region": {
       "province_code": "110000",
       "city_code": "110100",
@@ -1690,10 +1354,10 @@
     },
     "user_name": "效率至上考拉",
     "score": 86,
-    "sleep_seconds": 25680,
-    "deep_sleep_seconds": 4906,
+    "sleep_seconds": 27060,
+    "deep_sleep_seconds": 5110,
     "deep_sleep_ratio": 0.17,
-    "evaluation": "你的作息特别规律，入睡基本不折腾，深睡扎实、睡眠时长也够，不过夜里偶尔会醒的情况比多数同城人稍多一点，整体在同城的睡眠排名里挺靠前的。",
+    "evaluation": "你在同城的睡眠表现相当亮眼，作息规律帮你稳稳托在前列，深睡扎实、入睡顺滑，夜里也睡得稳，整体比同城平均水平高出不少。",
     "dimensions": {
       "deep_sleep": {
         "score": 80,
@@ -1705,14 +1369,350 @@
       "sleep_duration": {
         "score": 100,
         "weight": 0.25,
-        "value": 26893,
+        "value": 26850,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 29,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 85,
+        "weight": 0.2,
+        "value": 1,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bdd53b956c2fdbf215",
+    "uid": "69aea6d8af5e6cbf08027966",
+    "stats_date": "2026-05-26",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "效率至上考拉",
+    "score": 86,
+    "sleep_seconds": 27240,
+    "deep_sleep_seconds": 4838,
+    "deep_sleep_ratio": 0.16,
+    "evaluation": "你这睡眠排名在同城里挺靠前的，最亮眼的是作息特别规律，生物钟稳得不行，加上深睡扎实、入睡顺滑，睡眠时长也够，夜里也睡得踏实，其余表现和大伙也差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 80,
+        "weight": 0.25,
+        "value": 16,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 26811,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 31,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 85,
+        "weight": 0.2,
+        "value": 1,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bd73d6115a9762d6d8",
+    "uid": "69aea6d8af5e6cbf08027966",
+    "stats_date": "2026-05-27",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "效率至上考拉",
+    "score": 86,
+    "sleep_seconds": 27240,
+    "deep_sleep_seconds": 5192,
+    "deep_sleep_ratio": 0.17,
+    "evaluation": "你的作息稳得离谱，生物钟几乎没波动，这可是你排名靠前的核心底气；深睡扎实、入睡顺滑，睡眠时长也够，夜里也睡得稳，整体表现比同城多数人都出色。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 80,
+        "weight": 0.25,
+        "value": 17,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 26927,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 30,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 85,
+        "weight": 0.2,
+        "value": 1,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bd1be43561f9b9e89e",
+    "uid": "69aea6d8af5e6cbf08027966",
+    "stats_date": "2026-05-28",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "效率至上考拉",
+    "score": 94,
+    "sleep_seconds": 28740,
+    "deep_sleep_seconds": 7176,
+    "deep_sleep_ratio": 0.23,
+    "evaluation": "你的作息特别规律，深睡质量扎实，睡眠时长也给够了，入睡顺滑还睡得稳，整体睡眠表现在同城里相当亮眼，其他方面也和大部分人差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 23,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 27009,
         "city_avg": 26432.0,
         "city_score": 91
       },
       "sleep_efficiency": {
         "score": 80,
         "weight": 0.15,
-        "value": 20,
+        "value": 29,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 85,
+        "weight": 0.2,
+        "value": 1,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bdf4ab958474f2f396",
+    "uid": "69aea6d8af5e6cbf08027966",
+    "stats_date": "2026-05-29",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "效率至上考拉",
+    "score": 86,
+    "sleep_seconds": 25500,
+    "deep_sleep_seconds": 4694,
+    "deep_sleep_ratio": 0.16,
+    "evaluation": "你的作息规律度远超同城大部分人，深睡质量也很扎实，入睡顺滑，睡眠时长也够，夜里睡得稳，整体排名在同城里相当靠前，其他方面也都不错",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 80,
+        "weight": 0.25,
+        "value": 16,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 26863,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 31,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 85,
+        "weight": 0.2,
+        "value": 1,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bd5cf83e1654a958d7",
+    "uid": "69aea6d8af5e6cbf08027966",
+    "stats_date": "2026-05-30",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "效率至上考拉",
+    "score": 97,
+    "sleep_seconds": 27120,
+    "deep_sleep_seconds": 6776,
+    "deep_sleep_ratio": 0.23,
+    "evaluation": "你的睡眠表现在同城里相当亮眼，深睡扎实、入睡顺滑又作息特别稳，这些都稳稳托住了你的排名，睡眠时长和夜间睡眠连续性也和大家差不多甚至略好。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 23,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 26957,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 100,
+        "weight": 0.15,
+        "value": 29,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 85,
+        "weight": 0.2,
+        "value": 1,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bdd92e05fece924d48",
+    "uid": "69aea6d8af5e6cbf08027966",
+    "stats_date": "2026-05-31",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "效率至上考拉",
+    "score": 83,
+    "sleep_seconds": 26160,
+    "deep_sleep_seconds": 4819,
+    "deep_sleep_ratio": 0.16,
+    "evaluation": "你的作息特别规律，睡眠时长充足，入睡也顺滑，深睡质量也不错，不过夜里偶尔醒的情况比多数同城人稍多一点，整体排名在同城里挺靠前的。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 80,
+        "weight": 0.25,
+        "value": 16,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 26837,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 30,
         "city_avg": 43.0,
         "city_score": 48
       },
@@ -1732,7 +1732,7 @@
       }
     },
     "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:29.000Z",
-    "update_time": "2026-05-21T05:02:29.000Z"
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
   }
 ]

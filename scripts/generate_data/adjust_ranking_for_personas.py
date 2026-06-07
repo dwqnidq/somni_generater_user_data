@@ -1,10 +1,10 @@
-"""调整 somni_sleep_analysis.json 排名，确保真实用户 + 8 个人格用户每天都在前 10 名。
+"""调整 output/somni_sleep_analysis.json（仅虚拟用户）：八人格每日前 10，只改虚拟分数。
 
 策略：
-  1. 将人格用户和真实用户的 _somni_sleep_analysis.json 合并进主文件
-  2. 对每一天，以所有受保护用户中最低的 score 为锚点，计算需要降低多少虚拟用户的分数
-  3. 降低虚拟用户分数时，从底层数据正向计算确保公式一致
-  4. 真实用户和人格用户的原始数据不做任何修改
+  1. 大池文件只存虚拟用户；八人格仅从 output/{uid}_somni_sleep_analysis.json 只读参与排名
+  2. 每日以八人格（+ 可选真实用户）最低分为锚点，压低虚拟用户 score
+  3. 虚拟用户降分后从底层字段重算五维，保证 score 与公式一致
+  4. 禁止修改人格 JSON；写回大池时不写入人格 uid 记录
 
 用法：
     python scripts/generate_data/adjust_ranking_for_personas.py
@@ -28,6 +28,12 @@ if PROJECT_ROOT not in sys.path:
 OUTPUT_DIR = os.path.join(PROJECT_ROOT, "output")
 MAIN_FILE = os.path.join(OUTPUT_DIR, "somni_sleep_analysis.json")
 
+from sleep_map_persona_merge import (  # noqa: E402
+    filter_virtual_pool_records,
+    persona_uid_set,
+    resolve_current_persona_uid,
+)
+
 # 8 个人格用户 UID
 PERSONA_UIDS = {
     "69aea593af5e6cbf08027964",  # 完美主义百灵鸟
@@ -49,9 +55,13 @@ WEIGHTS = {
     "routine_regularity": 0.15,
 }
 
-# 允许排在受保护用户之前的虚拟用户数量
-# 8 人格 + 1 真实用户 = 9 人，ALLOWED_ABOVE=1 → 保证前 10
-ALLOWED_ABOVE = 1
+def _allowed_virtual_above_anchor(real_user_uid: Optional[str]) -> int:
+    """允许分数高于「受保护用户最低分」的虚拟用户数。
+
+    仅八人格时须为 0，否则最多 1 个虚拟会挤掉人格前十。
+    八人格 + 真实用户时可为 1（共 9 受保护，留 1 席虚拟高于锚点）。
+    """
+    return 1 if real_user_uid else 0
 
 
 # ─── 评分公式 ─────────────────────────────────────────────────────────────
@@ -174,32 +184,23 @@ def load_real_user_data(uid: str) -> List[dict]:
     return records
 
 
-def merge_users_into_main(
-    main_data: List[dict],
+def build_working_dataset_for_ranking(
+    virtual_records: List[dict],
     persona_data: Dict[str, List[dict]],
     real_user_uid: Optional[str],
     real_user_data: List[dict],
 ) -> List[dict]:
-    """将人格用户和真实用户数据合并进主文件（移除旧数据后重新合并）。"""
-    protected_uids = set(PERSONA_UIDS)
-    if real_user_uid:
-        protected_uids.add(real_user_uid)
-
-    original_count = len(main_data)
-    main_data = [r for r in main_data if r["uid"] not in protected_uids]
-    removed = original_count - len(main_data)
-    if removed > 0:
-        print(f"  移除旧数据 {removed} 条")
-
+    """内存合并：虚拟池 + 人格/真实用户文件（仅用于算榜与校验，不写回人格）。"""
+    working = list(virtual_records)
     added = 0
-    for uid, records in persona_data.items():
-        main_data.extend(records)
+    for records in persona_data.values():
+        working.extend(records)
         added += len(records)
     if real_user_data:
-        main_data.extend(real_user_data)
+        working.extend(real_user_data)
         added += len(real_user_data)
-    print(f"  合并用户数据 {added} 条")
-    return main_data
+    print(f"  内存合并人格/真实用户 {added} 条（大池仅保留虚拟 {len(virtual_records)} 条）")
+    return working
 
 
 # ─── 降分逻辑 ─────────────────────────────────────────────────────────────
@@ -281,15 +282,12 @@ def lower_virtual_user(record: dict, target_score: int) -> None:
 def adjust_ranking(
     data: List[dict],
     real_user_uid: Optional[str] = None,
+    protected_persona_uids: Optional[set[str]] = None,
     dry_run: bool = False,
 ) -> None:
-    """调整排名：确保真实用户和人格用户每天都在前 10。
-
-    策略：
-      - 以所有受保护用户（真实用户 + 人格用户）中最低的 score 为锚点
-      - 保留前 ALLOWED_ABOVE 名虚拟用户不变
-      - 降低其余虚拟用户的分数到锚点 score 以下
-    """
+    """调整排名：确保受保护人格每天在池内前 10，仅改写虚拟用户记录。"""
+    if protected_persona_uids is None:
+        protected_persona_uids = set(PERSONA_UIDS)
     import random
     random.seed(42)
 
@@ -308,7 +306,7 @@ def adjust_ranking(
             real_records = [r for r in records if r["uid"] == real_user_uid]
             if real_records:
                 protected_scores.append(real_records[0]["score"])
-        persona_records = [r for r in records if r["uid"] in PERSONA_UIDS]
+        persona_records = [r for r in records if r["uid"] in protected_persona_uids]
         protected_scores.extend(r["score"] for r in persona_records)
 
         if not protected_scores:
@@ -317,12 +315,19 @@ def adjust_ranking(
         # 以最低的受保护 score 为锚点
         anchor_score = min(protected_scores)
 
-        virtual_records = [r for r in records if r["uid"] not in PERSONA_UIDS and (not real_user_uid or r["uid"] != real_user_uid)]
+        virtual_records = [
+            r for r in records
+            if r["uid"] not in protected_persona_uids
+            and (not real_user_uid or r["uid"] != real_user_uid)
+        ]
         virtual_sorted = sorted(virtual_records, key=lambda r: r["score"], reverse=True)
-
-        keep = virtual_sorted[:ALLOWED_ABOVE]
-        to_lower = virtual_sorted[ALLOWED_ABOVE:]
-        to_lower = [v for v in to_lower if v["score"] >= anchor_score]
+        keep_n = _allowed_virtual_above_anchor(real_user_uid)
+        keep = virtual_sorted[:keep_n]
+        keep_uids = {v["uid"] for v in keep}
+        to_lower = [
+            v for v in virtual_records
+            if v["uid"] not in keep_uids and v["score"] >= anchor_score
+        ]
 
         if not to_lower:
             continue
@@ -332,6 +337,10 @@ def adjust_ranking(
             old_score = v["score"]
             jitter = random.randint(-5, 0)
             target = max(20, base_target + jitter)
+            if v["uid"] in protected_persona_uids or (
+                real_user_uid and v["uid"] == real_user_uid
+            ):
+                raise RuntimeError(f"禁止修改受保护用户记录: {v['uid']}")
             if not dry_run:
                 lower_virtual_user(v, target)
             total_lowered += 1
@@ -341,39 +350,41 @@ def adjust_ranking(
     print(f"\n{'[DRY RUN] ' if dry_run else ''}共降低 {total_lowered} 条虚拟用户记录")
 
 
-def verify_all(data: List[dict], real_user_uid: Optional[str] = None) -> bool:
-    """验证：1) 公式一致性  2) 真实用户和人格用户排名前 10。"""
-    by_date: Dict[str, List[dict]] = defaultdict(list)
-    for r in data:
-        by_date[r["stats_date"]].append(r)
-
-    all_ok = True
-
-    # 公式一致性（跳过人格用户，其 score 由连续插值公式生成，与离散阈值公式不同）
+def verify_virtual_formula(virtual_records: List[dict]) -> bool:
+    """仅校验虚拟用户：score 与五维加权一致。"""
     inconsistency_count = 0
-    for r in data:
-        if r["uid"] in PERSONA_UIDS:
-            continue
+    for r in virtual_records:
         err = verify_record_consistency(r)
         if err:
             inconsistency_count += 1
             if inconsistency_count <= 5:
                 print(f"  [INCONSISTENT] {r['stats_date']} {r['uid'][:12]}: {err}")
     if inconsistency_count > 0:
-        print(f"  [FAIL] {inconsistency_count} 条记录的 score 与公式计算不一致")
-        all_ok = False
-    else:
-        print("  [OK] 所有记录的 score 与公式计算一致")
+        print(f"  [FAIL] 虚拟用户 {inconsistency_count} 条 score 与公式不一致")
+        return False
+    print("  [OK] 虚拟用户 score 与公式计算一致")
+    return True
 
-    # 受保护用户排名（真实用户 + 人格用户）
-    protected_uids = set(PERSONA_UIDS)
+
+def verify_protected_top10(
+    working_data: List[dict],
+    real_user_uid: Optional[str] = None,
+    protected_persona_uids: Optional[set[str]] = None,
+) -> bool:
+    """在虚拟+人格合并数据上校验受保护 uid 每日前 10。"""
+    if protected_persona_uids is None:
+        protected_persona_uids = set(PERSONA_UIDS)
+    protected_uids = set(protected_persona_uids)
     if real_user_uid:
         protected_uids.add(real_user_uid)
 
+    by_date: Dict[str, List[dict]] = defaultdict(list)
+    for r in working_data:
+        by_date[r["stats_date"]].append(r)
+
     rank_fail_count = 0
     for date_str in sorted(by_date.keys()):
-        records = by_date[date_str]
-        sorted_records = sorted(records, key=lambda r: r["score"], reverse=True)
+        sorted_records = sorted(by_date[date_str], key=lambda r: r["score"], reverse=True)
         top10_uids = [r["uid"] for r in sorted_records[:10]]
         for uid in protected_uids:
             if uid not in top10_uids:
@@ -384,26 +395,37 @@ def verify_all(data: List[dict], real_user_uid: Optional[str] = None) -> bool:
                 if rank:
                     print(f"  [FAIL] {date_str}: 用户 {uid[:12]} 排名 {rank}，不在前 10")
                     rank_fail_count += 1
-                    all_ok = False
-    if rank_fail_count == 0:
-        print(f"  [OK] 所有受保护用户（真实用户 + 人格用户）所有日期都在前 10 名")
-
-    if all_ok:
-        print("  [OK] 公式一致性验证通过，受保护用户排名前 10")
-
-    return all_ok
+    if rank_fail_count > 0:
+        return False
+    print(f"  [OK] 受保护人格/用户所有日期都在前 10 名（共 {len(protected_uids)} 个 uid）")
+    return True
 
 
 # ─── 入口 ─────────────────────────────────────────────────────────────────
 
 
 def main():
-    parser = argparse.ArgumentParser(description="调整排名让真实用户和人格用户进入前 10")
-    parser.add_argument("--real-user-uid", default=None, help="真实用户 UID（从 {uid}_somni_sleep_analysis.json 读取分数）")
+    parser = argparse.ArgumentParser(
+        description="调整排行池：八人格每日前10，仅压低虚拟用户（不修改人格 JSON）",
+    )
+    parser.add_argument("--real-user-uid", default=None, help="额外保护的真实用户 UID")
+    parser.add_argument(
+        "--current-only",
+        action="store_true",
+        help="仅保护 config.json 当前人格（默认保护八人格全部）",
+    )
+    parser.add_argument("--current-persona-uid", default="", help="与 --current-only 联用指定 uid")
     parser.add_argument("--dry-run", action="store_true", help="只打印不实际修改")
     args = parser.parse_args()
 
     real_user_uid = args.real_user_uid
+    if args.current_only:
+        uid, label = resolve_current_persona_uid(uid=args.current_persona_uid)
+        protected_persona_uids = {uid}
+        print(f"=== 受保护人格：仅当前 {label} ({uid[:12]}) ===")
+    else:
+        protected_persona_uids = set(PERSONA_UIDS)
+        print("=== 受保护人格：八人格全部（不修改人格 output 文件）===")
 
     print("=== 加载人格用户数据 ===")
     persona_data = load_persona_data()
@@ -416,25 +438,45 @@ def main():
             print("[ERROR] 真实用户数据为空，退出")
             sys.exit(1)
 
-    print("\n=== 加载主文件 ===")
+    print("\n=== 加载主文件（仅虚拟） ===")
     with open(MAIN_FILE, "r", encoding="utf-8") as f:
         main_data = json.load(f)
-    print(f"  主文件: {len(main_data)} 条记录")
+    persona_uids_all = persona_uid_set()
+    virtual_only = filter_virtual_pool_records(main_data, persona_uids_all)
+    stripped = len(main_data) - len(virtual_only)
+    if stripped > 0:
+        print(f"  剔除大池中人格旧记录 {stripped} 条 → 虚拟 {len(virtual_only)} 条")
+    else:
+        print(f"  主文件: {len(virtual_only)} 条虚拟记录")
 
-    print("\n=== 合并用户数据 ===")
-    data = merge_users_into_main(main_data, persona_data, real_user_uid, real_user_data)
+    print("\n=== 内存合并（算榜用） ===")
+    working = build_working_dataset_for_ranking(
+        virtual_only, persona_data, real_user_uid, real_user_data
+    )
 
     print("\n=== 调整排名 ===")
-    adjust_ranking(data, real_user_uid=real_user_uid, dry_run=args.dry_run)
+    adjust_ranking(
+        working,
+        real_user_uid=real_user_uid,
+        protected_persona_uids=protected_persona_uids,
+        dry_run=args.dry_run,
+    )
 
     if not args.dry_run:
-        print(f"\n=== 写入文件 ===")
+        print(f"\n=== 写入文件（仅虚拟） ===")
         with open(MAIN_FILE, "w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False, indent=2)
-        print(f"  已写入 {MAIN_FILE} ({len(data)} 条)")
+            json.dump(virtual_only, f, ensure_ascii=False, indent=2)
+        print(f"  已写入 {MAIN_FILE} ({len(virtual_only)} 条，不含人格)")
 
         print("\n=== 验证 ===")
-        verify_all(data, real_user_uid=real_user_uid)
+        formula_ok = verify_virtual_formula(virtual_only)
+        rank_ok = verify_protected_top10(
+            working,
+            real_user_uid=real_user_uid,
+            protected_persona_uids=protected_persona_uids,
+        )
+        if not (formula_ok and rank_ok):
+            sys.exit(1)
 
 
 if __name__ == "__main__":

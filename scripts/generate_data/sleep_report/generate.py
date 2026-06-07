@@ -24,7 +24,11 @@ from .time_utils import (
     format_time_to_hhmm,
     generate_iso_date,
 )
-from .sleep_score import sleep_report_structure_minutes_and_percents
+from .sleep_score import (
+    build_sleep_structure_metrics,
+    get_stage_status as _get_stage_status,
+    sleep_report_structure_minutes_and_percents,
+)
 from .body_battery import generate_body_battery, get_body_battery_status
 from .sleep_helpers import build_sleep_events_index, night_wake_episodes_for_prompts
 from .auditory import (
@@ -39,27 +43,6 @@ from .title_summary import (
     build_main_local_summary,
     get_main_title_image_url,
 )
-
-
-# ---------------------------------------------------------------------------
-# 内部辅助
-# ---------------------------------------------------------------------------
-
-def _get_stage_status(value, standard):
-    """按阈值判断睡眠阶段状态（"正常"/"过高"/"过低"）。"""
-    if isinstance(standard, list):
-        min_val, max_val = standard
-        if value < min_val:
-            return "过低"
-        elif value > max_val:
-            return "过高"
-        else:
-            return "正常"
-    else:
-        if value < standard:
-            return "正常"
-        else:
-            return "过高"
 
 
 # ---------------------------------------------------------------------------
@@ -79,52 +62,18 @@ def generate_sleep_report(
     raw_data = sleep_data["raw_data"]
     record_date = sleep_data.get("record_date", "")
 
-    # 1. 睡眠结构计算
+    # 1. 睡眠结构：percent=health 占比，minutes=TIB×占比
     (
-        awake_minutes,
+        sleep_structure,
         deep_sleep_minutes,
-        light_sleep_minutes,
-        rem_sleep_minutes,
-        pie_awake_pct,
-        pie_deep_pct,
-        pie_light_pct,
-        pie_rem_pct,
         aw_pct_tib,
-        deep_pct_tst,
-        light_pct_tst,
-        rem_pct_tst,
-    ) = sleep_report_structure_minutes_and_percents(sleep_data)
-
+        deep_pct_tib,
+        light_pct_tib,
+        rem_pct_tib,
+    ) = build_sleep_structure_metrics(sleep_data, sleep_standard)
     total_sleep_minutes = raw_data.get("total_sleep_minutes", 0)
 
-    # 2. 睡眠结构 dict
-    sleep_structure = {
-        "awake": {
-            "minutes": awake_minutes,
-            "percent": pie_awake_pct,
-            "status": _get_stage_status(aw_pct_tib, sleep_standard.get("awake", 10)),
-        },
-        "rem_sleep": {
-            "minutes": rem_sleep_minutes,
-            "percent": pie_rem_pct,
-            "percent_of_net_sleep": rem_pct_tst,
-            "status": _get_stage_status(rem_pct_tst, sleep_standard.get("rem", [20, 25])),
-        },
-        "light_sleep": {
-            "minutes": light_sleep_minutes,
-            "percent": pie_light_pct,
-            "percent_of_net_sleep": light_pct_tst,
-            "status": _get_stage_status(light_pct_tst, sleep_standard.get("light", [45, 50])),
-        },
-        "deep_sleep": {
-            "minutes": deep_sleep_minutes,
-            "percent": pie_deep_pct,
-            "percent_of_net_sleep": deep_pct_tst,
-            "status": _get_stage_status(deep_pct_tst, sleep_standard.get("deep", [20, 25])),
-        },
-    }
-
-    # 3. 时间计算
+    # 2. 时间计算
     bed_time = raw_data.get("bed_time", "")
     wake_up_time = raw_data.get("wake_up_time", "")
     sleep_latency = raw_data.get("sleep_latency", 0)
@@ -178,9 +127,9 @@ def generate_sleep_report(
     main_title = pick_main_title(
         personality_type,
         sleep_data,
-        light_pct_tst,
-        deep_pct_tst,
-        rem_pct_tst,
+        light_pct_tib,
+        deep_pct_tib,
+        rem_pct_tib,
         sleep_latency,
         sleep_efficiency,
         apnea_count,
@@ -189,9 +138,9 @@ def generate_sleep_report(
     )
     main_summary = build_main_local_summary(
         main_title,
-        deep_pct_tst,
-        light_pct_tst,
-        rem_pct_tst,
+        deep_pct_tib,
+        light_pct_tib,
+        rem_pct_tib,
         sleep_latency,
         night_wake_eps,
         total_sleep_minutes=total_sleep_minutes,
@@ -249,7 +198,7 @@ def generate_sleep_report(
     # 11. 通知（本地版）
     notice = generate_notice(
         total_sleep_minutes,
-        deep_pct_tst,
+        deep_pct_tib,
         sleep_latency,
         aw_pct_tib,
         sleep_efficiency,

@@ -330,53 +330,118 @@ def _tst_phase_minutes_in_timeline_window(tl, lo, hi):
 
 # ── 睡眠结构分钟与占比 ───────────────────────────────────────────────────────
 
+def _tib_minutes_from_raw_stage_ratios(raw_data, record_date_str=None):
+    """
+    按总卧床时间 TIB（bed_time→wake_up_time）与 raw 四阶段占比拆分钟；
+    四段整数分钟之和严格等于 TIB（最大余数法，与 health 生成语义一致）。
+    返回 (m_aw, m_d, m_l, m_r, health_aw, health_d, health_l, health_r)，后四者为占 TIB 的整数%。
+    """
+    rd = raw_data or {}
+    tib = calculate_duration(
+        rd.get("bed_time", ""),
+        rd.get("wake_up_time", ""),
+        record_date_str,
+    )
+    if tib < 1:
+        tst = max(0, int(rd.get("total_sleep_minutes") or 0))
+        try:
+            awake_frac = float(rd.get("awake_ratio", 0) or 0) / 100.0
+        except (TypeError, ValueError):
+            awake_frac = 0.0
+        awake_frac = min(0.999, max(0.0, awake_frac))
+        tib = max(1, int(round(float(tst) / max(1e-6, 1.0 - awake_frac)))) if tst > 0 else 1
+
+    health_aw, health_d, health_l, health_r = normalize_four_spt_stage_percents(
+        rd.get("awake_ratio", 0),
+        rd.get("deep_sleep_ratio", 0),
+        rd.get("light_sleep_ratio", 0),
+        rd.get("rem_ratio", 0),
+    )
+    alloc = _spt_minutes_from_int_percents(tib, health_aw, health_d, health_l, health_r)
+    if alloc is None:
+        alloc = _spt_minutes_from_int_percents(
+            tib,
+            *_int100_from_four_floats(
+                [float(health_aw), float(health_d), float(health_l), float(health_r)]
+            ),
+        )
+    m_aw, m_d, m_l, m_r = alloc
+    return m_aw, m_d, m_l, m_r, health_aw, health_d, health_l, health_r
+
+
 def sleep_report_structure_minutes_and_percents(sleep_data):
     """
-    睡眠报告 sleep_structure 用分钟与两套占比：
+    睡眠报告 sleep_structure 用分钟与占比（均来自 health raw_data，占 TIB）：
 
-    - 分钟：深/浅/REM 由 total_sleep_minutes + raw 三占比拆分；清醒为 idf_data 全部 awake 段之和。
-    - 饼图 percent（pie_aw…pie_r）：由四段分钟归一，**四者之和恒为 100**，便于同屏环形/条形与分钟条一致。
-    - 健康口径（health_aw…health_r）：与 raw_data 对齐 —— 深/浅/REM 为占净睡(TST)%；清醒为 awake_ratio（占 TIB%），
-      缺失时用 清醒分钟/上床→起床 估算。供与 health 对账、阈值判定（如 pick_main_title）、文案中的「临床%」使用。
+    - 分钟：TIB × 四阶段占比（bed_time→wake_up_time）。
+    - 占比：与 raw_data 的 awake/deep/light/rem 比例一致（normalize 后和为 100）。
 
-    返回 (m_aw, m_d, m_l, m_r, pie_aw, pie_d, pie_l, pie_r, health_aw, health_d, health_l, health_r)。
+    返回 (m_aw, m_d, m_l, m_r, pct_aw, pct_d, pct_l, pct_r)。
     """
     raw = sleep_data.get("raw_data") or {}
     record_date = (sleep_data or {}).get("record_date") or None
-    tst = max(0, int(raw.get("total_sleep_minutes") or 0))
-    d0 = int(raw.get("deep_sleep_ratio") or 0)
-    l0 = int(raw.get("light_sleep_ratio") or 0)
-    r0 = int(raw.get("rem_ratio") or 0)
-    dp, lp, rp = _normalize_three_int100(d0, l0, r0)
-    m_d, m_l, m_r = distribute_sleep_stage_minutes(tst, dp, lp, rp)
-    m_aw = idf_all_awake_minutes(sleep_data)
+    return _tib_minutes_from_raw_stage_ratios(raw, record_date)
 
-    pie_aw, pie_d, pie_l, pie_r = _int100_from_four_floats(
-        [float(m_aw), float(m_d), float(m_l), float(m_r)]
+
+def get_stage_status(value, standard):
+    """按阈值判断睡眠阶段状态（"正常"/"过高"/"过低"）。"""
+    if isinstance(standard, list):
+        min_val, max_val = standard
+        if value < min_val:
+            return "过低"
+        if value > max_val:
+            return "过高"
+        return "正常"
+    if value < standard:
+        return "正常"
+    return "过高"
+
+
+def build_sleep_structure_metrics(sleep_data, sleep_standard):
+    """
+    由 health 行生成 sleep_structure：percent 直接为 raw 占 TIB 占比，分钟为 TIB×占比。
+    返回 (sleep_structure, deep_sleep_minutes, aw_pct, deep_pct, light_pct, rem_pct)。
+    """
+    (
+        awake_minutes,
+        deep_sleep_minutes,
+        light_sleep_minutes,
+        rem_sleep_minutes,
+        aw_pct_tib,
+        deep_pct_tib,
+        light_pct_tib,
+        rem_pct_tib,
+    ) = sleep_report_structure_minutes_and_percents(sleep_data)
+
+    return (
+        {
+            "awake": {
+                "minutes": awake_minutes,
+                "percent": aw_pct_tib,
+                "status": get_stage_status(aw_pct_tib, sleep_standard.get("awake", 10)),
+            },
+            "rem_sleep": {
+                "minutes": rem_sleep_minutes,
+                "percent": rem_pct_tib,
+                "status": get_stage_status(rem_pct_tib, sleep_standard.get("rem", [20, 25])),
+            },
+            "light_sleep": {
+                "minutes": light_sleep_minutes,
+                "percent": light_pct_tib,
+                "status": get_stage_status(light_pct_tib, sleep_standard.get("light", [45, 50])),
+            },
+            "deep_sleep": {
+                "minutes": deep_sleep_minutes,
+                "percent": deep_pct_tib,
+                "status": get_stage_status(deep_pct_tib, sleep_standard.get("deep", [20, 25])),
+            },
+        },
+        deep_sleep_minutes,
+        aw_pct_tib,
+        deep_pct_tib,
+        light_pct_tib,
+        rem_pct_tib,
     )
-
-    health_d, health_l, health_r = int(dp), int(lp), int(rp)
-    try:
-        health_aw = max(0, min(100, int(raw.get("awake_ratio"))))
-    except (TypeError, ValueError):
-        health_aw = -1
-    if health_aw < 0:
-        tib = calculate_duration(
-            raw.get("bed_time", ""),
-            raw.get("wake_up_time", ""),
-            record_date,
-        )
-        if tib and tib > 0:
-            health_aw = max(0, min(100, int(round(100.0 * float(m_aw) / float(tib)))))
-        else:
-            tot = float(tst + m_aw)
-            health_aw = (
-                max(0, min(100, int(round(100.0 * float(m_aw) / tot))))
-                if tot > 0
-                else 0
-            )
-
-    return m_aw, m_d, m_l, m_r, pie_aw, pie_d, pie_l, pie_r, health_aw, health_d, health_l, health_r
 
 
 # ── SPT 百分比工具 ───────────────────────────────────────────────────────────

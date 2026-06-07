@@ -4,15 +4,22 @@
 
 import pymongo
 import os
+import sys
 import argparse
 from dotenv import load_dotenv
 
 # 加载.env文件
 load_dotenv()
 
+# 复用项目内全库备份模块（mongodump，默认输出到桌面）
+_BACKUP_MODULE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "scripts", "backup")
+if _BACKUP_MODULE_DIR not in sys.path:
+    sys.path.insert(0, _BACKUP_MODULE_DIR)
+from backup_full_db import backup_full_database
+
 # 固定用户ID列表（不再从配置文件读取）
 user_ids = [
-    # "69aea593af5e6cbf08027964",
+    "69aea593af5e6cbf08027964",
     "69aea63eaf5e6cbf08027965",
     "69aea6d8af5e6cbf08027966",
     "69aea6e3af5e6cbf08027967",
@@ -25,7 +32,7 @@ print(f"Using fixed {len(user_ids)} user IDs: {user_ids}")
 
 # 需要删除数据的集合列表
 collections = [
-    "somni_reports",
+    # "somni_reports",
     # "somni_physiological_data",
     # "somni_events",
     # "somni_environment_data",
@@ -35,7 +42,6 @@ collections = [
     # "somni_dream_universe_assets",
     # "somni_sleep_analysis",
     # "somni_fusion",
-    # "somni_sleep_analysis",
     # "somni_sleep_district"
 ]
 
@@ -86,6 +92,14 @@ def delete_user_data(language: str | None = None):
 
 if __name__ == "__main__":
     args = parse_args()
+
+    print("=== Step 1: 全量备份数据库（输出到桌面）===")
+    backup_ok = backup_full_database()
+    if not backup_ok:
+        print("备份失败，已中止删除操作。")
+        sys.exit(1)
+
+    print("\n=== Step 2: 删除用户数据 ===")
     delete_user_data(language=args.language)
 
 # 注意：在运行此脚本之前，请确保：

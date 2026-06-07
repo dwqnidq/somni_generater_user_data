@@ -24,6 +24,8 @@ if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 os.chdir(PROJECT_ROOT)
 
+from persona_generation_config import load_personas_config, merge_generation
+
 TIMEZONE_OFFSET = 8  # UTC+8
 CONFIG_PATH = os.path.join(PROJECT_ROOT, "config", "health_data_personas_config.json")
 OUTPUT_DIR = os.path.join(PROJECT_ROOT, "output")
@@ -963,17 +965,17 @@ def generate_persona_health_data(
 
     start_str = date_range["start"]
     end_str = date_range["end"]
-    start_dt = datetime.strptime(start_str, "%Y-%m-%d").date()
-    end_dt = datetime.strptime(end_str, "%Y-%m-%d").date()
+    config_start = datetime.strptime(start_str, "%Y-%m-%d").date()
+    config_end = datetime.strptime(end_str, "%Y-%m-%d").date()
+    from date_range_helpers import apply_date_range_overrides  # noqa: WPS433
 
-    if start_date_override:
-        start_dt = max(start_dt, start_date_override)
-    if end_date_override:
-        end_dt = min(end_dt, end_date_override)
-
-    if start_dt > end_dt:
+    merged = apply_date_range_overrides(
+        config_start, config_end, start_date_override, end_date_override
+    )
+    if not merged:
         print(f"[{name}] 日期范围无效，跳过")
         return ""
+    start_dt, end_dt = merged
 
     out_file = os.path.join(OUTPUT_DIR, f"{uid}_health_data.json")
     if not overwrite and os.path.exists(out_file):
@@ -1003,14 +1005,16 @@ def generate_persona_health_data(
     elif state_mode == "bad":
         day_states = ["bad"] * total_days
     else:
-        # mixed：每 7 天为一个窗口，按 good_ratio 决定坏天数，但每周坏天数不超过 3 天，
-        # 并在窗口内随机打散，避免连续堆积。
+        # mixed：每 7 天为一个窗口，按 good_ratio 决定坏天数，并在窗口内随机打散。
+        gen = merge_generation(load_personas_config(), persona)
+        mix = gen.get("day_state_mix") or {}
+        max_bad_per_week = int(mix.get("max_bad_days_per_week", 3))
         day_states = []
         i = 0
         while i < total_days:
             week_size = min(7, total_days - i)
             expected_bad = round((1 - good_ratio) * week_size)
-            bad_count = min(3, max(0, expected_bad))
+            bad_count = min(max_bad_per_week, max(0, expected_bad))
             week_states = ["bad"] * bad_count + ["good"] * (week_size - bad_count)
             random.shuffle(week_states)
             day_states.extend(week_states)

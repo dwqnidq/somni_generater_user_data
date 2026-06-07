@@ -1,6 +1,6 @@
 [
   {
-    "_id": "6a0e91e9e71f11427563b1ed",
+    "_id": "6a1421bd2a8563d1d909ff12",
     "uid": "69aea6f8af5e6cbf0802796b",
     "stats_date": "2026-05-01",
     "region": {
@@ -10,8 +10,8 @@
     },
     "user_name": "月光冲浪者",
     "score": 94,
-    "sleep_seconds": 26760,
-    "deep_sleep_seconds": 6024,
+    "sleep_seconds": 26880,
+    "deep_sleep_seconds": 6036,
     "deep_sleep_ratio": 0.2,
     "evaluation": "你的深睡特别扎实，作息也特别规律，入睡顺滑还不缺时长，这些都帮你在同城排名里站稳了脚跟，不过夜里偶尔会醒的小状况稍微拖了点后腿，其他方面和大伙差不多。",
     "dimensions": {
@@ -25,14 +25,14 @@
       "sleep_duration": {
         "score": 100,
         "weight": 0.25,
-        "value": 26760,
+        "value": 26880,
         "city_avg": 26432.0,
         "city_score": 91
       },
       "sleep_efficiency": {
         "score": 100,
         "weight": 0.15,
-        "value": 8,
+        "value": 11,
         "city_avg": 43.0,
         "city_score": 48
       },
@@ -52,11 +52,11 @@
       }
     },
     "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:33.000Z",
-    "update_time": "2026-05-21T05:02:33.000Z"
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
   },
   {
-    "_id": "6a0e91e99aac1faf1d670ab6",
+    "_id": "6a1421bd1f03b882aebd3d67",
     "uid": "69aea6f8af5e6cbf0802796b",
     "stats_date": "2026-05-02",
     "region": {
@@ -65,72 +65,16 @@
       "district_code": "110108"
     },
     "user_name": "月光冲浪者",
-    "score": 94,
-    "sleep_seconds": 26760,
-    "deep_sleep_seconds": 6024,
-    "deep_sleep_ratio": 0.2,
+    "score": 72,
+    "sleep_seconds": 24840,
+    "deep_sleep_seconds": 3427,
+    "deep_sleep_ratio": 0.12,
     "evaluation": "你的深睡特别扎实，入睡顺滑还作息规律，睡眠时长也给够了，这些都帮你稳稳排在同城前列；不过夜里偶尔会醒的情况比多数人稍多，其他方面都和大家差不多。",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 20,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 26760,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 100,
-        "weight": 0.15,
-        "value": 10,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 70,
-        "weight": 0.2,
-        "value": 2,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 100,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:33.000Z",
-    "update_time": "2026-05-21T05:02:33.000Z"
-  },
-  {
-    "_id": "6a0e91e958382fbe1dc6db0a",
-    "uid": "69aea6f8af5e6cbf0802796b",
-    "stats_date": "2026-05-03",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "月光冲浪者",
-    "score": 84,
-    "sleep_seconds": 24060,
-    "deep_sleep_seconds": 4007,
-    "deep_sleep_ratio": 0.14,
-    "evaluation": "你的作息特别规律，入睡顺滑不折腾，夜里也睡得很稳，这几点都让你在同城排名里很有优势，其他方面和大部分同城人差不多，整体表现相当亮眼。",
     "dimensions": {
       "deep_sleep": {
         "score": 60,
         "weight": 0.25,
-        "value": 14,
+        "value": 12,
         "city_avg": 15.0,
         "city_score": 68
       },
@@ -142,21 +86,21 @@
         "city_score": 91
       },
       "sleep_efficiency": {
-        "score": 80,
+        "score": 60,
         "weight": 0.15,
-        "value": 13,
+        "value": 24,
         "city_avg": 43.0,
         "city_score": 48
       },
       "abnormal_events": {
-        "score": 95,
+        "score": 55,
         "weight": 0.2,
-        "value": 1,
+        "value": 2,
         "city_avg": 2.0,
         "city_score": 78
       },
       "routine_regularity": {
-        "score": 100,
+        "score": 96,
         "weight": 0.15,
         "value": "Excellent",
         "city_avg": "Fair",
@@ -164,11 +108,67 @@
       }
     },
     "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:33.000Z",
-    "update_time": "2026-05-21T05:02:33.000Z"
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
   },
   {
-    "_id": "6a0e91e909a638f1b7bcb266",
+    "_id": "6a1421bd54e3e82f841dd010",
+    "uid": "69aea6f8af5e6cbf0802796b",
+    "stats_date": "2026-05-03",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "月光冲浪者",
+    "score": 80,
+    "sleep_seconds": 23940,
+    "deep_sleep_seconds": 3705,
+    "deep_sleep_ratio": 0.13,
+    "evaluation": "你的作息特别规律，入睡顺滑不折腾，夜里也睡得很稳，这几点都让你在同城排名里很有优势，其他方面和大部分同城人差不多，整体表现相当亮眼。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 60,
+        "weight": 0.25,
+        "value": 13,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 90,
+        "weight": 0.25,
+        "value": 25220,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 26,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 95,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 98,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bd8d158636b31824c5",
     "uid": "69aea6f8af5e6cbf0802796b",
     "stats_date": "2026-05-04",
     "region": {
@@ -177,9 +177,9 @@
       "district_code": "110108"
     },
     "user_name": "月光冲浪者",
-    "score": 94,
-    "sleep_seconds": 26700,
-    "deep_sleep_seconds": 6012,
+    "score": 90,
+    "sleep_seconds": 26880,
+    "deep_sleep_seconds": 6036,
     "deep_sleep_ratio": 0.2,
     "evaluation": "你的睡眠底子相当扎实，睡眠时长充足、倒头就睡、作息稳定，连深睡质量都远超同城水平，不过夜里偶尔醒的情况比多数人稍多，稍微拖了点后腿。",
     "dimensions": {
@@ -193,19 +193,243 @@
       "sleep_duration": {
         "score": 100,
         "weight": 0.25,
-        "value": 26070,
+        "value": 25635,
         "city_avg": 26432.0,
         "city_score": 91
       },
       "sleep_efficiency": {
-        "score": 100,
+        "score": 80,
         "weight": 0.15,
-        "value": 13,
+        "value": 24,
         "city_avg": 43.0,
         "city_score": 48
       },
       "abnormal_events": {
         "score": 70,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 96,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bd52e43ec50752fbc1",
+    "uid": "69aea6f8af5e6cbf0802796b",
+    "stats_date": "2026-05-05",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "月光冲浪者",
+    "score": 77,
+    "sleep_seconds": 23220,
+    "deep_sleep_seconds": 3109,
+    "deep_sleep_ratio": 0.11,
+    "evaluation": "你的深睡质量特别扎实，入睡顺滑不折腾，夜里睡得稳，作息也很规律，睡眠时长也很足，整体在同城里表现相当亮眼，其他方面也和大部分人差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 60,
+        "weight": 0.25,
+        "value": 11,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 80,
+        "weight": 0.25,
+        "value": 25152,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 27,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 95,
+        "weight": 0.2,
+        "value": 1,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 95,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bddb86979adb9fd97e",
+    "uid": "69aea6f8af5e6cbf0802796b",
+    "stats_date": "2026-05-06",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "月光冲浪者",
+    "score": 96,
+    "sleep_seconds": 25740,
+    "deep_sleep_seconds": 5784,
+    "deep_sleep_ratio": 0.2,
+    "evaluation": "你的作息特别规律，入睡顺滑不折腾，夜里睡得很稳，深睡质量也不错，整体睡眠底子挺扎实，不过睡眠时间稍微差了点，其他方面和同城多数人差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 20,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 25250,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 25,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 95,
+        "weight": 0.2,
+        "value": 1,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 97,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bd54b0e3c6c70aff39",
+    "uid": "69aea6f8af5e6cbf0802796b",
+    "stats_date": "2026-05-07",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "月光冲浪者",
+    "score": 80,
+    "sleep_seconds": 24540,
+    "deep_sleep_seconds": 4482,
+    "deep_sleep_ratio": 0.15,
+    "evaluation": "你的生物钟特别稳，入睡顺滑不折腾，深睡质量也不错，这些帮你在同城排名里靠前；不过夜里偶尔醒的小情况稍微拖了点后腿，其他方面和大伙差不多",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 80,
+        "weight": 0.25,
+        "value": 15,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 90,
+        "weight": 0.25,
+        "value": 25149,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 26,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 1,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 99,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bd188fa7012815fba5",
+    "uid": "69aea6f8af5e6cbf0802796b",
+    "stats_date": "2026-05-08",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "月光冲浪者",
+    "score": 72,
+    "sleep_seconds": 24420,
+    "deep_sleep_seconds": 3155,
+    "deep_sleep_ratio": 0.11,
+    "evaluation": "你的深睡修复特别到位，作息规律也很稳，入睡顺滑还睡得够久，不过夜间偶尔醒的情况比多数同城人稍多一点，整体在同城里的排名相当靠前。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 60,
+        "weight": 0.25,
+        "value": 11,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 90,
+        "weight": 0.25,
+        "value": 25058,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 27,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 55,
         "weight": 0.2,
         "value": 2,
         "city_avg": 2.0,
@@ -220,235 +444,11 @@
       }
     },
     "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:33.000Z",
-    "update_time": "2026-05-21T05:02:33.000Z"
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
   },
   {
-    "_id": "6a0e91e9a7f12f1310d997ff",
-    "uid": "69aea6f8af5e6cbf0802796b",
-    "stats_date": "2026-05-05",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "月光冲浪者",
-    "score": 99,
-    "sleep_seconds": 26700,
-    "deep_sleep_seconds": 6000,
-    "deep_sleep_ratio": 0.2,
-    "evaluation": "你的深睡质量特别扎实，入睡顺滑不折腾，夜里睡得稳，作息也很规律，睡眠时长也很足，整体在同城里表现相当亮眼，其他方面也和大部分人差不多。",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 20,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 26196,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 100,
-        "weight": 0.15,
-        "value": 12,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 95,
-        "weight": 0.2,
-        "value": 1,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 100,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:33.000Z",
-    "update_time": "2026-05-21T05:02:33.000Z"
-  },
-  {
-    "_id": "6a0e91e98b142de4b5697832",
-    "uid": "69aea6f8af5e6cbf0802796b",
-    "stats_date": "2026-05-06",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "月光冲浪者",
-    "score": 88,
-    "sleep_seconds": 24840,
-    "deep_sleep_seconds": 4482,
-    "deep_sleep_ratio": 0.15,
-    "evaluation": "你的作息特别规律，入睡顺滑不折腾，夜里睡得很稳，深睡质量也不错，整体睡眠底子挺扎实，不过睡眠时间稍微差了点，其他方面和同城多数人差不多。",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 80,
-        "weight": 0.25,
-        "value": 15,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 90,
-        "weight": 0.25,
-        "value": 25970,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 80,
-        "weight": 0.15,
-        "value": 14,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 95,
-        "weight": 0.2,
-        "value": 1,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 100,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:33.000Z",
-    "update_time": "2026-05-21T05:02:33.000Z"
-  },
-  {
-    "_id": "6a0e91e9737af71c84f2fd47",
-    "uid": "69aea6f8af5e6cbf0802796b",
-    "stats_date": "2026-05-07",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "月光冲浪者",
-    "score": 84,
-    "sleep_seconds": 24600,
-    "deep_sleep_seconds": 4446,
-    "deep_sleep_ratio": 0.15,
-    "evaluation": "你的生物钟特别稳，入睡顺滑不折腾，深睡质量也不错，这些帮你在同城排名里靠前；不过夜里偶尔醒的小情况稍微拖了点后腿，其他方面和大伙差不多",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 80,
-        "weight": 0.25,
-        "value": 15,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 90,
-        "weight": 0.25,
-        "value": 25774,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 80,
-        "weight": 0.15,
-        "value": 16,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 70,
-        "weight": 0.2,
-        "value": 1,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 100,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:33.000Z",
-    "update_time": "2026-05-21T05:02:33.000Z"
-  },
-  {
-    "_id": "6a0e91e98bf6b6d80c2ff999",
-    "uid": "69aea6f8af5e6cbf0802796b",
-    "stats_date": "2026-05-08",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "月光冲浪者",
-    "score": 91,
-    "sleep_seconds": 26880,
-    "deep_sleep_seconds": 6036,
-    "deep_sleep_ratio": 0.2,
-    "evaluation": "你的深睡修复特别到位，作息规律也很稳，入睡顺滑还睡得够久，不过夜间偶尔醒的情况比多数同城人稍多一点，整体在同城里的排名相当靠前。",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 20,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 25912,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 80,
-        "weight": 0.15,
-        "value": 16,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 70,
-        "weight": 0.2,
-        "value": 1,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 100,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:33.000Z",
-    "update_time": "2026-05-21T05:02:33.000Z"
-  },
-  {
-    "_id": "6a0e91e9d60e7a7bb0e6de25",
+    "_id": "6a1421bd439953ef6784d799",
     "uid": "69aea6f8af5e6cbf0802796b",
     "stats_date": "2026-05-09",
     "region": {
@@ -459,7 +459,7 @@
     "user_name": "月光冲浪者",
     "score": 94,
     "sleep_seconds": 26700,
-    "deep_sleep_seconds": 6012,
+    "deep_sleep_seconds": 6000,
     "deep_sleep_ratio": 0.2,
     "evaluation": "你的生物钟特别稳，倒头就睡还深睡扎实，睡眠时间也够足，这些都稳稳托着你的排名；不过夜里偶尔醒的小情况稍微拖了点后腿。",
     "dimensions": {
@@ -473,26 +473,26 @@
       "sleep_duration": {
         "score": 100,
         "weight": 0.25,
-        "value": 26000,
+        "value": 25240,
         "city_avg": 26432.0,
         "city_score": 91
       },
       "sleep_efficiency": {
         "score": 100,
         "weight": 0.15,
-        "value": 15,
+        "value": 25,
         "city_avg": 43.0,
         "city_score": 48
       },
       "abnormal_events": {
         "score": 70,
         "weight": 0.2,
-        "value": 1,
+        "value": 2,
         "city_avg": 2.0,
         "city_score": 78
       },
       "routine_regularity": {
-        "score": 100,
+        "score": 99,
         "weight": 0.15,
         "value": "Excellent",
         "city_avg": "Fair",
@@ -500,11 +500,11 @@
       }
     },
     "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:33.000Z",
-    "update_time": "2026-05-21T05:02:33.000Z"
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
   },
   {
-    "_id": "6a0e91e911955f1f65138736",
+    "_id": "6a1421bdbf36e9d7925f74e4",
     "uid": "69aea6f8af5e6cbf0802796b",
     "stats_date": "2026-05-10",
     "region": {
@@ -514,36 +514,36 @@
     },
     "user_name": "月光冲浪者",
     "score": 78,
-    "sleep_seconds": 24840,
-    "deep_sleep_seconds": 3799,
-    "deep_sleep_ratio": 0.13,
+    "sleep_seconds": 24660,
+    "deep_sleep_seconds": 4518,
+    "deep_sleep_ratio": 0.15,
     "evaluation": "你的生物钟特别稳，入睡也很顺滑，这俩帮你在同城排名里靠前；不过深睡偏浅、夜里容易醒稍微拖了点后腿，其他方面和大伙差不多。",
     "dimensions": {
       "deep_sleep": {
-        "score": 60,
+        "score": 80,
         "weight": 0.25,
-        "value": 13,
+        "value": 15,
         "city_avg": 15.0,
         "city_score": 68
       },
       "sleep_duration": {
         "score": 90,
         "weight": 0.25,
-        "value": 25884,
+        "value": 25182,
         "city_avg": 26432.0,
         "city_score": 91
       },
       "sleep_efficiency": {
-        "score": 80,
+        "score": 60,
         "weight": 0.15,
-        "value": 16,
+        "value": 25,
         "city_avg": 43.0,
         "city_score": 48
       },
       "abnormal_events": {
-        "score": 70,
+        "score": 55,
         "weight": 0.2,
-        "value": 1,
+        "value": 2,
         "city_avg": 2.0,
         "city_score": 78
       },
@@ -556,11 +556,11 @@
       }
     },
     "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:33.000Z",
-    "update_time": "2026-05-21T05:02:33.000Z"
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
   },
   {
-    "_id": "6a0e91e9f39bb0bf1316c485",
+    "_id": "6a1421bdba78c69419cb4881",
     "uid": "69aea6f8af5e6cbf0802796b",
     "stats_date": "2026-05-11",
     "region": {
@@ -570,8 +570,8 @@
     },
     "user_name": "月光冲浪者",
     "score": 99,
-    "sleep_seconds": 26700,
-    "deep_sleep_seconds": 5988,
+    "sleep_seconds": 25980,
+    "deep_sleep_seconds": 5844,
     "deep_sleep_ratio": 0.2,
     "evaluation": "你的深睡特别扎实，入睡顺滑、作息规律还夜里睡得稳，睡眠底子在同城相当亮眼，整体排名表现远超大部分同城伙伴，睡眠时长也比多数人更充足。",
     "dimensions": {
@@ -585,21 +585,21 @@
       "sleep_duration": {
         "score": 100,
         "weight": 0.25,
-        "value": 25958,
+        "value": 25255,
         "city_avg": 26432.0,
         "city_score": 91
       },
       "sleep_efficiency": {
         "score": 100,
         "weight": 0.15,
-        "value": 15,
+        "value": 24,
         "city_avg": 43.0,
         "city_score": 48
       },
       "abnormal_events": {
         "score": 95,
         "weight": 0.2,
-        "value": 1,
+        "value": 2,
         "city_avg": 2.0,
         "city_score": 78
       },
@@ -612,11 +612,11 @@
       }
     },
     "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:33.000Z",
-    "update_time": "2026-05-21T05:02:33.000Z"
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
   },
   {
-    "_id": "6a0e91e9e4fba7bd4bb20ff1",
+    "_id": "6a1421bdfdf78357a8234b38",
     "uid": "69aea6f8af5e6cbf0802796b",
     "stats_date": "2026-05-12",
     "region": {
@@ -625,7 +625,7 @@
       "district_code": "110108"
     },
     "user_name": "月光冲浪者",
-    "score": 78,
+    "score": 76,
     "sleep_seconds": 24660,
     "deep_sleep_seconds": 3313,
     "deep_sleep_ratio": 0.11,
@@ -641,21 +641,21 @@
       "sleep_duration": {
         "score": 90,
         "weight": 0.25,
-        "value": 25850,
+        "value": 25205,
         "city_avg": 26432.0,
         "city_score": 91
       },
       "sleep_efficiency": {
-        "score": 80,
+        "score": 60,
         "weight": 0.15,
-        "value": 16,
+        "value": 25,
         "city_avg": 43.0,
         "city_score": 48
       },
       "abnormal_events": {
         "score": 70,
         "weight": 0.2,
-        "value": 1,
+        "value": 2,
         "city_avg": 2.0,
         "city_score": 78
       },
@@ -668,11 +668,11 @@
       }
     },
     "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:33.000Z",
-    "update_time": "2026-05-21T05:02:33.000Z"
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
   },
   {
-    "_id": "6a0e91e9ca0ee3f0a15ea2d3",
+    "_id": "6a1421bd69a75ed9e41e7d0c",
     "uid": "69aea6f8af5e6cbf0802796b",
     "stats_date": "2026-05-13",
     "region": {
@@ -681,403 +681,11 @@
       "district_code": "110108"
     },
     "user_name": "月光冲浪者",
-    "score": 94,
-    "sleep_seconds": 26760,
-    "deep_sleep_seconds": 6024,
-    "deep_sleep_ratio": 0.2,
-    "evaluation": "你的深睡特别扎实，入睡顺滑又作息规律，睡眠时长也足够，只是夜里偶尔的小波动稍微拖了点后腿，整体在同城的睡眠排名里相当靠前。",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 20,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 25920,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 100,
-        "weight": 0.15,
-        "value": 15,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 70,
-        "weight": 0.2,
-        "value": 1,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 100,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:33.000Z",
-    "update_time": "2026-05-21T05:02:33.000Z"
-  },
-  {
-    "_id": "6a0e91e93196968e2c8da580",
-    "uid": "69aea6f8af5e6cbf0802796b",
-    "stats_date": "2026-05-14",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "月光冲浪者",
-    "score": 78,
-    "sleep_seconds": 24840,
-    "deep_sleep_seconds": 3287,
-    "deep_sleep_ratio": 0.11,
-    "evaluation": "你的作息特别规律，入睡也顺滑不折腾，这俩点帮你在同城排名里占了优势；不过深睡质量稍显不足，夜里偶尔会醒，稍微拖了点后腿，其他方面和大伙差不多。",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 60,
-        "weight": 0.25,
-        "value": 11,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 90,
-        "weight": 0.25,
-        "value": 25843,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 80,
-        "weight": 0.15,
-        "value": 16,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 70,
-        "weight": 0.2,
-        "value": 1,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 100,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:33.000Z",
-    "update_time": "2026-05-21T05:02:33.000Z"
-  },
-  {
-    "_id": "6a0e91e9dde8411123974ea3",
-    "uid": "69aea6f8af5e6cbf0802796b",
-    "stats_date": "2026-05-15",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "月光冲浪者",
-    "score": 94,
-    "sleep_seconds": 26760,
-    "deep_sleep_seconds": 6024,
-    "deep_sleep_ratio": 0.2,
-    "evaluation": "你的深睡特别扎实，入睡顺滑还作息规律，睡眠时长也充足，这些都稳稳托着你的排名；不过夜里偶尔醒的情况稍微拖了点后腿，其他方面和同城多数人差不多。",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 20,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 25843,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 100,
-        "weight": 0.15,
-        "value": 16,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 70,
-        "weight": 0.2,
-        "value": 1,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 100,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:33.000Z",
-    "update_time": "2026-05-21T05:02:33.000Z"
-  },
-  {
-    "_id": "6a0e91e91d4e71c56f11f98e",
-    "uid": "69aea6f8af5e6cbf0802796b",
-    "stats_date": "2026-05-16",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "月光冲浪者",
-    "score": 78,
-    "sleep_seconds": 24840,
-    "deep_sleep_seconds": 3939,
-    "deep_sleep_ratio": 0.13,
-    "evaluation": "你的作息特别规律，入睡也很顺滑，这俩帮你稳稳排在同城靠前位置；不过深睡稍浅、夜里偶尔会醒，稍微拖了点后腿，其他方面和大伙差不多。",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 60,
-        "weight": 0.25,
-        "value": 13,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 90,
-        "weight": 0.25,
-        "value": 25706,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 80,
-        "weight": 0.15,
-        "value": 16,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 70,
-        "weight": 0.2,
-        "value": 1,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 100,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:33.000Z",
-    "update_time": "2026-05-21T05:02:33.000Z"
-  },
-  {
-    "_id": "6a0e91e9d48365e2f2065e19",
-    "uid": "69aea6f8af5e6cbf0802796b",
-    "stats_date": "2026-05-17",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "月光冲浪者",
-    "score": 94,
-    "sleep_seconds": 26700,
-    "deep_sleep_seconds": 6012,
-    "deep_sleep_ratio": 0.2,
-    "evaluation": "你的深睡特别扎实，入睡顺滑又作息规律，这些都稳稳托住了你的排名；睡眠时长也给够了，不过夜间偶尔醒的情况比多数同城人稍多一点，稍微拖了点后腿。",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 20,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 25894,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 100,
-        "weight": 0.15,
-        "value": 16,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 70,
-        "weight": 0.2,
-        "value": 2,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 100,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:33.000Z",
-    "update_time": "2026-05-21T05:02:33.000Z"
-  },
-  {
-    "_id": "6a0e91e9336121d028e4b128",
-    "uid": "69aea6f8af5e6cbf0802796b",
-    "stats_date": "2026-05-18",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "月光冲浪者",
-    "score": 94,
-    "sleep_seconds": 26700,
-    "deep_sleep_seconds": 6012,
-    "deep_sleep_ratio": 0.2,
-    "evaluation": "你的深睡质量远超同城，入睡很顺滑、生物钟也很稳，睡眠时长也给够了，不过夜里偶尔醒的情况比多数同城人稍多一点，整体在同城的睡眠排名里挺靠前的。",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 20,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 25894,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 100,
-        "weight": 0.15,
-        "value": 16,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 70,
-        "weight": 0.2,
-        "value": 2,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 100,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:33.000Z",
-    "update_time": "2026-05-21T05:02:33.000Z"
-  },
-  {
-    "_id": "6a0e91e9cc7e51e23a885a2f",
-    "uid": "69aea6f8af5e6cbf0802796b",
-    "stats_date": "2026-05-19",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "月光冲浪者",
-    "score": 84,
-    "sleep_seconds": 24840,
-    "deep_sleep_seconds": 4482,
-    "deep_sleep_ratio": 0.15,
-    "evaluation": "你的作息特别规律，入睡也很顺滑，深睡质量也挺扎实，这几点帮你在同城里表现不错，不过夜间偶尔会醒，睡眠时长稍微差一点，整体排名挺靠前的。",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 80,
-        "weight": 0.25,
-        "value": 15,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 90,
-        "weight": 0.25,
-        "value": 25761,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 80,
-        "weight": 0.15,
-        "value": 16,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 70,
-        "weight": 0.2,
-        "value": 2,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 100,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:33.000Z",
-    "update_time": "2026-05-21T05:02:33.000Z"
-  },
-  {
-    "_id": "6a0e91e92943f0223cee1c61",
-    "uid": "69aea6f8af5e6cbf0802796b",
-    "stats_date": "2026-05-20",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "月光冲浪者",
-    "score": 78,
-    "sleep_seconds": 24840,
-    "deep_sleep_seconds": 3427,
+    "score": 76,
+    "sleep_seconds": 24420,
+    "deep_sleep_seconds": 3492,
     "deep_sleep_ratio": 0.12,
-    "evaluation": "你的作息特别规律，入睡也一点不折腾，这俩帮你稳住了靠前的排名；不过深睡质量和夜间睡眠连续性稍差，其他方面和大部分同城人差不多。",
+    "evaluation": "你的深睡特别扎实，入睡顺滑又作息规律，睡眠时长也足够，只是夜里偶尔的小波动稍微拖了点后腿，整体在同城的睡眠排名里相当靠前。",
     "dimensions": {
       "deep_sleep": {
         "score": 60,
@@ -1089,14 +697,14 @@
       "sleep_duration": {
         "score": 90,
         "weight": 0.25,
-        "value": 25761,
+        "value": 25145,
         "city_avg": 26432.0,
         "city_score": 91
       },
       "sleep_efficiency": {
-        "score": 80,
+        "score": 60,
         "weight": 0.15,
-        "value": 16,
+        "value": 26,
         "city_avg": 43.0,
         "city_score": 48
       },
@@ -1116,11 +724,403 @@
       }
     },
     "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:33.000Z",
-    "update_time": "2026-05-21T05:02:33.000Z"
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
   },
   {
-    "_id": "6a0e91e9a1b9626d10e736e6",
+    "_id": "6a1421bd38ce36dee216641f",
+    "uid": "69aea6f8af5e6cbf0802796b",
+    "stats_date": "2026-05-14",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "月光冲浪者",
+    "score": 91,
+    "sleep_seconds": 26700,
+    "deep_sleep_seconds": 5988,
+    "deep_sleep_ratio": 0.2,
+    "evaluation": "你的作息特别规律，入睡也顺滑不折腾，这俩点帮你在同城排名里占了优势；不过深睡质量稍显不足，夜里偶尔会醒，稍微拖了点后腿，其他方面和大伙差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 20,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 25256,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 25,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bd279fd58258aab647",
+    "uid": "69aea6f8af5e6cbf0802796b",
+    "stats_date": "2026-05-15",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "月光冲浪者",
+    "score": 72,
+    "sleep_seconds": 23880,
+    "deep_sleep_seconds": 3744,
+    "deep_sleep_ratio": 0.13,
+    "evaluation": "你的深睡特别扎实，入睡顺滑还作息规律，睡眠时长也充足，这些都稳稳托着你的排名；不过夜里偶尔醒的情况稍微拖了点后腿，其他方面和同城多数人差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 60,
+        "weight": 0.25,
+        "value": 13,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 90,
+        "weight": 0.25,
+        "value": 25041,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 27,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 55,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bd89e110ce47196b24",
+    "uid": "69aea6f8af5e6cbf0802796b",
+    "stats_date": "2026-05-16",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "月光冲浪者",
+    "score": 94,
+    "sleep_seconds": 26700,
+    "deep_sleep_seconds": 5988,
+    "deep_sleep_ratio": 0.2,
+    "evaluation": "你的作息特别规律，入睡也很顺滑，这俩帮你稳稳排在同城靠前位置；不过深睡稍浅、夜里偶尔会醒，稍微拖了点后腿，其他方面和大伙差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 20,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 25174,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 100,
+        "weight": 0.15,
+        "value": 25,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bdf38cf09336bdcf8c",
+    "uid": "69aea6f8af5e6cbf0802796b",
+    "stats_date": "2026-05-17",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "月光冲浪者",
+    "score": 72,
+    "sleep_seconds": 24780,
+    "deep_sleep_seconds": 3161,
+    "deep_sleep_ratio": 0.11,
+    "evaluation": "你的深睡特别扎实，入睡顺滑又作息规律，这些都稳稳托住了你的排名；睡眠时长也给够了，不过夜间偶尔醒的情况比多数同城人稍多一点，稍微拖了点后腿。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 60,
+        "weight": 0.25,
+        "value": 11,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 90,
+        "weight": 0.25,
+        "value": 25234,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 25,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 55,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bde2fa04e07f1a9ee4",
+    "uid": "69aea6f8af5e6cbf0802796b",
+    "stats_date": "2026-05-18",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "月光冲浪者",
+    "score": 72,
+    "sleep_seconds": 24060,
+    "deep_sleep_seconds": 3188,
+    "deep_sleep_ratio": 0.11,
+    "evaluation": "你的深睡质量远超同城，入睡很顺滑、生物钟也很稳，睡眠时长也给够了，不过夜里偶尔醒的情况比多数同城人稍多一点，整体在同城的睡眠排名里挺靠前的。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 60,
+        "weight": 0.25,
+        "value": 11,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 90,
+        "weight": 0.25,
+        "value": 25033,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 26,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 55,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bddbe3e23d18373d6f",
+    "uid": "69aea6f8af5e6cbf0802796b",
+    "stats_date": "2026-05-19",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "月光冲浪者",
+    "score": 97,
+    "sleep_seconds": 25680,
+    "deep_sleep_seconds": 5772,
+    "deep_sleep_ratio": 0.2,
+    "evaluation": "你的作息特别规律，入睡也很顺滑，深睡质量也挺扎实，这几点帮你在同城里表现不错，不过夜间偶尔会醒，睡眠时长稍微差一点，整体排名挺靠前的。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 20,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 25209,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 100,
+        "weight": 0.15,
+        "value": 24,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 85,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bd6e7c39560c0473dd",
+    "uid": "69aea6f8af5e6cbf0802796b",
+    "stats_date": "2026-05-20",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "月光冲浪者",
+    "score": 76,
+    "sleep_seconds": 24300,
+    "deep_sleep_seconds": 3260,
+    "deep_sleep_ratio": 0.11,
+    "evaluation": "你的作息特别规律，入睡也一点不折腾，这俩帮你稳住了靠前的排名；不过深睡质量和夜间睡眠连续性稍差，其他方面和大部分同城人差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 60,
+        "weight": 0.25,
+        "value": 11,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 90,
+        "weight": 0.25,
+        "value": 25106,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 26,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bd436f5b33e95c8aac",
     "uid": "69aea6f8af5e6cbf0802796b",
     "stats_date": "2026-05-21",
     "region": {
@@ -1130,8 +1130,8 @@
     },
     "user_name": "月光冲浪者",
     "score": 99,
-    "sleep_seconds": 26700,
-    "deep_sleep_seconds": 6000,
+    "sleep_seconds": 26220,
+    "deep_sleep_seconds": 5892,
     "deep_sleep_ratio": 0.2,
     "evaluation": "你的睡眠底子特别扎实，睡眠时长给够了，入睡顺滑不折腾，作息稳当，深睡修复到位，夜里几乎不醒，整体在同城的睡眠排名里很亮眼。",
     "dimensions": {
@@ -1145,14 +1145,14 @@
       "sleep_duration": {
         "score": 100,
         "weight": 0.25,
-        "value": 25911,
+        "value": 25226,
         "city_avg": 26432.0,
         "city_score": 91
       },
       "sleep_efficiency": {
         "score": 100,
         "weight": 0.15,
-        "value": 14,
+        "value": 25,
         "city_avg": 43.0,
         "city_score": 48
       },
@@ -1172,11 +1172,11 @@
       }
     },
     "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:33.000Z",
-    "update_time": "2026-05-21T05:02:33.000Z"
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
   },
   {
-    "_id": "6a0e91e9eb05d783e7a68e5e",
+    "_id": "6a1421bde6a5a5bb92987e44",
     "uid": "69aea6f8af5e6cbf0802796b",
     "stats_date": "2026-05-22",
     "region": {
@@ -1185,11 +1185,235 @@
       "district_code": "110108"
     },
     "user_name": "月光冲浪者",
-    "score": 82,
-    "sleep_seconds": 24840,
-    "deep_sleep_seconds": 3506,
-    "deep_sleep_ratio": 0.12,
+    "score": 97,
+    "sleep_seconds": 25560,
+    "deep_sleep_seconds": 5736,
+    "deep_sleep_ratio": 0.2,
     "evaluation": "你入睡特别顺滑，作息也格外规律，这两点比同城多数人都出色，是你排名靠前的核心支撑，其他睡眠维度和大家的平均水平差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 20,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 25307,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 100,
+        "weight": 0.15,
+        "value": 23,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 85,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bda5244f3a050bb4fe",
+    "uid": "69aea6f8af5e6cbf0802796b",
+    "stats_date": "2026-05-23",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "月光冲浪者",
+    "score": 91,
+    "sleep_seconds": 26460,
+    "deep_sleep_seconds": 5952,
+    "deep_sleep_ratio": 0.2,
+    "evaluation": "你的作息特别稳，入睡也顺滑不折腾，这俩点帮你在同城排名里站稳了脚跟；不过深睡稍浅、夜里偶尔容易醒，稍微拖了点后腿，其他方面和大家差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 20,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 25290,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 24,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bddac7fe3d85263554",
+    "uid": "69aea6f8af5e6cbf0802796b",
+    "stats_date": "2026-05-24",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "月光冲浪者",
+    "score": 76,
+    "sleep_seconds": 24360,
+    "deep_sleep_seconds": 4166,
+    "deep_sleep_ratio": 0.14,
+    "evaluation": "你的入睡特别顺滑，作息生物钟稳得很，深睡质量也远超同城大家，睡眠时长也挺充足的，整体排名挺靠前的，不过夜间偶尔醒的情况稍微拖了点小后腿，其他方面和大家差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 60,
+        "weight": 0.25,
+        "value": 14,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 90,
+        "weight": 0.25,
+        "value": 25269,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 24,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 70,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bd460068b7e1c2d03c",
+    "uid": "69aea6f8af5e6cbf0802796b",
+    "stats_date": "2026-05-25",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "月光冲浪者",
+    "score": 99,
+    "sleep_seconds": 25320,
+    "deep_sleep_seconds": 5700,
+    "deep_sleep_ratio": 0.2,
+    "evaluation": "你的作息特别规律，入睡顺滑又夜里睡得踏实，深睡质量扎实，睡眠时长也够，整体在同城里的表现相当亮眼，其他方面也和大家差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 20,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 25221,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 100,
+        "weight": 0.15,
+        "value": 24,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 95,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bdf35de8edcc61e790",
+    "uid": "69aea6f8af5e6cbf0802796b",
+    "stats_date": "2026-05-26",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "月光冲浪者",
+    "score": 76,
+    "sleep_seconds": 23760,
+    "deep_sleep_seconds": 3470,
+    "deep_sleep_ratio": 0.12,
+    "evaluation": "你的生物钟特别稳，入睡也顺滑不折腾，这两点给你的排名托了不少底气；不过深睡偏浅、夜里偶尔会醒拖了点后腿，其他方面和多数同城人差不多。",
     "dimensions": {
       "deep_sleep": {
         "score": 60,
@@ -1201,70 +1425,14 @@
       "sleep_duration": {
         "score": 90,
         "weight": 0.25,
-        "value": 25766,
+        "value": 25157,
         "city_avg": 26432.0,
         "city_score": 91
       },
       "sleep_efficiency": {
-        "score": 100,
-        "weight": 0.15,
-        "value": 14,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 70,
-        "weight": 0.2,
-        "value": 2,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 100,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:33.000Z",
-    "update_time": "2026-05-21T05:02:33.000Z"
-  },
-  {
-    "_id": "6a0e91e93abeb05cdd83ddf9",
-    "uid": "69aea6f8af5e6cbf0802796b",
-    "stats_date": "2026-05-23",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "月光冲浪者",
-    "score": 78,
-    "sleep_seconds": 24720,
-    "deep_sleep_seconds": 4074,
-    "deep_sleep_ratio": 0.14,
-    "evaluation": "你的作息特别稳，入睡也顺滑不折腾，这俩点帮你在同城排名里站稳了脚跟；不过深睡稍浅、夜里偶尔容易醒，稍微拖了点后腿，其他方面和大家差不多。",
-    "dimensions": {
-      "deep_sleep": {
         "score": 60,
-        "weight": 0.25,
-        "value": 14,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 90,
-        "weight": 0.25,
-        "value": 25624,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 80,
         "weight": 0.15,
-        "value": 15,
+        "value": 24,
         "city_avg": 43.0,
         "city_score": 48
       },
@@ -1284,179 +1452,11 @@
       }
     },
     "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:33.000Z",
-    "update_time": "2026-05-21T05:02:33.000Z"
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
   },
   {
-    "_id": "6a0e91e9dfe65382df58cfd4",
-    "uid": "69aea6f8af5e6cbf0802796b",
-    "stats_date": "2026-05-24",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "月光冲浪者",
-    "score": 94,
-    "sleep_seconds": 26700,
-    "deep_sleep_seconds": 6000,
-    "deep_sleep_ratio": 0.2,
-    "evaluation": "你的入睡特别顺滑，作息生物钟稳得很，深睡质量也远超同城大家，睡眠时长也挺充足的，整体排名挺靠前的，不过夜间偶尔醒的情况稍微拖了点小后腿，其他方面和大家差不多。",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 20,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 25757,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 100,
-        "weight": 0.15,
-        "value": 14,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 70,
-        "weight": 0.2,
-        "value": 2,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 99,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:33.000Z",
-    "update_time": "2026-05-21T05:02:33.000Z"
-  },
-  {
-    "_id": "6a0e91e9b6370e9e26f21e34",
-    "uid": "69aea6f8af5e6cbf0802796b",
-    "stats_date": "2026-05-25",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "月光冲浪者",
-    "score": 99,
-    "sleep_seconds": 26880,
-    "deep_sleep_seconds": 6036,
-    "deep_sleep_ratio": 0.2,
-    "evaluation": "你的深睡特别扎实，睡眠时长也给够了，夜里睡得稳还入睡顺滑，作息也稳得很，整体在同城相当能打，其他方面也都和大伙差不多。",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 20,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 25770,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 100,
-        "weight": 0.15,
-        "value": 15,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 95,
-        "weight": 0.2,
-        "value": 2,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 99,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:33.000Z",
-    "update_time": "2026-05-21T05:02:33.000Z"
-  },
-  {
-    "_id": "6a0e91e95f27e99a1969908e",
-    "uid": "69aea6f8af5e6cbf0802796b",
-    "stats_date": "2026-05-26",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "月光冲浪者",
-    "score": 97,
-    "sleep_seconds": 26700,
-    "deep_sleep_seconds": 6012,
-    "deep_sleep_ratio": 0.2,
-    "evaluation": "你的深睡特别扎实，入睡顺滑作息规律，睡眠时长也够，夜里睡得也稳，这几项都比同城多数人出彩，整体排名在同城里相当靠前。",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 20,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 25916,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 100,
-        "weight": 0.15,
-        "value": 14,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 85,
-        "weight": 0.2,
-        "value": 2,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 99,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:33.000Z",
-    "update_time": "2026-05-21T05:02:33.000Z"
-  },
-  {
-    "_id": "6a0e91e94c2d3c3aeeefd69e",
+    "_id": "6a1421bd8d20f41544a0bcf2",
     "uid": "69aea6f8af5e6cbf0802796b",
     "stats_date": "2026-05-27",
     "region": {
@@ -1465,179 +1465,11 @@
       "district_code": "110108"
     },
     "user_name": "月光冲浪者",
-    "score": 97,
-    "sleep_seconds": 26520,
-    "deep_sleep_seconds": 5964,
-    "deep_sleep_ratio": 0.2,
-    "evaluation": "你的深睡特别扎实，入睡顺滑还作息规律，睡眠时长也很充足，就连夜间睡得都比多数同城人稳，整体表现在同城里相当亮眼",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 20,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 25899,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 100,
-        "weight": 0.15,
-        "value": 14,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 85,
-        "weight": 0.2,
-        "value": 2,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 99,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:33.000Z",
-    "update_time": "2026-05-21T05:02:33.000Z"
-  },
-  {
-    "_id": "6a0e91e9b2e5866bc286968f",
-    "uid": "69aea6f8af5e6cbf0802796b",
-    "stats_date": "2026-05-28",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "月光冲浪者",
-    "score": 81,
-    "sleep_seconds": 24060,
-    "deep_sleep_seconds": 4057,
-    "deep_sleep_ratio": 0.14,
-    "evaluation": "你的作息特别规律，入睡也顺滑不折腾，这可是你排名靠前的底气；不过深睡质量稍显不足，其他方面和大部分同城人都差不多。",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 60,
-        "weight": 0.25,
-        "value": 14,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 90,
-        "weight": 0.25,
-        "value": 25843,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 80,
-        "weight": 0.15,
-        "value": 14,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 85,
-        "weight": 0.2,
-        "value": 2,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 99,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:33.000Z",
-    "update_time": "2026-05-21T05:02:33.000Z"
-  },
-  {
-    "_id": "6a0e91e9592fc9713070b83d",
-    "uid": "69aea6f8af5e6cbf0802796b",
-    "stats_date": "2026-05-29",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "月光冲浪者",
-    "score": 99,
-    "sleep_seconds": 26700,
-    "deep_sleep_seconds": 6012,
-    "deep_sleep_ratio": 0.2,
-    "evaluation": "你的睡眠整体表现远超同城多数人，深睡扎实、入睡顺滑还作息稳定，夜里也睡得稳，这些都帮你稳住了排名优势，睡眠时长也比不少人更充足",
-    "dimensions": {
-      "deep_sleep": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 20,
-        "city_avg": 15.0,
-        "city_score": 68
-      },
-      "sleep_duration": {
-        "score": 100,
-        "weight": 0.25,
-        "value": 25839,
-        "city_avg": 26432.0,
-        "city_score": 91
-      },
-      "sleep_efficiency": {
-        "score": 100,
-        "weight": 0.15,
-        "value": 14,
-        "city_avg": 43.0,
-        "city_score": 48
-      },
-      "abnormal_events": {
-        "score": 95,
-        "weight": 0.2,
-        "value": 1,
-        "city_avg": 2.0,
-        "city_score": 78
-      },
-      "routine_regularity": {
-        "score": 99,
-        "weight": 0.15,
-        "value": "Excellent",
-        "city_avg": "Fair",
-        "city_score": 45
-      }
-    },
-    "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:33.000Z",
-    "update_time": "2026-05-21T05:02:33.000Z"
-  },
-  {
-    "_id": "6a0e91e95e84341c4c2095e7",
-    "uid": "69aea6f8af5e6cbf0802796b",
-    "stats_date": "2026-05-30",
-    "region": {
-      "province_code": "110000",
-      "city_code": "110100",
-      "district_code": "110108"
-    },
-    "user_name": "月光冲浪者",
-    "score": 84,
-    "sleep_seconds": 24540,
-    "deep_sleep_seconds": 3806,
+    "score": 76,
+    "sleep_seconds": 23460,
+    "deep_sleep_seconds": 3674,
     "deep_sleep_ratio": 0.13,
-    "evaluation": "你的作息特别规律，入睡顺滑还很少夜醒，这些都让你在同城排名里很亮眼；不过深睡质量稍显不足，其他方面和大部分同城人差不多。",
+    "evaluation": "你的作息特别规整，入睡也很顺畅，这两点帮你稳稳排在同城前列；不过深睡质量稍显不足，其他方面和大部分同城人差不多。",
     "dimensions": {
       "deep_sleep": {
         "score": 60,
@@ -1649,21 +1481,21 @@
       "sleep_duration": {
         "score": 90,
         "weight": 0.25,
-        "value": 25817,
+        "value": 25089,
         "city_avg": 26432.0,
         "city_score": 91
       },
       "sleep_efficiency": {
-        "score": 80,
+        "score": 60,
         "weight": 0.15,
-        "value": 14,
+        "value": 24,
         "city_avg": 43.0,
         "city_score": 48
       },
       "abnormal_events": {
-        "score": 95,
+        "score": 70,
         "weight": 0.2,
-        "value": 1,
+        "value": 2,
         "city_avg": 2.0,
         "city_score": 78
       },
@@ -1676,11 +1508,179 @@
       }
     },
     "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:33.000Z",
-    "update_time": "2026-05-21T05:02:33.000Z"
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
   },
   {
-    "_id": "6a0e91e9a2044790cf73f0fe",
+    "_id": "6a1421bd3370b3f3054efcdd",
+    "uid": "69aea6f8af5e6cbf0802796b",
+    "stats_date": "2026-05-28",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "月光冲浪者",
+    "score": 72,
+    "sleep_seconds": 24720,
+    "deep_sleep_seconds": 3274,
+    "deep_sleep_ratio": 0.11,
+    "evaluation": "你的作息特别规律，生物钟稳得很，入睡也很顺滑，这俩点帮你稳稳托住了排名；不过夜里容易醒的情况比多数同城人多，稍微拖了点后腿，其他方面和大家差不多。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 60,
+        "weight": 0.25,
+        "value": 11,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 90,
+        "weight": 0.25,
+        "value": 24947,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 25,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 55,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bd45420560b2e03417",
+    "uid": "69aea6f8af5e6cbf0802796b",
+    "stats_date": "2026-05-29",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "月光冲浪者",
+    "score": 96,
+    "sleep_seconds": 25920,
+    "deep_sleep_seconds": 5820,
+    "deep_sleep_ratio": 0.2,
+    "evaluation": "你的睡眠在同城里表现相当亮眼，深睡特别扎实、作息稳当是你排名靠前的主要底气，入睡顺滑、夜里睡得稳也都很加分，睡眠时长也很够用。",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 20,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 100,
+        "weight": 0.25,
+        "value": 25093,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 80,
+        "weight": 0.15,
+        "value": 24,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 95,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bd4c7fe05d803b3c47",
+    "uid": "69aea6f8af5e6cbf0802796b",
+    "stats_date": "2026-05-30",
+    "region": {
+      "province_code": "110000",
+      "city_code": "110100",
+      "district_code": "110108"
+    },
+    "user_name": "月光冲浪者",
+    "score": 78,
+    "sleep_seconds": 24360,
+    "deep_sleep_seconds": 3869,
+    "deep_sleep_ratio": 0.13,
+    "evaluation": "你作息特别规律，入睡一点不折腾，夜里也睡得踏实，睡眠时长也跟大伙差不多，不过深睡还能再扎实些，整体在同城的排名挺靠前的",
+    "dimensions": {
+      "deep_sleep": {
+        "score": 60,
+        "weight": 0.25,
+        "value": 13,
+        "city_avg": 15.0,
+        "city_score": 68
+      },
+      "sleep_duration": {
+        "score": 90,
+        "weight": 0.25,
+        "value": 24926,
+        "city_avg": 26432.0,
+        "city_score": 91
+      },
+      "sleep_efficiency": {
+        "score": 60,
+        "weight": 0.15,
+        "value": 26,
+        "city_avg": 43.0,
+        "city_score": 48
+      },
+      "abnormal_events": {
+        "score": 85,
+        "weight": 0.2,
+        "value": 2,
+        "city_avg": 2.0,
+        "city_score": 78
+      },
+      "routine_regularity": {
+        "score": 100,
+        "weight": 0.15,
+        "value": "Excellent",
+        "city_avg": "Fair",
+        "city_score": 45
+      }
+    },
+    "is_env_sensitive": false,
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
+  },
+  {
+    "_id": "6a1421bd2fa78fe0ef00ab52",
     "uid": "69aea6f8af5e6cbf0802796b",
     "stats_date": "2026-05-31",
     "region": {
@@ -1689,37 +1689,37 @@
       "district_code": "110108"
     },
     "user_name": "月光冲浪者",
-    "score": 84,
-    "sleep_seconds": 24480,
-    "deep_sleep_seconds": 4032,
-    "deep_sleep_ratio": 0.14,
-    "evaluation": "你入睡特别顺滑，生物钟也稳得很，夜里睡得也踏实，深睡和睡眠时长和大伙差不了多少，整体表现比同城平均要亮眼不少。",
+    "score": 72,
+    "sleep_seconds": 24660,
+    "deep_sleep_seconds": 3607,
+    "deep_sleep_ratio": 0.12,
+    "evaluation": "你的睡眠表现在同城里挺靠前的，作息特别规律、入睡顺滑帮了大忙，不过夜里容易醒的小问题稍微拖了后腿，其他方面和大部分同城人都差不多。",
     "dimensions": {
       "deep_sleep": {
         "score": 60,
         "weight": 0.25,
-        "value": 14,
+        "value": 12,
         "city_avg": 15.0,
         "city_score": 68
       },
       "sleep_duration": {
         "score": 90,
         "weight": 0.25,
-        "value": 25659,
+        "value": 24917,
         "city_avg": 26432.0,
         "city_score": 91
       },
       "sleep_efficiency": {
-        "score": 100,
+        "score": 60,
         "weight": 0.15,
-        "value": 14,
+        "value": 26,
         "city_avg": 43.0,
         "city_score": 48
       },
       "abnormal_events": {
-        "score": 85,
+        "score": 55,
         "weight": 0.2,
-        "value": 1,
+        "value": 2,
         "city_avg": 2.0,
         "city_score": 78
       },
@@ -1732,7 +1732,7 @@
       }
     },
     "is_env_sensitive": false,
-    "create_time": "2026-05-21T05:02:33.000Z",
-    "update_time": "2026-05-21T05:02:33.000Z"
+    "create_time": "2026-05-25T10:17:33.000Z",
+    "update_time": "2026-05-25T10:17:33.000Z"
   }
 ]
