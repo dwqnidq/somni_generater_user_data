@@ -41,6 +41,17 @@ TITLE_MAX_LEN = 14
 CONTENT_MAX_LEN = 28
 EN_SUFFIX = "_en"
 
+# 环境干预分析（pain_point_analysis.module）按 session 过滤睡眠事件：(uid, record_date) -> session_id
+ENV_INTERVENTION_SESSION_BY_UID_DATE: dict[tuple[str, str], str] = {
+    ("69aea6e3af5e6cbf08027967", "2026-06-06"): "6a2451df8790e0a2d36915dc",
+}
+
+
+def env_intervention_session_id(uid: str, record_date: str) -> str | None:
+    """若配置了该 uid+日期的 session 过滤，返回 session_id；否则 None（使用当日全部事件）。"""
+    sid = ENV_INTERVENTION_SESSION_BY_UID_DATE.get((uid.strip(), record_date.strip()))
+    return sid.strip() if sid else None
+
 
 def resolve_path(raw: str | None, default_rel: str) -> str:
     if raw:

@@ -9,6 +9,7 @@ from typing import Any, Optional
 
 from scripts.backup.exhibition.shared import (
     assert_writable_work_dir,
+    env_intervention_session_id,
     health_dates,
     index_by_record_date,
     list_persona_uids,
@@ -180,7 +181,11 @@ def _regenerate_llm_sidecars(
     stats["notice"] = len(
         generate_notice_for_uid(**date_kw, personality_type=personality_type or None)
     )
-    stats["env_intervention"] = len(generate_intervention_for_uid(**date_kw))
+    env_session_id = env_intervention_session_id(uid, record_date)
+    env_kw = dict(date_kw)
+    if env_session_id:
+        env_kw["session_id_by_date"] = {record_date: env_session_id}
+    stats["env_intervention"] = len(generate_intervention_for_uid(**env_kw))
     return stats
 
 

@@ -34,7 +34,10 @@ from generate_ai.llm_resume import run_llm_date_batch  # noqa: E402
 from generate_ai.multi_day_llm_helpers import apply_max_records  # noqa: E402
 from generate_ai.runtime import PROJECT_ROOT, bootstrap_llm, iter_uids  # noqa: E402
 
-from sleep_report.sleep_helpers import build_sleep_events_index  # noqa: E402
+from sleep_report.sleep_helpers import (  # noqa: E402
+    build_sleep_events_index,
+    filter_sleep_events_by_session_id,
+)
 
 
 def _build_pain_point_event_groups(events: List[dict]) -> List[List[dict]]:
@@ -110,6 +113,7 @@ def generate_intervention_for_uid(
     retry_delay: float = 0.5,
     max_records: Optional[int] = None,
     resume: bool = False,
+    session_id_by_date: Optional[dict[str, str]] = None,
 ) -> List[dict]:
     """为单个用户批量生成每日 pain_point_analysis_module。
 
@@ -130,9 +134,14 @@ def generate_intervention_for_uid(
     dates = apply_max_records(dates, max_records)
 
     out_path = os.path.join(output_dir, f"{uid}_sleep_event_environment_intervention.json")
+    sid_map = session_id_by_date or {}
 
     def _one(rd: str) -> Optional[dict]:
-        mod = generate_intervention_for_date(rd, events_index.get(rd, []))
+        events = events_index.get(rd, [])
+        session_id = str(sid_map.get(rd) or "").strip()
+        if session_id:
+            events = filter_sleep_events_by_session_id(events, session_id)
+        mod = generate_intervention_for_date(rd, events)
         if mod is None:
             return None
         return {"uid": uid, "record_date": rd, "pain_point_analysis_module": mod}

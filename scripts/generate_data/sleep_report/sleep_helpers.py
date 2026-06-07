@@ -93,3 +93,15 @@ def build_sleep_events_index(user_id, output_dir="output"):
     except Exception:
         return {}
     return idx
+
+
+def filter_sleep_events_by_session_id(events: list, session_id: str) -> list:
+    """仅保留指定 session_id 的睡眠事件（用于环境干预分析等按 session 隔离）。"""
+    sid = str(session_id or "").strip()
+    if not sid:
+        return list(events) if events else []
+    return [
+        e
+        for e in events
+        if isinstance(e, dict) and str(e.get("session_id") or "").strip() == sid
+    ]
